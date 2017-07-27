@@ -1,4 +1,5 @@
 <?php
+//index.php ComponentScandir
 //carga el loader de composer. Este loader solo tiene registrado el loader de helpers.
 require_once "vendor/autoload.php";
 //$oRaw = new Theframework\Helpers\HelperRaw("<p>hello</p>");
@@ -17,13 +18,15 @@ $oComp->run();
 $arLines = $oComp->get_extracted();
 $arLines = array_unique($arLines);
 asort($arLines);
-bug($arLines);
+//bug($arLines);
 
 $sSQLIn = implode("','",$arLines);
 $sSQLIn = "('$sSQLIn')";
+//print_r($sSQLIn);
 
-print_r($sSQLIn);
 
+$oComp = new \TheFramework\Components\ComponentScandir();
+$oComp->run();
 /*FCABPED
 select distinct tabla,a_erptabla
 from ERP_Taules_Telynet
