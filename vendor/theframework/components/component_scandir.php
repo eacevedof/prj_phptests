@@ -4,7 +4,7 @@
  * @link www.eduardoaf.com
  * @name ComponentScandir
  * @file component_scandir.php
- * @version 1.0.0 
+ * @version 1.0.1
  * @date 27-07-2017 12:06
  * @observations
  */
@@ -20,7 +20,8 @@ class ComponentScandir
         $this->arPaths = [
             "C:/xampp/htdocs/proy_hydra_flamagas/dts/update_20170620_pricing",
             "C:/xampp/htdocs/proy_hydra_flamagas/dts/update_20170705_tablas_enblanco",
-            "C:/xampp/htdocs/proy_hydra_flamagas/dts/update_20170706_campo_en_knb1"
+            "C:/xampp/htdocs/proy_hydra_flamagas/dts/update_20170706_campo_en_knb1",
+            "C:/xampp/htdocs/proy_hydra_flamagas/dts/Datos/IN/BackUP"
         ];
         
         $this->arFiles = [];
@@ -54,7 +55,8 @@ class ComponentScandir
                 if($this->in_string([".XNT"],$sFileName))
                 {
                     $this->clean([".XNT"],$sFileName);
-                    $sFileName = substr($sFileName,14);
+                    if(strlen($sFileName)>(14+3))
+                        $sFileName = substr($sFileName,14);
                     $this->arFiles[$sPath][] = $sFileName;
                 }
             }
