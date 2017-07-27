@@ -2,10 +2,10 @@
 /**
  * @author Eduardo Acevedo Farje.
  * @link www.eduardoaf.com
- * @version 1.0.0
  * @name ComponentExtract
- * @date 01-06-2014 12:45
  * @file component_extract.php
+ * @version 1.0.1
+ * @date 01-06-2014 12:45
  * @observations
  */
 namespace TheFramework\Components;
@@ -40,7 +40,7 @@ class ComponentExtract
         $sString = $sReplace;
     }
     
-    public function run()
+    private function load_lines()
     {
         $sContent = file_get_contents($this->sFilePath);
         $arContent = explode("\n",$sContent);
@@ -57,7 +57,25 @@ class ComponentExtract
                     $this->arLines[$i] = trim($sLine); 
                 }
             }
-        }//foreach
+        }//foreach        
+    }
+    
+    public function run($isPrintL=1)
+    {
+        $this->load_lines();
+        $this->arLines = array_unique($this->arLines);
+        asort($this->arLines);
+        if($isPrintL)
+            print_r($this->arLines);
+        $sSQLIn = implode("','",$this->arLines);
+        $sSQLIn = "('$sSQLIn')";
+        $sSQLIn = "
+        SELECT DISTINCT tabla,a_erptabla
+        FROM ERP_Taules_Telynet
+        WHERE 1=1
+        AND tabla IN $sSQLIn
+        ";
+        print_r($sSQLIn);     
     }//run()
     
     public function set_path_file($value){$this->sFilePath=$value;}
