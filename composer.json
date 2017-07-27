@@ -1,0 +1,5 @@
+{
+    "require": {
+        "theframework/helpers": "^0.0.2"
+    }
+}
