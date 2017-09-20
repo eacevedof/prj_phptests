@@ -2,17 +2,18 @@
 /**
  * @author Eduardo Acevedo Farje.
  * @link www.eduardoaf.com
- * @name ComponentExtract
- * @file component_extract.php
+ * @name ComponentHydrapk
+ * @file component_scandir.php
  * @version 1.0.1
- * @date 01-06-2014 12:45
+ * @date 27-07-2017 12:06
  * @observations
- * usado en flamagas para extraer de los archivos .dtsx (xml)
- * devuelve las tablas que ya se han tratado 
+ * Extrae los 
+ *  alter table accounts_agrupation2_tr add constraint acut_guain_r2416_PK primary key (Language_tr,Code,Code_Agrupation1);
+ * con el fin de pasarlos a drop para despues poder vaciar las tablas con truncate 
  */
 namespace TheFramework\Components;
 
-class ComponentExtract 
+class ComponentHydrapk 
 {
     private $sRegexp;
     private $sFilePath;
@@ -20,8 +21,8 @@ class ComponentExtract
     
     public function __construct() 
     {
-        $this->sRegexp = "<DTS:Property DTS:Name=\"ObjectName\">.*<\/DTS:Property>";
-        $this->sFilePath = "C:\Proyectos\Interfaz\Flamagas\Interfaz Flamagas\ImportFlamagas.dtsx";
+        $this->sRegexp = "alter table .*";
+        $this->sFilePath = "C:\shared\scriptBD.install.mssql.sql";
         $this->arLines = [];
         //echo "<DTS:Property DTS:Name=\"ObjectName\">FATRVA - ERP_auxiliar</DTS:Property>";
     }
@@ -62,22 +63,14 @@ class ComponentExtract
         }//foreach        
     }
     
-    public function run($isPrintL=1)
+    public function run()
     {
         $this->load_lines();
         $this->arLines = array_unique($this->arLines);
         asort($this->arLines);
-        if($isPrintL)
-            print_r($this->arLines);
-        $sSQLIn = implode("','",$this->arLines);
-        $sSQLIn = "('$sSQLIn')";
-        $sSQLIn = "
-        SELECT DISTINCT tabla,a_erptabla
-        FROM ERP_Taules_Telynet
-        WHERE 1=1
-        AND tabla IN $sSQLIn
-        ";
-        print_r($sSQLIn);     
+        foreach ($this->arLines as $sLine)
+            echo $sLine."\n";
+   
     }//run()
     
     public function set_path_file($value){$this->sFilePath=$value;}
@@ -85,4 +78,4 @@ class ComponentExtract
     
     public function get_extracted(){return $this->arLines;}
     
-}//ComponentExtract
+}//ComponentHydrapk

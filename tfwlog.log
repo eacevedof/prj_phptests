@@ -1,81 +1,27 @@
 
-2017-07-26_09:59:39: 
+2017-09-20_13:01:25: 
 theframework.helpers.autoload: TheFramework\Components\ComponentExtract
 
-2017-07-26_10:01:37: 
+2017-09-20_13:01:25: 
+theframework.helpers.autoload: TheFramework\Components\ComponentScandir
+
+2017-09-20_13:01:25: 
+theframework.helpers.autoload: TheFramework\Components\ComponentHydrapk
+
+2017-09-20_13:02:33: 
 theframework.helpers.autoload: TheFramework\Components\ComponentExtract
 
-2017-07-26_10:06:07: 
+2017-09-20_13:02:33: 
+theframework.helpers.autoload: TheFramework\Components\ComponentScandir
+
+2017-09-20_13:02:33: 
+theframework.helpers.autoload: TheFramework\Components\ComponentHydrapk
+
+2017-09-20_13:03:27: 
 theframework.helpers.autoload: TheFramework\Components\ComponentExtract
 
-2017-07-26_10:09:10: 
-theframework.helpers.autoload: TheFramework\Components\ComponentExtract
+2017-09-20_13:03:27: 
+theframework.helpers.autoload: TheFramework\Components\ComponentScandir
 
-2017-07-26_10:19:24: 
-theframework.helpers.autoload: TheFramework\Components\ComponentExtract
-
-2017-07-26_10:22:19: 
-theframework.helpers.autoload: TheFramework\Components\ComponentExtract
-
-2017-07-26_10:24:25: 
-theframework.helpers.autoload: TheFramework\Components\ComponentExtract
-
-2017-07-26_10:26:47: 
-theframework.helpers.autoload: TheFramework\Components\ComponentExtract
-
-2017-07-26_10:27:19: 
-theframework.helpers.autoload: TheFramework\Components\ComponentExtract
-
-2017-07-26_10:30:44: 
-theframework.helpers.autoload: TheFramework\Components\ComponentExtract
-
-2017-07-26_10:30:59: 
-theframework.helpers.autoload: TheFramework\Components\ComponentExtract
-
-2017-07-26_10:31:48: 
-theframework.helpers.autoload: TheFramework\Components\ComponentExtract
-
-2017-07-26_10:32:05: 
-theframework.helpers.autoload: TheFramework\Components\ComponentExtract
-
-2017-07-26_10:33:34: 
-theframework.helpers.autoload: TheFramework\Components\ComponentExtract
-
-2017-07-26_10:39:50: 
-theframework.helpers.autoload: TheFramework\Components\ComponentExtract
-
-2017-07-26_10:40:07: 
-theframework.helpers.autoload: TheFramework\Components\ComponentExtract
-
-2017-07-26_10:51:53: 
-theframework.helpers.autoload: TheFramework\Components\ComponentExtract
-
-2017-07-26_10:52:10: 
-theframework.helpers.autoload: TheFramework\Components\ComponentExtract
-
-2017-07-26_10:52:32: 
-theframework.helpers.autoload: TheFramework\Components\ComponentExtract
-
-2017-07-26_10:53:15: 
-theframework.helpers.autoload: TheFramework\Components\ComponentExtract
-
-2017-07-26_10:53:40: 
-theframework.helpers.autoload: TheFramework\Components\ComponentExtract
-
-2017-07-26_10:54:18: 
-theframework.helpers.autoload: TheFramework\Components\ComponentExtract
-
-2017-07-26_10:54:53: 
-theframework.helpers.autoload: TheFramework\Components\ComponentExtract
-
-2017-07-26_10:55:31: 
-theframework.helpers.autoload: TheFramework\Components\ComponentExtract
-
-2017-07-26_10:58:20: 
-theframework.helpers.autoload: TheFramework\Components\ComponentExtract
-
-2017-07-26_12:32:34: 
-theframework.helpers.autoload: TheFramework\Components\ComponentExtract
-
-2017-07-26_12:34:10: 
-theframework.helpers.autoload: TheFramework\Components\ComponentExtract
+2017-09-20_13:03:27: 
+theframework.helpers.autoload: TheFramework\Components\ComponentHydrapk

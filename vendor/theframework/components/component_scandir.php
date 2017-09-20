@@ -7,6 +7,7 @@
  * @version 1.0.1
  * @date 27-07-2017 12:06
  * @observations
+ * Flamagas devuelve todos los archivos .XNT que nos han pasado
  */
 namespace TheFramework\Components;
 
