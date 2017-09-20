@@ -22,7 +22,7 @@ class ComponentHydrapk
     public function __construct() 
     {
         $this->sRegexp = "alter table .*";
-        $this->sFilePath = "C:\shared\scriptBD.install.mssql.sql";
+        $this->sFilePath = "C:\shared\constraints.sql";
         $this->arLines = [];
         //echo "<DTS:Property DTS:Name=\"ObjectName\">FATRVA - ERP_auxiliar</DTS:Property>";
     }
@@ -53,12 +53,11 @@ class ComponentHydrapk
             preg_match("/$this->sRegexp/",$sLine,$arMatches);
             if($arMatches)
             {
-                //bug($arMatches,"line:$i");
-                if(!$this->in_string(["{","}",".log","sql.desa1","Restricción"],$sLine))
-                {
-                    $this->clean(["<DTS:Property DTS:Name=\"ObjectName\">","</DTS:Property>"],$sLine);
-                    $this->arLines[$i] = trim($sLine); 
-                }
+                $iPos = strpos($sLine,"foreign key");
+                $sLine = substr($sLine,0,$iPos);
+                $sLine = str_replace("add constraint","drop constraint",$sLine);
+                $sLine .= ";";
+                $this->arLines[$i] = trim($sLine);                
             }
         }//foreach        
     }
