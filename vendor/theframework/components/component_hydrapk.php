@@ -10,6 +10,8 @@
  * Extrae los 
  *  alter table accounts_agrupation2_tr add constraint acut_guain_r2416_PK primary key (Language_tr,Code,Code_Agrupation1);
  * con el fin de pasarlos a drop para despues poder vaciar las tablas con truncate 
+ * https://stackoverflow.com/questions/2337717/removing-all-primary-keys
+ * Al final no ha servido pq al aplicar los drop no se ejecutan bien las consultas
  */
 namespace TheFramework\Components;
 
@@ -53,13 +55,15 @@ class ComponentHydrapk
             preg_match("/$this->sRegexp/",$sLine,$arMatches);
             if($arMatches)
             {
-                $iPos = strpos($sLine,"foreign key");
-                $sLine = substr($sLine,0,$iPos);
-                $sLine = str_replace("add constraint","drop constraint",$sLine);
-                $sLine .= ";";
-                $this->arLines[$i] = trim($sLine);                
+                $iPos1 = strpos($sLine,"alter table");
+                $iPos1 += 11;
+                $iPos2 = strpos($sLine,"add constraint");
+                $iPos2 = $iPos2-$iPos1;
+                $sLine = substr($sLine,$iPos1,$iPos2);
+                $this->arLines[$i] = trim($sLine);
             }
         }//foreach        
+        //array_unique($this->arLines);
     }
     
     public function run()
@@ -67,8 +71,8 @@ class ComponentHydrapk
         $this->load_lines();
         $this->arLines = array_unique($this->arLines);
         asort($this->arLines);
-        foreach ($this->arLines as $sLine)
-            echo $sLine."\n";
+        $sSQLIn = implode("','",$this->arLines);
+        echo "'$sSQLIn'";
    
     }//run()
     
