@@ -3,34 +3,35 @@
 //las promesas según el standard a+ deben tener un metodo then
 console.log("file:promises.js");
 (function(){
-    function getUsers(){
+    getUsers = ()=>{
         let oPromise = new Promise(function(fnResolve,fnReject){
             setTimeout(function(){
                 console.log("Users are Ready")
-                fnResolve()
-                return [7,8,9]
+                //se pasa como parámetro un array, este array se pasara
+                //como parámetro de la funcion anonima que esta en then: then(fn(array){...})
+                fnResolve(["u7","u8","u9"])
                 //fnReject();
             },800)            
         })
         return oPromise
     }
     
-    function getCustomers(){
+     getCustomers=()=>{
         let oPromise = new Promise(function(fnResolve,fnReject){
             setTimeout(function(){
                 console.log("Customers are Ready")
-                //fnResolve()//resolve avisa que esta promesa ha terminado correcamente
-                fnReject()
+                fnResolve(["c3","c4","c20"])//resolve avisa que esta promesa ha terminado correcamente
+                //fnReject("error al obtener customers")
             },400)
         })
         return oPromise
     }    
     
-    function getProducts(){
+    getProducts = ()=>{
         let oPromise = new Promise(function(fnResolve,fnReject){
             setTimeout(function(){
                 console.log("Products are Ready")
-                fnResolve()
+                fnResolve([true,false,null,undefined])
             },600)
         })
         return oPromise
@@ -38,8 +39,14 @@ console.log("file:promises.js");
     
     getUsers()
         //solo se pasa el callback (el nombre)
-        .then(getCustomers)
-        .then(getProducts)
+        .then((arUsers)=>{
+            console.log(arUsers)
+            return getCustomers()
+        })
+        .then((arCustomers)=>{
+            console.log(arCustomers)
+            return getProducts()
+        })
         .catch((oErr)=>{
             console.log("Error",oErr)
         })
