@@ -15,7 +15,7 @@ console.log("file:promises.js");
         let oPromise = new Promise(function(fnResolve,oReject){
             setTimeout(function(){
                 console.log("Customers are Ready")
-                fnResolve()
+                fnResolve()//resolve avisa que esta promesa ha terminado correcamente
             },400)
         })
         return oPromise
@@ -32,6 +32,7 @@ console.log("file:promises.js");
     }
     
     getUsers()
-            .then(getCustomers)
-            .then(getProducts)
+        //solo se pasa el callback (el nombre)
+        .then(getCustomers)
+        .then(getProducts)
 })();
