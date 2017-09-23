@@ -22,6 +22,25 @@
         return oPromise;
     }//getDataByAJAX
         
+    //endpoints
+    let arFiles = ["base_user","app_product_family","app_product_subfamily"]
+    
+    let arObjDeferred = []
+    
+    arFiles.forEach((sFile)=>{
+        arObjDeferred.push(getDataByAJAX(sFile))
+    })
+    
+    console.log("arObjDeferred",arObjDeferred)
+    
+    //con apply se puede pasar parametros en un arreglo
+    //ejecutaria this.when(arObjDeferred)
+    //el metodo apply invoca una función parecido a call, solo que call requiere los parametros separados
+    $.when.apply(this,arObjDeferred)
+        .then((sUser,sProdFam,sProdSubfam) => {
+            console.log("sUser",sUser,"sFam",sProdFam,"sSub",sProdSubfam)
+        })
+    
 //    $.when(getDataByAJAX("base_user")
 //        ,getDataByAJAX("app_product_family")
 //        ,getDataByAJAX("app_product_subfamily")
@@ -34,17 +53,17 @@
     //devuelve un array de arrays en orden de llamada
     //hay q tener cuidado usando .all ya que segun la cantidad de tiempo de recuperacion de los datos
     //estos pueden ralentizar mucho la app. Lo ideal en estos casos seria cargar la visualizacion de modo asincrono 
-    Promise.all([getDataByAJAX("base_user")
-        ,getDataByAJAX("app_product_family")
-        ,getDataByAJAX("app_product_subfamily")]
-        )
-        .then(arResponse=>{
-            arResponse.forEach((arItem,i)=>{
-                console.log(i,arItem)
-            })
-            //console.log(arResponse)
-        })
-    
+//    Promise.all([getDataByAJAX("base_user")
+//        ,getDataByAJAX("app_product_family")
+//        ,getDataByAJAX("app_product_subfamily")]
+//        )
+//        .then(arResponse=>{
+//            arResponse.forEach((arItem,i)=>{
+//                console.log(i,arItem)
+//            })
+//            //console.log(arResponse)
+//        })
+//    
 //    getDataByAJAX("base_user")
 //        .then( arUsers =>{
 //            console.info("arUsers",arUsers)
