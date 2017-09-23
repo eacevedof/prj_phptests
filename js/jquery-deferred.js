@@ -7,14 +7,15 @@
     $.ajax({
         url: sServerUrl.concat("base_user.json"),
         headers:{
+            //estas cabeceras se usan para APIS que acepta CORS
             //"Content-Type":"application/json",
             //"Api-Token":"1234"
         },
-        success:(oResponse)=>{
-            console.log("success",oResponse)
+        success:(sResponse)=>{
+            console.info("users",sResponse)
         },
-        error:(oResponse)=>{
-            console.log("error",oResponse)
+        error:(sResponse)=>{
+            console.log("error",sResponse)
         }
     })
 })(jQuery);
