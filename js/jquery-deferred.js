@@ -14,15 +14,24 @@
         //y etados pending, rejected y fullfill
         //y tiene otro metodo promise() que hace la transformacion
         let oPromise = $.ajax({
-            url: sServerUrl.concat(sFile),
+            url: sServerUrl.concat(sFile).concat(".json"),
         }).promise()//promise: transforma el deferred object a una promesa
         
         return oPromise;
     }//getDataByAJAX
     
-    getDataByAJAX("base_user.json")
-            .then(getDataByAJAX("app_product_family.json"))
-            .then(getDataByAJAX("app_product_subfamily.json"))
-    
+    getDataByAJAX("base_user")
+        .then( arUsers =>{
+            console.info("arUsers",arUsers)
+            return getDataByAJAX("app_product_family")
+        })
+        .then( arFamilies =>{
+            console.info("arFamilies",arFamilies)
+            return getDataByAJAX("app_product_subfamily")
+        })
+        .then(arSubfamilies=>{
+            console.info("arSubfamiles",arSubfamilies)
+        })
+        .done(()=>{console.log("done :)")})
 
 })(jQuery);
