@@ -2,11 +2,12 @@
 //Promesas A+:  Es una promesa que cumple con un standard
 //las promesas según el standard a+ deben tener un metodo then
 //Reason: El argumento (mensaje) que recibe fnReject(reas)
+//Polyfill: es6 promise. Da soporte de promesas a navegadores antiguos
 console.log("file:promises.js");
-(function(){
+(()=>{
     getUsers = ()=>{
-        let oPromise = new Promise(function(fnResolve,fnReject){
-            setTimeout(function(){
+        let oPromise = new Promise((fnResolve,fnReject)=>{
+            setTimeout(()=>{
                 console.log("Users are Ready")
                 //se pasa como parámetro un array, este array se pasara
                 //como parámetro de la funcion anonima que esta en then: then(fn(array){...})
@@ -18,8 +19,8 @@ console.log("file:promises.js");
     }
     
      getCustomers=()=>{
-        let oPromise = new Promise(function(fnResolve,fnReject){
-            setTimeout(function(){
+        let oPromise = new Promise((fnResolve,fnReject)=>{
+            setTimeout(()=>{
                 console.log("Customers are Ready")
                 fnResolve(["c3","c4","c20"])//resolve avisa que esta promesa ha terminado correcamente
                 //fnReject("error al obtener customers")
@@ -29,8 +30,8 @@ console.log("file:promises.js");
     }    
     
     getProducts = ()=>{
-        let oPromise = new Promise(function(fnResolve,fnReject){
-            setTimeout(function(){
+        let oPromise = new Promise((fnResolve,fnReject)=>{
+            setTimeout(()=>{
                 console.log("Products are Ready")
                 fnResolve([true,false,null,undefined])
             },600)
