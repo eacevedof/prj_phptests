@@ -49,7 +49,7 @@ console.log("file:promises.js");
             console.log(arCustomers)
             return getProducts()
         })
-        .catch((oErr)=>{
-            console.log("Error",oErr)
+        .catch((sReason)=>{
+            console.log("Error",sReason)
         })
 })();
