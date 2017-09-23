@@ -5,6 +5,8 @@
 //Polyfill: es6 promise. Da soporte de promesas a navegadores antiguos
 //Polyfill.io  Pequeño que script que cargara solo lo que necesite el navegador del usuario final discriminando el resto de navegadores
 //tiene promises
+//diferencia entre promise y observable es que la promesa se ejecuta una vez el observable se queda a la escucha
+//consejo: no concatenar mas de 10 promesas
 console.log("file:promises.js");
 (()=>{
     getUsers = ()=>{
@@ -13,8 +15,8 @@ console.log("file:promises.js");
                 console.log("Users are Ready")
                 //se pasa como parámetro un array, este array se pasara
                 //como parámetro de la funcion anonima que esta en then: then(fn(array){...})
-                //fnResolve(["u7","u8","u9"])
-                fnReject("Base de datos inaccesible al recuperar usuarios");
+                fnResolve({code:100,data:["u7","u8","u9"]})
+                //fnReject({code:-1,data:"Base de datos inaccesible al recuperar usuarios"});
             },800)            
         })
         return oPromise
@@ -25,7 +27,7 @@ console.log("file:promises.js");
             setTimeout(()=>{
                 console.log("Customers are Ready")
                 fnResolve(["c3","c4","c20"])//resolve avisa que esta promesa ha terminado correcamente
-                //fnReject("error al obtener customers")
+                //fnReject({code:-1,data:"Base de datos inaccesible al recuperar usuarios"});
             },400)
         })
         return oPromise
