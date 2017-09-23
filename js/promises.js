@@ -18,7 +18,7 @@ console.log("file:promises.js");
         return oPromise
     }
     
-     getCustomers=()=>{
+     getCustomers = ()=>{
         let oPromise = new Promise((fnResolve,fnReject)=>{
             setTimeout(()=>{
                 console.log("Customers are Ready")
