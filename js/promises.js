@@ -1,6 +1,6 @@
 //http://json.theframework.es/data/app_costumer.json
-console.log("promises")
-(()=>{
+console.log("file:promises.js");
+(function(){
     function getUsers(){
         setTimeout(function(){
             console.log("Users are Ready")
@@ -17,5 +17,9 @@ console.log("promises")
         setTimeout(function(){
             console.log("Products are Ready")
         },800)
-    }    
-})
+    }
+    
+    getUsers()
+    getCustomers()
+    getProducts()
+})();
