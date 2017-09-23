@@ -22,13 +22,21 @@
         return oPromise;
     }//getDataByAJAX
         
-    $.when(getDataByAJAX("base_user")
+//    $.when(getDataByAJAX("base_user")
+//        ,getDataByAJAX("app_product_family")
+//        ,getDataByAJAX("app_product_subfamily")
+//        )
+//        .then((sUser,sProdFam,sProdSubfam) => {
+//            console.log("sUser",sUser,"sFam",sProdFam,"sSub",sProdSubfam)
+//        })
+    
+    //sin jquery, con ecmascript
+    //devuelve un array de arrays en orden de llamada
+    Promise.all([getDataByAJAX("base_user")
         ,getDataByAJAX("app_product_family")
-        ,getDataByAJAX("app_product_subfamily")
+        ,getDataByAJAX("app_product_subfamily")]
         )
-        .then((sUser,sProdFam,sProdSubfam) => {
-            console.log("sUser",sUser,"sFam",sProdFam,"sSub",sProdSubfam)
-        })
+        .then(sResponse=>console.log(sResponse))
     
 //    getDataByAJAX("base_user")
 //        .then( arUsers =>{
