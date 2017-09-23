@@ -8,6 +8,11 @@
     let sServerUrl = "http://json.theframework.es/index.php?getfile="
     
     let getDataByAJAX = (sFile)=>{
+        //$.ajax devuelve un objeto deferred que es compatible con un objeto 
+        //Promise A+
+        //con lo cual cuenta con un metodo .then
+        //y etados pending, rejected y fullfill
+        //y tiene otro metodo promise() que hace la transformacion
         let oJqAjax = $.ajax({
             url: sServerUrl.concat(sFile),
             headers:{
@@ -21,7 +26,7 @@
             error:(sResponse)=>{
                 console.log("error",sResponse)
             }
-        }).promise()
+        }).promise()//promise: transforma el deferred object a una promesa
         
         //devuelve un objeto deferido
         return oJqAjax;
