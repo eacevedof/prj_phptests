@@ -20,7 +20,9 @@
         return oPromise;
     }//getDataByAJAX
     
-    let oPromise = getDataByAJAX("base_user.json")
-    //console.log("oJqAjax",oJqAjax)
+    getDataByAJAX("base_user.json")
+            .then(getDataByAJAX("app_product_family.json"))
+            .then(getDataByAJAX("app_product_subfamily.json"))
+    
 
 })(jQuery);
