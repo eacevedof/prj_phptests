@@ -21,17 +21,14 @@
         
         return oPromise;
     }//getDataByAJAX
-    
-    
+        
     $.when(getDataByAJAX("base_user")
         ,getDataByAJAX("app_product_family")
         ,getDataByAJAX("app_product_subfamily")
         )
-        .then(sResponse => {
-            console.log("response",sResponse)
+        .then((sUser,sProdFam,sProdSubfam) => {
+            console.log("sUser",sUser,"sFam",sProdFam,"sSub",sProdSubfam)
         })
-            
-    
     
 //    getDataByAJAX("base_user")
 //        .then( arUsers =>{
