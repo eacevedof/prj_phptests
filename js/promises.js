@@ -1,6 +1,7 @@
 //http://json.theframework.es/data/app_costumer.json
 //Promesas A+:  Es una promesa que cumple con un standard
 //las promesas según el standard a+ deben tener un metodo then
+//Reason: El argumento (mensaje) que recibe fnReject(reas)
 console.log("file:promises.js");
 (function(){
     getUsers = ()=>{
@@ -9,8 +10,8 @@ console.log("file:promises.js");
                 console.log("Users are Ready")
                 //se pasa como parámetro un array, este array se pasara
                 //como parámetro de la funcion anonima que esta en then: then(fn(array){...})
-                fnResolve(["u7","u8","u9"])
-                //fnReject();
+                //fnResolve(["u7","u8","u9"])
+                fnReject("Base de datos inaccesible al recuperar usuarios");
             },800)            
         })
         return oPromise
