@@ -3,6 +3,8 @@
 //las promesas según el standard a+ deben tener un metodo then
 //Reason: El argumento (mensaje) que recibe fnReject(reas)
 //Polyfill: es6 promise. Da soporte de promesas a navegadores antiguos
+//Polyfill.io  Pequeño que script que cargara solo lo que necesite el navegador del usuario final discriminando el resto de navegadores
+//tiene promises
 console.log("file:promises.js");
 (()=>{
     getUsers = ()=>{
