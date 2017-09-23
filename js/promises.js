@@ -2,27 +2,29 @@
 console.log("file:promises.js");
 (function(){
     function getUsers(){
-        let oPromise = new Promise(function(fnResolve,oReject){
+        let oPromise = new Promise(function(fnResolve,fnReject){
             setTimeout(function(){
                 console.log("Users are Ready")
                 fnResolve()
+                //fnReject();
             },800)            
         })
         return oPromise
     }
     
     function getCustomers(){
-        let oPromise = new Promise(function(fnResolve,oReject){
+        let oPromise = new Promise(function(fnResolve,fnReject){
             setTimeout(function(){
                 console.log("Customers are Ready")
-                fnResolve()//resolve avisa que esta promesa ha terminado correcamente
+                //fnResolve()//resolve avisa que esta promesa ha terminado correcamente
+                fnReject()
             },400)
         })
         return oPromise
     }    
     
     function getProducts(){
-        let oPromise = new Promise(function(fnResolve,oReject){
+        let oPromise = new Promise(function(fnResolve,fnReject){
             setTimeout(function(){
                 console.log("Products are Ready")
                 fnResolve()
@@ -35,4 +37,7 @@ console.log("file:promises.js");
         //solo se pasa el callback (el nombre)
         .then(getCustomers)
         .then(getProducts)
+        .catch((oErr)=>{
+            console.log("Error",oErr)
+        })
 })();
