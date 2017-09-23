@@ -14,6 +14,7 @@
         //y etados pending, rejected y fullfill
         //y tiene otro metodo promise() que hace la transformacion
         //los deferred objects son más pesados que las promesas. Pe. cuenta con done()
+        //solo hay compatibilidad de deferred a partir de laversion 3 de jquery
         let oPromise = $.ajax({
             url: sServerUrl.concat(sFile).concat(".json"),
         }).promise()//promise: transforma el deferred object a una promesa
@@ -21,18 +22,29 @@
         return oPromise;
     }//getDataByAJAX
     
-    getDataByAJAX("base_user")
-        .then( arUsers =>{
-            console.info("arUsers",arUsers)
-            return getDataByAJAX("app_product_family")
+    
+    $.when(getDataByAJAX("base_user")
+        ,getDataByAJAX("app_product_family")
+        ,getDataByAJAX("app_product_subfamily")
+        )
+        .then(sResponse => {
+            console.log("response",sResponse)
         })
-        .then( arFamilies =>{
-            console.info("arFamilies",arFamilies)
-            return getDataByAJAX("app_product_subfamily")
-        })
-        .then(arSubfamilies=>{
-            console.info("arSubfamiles",arSubfamilies)
-        })
-        .done(()=>{console.log("done :)")})
+            
+    
+    
+//    getDataByAJAX("base_user")
+//        .then( arUsers =>{
+//            console.info("arUsers",arUsers)
+//            return getDataByAJAX("app_product_family")
+//        })
+//        .then( arFamilies =>{
+//            console.info("arFamilies",arFamilies)
+//            return getDataByAJAX("app_product_subfamily")
+//        })
+//        .then(arSubfamilies=>{
+//            console.info("arSubfamiles",arSubfamilies)
+//        })
+//        .done(()=>{console.log("done :)")})
 
 })(jQuery);
