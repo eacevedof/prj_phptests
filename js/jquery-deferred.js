@@ -32,11 +32,18 @@
     
     //sin jquery, con ecmascript
     //devuelve un array de arrays en orden de llamada
+    //hay q tener cuidado usando .all ya que segun la cantidad de tiempo de recuperacion de los datos
+    //estos pueden ralentizar mucho la app. Lo ideal en estos casos seria cargar la visualizacion de modo asincrono 
     Promise.all([getDataByAJAX("base_user")
         ,getDataByAJAX("app_product_family")
         ,getDataByAJAX("app_product_subfamily")]
         )
-        .then(sResponse=>console.log(sResponse))
+        .then(arResponse=>{
+            arResponse.forEach((arItem,i)=>{
+                console.log(i,arItem)
+            })
+            //console.log(arResponse)
+        })
     
 //    getDataByAJAX("base_user")
 //        .then( arUsers =>{
