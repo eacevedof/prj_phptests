@@ -2,24 +2,33 @@
 console.log("file:promises.js");
 (function(){
     function getUsers(){
-        setTimeout(function(){
-            console.log("Users are Ready")
-        },800)
+        let oPromise = new Promise(function(oResolve,oReject){
+            setTimeout(function(){
+                console.log("Users are Ready")
+            },800)            
+        })
+        return oPromise
     }
     
     function getCustomers(){
-        setTimeout(function(){
-            console.log("Customers are Ready")
-        },400)
+        let oPromise = new Promise(function(oResolve,oReject){
+            setTimeout(function(){
+                console.log("Customers are Ready")
+            },400)
+        })
+        return oPromise
     }    
     
     function getProducts(){
-        setTimeout(function(){
-            console.log("Products are Ready")
-        },800)
+        let oPromise = new Promise(function(oResolve,oReject){
+            setTimeout(function(){
+                console.log("Products are Ready")
+            },600)
+        })
+        return oPromise
     }
     
     getUsers()
-    getCustomers()
-    getProducts()
+            .then(getCustomers)
+            .then(getProducts)
 })();
