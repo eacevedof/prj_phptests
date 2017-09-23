@@ -36,11 +36,19 @@
     //con apply se puede pasar parametros en un arreglo
     //ejecutaria this.when(arObjDeferred)
     //el metodo apply invoca una función parecido a call, solo que call requiere los parametros separados
-    $.when.apply(this,arObjDeferred)
-        .then((sUser,sProdFam,sProdSubfam) => {
-            console.log("sUser",sUser,"sFam",sProdFam,"sSub",sProdSubfam)
+//    $.when.apply(this,arObjDeferred)
+//        .then((sUser,sProdFam,sProdSubfam) => {
+//            console.log("sUser",sUser,"sFam",sProdFam,"sSub",sProdSubfam)
+//        })
+        
+    Promise.all(arObjDeferred)
+        .then(arResponse=>{
+            arResponse.forEach((arItem,i)=>{
+                console.log(i,arItem)
+            })
+            //console.log(arResponse)
         })
-    
+        
 //    $.when(getDataByAJAX("base_user")
 //        ,getDataByAJAX("app_product_family")
 //        ,getDataByAJAX("app_product_subfamily")
