@@ -41,6 +41,7 @@ console.log("file:promises.js");
         //solo se pasa el callback (el nombre)
         .then((arUsers)=>{
             console.log(arUsers)
+            throw "Error en arUsers"
             return getCustomers()
         })
         .then((arCustomers)=>{
