@@ -2,7 +2,7 @@
 /**
  * @author Eduardo Acevedo Farje.
  * @link www.eduardoaf.com
- * @name TheApplication\Components\ComponentSqlserver 
+ * @name TheFramework\Components\ComponentSqlserver 
  * @file component_sqlserver.php v1.0.1
  * @date 19-09-2017 04:56 SPAIN
  * @observations
@@ -12,22 +12,35 @@ namespace TheFramework\Components;
 class ComponentSqlserver 
 {
 
-    public function query($sSQL)
+   public function query()
     {
-
-        $arDb["server"] = "localhost";
+        $arDb["server"] = "EALEXEI-W7\MSSQLSERVER2012";
+        //$arDb["server"] = "";
         $arDb["database"] = "crm3_flamagas";
         $arDb["user"] = "sa";
         $arDb["password"] = "Sasql2012";
-            
-        $db = new \PDO("sqlsrv:Server={$arDb["server"]};Database={$arDb["database"]}"
-            ,$arDb["user"],$arDb["password"]);
-        //$db->setAttribute(PDO::SQLSRV_ATTR_ENCODING, PDO::SQLSRV_ENCODING_SYSTEM);
-        $query =  "select * from core_users";
-        foreach ($db->query($query) as $row)
+           
+        //bug($arDb);
+        try
         {
-            print_r($row);
-        }   
+            //https://stackoverflow.com/questions/38671330/error-with-php7-and-sql-server-on-windows
+            $db = new \PDO("sqlsrv:Server={$arDb["server"]};Database={$arDb["database"]};ConnectionPooling=0"
+                            ,$arDb["user"],$arDb["password"]);
+//            $db = new \PDO("odbc:Driver={SQL Server};Server={$arDb["server"]};Database={$arDb["database"]}"
+//                            ,$arDb["user"],$arDb["password"]);
+//            bug($db);
+            $db->setAttribute(\PDO::SQLSRV_ATTR_ENCODING, \PDO::SQLSRV_ENCODING_SYSTEM);
+            $query =  "select * from core_users";
+            foreach ($db->query($query) as $row)
+            {
+                print_r($row);
+            }
+        }
+        catch(PDOException $oE)
+        {
+            echo "exception";
+            //bug($oE->getMessage());
+        }
     }
 
     
