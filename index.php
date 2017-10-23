@@ -37,7 +37,7 @@ use TheFramework\Helpers\HelperLabel;
 use TheFramework\Helpers\HelperDate;
 
 $oSql = new ComponentSqlserver();
-$oSql->query("");
+$oSql->query();
 
 $oLabel = new HelperLabel("datBirthdate","Birthdate","lblBirthdate");
 $oDate = new HelperDate();
