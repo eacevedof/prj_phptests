@@ -1,0 +1,23 @@
+{
+  "name": "tests",
+  "description": "prj_phptests",
+  "version": "1.0.0",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "path": "^0.12.7"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eacevedof/prj_phptests.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/eacevedof/prj_phptests/issues"
+  },
+  "homepage": "https://github.com/eacevedof/prj_phptests#readme"
+}
