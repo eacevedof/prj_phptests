@@ -132,11 +132,9 @@ class ComponentGd2
     }//resize
     
     private function add_error($sMessage){$this->isError = TRUE;$this->arErrors[]=$sMessage;}
-    
     public function add_from($sKey,$sValue){$this->arFrom[$sKey] = $sValue;}
     public function add_to($sKey,$sValue){$this->arTo[$sKey] = $sValue;}
-    
     public function is_error(){return $this->isError;}
-    
     public function get_errors(){return $this->arErrors;}
+    public function show_errors(){echo "<pre>".var_export($this->arErrors,1);}
 }//class ComponentGd2
