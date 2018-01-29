@@ -15,6 +15,7 @@ class ComponentGd2
     private $arFrom;
     private $arTmp;
     private $arTo;
+    private $isError;
     private $arErrors;
     
     //$GLOBALS["config_app_dir"].$GLOBALS["config_web_folder"].config_bar.$GLOBALS["config_res_dir"].config_bar."products_picture".config_bar.$Nom_Photo
@@ -23,6 +24,7 @@ class ComponentGd2
         define("DS",config_bar);
         define("PATH_RESDIR", realpath($GLOBALS["config_app_dir"].$GLOBALS["config_web_folder"].DS.$GLOBALS["config_res_dir"]));
         
+        $this->isError = FALSE;
         $this->arErrors = array();
         $this->arFrom = array("pathfolder"=>PATH_RESDIR.DS."products_picture".DS,"filename"=>"");
         $this->arTmp = array();
@@ -50,13 +52,18 @@ class ComponentGd2
         return $oImage;
     }//get_image_blank_obj
     
+    /**
+     * a partir de dos objetos, uno en blanco (lienzo) y otro original ($arFrom[object]) se copia el original en el blanco
+     * @param array $arFrom array("object","x","y","w","h")
+     * @param array $arTo array("object","x","y","w","h")
+     * @return boolean
+     */
     private function save_in_blank($arFrom,$arTo)
     {
-        
         //imagecopyresampled($dst_image, $src_image, int $dst_x, int $dst_y, int $src_x, int $src_y, int $dst_w, int $dst_h, int $src_w, int $src_h): bool {}
         //imagecopyresampled($dst_image, $src_image, $dst_x, $dst_y, $src_x, $src_y, $dst_w, $dst_h, $src_w, $src_h);
         //imagecopyresampled($tnImage,$fullImage, 0,$isy, 0,0, $ix,$iy, $fullSize[0],$fullSize[1]);
-        return imagecopyresampled($arTo["path"],$arFrom["path"]
+        return imagecopyresampled($arTo["object"],$arFrom["object"]
             ,$arTo["x"],$arTo["y"],$arFrom["x"],$arFrom["y"]
             ,$arTo["w"],$arTo["h"], $arFrom["w"],$arFrom["h"]);
     }//save_in_blank
@@ -64,47 +71,46 @@ class ComponentGd2
     public function get_size($sPathFile)
     {
         //getimagesize("https://www.virginexperiencedays.co.uk/content/img/product/large/big-cat-encounter--17120907.jpg");
-        /*array(7) {
-        [0]=>
-        int(1200)
-        [1]=>
-        int(800)
-        [2]=>
-        int(2)
-        [3]=>
-        string(25) "width="1200" height="800""
-        ["bits"]=>
-        int(8)
-        ["channels"]=>
-        int(3)
-        ["mime"]=>
-        string(10) "image/jpeg"
-        }*/
+        /*array(7) {[0]=>int(1200) [1]=> int(800) [2]=> int(2) [3]=> string(25) "width="1200" height="800"" ["bits"]=> int(8)
+        ["channels"]=>int(3) ["mime"]=> string(10) "image/jpeg"}*/
         $arSize = getimagesize($sPathFile);
-        return array("with"=>$arSize[0],"height"=>$arSize[1]);
+        return array("w"=>$arSize[0],"h"=>$arSize[1]);
     }//get_size
     
     public function resize($arTo)
     {
-        $iW = $arTo["w"];
-        $iH = $arTo["h"];
+        $iW = isset($arTo["w"])?$arTo["w"]:NULL;
+        $iH = isset($arTo["h"])?$arTo["h"]:NULL;
         $this->arFrom["pathfile"] = $this->arFrom["pathfolder"].$this->arFrom["filename"];
         $this->arTo["pathfile"] = $this->arFrom["pathfolder"].$this->arFrom["filename"];
         
-        if(!is_file($this->arFrom["pathfile"]))
-            $this->arErrors[] = "Archivo no encontrado";
+        $sPathFileFrom = $this->arFrom["pathfile"];
         
-        if($iW)
+        if(!is_file($sPathFileFrom)) $this->add_error("Archivo no encontrado en $sPathFileFrom");
+        
+        if($iW || $iH)
         {
-            
-        }
-        elseif($iH)
-        {
-            
+            $sExt = $this->get_type($this->arFrom["filename"]);
+            $oImgFrom = $this->get_image_obj($sExt,$sPathFileFrom);
+            $arSize = $this->get_size($sPathFileFrom);
+            //$iW = 124; 
+            $iH = floor($arSize["h"]/$arSize["w"]*$iW);
+                
+            if($iW)
+            {
+                $oCanvas = $this->get_image_blank_obj($iW,$iH);
+                $arFrom = array("object"=>$oImgFrom,"x"=>0,"y"=>0,"w"=>$arSize["w"],"h"=>$arSize["h"]);
+                $arTo = array("object"=>$oImgFrom,"x"=>0,"y"=>0,"w"=>$iW,"h"=>$iH);
+                $this->save_in_blank($arFrom,$arTo);
+            }
+            elseif($iH)
+            {
+
+            }
         }
         else
         {
-            echo "sin datos!!";
+            $this->add_error("No hay datos de destino:".var_export($arTo,1));
         }
         
     }//resize
