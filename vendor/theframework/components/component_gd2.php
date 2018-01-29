@@ -77,6 +77,12 @@ class ComponentGd2
         return array("w"=>$arSize[0],"h"=>$arSize[1]);
     }//get_size
     
+    /**
+     * w: El ancho en el que se desea transformar la imagen original
+     * h: La altura que tendrá la imagen original. 
+     * Son excluyentes, en caso de pasar los dos valores se tomara unicamente w
+     * @param array $arTo array("w","h")
+     */
     public function resize($arTo)
     {
         $iW = isset($arTo["w"])?$arTo["w"]:NULL;
@@ -93,20 +99,30 @@ class ComponentGd2
             $sExt = $this->get_type($this->arFrom["filename"]);
             $oImgFrom = $this->get_image_obj($sExt,$sPathFileFrom);
             $arSize = $this->get_size($sPathFileFrom);
-            //$iW = 124; 
-            $iH = floor($arSize["h"]/$arSize["w"]*$iW);
-                
+
             if($iW)
             {
-                $oCanvas = $this->get_image_blank_obj($iW,$iH);
-                $arFrom = array("object"=>$oImgFrom,"x"=>0,"y"=>0,"w"=>$arSize["w"],"h"=>$arSize["h"]);
-                $arTo = array("object"=>$oImgFrom,"x"=>0,"y"=>0,"w"=>$iW,"h"=>$iH);
-                $this->save_in_blank($arFrom,$arTo);
+                $iH = floor($arSize["h"]/$arSize["w"]*$iW);                
             }
             elseif($iH)
             {
-
+                $iW = floor($arSize["h"]/$arSize["w"]*$iH);
             }
+            
+            $oImgBlank = $this->get_image_blank_obj($iW,$iH);
+            $arFrom = array("object"=>$oImgFrom,"x"=>0,"y"=>0,"w"=>$arSize["w"],"h"=>$arSize["h"]);
+            $arTo = array("object"=>$oImgBlank,"x"=>0,"y"=>0,"w"=>$iW,"h"=>$iH);
+            $isPrinted = $this->save_in_blank($arFrom,$arTo);
+            if($isPrinted)
+            {
+                imagejpeg($arTo["object"],$this->arTo["pathfile"]);
+                imagedestroy($oImgFrom);
+                imagedestroy($oImgBlank);
+            }
+            else
+            {
+                $this->add_error("Ocurrio un error al guardar en blanco: arFrom:".var_export($arFrom,1)." arTo:".var_export($arTo,1));
+            }            
         }
         else
         {
