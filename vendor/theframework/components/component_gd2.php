@@ -42,11 +42,22 @@ class ComponentGd2
         return $oImage;
     }//get_image_obj
     
-    private function get_image_blank_obj($iW,$iL)
+    private function get_image_blank_obj($iW,$iH)
     {
-        $oImage = imagecreatetruecolor($iW,$iL);
+        $oImage = imagecreatetruecolor($iW,$iH);
         return $oImage;
     }//get_image_blank_obj
+    
+    private function save_in_blank($arFrom,$arTo)
+    {
+        
+        //imagecopyresampled($dst_image, $src_image, int $dst_x, int $dst_y, int $src_x, int $src_y, int $dst_w, int $dst_h, int $src_w, int $src_h): bool {}
+        //imagecopyresampled($dst_image, $src_image, $dst_x, $dst_y, $src_x, $src_y, $dst_w, $dst_h, $src_w, $src_h);
+        //imagecopyresampled($tnImage,$fullImage, 0,$isy, 0,0, $ix,$iy, $fullSize[0],$fullSize[1]);
+        return imagecopyresampled($arTo["path"],$arFrom["path"]
+            ,$arTo["x"],$arTo["y"],$arFrom["x"],$arFrom["y"]
+            ,$arTo["w"],$arTo["h"], $arFrom["w"],$arFrom["h"]);
+    }//save_in_blank
     
     public function get_size($sPathFile)
     {
