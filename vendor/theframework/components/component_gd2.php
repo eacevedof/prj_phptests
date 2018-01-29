@@ -137,4 +137,6 @@ class ComponentGd2
     public function add_to($sKey,$sValue){$this->arTo[$sKey] = $sValue;}
     
     public function is_error(){return $this->isError;}
+    
+    public function get_errors(){return $this->arErrors;}
 }//class ComponentGd2
