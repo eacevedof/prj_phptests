@@ -15,6 +15,7 @@ class ComponentGd2
     private $arFrom;
     private $arTmp;
     private $arTo;
+    private $arErrors;
     
     //$GLOBALS["config_app_dir"].$GLOBALS["config_web_folder"].config_bar.$GLOBALS["config_res_dir"].config_bar."products_picture".config_bar.$Nom_Photo
     public function __construct() 
@@ -22,6 +23,7 @@ class ComponentGd2
         define("DS",config_bar);
         define("PATH_RESDIR", realpath($GLOBALS["config_app_dir"].$GLOBALS["config_web_folder"].DS.$GLOBALS["config_res_dir"]));
         
+        $this->arErrors = array();
         $this->arFrom = array("pathfolder"=>PATH_RESDIR.DS."products_picture".DS,"filename"=>"");
         $this->arTmp = array();
         $this->arTo = array("pathfolder"=>PATH_RESDIR.DS."products_picture".DS,"filename"=>"");
@@ -82,12 +84,35 @@ class ComponentGd2
         return array("with"=>$arSize[0],"height"=>$arSize[1]);
     }//get_size
     
-    public function resize()
+    public function resize($arTo)
     {
+        $iW = $arTo["w"];
+        $iH = $arTo["h"];
+        $this->arFrom["pathfile"] = $this->arFrom["pathfolder"].$this->arFrom["filename"];
+        $this->arTo["pathfile"] = $this->arFrom["pathfolder"].$this->arFrom["filename"];
+        
+        if(!is_file($this->arFrom["pathfile"]))
+            $this->arErrors[] = "Archivo no encontrado";
+        
+        if($iW)
+        {
+            
+        }
+        elseif($iH)
+        {
+            
+        }
+        else
+        {
+            echo "sin datos!!";
+        }
         
     }//resize
     
+    private function add_error($sMessage){$this->isError = TRUE;$this->arErrors[]=$sMessage;}
+    
     public function add_from($sKey,$sValue){$this->arFrom[$sKey] = $sValue;}
     public function add_to($sKey,$sValue){$this->arTo[$sKey] = $sValue;}
-        
+    
+    public function is_error(){return $this->isError;}
 }//class ComponentGd2
