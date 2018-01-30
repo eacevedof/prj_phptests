@@ -22,7 +22,7 @@ class ComponentHydralogs
     
     public function __construct() 
     {
-        $this->sRegexp = "alter table .*";
+        $this->sRegexp = "\[([0-9]+\-[0-9]+\-[0-9]+ [0-9]+:[0-9]+:[0-9]+)\] \[ok\] ";
         $this->sPathLogs = realpath("C:\\shared\\flamagas_logs");
         $this->arLines = [];
     }
@@ -43,17 +43,71 @@ class ComponentHydralogs
         $sString = $sReplace;
     }
     
+    private function get_only_work($arLogs)
+    {
+        $arWorkLogs = array_filter($arLogs,function($sFileName){return strstr($sFileName,"work_");});
+        return $arWorkLogs;
+    }
+    
+    private function get_over_date($arLogs,$sDate)
+    {
+        $arWorkLogs = array_filter($arLogs,function ($sFileName) use ($sDate) {
+            $arTmp = explode(".",$sFileName);
+            $arTmp = $arTmp[0];
+            $arTmp = explode("_",$arTmp);
+            $sFileDate = end($arTmp);
+            return ($sFileDate>=$sDate);
+        });
+        return $arWorkLogs;
+    }
+    
+    private function get_by_users($arLogs,$arUsers)
+    {
+        $arWorkLogs = array_filter($arLogs, function($sFileName) use ($arUsers) {
+            $arTmp = explode(".",$sFileName);
+            $arTmp = $arTmp[0];
+            $arTmp = explode("_",$arTmp);
+            $sUser = $arTmp[3];
+            return (in_array($sUser,$arUsers));
+        });
+        return $arWorkLogs;
+    }
+    
+    private function get_date($sFileName)
+    {
+        $arTmp = explode(".",$sFileName);
+        $arTmp = $arTmp[0];
+        $arTmp = explode("_",$arTmp);
+        $sFileDate = end($arTmp);
+        return $sFileDate;
+    }
+    
+    private function get_sorted_by_date($arLogs)
+    {
+         $isOk = usort($arLogs, function($sFileA,$sFileB){
+            $sDateA = (int)$this->get_date($sFileA);
+            $sDateB = (int)$this->get_date($sFileB);
+            return ($sDateA>$sDateB);
+        });
+        return $arLogs;
+    }
+    
     private function get_worklogs()
     {
         $arLogs = scandir($this->sPathLogs);
-        $this->debug($arLogs);
-        die;
+        //unset($arLogs[0]); unset($arLogs[1]);//. y ..
+        $arLogs = $this->get_only_work($arLogs);
+        $arLogs = $this->get_over_date($arLogs,"20180115");
+        $arLogs = $this->get_by_users($arLogs,["2","x0"]);
+        $arLogs = $this->get_sorted_by_date($arLogs);
+        //$this->debug($arLogs);
+        //die;
+        return $arLogs;
     }//get_worklogs
     
-    private function load_lines()
+    private function load_lines($sPathLog)
     {
-        
-        $sContent = file_get_contents($this->sPathLogs);
+        $sContent = file_get_contents($sPathLog);
         $arContent = explode("\n",$sContent);
         foreach($arContent as $i=>$sLine)
         {
@@ -61,11 +115,6 @@ class ComponentHydralogs
             preg_match("/$this->sRegexp/",$sLine,$arMatches);
             if($arMatches)
             {
-                $iPos1 = strpos($sLine,"alter table");
-                $iPos1 += 11;
-                $iPos2 = strpos($sLine,"add constraint");
-                $iPos2 = $iPos2-$iPos1;
-                $sLine = substr($sLine,$iPos1,$iPos2);
                 $this->arLines[$i] = trim($sLine);
             }
         }//foreach        
@@ -74,13 +123,19 @@ class ComponentHydralogs
     
     public function run()
     {
-        $this->get_worklogs();
-        $this->load_lines();
-        $this->arLines = array_unique($this->arLines);
-        asort($this->arLines);
-        $sSQLIn = implode("','",$this->arLines);
-        echo "'$sSQLIn'";
-   
+        $arRm = scandir($this->sPathLogs);
+        unset($arRm[0]); unset($arRm[1]);
+
+        $arLogs = $this->get_worklogs();
+        foreach($arRm as $sFileName)
+        {
+            if(!in_array($sFileName,$arLogs))
+            {
+                $iR = unlink($this->sPathLogs.DIRECTORY_SEPARATOR.$sFileName);
+                $this->debug("borrado $sFileName,r:$iR");
+            }
+            //$this->load_lines($this->sPathLogs.DIRECTORY_SEPARATOR.$sFileName);            
+        }
     }//run()
     
     public function debug($mxVar){echo "<pre>".var_export($mxVar,1);}    

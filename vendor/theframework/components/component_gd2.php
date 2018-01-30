@@ -21,7 +21,7 @@ class ComponentGd2
     public function __construct() 
     {
         define("DS",defined("config_bar")?config_bar:DIRECTORY_SEPARATOR);
-        define("PATH_RESDIR", realpath($GLOBALS["config_app_dir"].$GLOBALS["config_web_folder"].DS.$GLOBALS["config_res_dir"]));
+        
         
         $this->isError = FALSE;
         $this->arErrors = array();
@@ -29,6 +29,12 @@ class ComponentGd2
         $this->arTmp = array();
         $this->arTo = array("pathfolder"=>PATH_RESDIR.DS."products_picture".DS,"filename"=>"");
     }
+    
+    private function define_resdir()
+    {
+        define("PATH_RESDIR",realpath($GLOBALS["config_app_dir"].$GLOBALS["config_web_folder"].DS.$GLOBALS["config_res_dir"]));        
+    }
+    
     
     private function get_type($sFilename){return end(explode(".",trim($sFilename)));}
     
