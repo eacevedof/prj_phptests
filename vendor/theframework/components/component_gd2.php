@@ -13,7 +13,6 @@ namespace TheFramework\Components;
 class ComponentGd2 
 {
     private $arFrom;
-    private $arTmp;
     private $arTo;
     private $isError;
     private $arErrors;
@@ -21,7 +20,7 @@ class ComponentGd2
     //$GLOBALS["config_app_dir"].$GLOBALS["config_web_folder"].config_bar.$GLOBALS["config_res_dir"].config_bar."products_picture".config_bar.$Nom_Photo
     public function __construct() 
     {
-        define("DS",config_bar);
+        define("DS",defined("config_bar")?config_bar:DIRECTORY_SEPARATOR);
         define("PATH_RESDIR", realpath($GLOBALS["config_app_dir"].$GLOBALS["config_web_folder"].DS.$GLOBALS["config_res_dir"]));
         
         $this->isError = FALSE;
@@ -91,10 +90,11 @@ class ComponentGd2
         $this->arTo["pathfile"] = $this->arFrom["pathfolder"].$this->arFrom["filename"];
         
         $sPathFileFrom = $this->arFrom["pathfile"];
-        
+        if(!$sPathFileFrom) $this->add_error ("Ruta de origen no proporcionada");
+        if(!$this->arTo["pathfile"]) $this->add_error ("Ruta de destino no proporcionada");
         if(!is_file($sPathFileFrom)) $this->add_error("Archivo no encontrado en $sPathFileFrom");
         
-        if($iW || $iH)
+        if(($iW || $iH) && !$this->isError)
         {
             $sExt = $this->get_type($this->arFrom["filename"]);
             $oImgFrom = $this->get_image_obj($sExt,$sPathFileFrom);
@@ -112,6 +112,7 @@ class ComponentGd2
             $oImgBlank = $this->get_image_blank_obj($iW,$iH);
             $arFrom = array("object"=>$oImgFrom,"x"=>0,"y"=>0,"w"=>$arSize["w"],"h"=>$arSize["h"]);
             $arTo = array("object"=>$oImgBlank,"x"=>0,"y"=>0,"w"=>$iW,"h"=>$iH);
+            //se guarda en el lienzo en blanco
             $isPrinted = $this->save_in_blank($arFrom,$arTo);
             if($isPrinted)
             {
@@ -138,3 +139,4 @@ class ComponentGd2
     public function get_errors(){return $this->arErrors;}
     public function show_errors(){echo "<pre>".var_export($this->arErrors,1);}
 }//class ComponentGd2
+

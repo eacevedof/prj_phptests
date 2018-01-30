@@ -30,7 +30,7 @@ require_once "vendor/theframework/components/autoload.php";
     <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
     <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
   </div>
- *  */
+ 
 use TheFramework\Components\ComponentSqlserver;
 
 use TheFramework\Helpers\HelperLabel;
@@ -45,3 +45,15 @@ $oDate->set_type("date");
 $oDate->set_id("datBirthdate");
 $oDate->set_name("datBirthdate");
 $oDate->show();
+*/
+
+use TheFramework\Components\ComponentGd2;
+$oGd2 = new ComponentGd2();
+$oGd2->add_from("pathfolder","C:\Users\eduardo alexei\Desktop\upload");
+$oGd2->add_from("filename","C:\Users\eduardo alexei\Desktop\upload");
+
+$oGd2->add_to("pathfolder","");
+$oGd2->add_to("filename","");
+
+$oGd2->resize(array("w"=>100));
+$oGd2->show_errors();
