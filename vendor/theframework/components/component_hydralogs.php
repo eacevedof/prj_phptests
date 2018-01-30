@@ -23,7 +23,7 @@ class ComponentHydralogs
     public function __construct() 
     {
         $this->sRegexp = "alter table .*";
-        $this->sPathLogs = "C:\\shared\\falamagas_logs\\";
+        $this->sPathLogs = realpath("C:\\shared\\flamagas_logs");
         $this->arLines = [];
     }
     
@@ -46,9 +46,9 @@ class ComponentHydralogs
     private function get_worklogs()
     {
         $arLogs = scandir($this->sPathLogs);
-        
+        $this->debug($arLogs);
         die;
-    }
+    }//get_worklogs
     
     private function load_lines()
     {
@@ -74,6 +74,7 @@ class ComponentHydralogs
     
     public function run()
     {
+        $this->get_worklogs();
         $this->load_lines();
         $this->arLines = array_unique($this->arLines);
         asort($this->arLines);
@@ -82,6 +83,7 @@ class ComponentHydralogs
    
     }//run()
     
+    public function debug($mxVar){echo "<pre>".var_export($mxVar,1);}    
     private function add_error($sMessage){$this->isError = TRUE;$this->arErrors[]=$sMessage;}
     
     public function set_path_file($value){$this->sPathLogs=$value;}
