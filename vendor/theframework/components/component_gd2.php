@@ -86,8 +86,8 @@ class ComponentGd2
     {
         $iW = isset($arTo["w"])?$arTo["w"]:NULL;
         $iH = isset($arTo["h"])?$arTo["h"]:NULL;
-        $this->arFrom["pathfile"] = $this->arFrom["pathfolder"].$this->arFrom["filename"];
-        $this->arTo["pathfile"] = $this->arFrom["pathfolder"].$this->arFrom["filename"];
+        $this->arFrom["pathfile"] = $this->arFrom["pathfolder"].DS.$this->arFrom["filename"];
+        $this->arTo["pathfile"] = $this->arFrom["pathfolder"].DS.$this->arFrom["filename"];
         
         $sPathFileFrom = $this->arFrom["pathfile"];
         if(!$sPathFileFrom) $this->add_error ("Ruta de origen no proporcionada");
