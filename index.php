@@ -1,5 +1,7 @@
 <?php
-//index.php 2.0.0 Extract mejorado
+//index.php 2.0.1
+
+//<editor-fold defaultstate="collapsed" desc="HELPERS">
 //carga el loader de composer. Este loader solo tiene registrado el loader de helpers.
 /**
  * HELPERS
@@ -12,7 +14,9 @@ $oDiv->show();
 
 $oRaw = new TheFramework\Helpers\HelperRaw("<p>hello</p>");
 $oRaw->show();
+//</editor-fold>
 
+//<editor-fold defaultstate="collapsed" desc="COMPONENTES">
 /**
  * COMPONENTES
  **/
@@ -73,7 +77,7 @@ $oGd2->show_errors();
 //use TheFramework\Components\ComponentHydralogs;
 //$oWLogs = new ComponentHydralogs();
 //$oWLogs->run();
-
+//</editor-fold>
 
 
 //$sText = file_get_contents("c:\\shared\\flamagas_logs\\work_crm3_flamagas_2_20180126.log");
