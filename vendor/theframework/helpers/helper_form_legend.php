@@ -88,5 +88,4 @@ class HelperLegend extends TheFrameworkHelper
     //**********************************
     public function show_opentag(){parent::show_opentag();}
     public function show_closetag(){parent::show_closetag();}
-    
-}
+}//HelperLegend
