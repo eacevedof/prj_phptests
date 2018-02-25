@@ -14,6 +14,16 @@ $oDiv->show();
 
 $oRaw = new TheFramework\Helpers\HelperRaw("<p>hello</p>");
 $oRaw->show();
+
+use TheFramework\Helpers\HelperInputText;
+$oInput = new HelperInputText();
+$oInput->set_name("txtMiFirstInput");
+$oInput->set_value("Hello World");
+$oInput->add_class("form-control");
+$oInput->is_readonly();
+$oInput->required();
+$oInput->set_maxlength(35);
+$oInput->show();
 //</editor-fold>
 
 //<editor-fold defaultstate="collapsed" desc="COMPONENTES">
