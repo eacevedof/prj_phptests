@@ -1,6 +1,6 @@
 {
-    "version":"0.0.2",
-    "updated":"20170514",
+    "version":"0.1.0",
+    "updated":"20180225",
     "name": "theframework/helpers",
     "type":"library",
     "description": "Library that helps you to create html elements using OOP",
