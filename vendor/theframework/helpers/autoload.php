@@ -9,7 +9,7 @@ set_include_path($sPathInclude);
 //pr(get_include_path(),"sPathInclude");//die;
 spl_autoload_register(function($sNameSpacePath)
 {
-    //si se utiliza algo como: use Theframework\Helpers\HelperDiv
+    //si se utiliza algo como: use TheFramework\Helpers\HelperDiv
     if(strstr($sNameSpacePath,"TheFramework\\"))
     {
         //pr($sNameSpacePath,"classname");//DIE;
