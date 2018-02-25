@@ -1,0 +1,62 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "This file is @generated automatically"
+    ],
+    "content-hash": "9d4d96d8b9365db0674b86d418275102",
+    "packages": [
+        {
+            "name": "theframework/helpers",
+            "version": "0.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/eacevedof/prj_theframework_helpers.git",
+                "reference": "de1ad71acefd50e5e14218b35ea07648bf15339b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/eacevedof/prj_theframework_helpers/zipball/de1ad71acefd50e5e14218b35ea07648bf15339b",
+                "reference": "de1ad71acefd50e5e14218b35ea07648bf15339b",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "autoload.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Eduardo Acevedo Farje",
+                    "email": "eacevedof@gmail.com",
+                    "homepage": "http://eduardoaf.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Library that helps you to create html elements using OOP",
+            "homepage": "https://github.com/eacevedof/prj_theframework_helpers",
+            "keywords": [
+                "helpers",
+                "html elements",
+                "view helpers"
+            ],
+            "time": "2018-02-25T18:39:49+00:00"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": [],
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": [],
+    "platform-dev": []
+}
