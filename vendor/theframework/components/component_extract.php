@@ -4,7 +4,7 @@
  * @link www.eduardoaf.com
  * @name ComponentExtract
  * @file component_extract.php
- * @version 1.0.1
+ * @version 2.0.0
  * @date 01-06-2014 12:45
  * @observations
  * usado en flamagas para extraer de los archivos .dtsx (xml)
@@ -44,23 +44,28 @@ class ComponentExtract
     
     private function load_lines()
     {
-        $sContent = file_get_contents($this->sFilePath);
-        $arContent = explode("\n",$sContent);
-        foreach($arContent as $i=>$sLine)
+        if(is_file($this->sFilePath))
         {
-            $arMatches = [];
-            preg_match("/$this->sRegexp/",$sLine,$arMatches);
-            if($arMatches)
+            $sContent = file_get_contents($this->sFilePath);
+            $arContent = explode("\n",$sContent);
+            foreach($arContent as $i=>$sLine)
             {
-                //bug($arMatches,"line:$i");
-                if(!$this->in_string(["{","}",".log","sql.desa1","Restricción"],$sLine))
+                $arMatches = [];
+                preg_match("/$this->sRegexp/",$sLine,$arMatches);
+                if($arMatches)
                 {
-                    $this->clean(["<DTS:Property DTS:Name=\"ObjectName\">","</DTS:Property>"],$sLine);
-                    $this->arLines[$i] = trim($sLine); 
+                    //bug($arMatches,"line:$i");
+                    if(!$this->in_string(["{","}",".log","sql.desa1","Restricción"],$sLine))
+                    {
+                        $this->clean(["<DTS:Property DTS:Name=\"ObjectName\">","</DTS:Property>"],$sLine);
+                        $this->arLines[$i] = trim($sLine); 
+                    }
                 }
-            }
-        }//foreach        
-    }
+            }//foreach  
+        }
+        else
+            echo "ComponentExtract.load_lines: $this->sFilePath not found!!";
+    }//load_lines
     
     public function run($isPrintL=1)
     {
