@@ -1,15 +1,15 @@
 # The Framework Helpers Version 0.1.0
 PHP view helpers for rendering html elements using objects
 
-* [helpers.theframework.es](http://helpers.theframework.es/){:target="_blank"}
-* [https://packagist.org/packages/theframework/helpers](https://packagist.org/packages/theframework/helpers){:target="_blank"}
+* [helpers.theframework.es](http://helpers.theframework.es/) **manual download**
+* [https://packagist.org/packages/theframework/helpers](https://packagist.org/packages/theframework/helpers) **composer**
 
 ## Installing with composer
 ```bash
     composer require theframework/helpers
 ```
 
-Let's suppose you have your root folder "myphpsite":
+Let's suppose you have your root folder **"myphpsite"** with an **index.php** file in it:
 ```bash
     PCALEX@MSI MINGW64 /d/temp/myphpsite
 
@@ -44,8 +44,8 @@ Once it is installed with composer this structure is created:
 ```
 
 ## Including autoload.php
-The autoload.php file enables you to instantiate classes (in this case, helpers) using namespaces paths (**use** operator) in place of
-using **require** or **include** operators
+The autoload.php file enables you to instantiate classes (in this case, helpers) using namespaces paths (the **use** operator) in place of
+using **require**,**include**,**require_once**,**include_once** operators
 
 ```php
 <?php
@@ -53,7 +53,9 @@ using **require** or **include** operators
 //notice that including autoload.php path using composer is not the same as downloading the package. 
 
 include_once("vendors/autoload.php");//if installed with composer
+//or
 include_once("theframework/helpers/autoload.php");//if downloaded from http://helpers.theframework.es/versions/
+//or
 include_once("<anyfolder-you-create>/autoload.php");//downloaded from https://github.com/eacevedof/prj_theframework_helpers/releases
 
 use TheFramework\Helpers\HelperInputText;
