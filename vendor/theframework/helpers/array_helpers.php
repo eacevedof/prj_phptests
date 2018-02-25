@@ -1,5 +1,5 @@
 <?php
-//file: array_helpers.php 1.0.2
+//file: array_helpers.php 1.1.0
 $arHelpers = [
     "TheFrameworkHelper"=>"theframework_helper",
     "HelperAnchor"=>"helper_anchor",
