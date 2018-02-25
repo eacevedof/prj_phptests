@@ -1,12 +1,13 @@
 <?php
 //components autoload
-//autoload.php 1.0.0
+//autoload.php 1.0.1
 $sPathRoot = dirname(__FILE__);
 $sPathInclude = get_include_path().PATH_SEPARATOR.$sPathRoot;
 set_include_path($sPathInclude);
 
 spl_autoload_register(function($sNSClassName)
 {
+    //echo "components autoload";die;
     $arClass = explode("\\",$sNSClassName);
     $sClassName = end($arClass);
     $sClassName = str_replace("Component","",$sClassName);
