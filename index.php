@@ -1,5 +1,5 @@
 <?php
-//index.php 2.0.1
+//index.php 2.0.2
 
 //<editor-fold defaultstate="collapsed" desc="HELPERS">
 //carga el loader de composer. Este loader solo tiene registrado el loader de helpers.
@@ -79,6 +79,7 @@ $oGd2->show_errors();
 //$oWLogs->run();
 //</editor-fold>
 
+//<editor-fold defaultstate="collapsed" desc="SNIPETS">
 
 //$sText = file_get_contents("c:\\shared\\flamagas_logs\\work_crm3_flamagas_2_20180126.log");
 //
@@ -95,3 +96,5 @@ $oGd2->show_errors();
 //echo "<pre>";
 //var_dump($arResult,"patron completo:",$iResult);
 //    
+
+//</editor-fold>
