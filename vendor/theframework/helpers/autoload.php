@@ -10,27 +10,31 @@ set_include_path($sPathInclude);
 spl_autoload_register(function($sNameSpacePath)
 {
     //si se utiliza algo como: use Theframework\Helpers\HelperDiv
-    if(strstr($sNameSpacePath,"TheFramework\Helpers"))
+    if(strstr($sNameSpacePath,"TheFramework\\"))
     {
-        pr($sNameSpacePath,"classname");//DIE;
+        //pr($sNameSpacePath,"classname");//DIE;
+        //array_helpers. Mapea HelperDiv 
         include("array_helpers.php");
         $arExplode = explode("\\",$sNameSpacePath);
         //pr($arExplode,"arExplode");
-        $sClassName = (isset($arExplode[2])?$arExplode[2]:$arExplode[0]);
+        //$sClassName = (isset($arExplode[2])?$arExplode[2]:$arExplode[0]);
+        $sClassName = end($arExplode);
 
-        //bug($sNameSpacePath,"classname to include");
+        //bug($sClassName,"classname to include");
         if(isset($arHelpers[$sClassName]))
         {
             $sFileName = $arHelpers[$sClassName].".php";
-            pr("file to include: $sFileName");
-            include_once($sFileName);
+            if(stream_resolve_include_path($sFileName))
+                //pr("file to include: $sFileName");
+                include_once($sFileName);
             //bug($isIncluded,"isIncluded:$sFileName");
         }
-        else
-        {
-            pr("theframework.helpers.autoload: $sNameSpacePath");
-            die();
-        }
+//        else
+//        {
+//            //quito esto pq mata el php
+//            //pr("theframework.helpers.autoload: $sNameSpacePath");
+//            //die();
+//        }
     }
 });//spl_autoload_register
 
