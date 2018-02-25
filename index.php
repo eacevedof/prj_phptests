@@ -17,6 +17,7 @@ $oRaw->show();
  * COMPONENTES
  **/
 
+/**
 require_once "vendor/theframework/components/autoload.php";
 //extrae los archvios tratadas en la dts
 use TheFramework\Components\ComponentExtract;
@@ -24,12 +25,14 @@ $oComp = new ComponentExtract();
 $oComp->run(0);
 
 //archivos .XNT que nos han proporcionado
-//$oComp = new \TheFramework\Components\ComponentScandir();
-//$oComp->run();
+$oComp = new \TheFramework\Components\ComponentScandir();
+$oComp->run();
 
 //recupero los alter table
-//$oComp = new \TheFramework\Components\ComponentHydrapk();
-//$oComp->run();
+$oComp = new \TheFramework\Components\ComponentHydrapk();
+$oComp->run();
+
+/**/
 
 /*
 <div class="form-group">
