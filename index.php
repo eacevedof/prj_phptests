@@ -2,61 +2,51 @@
 //index.php 2.0.2
 
 //<editor-fold defaultstate="collapsed" desc="HELPERS">
-//carga el loader de composer. Este loader solo tiene registrado el loader de helpers.
 /**
  * HELPERS
  **/
 require_once "vendor/autoload.php";//generdo por composer
 use TheFramework\Helpers\HelperLabel;
-use TheFramework\Helpers\HelperInputFile;
-use TheFramework\Helpers\HelperForm;
+use TheFramework\Helpers\HelperInputText;
 use TheFramework\Helpers\HelperDiv;
-use TheFramework\Helpers\HelperRaw;
 use TheFramework\Helpers\HelperButtonBasic;
+use TheFramework\Helpers\HelperForm;
 
-//<label for="exampleInputFile">File input</label>
 $oLabel = new HelperLabel();
-$oLabel->set_for("exampleInputFile");
-$oLabel->set_innerhtml("File input");
+$oLabel->set_for("example-text-input");
+$oLabel->add_class("col-2 col-form-label");
+$oLabel->set_innerhtml("Text");
 
-//<input type="file" class="form-control-file" id="exampleInputFile" aria-describedby="fileHelp">
-$oFile = new HelperInputFile("exampleInputFile");
-$oFile->add_class("form-control-file");
-$oFile->add_extras("aria-describedby","fileHelp");
+$oInputText = new HelperInputText();
+$oInputText->set_id("example-text-input");
+$oInputText->set_value("Artisanal kale");
+$oInputText->add_class("form-control");
+$oInputText->required();
 
-//there is no such a "HelperSmall" thats why I use HelperRaw in place.
-$oRaw = new HelperRaw("<small id=\"fileHelp\" class=\"form-text text-muted\">"
-        . "This is some placeholder block-level help text for the above input. "
-        . "It's a bit lighter and easily wraps to a new line."
-        . "</small>");
+$oDiv2 = new HelperDiv();
+$oDiv2->add_class("col-10");
+$oDiv2->add_inner_object($oInputText);
 
-//<button type="submit" class="btn btn-primary">Submit</button>
+$oDiv = new HelperDiv();
+$oDiv->set_comments("div form row");
+$oDiv->add_class("form-group row");
+$oDiv->add_inner_object($oLabel);
+$oDiv->add_inner_object($oInputText);
+
 $oButton = new HelperButtonBasic();
 $oButton->set_type("submit");
 $oButton->add_class("btn btn-primary");
 $oButton->set_innerhtml("Submit");
 
-//<div class="form-group">
-$oDiv = new HelperDiv();
-$oDiv->set_comments("div for label and input");
-$oDiv->add_class("form-group");
-
-$oDiv->add_inner_object($oLabel);
-$oDiv->add_inner_object($oFile);
-$oDiv->add_inner_object($oRaw);
-
 $oForm = new HelperForm();
-$oForm->set_action("/helper-input-file/examples/");
 $oForm->set_id("myForm");
 $oForm->set_comments("This is a comment");
 $oForm->set_method("post");
-$oForm->set_enctype("multipart/form-data");
 $oForm->add_style("border:1px dashed #4f9fcf;");
 $oForm->add_style("padding:5px;");
 $oForm->add_inner_object($oDiv);
 $oForm->add_inner_object($oButton);
 $oForm->show();
-
 //</editor-fold>
 
 //<editor-fold defaultstate="collapsed" desc="COMPONENTES">
