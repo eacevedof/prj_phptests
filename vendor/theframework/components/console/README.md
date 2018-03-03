@@ -12,4 +12,5 @@ php run.php C:\Proyectos\...\phplibs\component_download.php ComponentDownload ge
 
 ```
 D:\xampp\php\php.exe D:\xampp\htdocs\tests\vendor\theframework\components\console\run.php D:\xampp\htdocs\tests\vendor\theframework\components\component_getter.php ComponentGetter go >>  D:\xampp\htdocs\tests\vendor\theframework\components\console\borrame.log
+D:\xampp\php\php.exe D:\xampp\htdocs\tests\vendor\theframework\components\console\run.php D:\xampp\htdocs\tests\vendor\theframework\components\component_getter.php ComponentGetter download
 ```
