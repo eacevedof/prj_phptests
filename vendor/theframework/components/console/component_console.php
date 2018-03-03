@@ -25,6 +25,24 @@ class ComponentConsole
     {
         $this->set_arguments($argv);
         $this->sPathLogs = realpath(dirname(__FILE__));
+        //$this->debug($argv);die;
+    }
+    
+    private function get_namespace($sPathClass)
+    {
+        $sContent = file_get_contents($sPathClass);
+        $arLines = explode("\n",$sContent);
+        foreach($arLines as $sLine)
+            if(strstr($sLine,"namespace"))
+            {
+                $sNameSpace = str_replace("namespace","",$sLine);
+                $sNameSpace = str_replace(";","",$sNameSpace);
+                $sNameSpace = trim($sNameSpace);
+                return $sNameSpace;
+            }
+            
+        //die("namespace $sNameSpace");
+        return "";
     }
     
     public function run()
@@ -35,29 +53,44 @@ class ComponentConsole
             {
                 include_once $this->sPathClass;
                 $arIncFiles = get_included_files();
+
                 if(in_array($this->sPathClass,$arIncFiles))
                 {
-                    if($this->arArguments)
-                        $oObject = new $this->sClassName($this->arArguments);
-                    else
-                        $oObject = new $this->sClassName();
-                    
-                    if(is_object($oObject))
+                    $sNameSpace = $this->get_namespace($this->sPathClass);
+                    $sFullClass = "\\$this->sClassName";
+                    if($sNameSpace)
+                        $sFullClass = "\\$sNameSpace\\$this->sClassName";
+                    //die("fullclass:$sFullClass");
+                    if(class_exists($sFullClass))
                     {
-                        if(method_exists($oObject,$this->sMethod))
+                        if($this->arArguments)
+                            $oObject = new $sFullClass($this->arArguments);
+                        else
+                            $oObject = new $sFullClass();
+
+                        if(is_object($oObject))
                         {
-                            $oObject->{$this->sMethod}();
+                            if(method_exists($oObject,$this->sMethod))
+                            {
+                                $oObject->{$this->sMethod}();
+                            }
+                            else
+                            {
+                                $this->add_error("Method does not exist: $this->sMethod in $sFullClass");
+                                $this->log("Method does not exist: $this->sMethod in $sFullClass");                          
+                            }
                         }
                         else
                         {
-                            $this->add_error("Method does not exist: $this->sMethod in $this->sClassName");
-                            $this->log("Method does not exist: $this->sMethod in $this->sClassName");                          
-                        }
+                            $this->add_error("Not an object:  \$oObject");
+                            $this->log("Not an object:  \$oObject");
+                        }                        
                     }
+                    //clase no encontrada
                     else
                     {
-                        $this->add_error("Not an object:  \$oObject");
-                        $this->log("Not an object:  \$oObject");
+                        $this->add_error("Class not found: $this->sClassName");
+                        $this->log("Class not found: $this->sClassName");                        
                     }
                 }
                 //no se ha incluido
@@ -103,7 +136,7 @@ class ComponentConsole
     
     private function save($sContent,$sTitle=NULL)
     {
-        $sToday = date("YmdHis");
+        $sToday = date("Ymd");
         $sPathFile = $this->sPathLogs."/console_$sToday.log";
         if(is_file($sPathFile))
             $oCursor = fopen($sPathFile,"a");
