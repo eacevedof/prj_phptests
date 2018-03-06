@@ -14,6 +14,7 @@ class ComponentSqlserver
 
    public function query()
     {
+       $arResult = [];
         $arDb["server"] = "EALEXEI-W7\MSSQLSERVER2012";
         //$arDb["server"] = "";
         $arDb["database"] = "crm3_flamagas";
@@ -33,7 +34,7 @@ class ComponentSqlserver
             $query =  "select * from core_users";
             foreach ($db->query($query) as $row)
             {
-                print_r($row);
+                $arResult[] = $row;
             }
         }
         catch(PDOException $oE)
@@ -41,6 +42,7 @@ class ComponentSqlserver
             echo "exception";
             //bug($oE->getMessage());
         }
+        return $arResult;
     }
 
     
@@ -48,7 +50,7 @@ class ComponentSqlserver
 
 
 /*include("DB.php");
-ini_set("mssql.datetimeconvert",0);*/
+ini_set("mssql.datetimeconvert",0);
 
 class crm {
  function db_connect($dsn="") {
@@ -115,7 +117,7 @@ class recordset extends crm {
   if(is_object($db)) {
    if($db->autoCommit($stat)!=DB_OK) writelog("sync","Error BD[autocommit]");
  }}
-*/
+*
  function numRows($res) {
    return $res->rowCount();
  }
@@ -140,3 +142,4 @@ class recordset extends crm {
    $res->closeCursor();
  }
 }
+*/
