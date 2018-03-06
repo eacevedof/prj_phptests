@@ -4,7 +4,7 @@
 //<editor-fold defaultstate="collapsed" desc="HELPERS">
 /**
  * HELPERS
- **/
+ **
 require_once "vendor/autoload.php";//generdo por composer
 use TheFramework\Helpers\HelperLabel;
 use TheFramework\Helpers\HelperInputText;
@@ -67,12 +67,20 @@ $oForm->add_inner_object($oLabe2);
 $oForm->add_inner_object($oDiv2);
 $oForm->add_inner_object($oButton);
 $oForm->show();
+ * 
+ */
 //</editor-fold>
 
 //<editor-fold defaultstate="collapsed" desc="COMPONENTES">
 /**
  * COMPONENTES
  **/
+
+require_once "vendor/theframework/components/autoload.php";
+use TheFramework\Components\ComponentQueries;
+
+$oQ = new ComponentQueries();
+$oQ->get_all();
 
 /**
 require_once "vendor/theframework/components/autoload.php";

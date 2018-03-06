@@ -3,7 +3,7 @@
  * @author Eduardo Acevedo Farje.
  * @link www.eduardoaf.com
  * @name TheFramework\Components\ComponentSqlserver 
- * @file component_sqlserver.php v1.0.1
+ * @file component_sqlserver.php v1.0.2
  * @date 19-09-2017 04:56 SPAIN
  * @observations
  */
@@ -12,14 +12,14 @@ namespace TheFramework\Components;
 class ComponentSqlserver 
 {
 
-   public function query()
+   public function query($query)
     {
        $arResult = [];
         $arDb["server"] = "EALEXEI-W7\MSSQLSERVER2012";
-        //$arDb["server"] = "";
+        $arDb["server"] = "192.168.5.2\sql2012";
+        //$arDb["server"] = "sql.desa1\sql2012";
         $arDb["database"] = "crm3_flamagas";
-        $arDb["user"] = "sa";
-        $arDb["password"] = "Sasql2012";
+        
            
         //bug($arDb);
         try
@@ -31,7 +31,7 @@ class ComponentSqlserver
 //                            ,$arDb["user"],$arDb["password"]);
 //            bug($db);
             $db->setAttribute(\PDO::SQLSRV_ATTR_ENCODING, \PDO::SQLSRV_ENCODING_SYSTEM);
-            $query =  "select * from core_users";
+            //$query =  "select * from core_users";
             foreach ($db->query($query) as $row)
             {
                 $arResult[] = $row;
