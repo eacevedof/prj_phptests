@@ -10,11 +10,20 @@ class ComponentErpaux
 
     public function get_tables_aux()
     {
+/*
+/*
+ CONFIG -- NO TIENE CLAVES, (DATOS PARTICULARES DE CADA TERMINAL)
+FTIIVA  -- DEBERIA APLICAR CLAVES, PERO CON SU CI HAY REPETIDOS POR CLAVES. (TIPOS DE IVA)
+LIKP  -- NO TIENE CLAVES (DOCUMENTOS DE VENTAS - ENTREGAS X PEDIDO)
+STPO -- DEBERIA APLICAR COMO CLAVE CAMPO STLNR, PERO HAY REPETIDOS EN SU CI  (MATERIALES - DETALE LLISTA MATERIALES)
+T002T -- DEBERIA TENER CLAVES (SPRAS,SPRSL), PERO HAY REPTEIDOS EN SU CI (IDIOMAS)
+*/        
         $sSQL = "
         SELECT DISTINCT TOP 200 tablename
         FROM view_gettable
         WHERE 1=1
         AND tablename LIKE 'ERP_%_AUX'
+        AND tablename IN ('ERP_CONFIG_AUX','ERP_FTIIVA_AUX','ERP_LIKP_AUX','ERP_STPO_AUX','ERP_T002T_AUX')
         ORDER BY tablename";
         $oComp = new ComponentSqlserver();
         $arRows = $oComp->query($sSQL);
