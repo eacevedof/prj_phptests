@@ -12,14 +12,15 @@ namespace TheFramework\Components;
 class ComponentSqlserver 
 {
 
-   public function query($query)
+    public function query($query)
     {
-       $arResult = [];
+        //echo $query;
+        $arResult = [];
         $arDb["server"] = "EALEXEI-W7\MSSQLSERVER2012";
         $arDb["server"] = "192.168.5.2\sql2012";
         //$arDb["server"] = "sql.desa1\sql2012";
         $arDb["database"] = "crm3_flamagas";
-        
+
            
         //bug($arDb);
         try
@@ -30,16 +31,21 @@ class ComponentSqlserver
 //            $db = new \PDO("odbc:Driver={SQL Server};Server={$arDb["server"]};Database={$arDb["database"]}"
 //                            ,$arDb["user"],$arDb["password"]);
 //            bug($db);
-            $db->setAttribute(\PDO::SQLSRV_ATTR_ENCODING, \PDO::SQLSRV_ENCODING_SYSTEM);
-            //$query =  "select * from core_users";
-            foreach ($db->query($query) as $row)
-            {
+            $db->setAttribute(\PDO::ATTR_ERRMODE,\PDO::ERRMODE_EXCEPTION );  
+            //$db->setAttribute(\PDO::SQLSRV_ATTR_ENCODING, \PDO::SQLSRV_ENCODING_SYSTEM);
+
+            $stmt = $db->query($query);
+            //var_dump($stmt);
+            while ( $row = $stmt->fetch(\PDO::FETCH_ASSOC) )
+            {   
+                //var_dump($row);
                 $arResult[] = $row;
-            }
+            } 
+            
         }
         catch(PDOException $oE)
         {
-            echo "exception";
+            echo "<pre>exception {$oE->getMessage()} : $query";
             //bug($oE->getMessage());
         }
         return $arResult;

@@ -11,7 +11,7 @@ class ComponentQueries
     public function get_tables_aux()
     {
         $sSQL = "
-        SELECT DISTINCT tablename
+        SELECT DISTINCT TOP 10 tablename
         FROM view_gettable
         WHERE 1=1
         AND tablename LIKE 'ERP_%_AUX'
@@ -42,7 +42,7 @@ class ComponentQueries
         WHERE 1=1
         AND tablename LIKE '$sTableAux'
         AND ispk='Y'
-        ORDER BY tablename";
+        ORDER BY fieldname";
         $oComp = new ComponentSqlserver();
         $arRows = $oComp->query($sSQL);
         return $arRows;        
@@ -56,7 +56,7 @@ class ComponentQueries
         WHERE 1=1
         AND tablename LIKE '$sTableAux'
         AND ispk=''
-        ORDER BY tablename";
+        ORDER BY fieldname";
         $oComp = new ComponentSqlserver();
         $arRows = $oComp->query($sSQL);
         return $arRows;        
@@ -74,6 +74,7 @@ class ComponentQueries
         foreach ($arPks as $sPk)
             $arOns[] = "$sTableAux.$sPk = $sTableFull.$sPk";
         $sSQL .= implode("\nAND ",$arOns);
+        return $sSQL;
     }
     
     public function get_insert($sTableAux,$arPks)
@@ -101,15 +102,18 @@ class ComponentQueries
         $arTables = $this->get_tables_aux();
         foreach($arTables as $sTableAux)
         {
+            $sTableAux =$sTableAux["tablename"];
+            //print_r($sTableAux);die;
             $arPks = $this->get_pks($sTableAux);
-            $arNoPks = $this->get_nopks($sTableAux);
+            $arPks = array_column($arPks,"fieldname");
+            //$arNoPks = $this->get_nopks($sTableAux);
             $sDelete = $this->get_delete($sTableAux,$arPks);
             $sInsert = $this->get_insert($sTableAux,$arPks);
             
             $arQueries[] = $sDelete;
             $arQueries[] = $sInsert;
         }        
-        
+        echo "<pre>";
         print_r($arQueries);
     }
     
