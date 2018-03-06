@@ -78,9 +78,9 @@ $oForm->show();
 
 ini_set('max_execution_time',3000);
 require_once "vendor/theframework/components/autoload.php";
-use TheFramework\Components\ComponentQueries;
+use TheFramework\Components\ComponentErpaux;
 
-$oQ = new ComponentQueries();
+$oQ = new ComponentErpaux();
 $oQ->get_all();
 
 /**

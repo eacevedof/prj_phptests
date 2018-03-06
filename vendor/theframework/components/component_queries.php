@@ -3,7 +3,7 @@ namespace TheFramework\Components;
 
 use TheFramework\Components\ComponentSqlserver;
 
-class ComponentQueries
+class ComponentErpaux
 {
     public function __consturct(){;}
     
@@ -87,11 +87,12 @@ class ComponentQueries
         LEFT OUTER JOIN $sTableFull
         ON ";
         $arOns = [];
+        $sPk = "-- ERROR NO PKS ---";
         foreach ($arPks as $sPk)
             $arOns[] = "$sTableAux.$sPk = $sTableFull.$sPk";
         $sSQL .= implode("\nAND ",$arOns);
 
-        $sSQL .= " WHERE 1=1 AND $sTableFull.$sPk IS NULL";
+        $sSQL .= "\nWHERE 1=1 \nAND $sTableFull.$sPk IS NULL";
         
         return $sSQL;
     }
@@ -110,11 +111,18 @@ class ComponentQueries
             $sDelete = $this->get_delete($sTableAux,$arPks);
             $sInsert = $this->get_insert($sTableAux,$arPks);
             
-            $arQueries[] = $sDelete;
-            $arQueries[] = $sInsert;
+            $arQueries[$sTableAux] = [$sDelete,$sInsert];
         }        
         echo "<pre>";
-        print_r($arQueries);
+        
+        foreach($arQueries as $sTable => $arQ)
+        {
+            echo "-- ====================\n";
+            echo "--        $sTable\n";
+            echo "-- ====================\n";
+            echo $arQ[0]."\n";
+            echo $arQ[1]."\n";
+        }
     }
     
     /*
