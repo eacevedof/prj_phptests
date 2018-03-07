@@ -51,6 +51,25 @@ class ComponentDtsxrep
         }
         return $arRet;        
     }
+    
+    public function get_files_iif()
+    {
+        $arRet = [];        
+        if($this->sDir)
+        {
+            $arFiles = scandir($this->sDir);       
+
+            foreach($arFiles as $sFile)
+            {
+                
+                if(strstr($sFile,"erp_") || strstr($sFile,"erpimp_"))
+                {
+                    $arRet[] = $sFile;
+                }
+            }
+        }
+        return $arRet;
+    }
         
     private function save($sContent,$sFile)
     {
@@ -98,5 +117,51 @@ class ComponentDtsxrep
             $this->save($sRep,"ok_".$sFile);
         }
     }//replace
+    
+    public function get_name_iniif($sLine)
+    {
+        //$string = "IIF(ISNULL(ERP_TSPA.STATUS,'')='',0,9) AS Transfer_Status";
+        //preg_match("/IIF\(ISNULL\((.*?).STATUS/",$string,$m );
+        preg_match("/IIF\(ISNULL\((.*?).STATUS/",$sLine,$arMatch);
+        //var_dump($m);        
+        return $arMatch;
+    }
+    
+    public function replace_status()
+    {
+        echo "<pre>";
+        $arFiles = $this->get_files_iif();
+        foreach($arFiles as $sFile)
+        {
+            echo " $sFile\n\t";
+
+            $sContet = file_get_contents($this->sDir."/".$sFile);
+            $arContent = explode("\n",$sContet);
+            foreach($arContent as $i=>$sLine)
+            {
+                //IIF(ISNULL(ERP_FAGEMA.STATUS,'')='',0,9) AS Transfer_Status, 
+                if(strstr($sLine,"IIF(ISNULL(") && strstr($sLine,"STATUS,'')='',0,9) AS Transfer_Status"))
+                {
+                    echo "$i => ";
+                    $arName = $this->get_name_iniif($sLine);
+                    print_r($arName);
+                    //echo $sLine;
+                    echo "\n";
+                }
+            }
+            echo "\n";
+            
+//            foreach($arTables as $sTableAux)
+//            {
+//                $sTable = str_replace(".STATUS,'')='',0,9) AS Transfer_Status",".STATUS,'')=0,IIF(ERP_FAGEMA.STATUS='T',0,9)) AS Transfer_Status",$sTableAux);
+//                if(strstr($sRep,$sTable))
+//                {
+//                    echo "\t$sTableAux\n";
+//                    $sRep = str_replace($sTable,$sTableAux,$sRep); 
+//                }
+//            }
+//            $this->save($sRep,"ok_".$sFile);
+        }
+    }
 
 }//class
