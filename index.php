@@ -84,7 +84,8 @@ require_once "vendor/theframework/components/autoload.php";
 
 use TheFramework\Components\ComponentDtsxrep;
 $o = new ComponentDtsxrep();
-$o->replace();
+//$o->replace();
+$o->replace_status();
 
 
 /**
