@@ -12,15 +12,21 @@ class ComponentErpaux
     {
 /*
 /*
- CONFIG -- NO TIENE CLAVES, (DATOS PARTICULARES DE CADA TERMINAL)
+ CONFIG -- NO TIENE CLAVES, (DATOS PARTICULARES DE CADA TERMINAL) ok cambio clave a ZTERMIN
  * 
-FTIIVA  -- DEBERIA APLICAR CLAVES, PERO CON SU CI HAY REPETIDOS POR CLAVES. (TIPOS DE IVA)
-LIKP  -- NO TIENE CLAVES (DOCUMENTOS DE VENTAS - ENTREGAS X PEDIDO)
+FTIIVA  -- DEBERIA APLICAR CLAVES, PERO CON SU CI HAY REPETIDOS POR CLAVES. (TIPOS DE IVA) ok se mantienen las claves
+LIKP  -- NO TIENE CLAVES (DOCUMENTOS DE VENTAS - ENTREGAS X PEDIDO) sigue fallando
  
  * stpo añadidas claves
-STPO -- DEBERIA APLICAR COMO CLAVE CAMPO STLNR, PERO HAY REPETIDOS EN SU CI  (MATERIALES - DETALE LLISTA MATERIALES)
-T002T -- DEBERIA TENER CLAVES (SPRAS,SPRSL), PERO HAY REPTEIDOS EN SU CI (IDIOMAS)
+STPO -- DEBERIA APLICAR COMO CLAVE CAMPO STLNR, PERO HAY REPETIDOS EN SU CI  (MATERIALES - DETALE LLISTA MATERIALES) corregido por pedro
+T002T -- DEBERIA TENER CLAVES (SPRAS,SPRSL), PERO HAY REPTEIDOS EN SU CI (IDIOMAS) ok se mantienen las claves
  * 
+ 
+
+La tabla CONFIG tiene como clave el dato ZTERMIN, que corresponde al número de terminal del AUTOCOMM. 
+ * Lo que no tengo claro es si esta tabla la váis a utilizar ahora, piensa que, entre otros datos, 
+ * contiene el contador para pedidos y para clientes.
+La clave de LIKP es VBELN, que corresponde al número de entrega. (sigue sin funcionar)
  * FCLIPL eliminada
 */        
         $sSQL = "
