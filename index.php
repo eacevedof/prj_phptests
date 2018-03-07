@@ -78,10 +78,14 @@ $oForm->show();
 
 ini_set('max_execution_time',3000);
 require_once "vendor/theframework/components/autoload.php";
-use TheFramework\Components\ComponentErpaux;
+//use TheFramework\Components\ComponentErpaux;
+//$oQ = new ComponentErpaux();
+//$oQ->get_all();
 
-$oQ = new ComponentErpaux();
-$oQ->get_all();
+use TheFramework\Components\ComponentDtsxrep;
+$o = new ComponentDtsxrep();
+$o->replace();
+
 
 /**
 require_once "vendor/theframework/components/autoload.php";

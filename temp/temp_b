@@ -1,0 +1,3378 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="4/26/2017 11:55:41 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="SOLOMANDO"
+  DTS:CreatorName="TELYNET"
+  DTS:Description="Importar archivos planos Flamagas"
+  DTS:DTSID="{3C6D3ECF-6484-40C6-975C-6196428B38D9}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="14.0.3008.28"
+  DTS:LocaleID="3082"
+  DTS:MaxErrorCount="0"
+  DTS:ObjectName="archivos_c"
+  DTS:ProtectionLevel="2"
+  DTS:VersionBuild="670"
+  DTS:VersionGUID="{4CC610FC-07B1-41E8-80EC-F95F42796A99}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[archivos_f1.dtsx]"
+      DTS:CreationName="FILE"
+      DTS:DTSID="{08CF87C0-A5DF-4F88-82E4-5D738B4C74E2}"
+      DTS:ObjectName="archivos_f1.dtsx">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="D:\dts\interfaz\archivos_f1.dtsx" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[cnx_crlfutf8]"
+      DTS:CreationName="FLATFILE"
+      DTS:Description="FCABRAP.XNT"
+      DTS:DTSID="{6a8f6eaa-a1ed-4950-9eb5-836c8f1dcca4}"
+      DTS:ObjectName="cnx_crlfutf8">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">@[User::RutaOrigen]+@[User::Archivo]+".XNT"</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="RaggedRight"
+          DTS:LocaleID="3082"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:RowDelimiter="_x000A_"
+          DTS:TextQualifier="_x003C_none_x003E_"
+          DTS:CodePage="65001"
+          DTS:ConnectionString="D:\\dts\\datos\\in\\defecto.XNT">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="linea"
+              DTS:DTSID="{393CABAF-8F33-440A-A969-C7FD9D8E3830}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[cnx_crlf_ansi]"
+      DTS:CreationName="FLATFILE"
+      DTS:Description="FCABRAP.XNT"
+      DTS:DTSID="{ad4fdddf-7991-449d-bde1-e9f2a626f960}"
+      DTS:ObjectName="cnx_crlf_ansi">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">@[User::RutaOrigen]+@[User::Archivo]+".XNT"</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="RaggedRight"
+          DTS:LocaleID="3082"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:RowDelimiter="_x000A_"
+          DTS:TextQualifier="_x003C_none_x003E_"
+          DTS:CodePage="1252"
+          DTS:ConnectionString="D:\\dts\\datos\\in\\defecto.XNT">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="linea"
+              DTS:DTSID="{7DE342DF-B94C-4A67-BB39-8A50D065AE67}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[cnx_lf]"
+      DTS:CreationName="FLATFILE"
+      DTS:Description="FCABRAP.XNT"
+      DTS:DTSID="{eae02777-999f-4dc0-932a-a7877b91a342}"
+      DTS:ObjectName="cnx_lf">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">@[User::RutaOrigen]+@[User::Archivo]+".XNT"</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="RaggedRight"
+          DTS:LocaleID="3082"
+          DTS:HeaderRowDelimiter="_x000A_"
+          DTS:RowDelimiter="_x000A_"
+          DTS:TextQualifier="_x003C_none_x003E_"
+          DTS:CodePage="65001"
+          DTS:ConnectionString="D:\\dts\\datos\\in\\defecto.XNT">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000A_"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="linea"
+              DTS:DTSID="{A2811425-8F42-4666-9898-A94614065297}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[dtsimp_flamagas_c.log]"
+      DTS:CreationName="FILE"
+      DTS:DTSID="{643B360C-63D5-472E-B5BC-3EA7875E18CE}"
+      DTS:ObjectName="dtsimp_flamagas_c.log">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:FileUsageType="1"
+          DTS:ConnectionString="D:\dts\logs\dtsimp_flamagas_c.log" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[NETPROVIDER_Hydra_prod.sa]"
+      DTS:CreationName="ADO.NET:System.Data.SqlClient.SqlConnection, System.Data, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+      DTS:DTSID="{2E5CC153-426E-489E-8971-75AC2BAC199C}"
+      DTS:ObjectName="NETPROVIDER_Hydra_prod.sa">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=FLAMACRM;User ID=sa;Initial Catalog=hydra_prod;Persist Security Info=True;Application Name=SSIS-ImportFlamagas-{2E5CC153-426E-489E-8971-75AC2BAC199C}NETPROVIDER_Hydra_prod.sa;">
+          <EncryptedData
+            Type="http://www.w3.org/2001/04/xmlenc#Element"
+            Salt="ysaGERqDkm0="
+            IV="RxALdMwRY8uAXZRmEnbMBA==" xmlns="http://www.w3.org/2001/04/xmlenc#">
+            <EncryptionMethod
+              Algorithm="http://www.w3.org/2001/04/xmlenc#aes256-cbc" />
+            <CipherData>
+              <CipherValue>RxALdMwRY8uAXZRmEnbMBNqFxkzWotcQISKpTeCsvh/XEff8zZTH3Y52SYVpySMCBKwqUVttLOUrV6NBp+4ucAHlAmeQMHHo5FIEodT+J3zxdDxiLkcrZLj0DxXCaYLzSjVNI6ke23jYM6tQF/+FJ06F2fdXDg0vpYv3i1xFaKIuTDOspQcdF0/CEXH0xjPe</CipherValue>
+            </CipherData>
+          </EncryptedData>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[OLEDB_Hydra_prod.sa]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{62E61418-8CC2-4254-AE24-BF2CEFA6D27E}"
+      DTS:ObjectName="OLEDB_Hydra_prod.sa">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=FLAMACRM;User ID=sa;Initial Catalog=hydra_prod;Provider=SQLNCLI11.1;Persist Security Info=True;Auto Translate=False;Application Name=SSIS-ImportFlamagas-{62E61418-8CC2-4254-AE24-BF2CEFA6D27E}sql.desa1\sql2012.sa;">
+          <EncryptedData
+            Type="http://www.w3.org/2001/04/xmlenc#Element"
+            Salt="5Th7ijt5L80="
+            IV="ISeiSL+UdL72GvC5L7nPrg==" xmlns="http://www.w3.org/2001/04/xmlenc#">
+            <EncryptionMethod
+              Algorithm="http://www.w3.org/2001/04/xmlenc#aes256-cbc" />
+            <CipherData>
+              <CipherValue>ISeiSL+UdL72GvC5L7nPrqGWAS++DJ9D6LqFZE2cGiThJjILdsqnysM8JPSEIeH122dbsoBeUfMEiaRX7ShtPLlmC+pIpy1x8uusziUUeIGSor+JgzuSp2sqXRlLn79QdSX4zGEohe2i+MZ9KVCd1fMKwQPBaABfZ7EkVRdmjZyLckqSEwAFDolEj2Lcpm7v</CipherValue>
+            </CipherData>
+          </EncryptedData>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:LogProviders>
+    <DTS:LogProvider
+      DTS:ConfigString="dtsimp_flamagas_c.log"
+      DTS:CreationName="Microsoft.LogProviderTextFile"
+      DTS:Description="Escribe entradas del registro sobre eventos en un archivo CSV"
+      DTS:DTSID="{E0908083-F748-47E8-AEDA-AF96E713E9AD}"
+      DTS:ObjectName="Proveedor de registro SSIS para archivos de texto">
+      <DTS:ObjectData>
+        <InnerObject />
+      </DTS:ObjectData>
+    </DTS:LogProvider>
+  </DTS:LogProviders>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{D2A85B0F-F334-4B7F-9C39-F1798A518CE9}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="Archivo">
+      <DTS:VariableValue
+        DTS:DataType="8">defecto</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{A29A4C21-7DB8-4530-B9AF-52E469CF0B2B}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="RutaOrigen">
+      <DTS:VariableValue
+        DTS:DataType="8">D:\\dts\\datos\\in\\</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:LoggingOptions
+    DTS:FilterKind="0"
+    DTS:LoggingMode="2">
+    <DTS:Property
+      DTS:DataType="8"
+      DTS:Name="EventFilter">3,7,OnError,12,OnTaskFailed,9,OnWarning</DTS:Property>
+    <DTS:Property
+      DTS:EventName="OnError"
+      DTS:Name="ColumnFilter">
+      <DTS:Property
+        DTS:Name="Computer">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="Operator">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="SourceName">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="SourceID">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="ExecutionID">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="MessageText">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="DataBytes">-1</DTS:Property>
+    </DTS:Property>
+    <DTS:Property
+      DTS:EventName="OnInformation"
+      DTS:Name="ColumnFilter">
+      <DTS:Property
+        DTS:Name="Computer">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="Operator">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="SourceName">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="SourceID">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="ExecutionID">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="MessageText">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="DataBytes">-1</DTS:Property>
+    </DTS:Property>
+    <DTS:Property
+      DTS:EventName="OnTaskFailed"
+      DTS:Name="ColumnFilter">
+      <DTS:Property
+        DTS:Name="Computer">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="Operator">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="SourceName">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="SourceID">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="ExecutionID">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="MessageText">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="DataBytes">-1</DTS:Property>
+    </DTS:Property>
+    <DTS:Property
+      DTS:EventName="OnWarning"
+      DTS:Name="ColumnFilter">
+      <DTS:Property
+        DTS:Name="Computer">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="Operator">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="SourceName">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="SourceID">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="ExecutionID">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="MessageText">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="DataBytes">-1</DTS:Property>
+    </DTS:Property>
+    <DTS:SelectedLogProviders>
+      <DTS:SelectedLogProvider
+        DTS:InstanceID="{E0908083-F748-47E8-AEDA-AF96E713E9AD}" />
+    </DTS:SelectedLogProviders>
+  </DTS:LoggingOptions>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\AUX a ERP_CLASEATR_AUX"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Tarea Flujo de datos"
+      DTS:DTSID="{e92f08ed-2f14-42f1-a1f7-72806228cffc}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="AUX a ERP_CLASEATR_AUX"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server v10; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          BLOBTempStoragePath=""
+          bufferTempStoragePath=""
+          version="1">
+          <components>
+            <component
+              refId="Package\AUX a ERP_CLASEATR_AUX\ERP_auxiliar"
+              componentClassID="Microsoft.ManagedComponentHost"
+              contactInfo="Extrae datos de una base de datos relacional mediante un proveedor .NET.;Microsoft Corporation; Microsoft SqlServer v10; © 2007 Microsoft Corporation; Reservados todos los derechos; http://www.microsoft.com/sql/support;4"
+              description="Extrae datos de una base de datos relacional mediante un proveedor .NET."
+              name="ERP_auxiliar"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Especifica la instrucción SQL utilizada por el componente para extraer datos."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">-- CLASEATR
+    SELECT * 
+    FROM
+    (
+        SELECT SUBSTRING(linea,1,1) AS Status,
+LTRIM(RTRIM(SUBSTRING(linea,2,11))) AS ZATRIB,
+LTRIM(RTRIM(SUBSTRING(linea,13,7))) AS NUMORD
+--,id
+FROM ERP_auxiliar 
+        ) AS t
+        WHERE 1=1
+        --AND</property>
+                <property
+                  dataType="System.Int32"
+                  description="Número de segundos antes de que se agote el tiempo de espera de un comando. Un valor de 0 indica un tiempo de espera infinito."
+                  name="CommandTimeout">30</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indica si se debe permitir que columnas externas que no sean de cadenas se conviertan implícitamente en cadenas en las columnas de salida."
+                  name="AllowImplicitStringConversion">true</property>
+                <property
+                  dataType="System.String"
+                  description="Nombre de la tabla de la base de datos de destino."
+                  expressionType="Notify"
+                  name="TableOrViewName"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">"dbo"."ERP_auxiliar"</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especificar el modo de recuperar información de columnas externas"
+                  name="AccessMode"
+                  typeConverter="Microsoft.SqlServer.Dts.Pipeline.DataReaderSourceAdapter+EnumToStringConverter">2</property>
+                <property
+                  dataType="System.String"
+                  name="UserComponentTypeName">Microsoft.DataReaderSourceAdapter</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\AUX a ERP_CLASEATR_AUX\ERP_auxiliar.Connections[IDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[NETPROVIDER_Hydra_prod.sa]"
+                  connectionManagerRefId="Package.ConnectionManagers[NETPROVIDER_Hydra_prod.sa]"
+                  description="Administrador de conexiones administrado"
+                  name="IDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\AUX a ERP_CLASEATR_AUX\ERP_auxiliar.Outputs[Salida de origen de ADO NET]"
+                  name="Salida de origen de ADO NET">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\AUX a ERP_CLASEATR_AUX\ERP_auxiliar.Outputs[Salida de origen de ADO NET].Columns[Status]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\AUX a ERP_CLASEATR_AUX\ERP_auxiliar.Outputs[Salida de origen de ADO NET].ExternalColumns[Status]"
+                      length="1"
+                      lineageId="Package\AUX a ERP_CLASEATR_AUX\ERP_auxiliar.Outputs[Salida de origen de ADO NET].Columns[Status]"
+                      name="Status"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\AUX a ERP_CLASEATR_AUX\ERP_auxiliar.Outputs[Salida de origen de ADO NET].Columns[ZATRIB]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\AUX a ERP_CLASEATR_AUX\ERP_auxiliar.Outputs[Salida de origen de ADO NET].ExternalColumns[ZATRIB]"
+                      length="11"
+                      lineageId="Package\AUX a ERP_CLASEATR_AUX\ERP_auxiliar.Outputs[Salida de origen de ADO NET].Columns[ZATRIB]"
+                      name="ZATRIB"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\AUX a ERP_CLASEATR_AUX\ERP_auxiliar.Outputs[Salida de origen de ADO NET].Columns[NUMORD]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\AUX a ERP_CLASEATR_AUX\ERP_auxiliar.Outputs[Salida de origen de ADO NET].ExternalColumns[NUMORD]"
+                      length="7"
+                      lineageId="Package\AUX a ERP_CLASEATR_AUX\ERP_auxiliar.Outputs[Salida de origen de ADO NET].Columns[NUMORD]"
+                      name="NUMORD"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\AUX a ERP_CLASEATR_AUX\ERP_auxiliar.Outputs[Salida de origen de ADO NET].ExternalColumns[Status]"
+                      dataType="wstr"
+                      length="1"
+                      name="Status" />
+                    <externalMetadataColumn
+                      refId="Package\AUX a ERP_CLASEATR_AUX\ERP_auxiliar.Outputs[Salida de origen de ADO NET].ExternalColumns[ZATRIB]"
+                      dataType="wstr"
+                      length="11"
+                      name="ZATRIB" />
+                    <externalMetadataColumn
+                      refId="Package\AUX a ERP_CLASEATR_AUX\ERP_auxiliar.Outputs[Salida de origen de ADO NET].ExternalColumns[NUMORD]"
+                      dataType="wstr"
+                      length="7"
+                      name="NUMORD" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\AUX a ERP_CLASEATR_AUX\ERP_auxiliar.Outputs[Salida de error de origen de ADO NET]"
+                  isErrorOut="true"
+                  name="Salida de error de origen de ADO NET">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\AUX a ERP_CLASEATR_AUX\ERP_auxiliar.Outputs[Salida de error de origen de ADO NET].Columns[Status]"
+                      dataType="wstr"
+                      length="1"
+                      lineageId="Package\AUX a ERP_CLASEATR_AUX\ERP_auxiliar.Outputs[Salida de error de origen de ADO NET].Columns[Status]"
+                      name="Status" />
+                    <outputColumn
+                      refId="Package\AUX a ERP_CLASEATR_AUX\ERP_auxiliar.Outputs[Salida de error de origen de ADO NET].Columns[ZATRIB]"
+                      dataType="wstr"
+                      length="11"
+                      lineageId="Package\AUX a ERP_CLASEATR_AUX\ERP_auxiliar.Outputs[Salida de error de origen de ADO NET].Columns[ZATRIB]"
+                      name="ZATRIB" />
+                    <outputColumn
+                      refId="Package\AUX a ERP_CLASEATR_AUX\ERP_auxiliar.Outputs[Salida de error de origen de ADO NET].Columns[NUMORD]"
+                      dataType="wstr"
+                      length="7"
+                      lineageId="Package\AUX a ERP_CLASEATR_AUX\ERP_auxiliar.Outputs[Salida de error de origen de ADO NET].Columns[NUMORD]"
+                      name="NUMORD" />
+                    <outputColumn
+                      refId="Package\AUX a ERP_CLASEATR_AUX\ERP_auxiliar.Outputs[Salida de error de origen de ADO NET].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\AUX a ERP_CLASEATR_AUX\ERP_auxiliar.Outputs[Salida de error de origen de ADO NET].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\AUX a ERP_CLASEATR_AUX\ERP_auxiliar.Outputs[Salida de error de origen de ADO NET].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\AUX a ERP_CLASEATR_AUX\ERP_auxiliar.Outputs[Salida de error de origen de ADO NET].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\AUX a ERP_CLASEATR_AUX\ERP_CLASEATR_AUX"
+              componentClassID="Microsoft.ManagedComponentHost"
+              contactInfo="Escribe en una base de datos utilizando el proveedor de ADO.NET.;Microsoft Corporation; Microsoft SqlServer v10; © 2007 Microsoft Corporation; Reservados todos los derechos; http://www.microsoft.com/sql/support;1"
+              description="Escribe en una base de datos utilizando el proveedor de ADO.NET."
+              localeId="3082"
+              name="ERP_CLASEATR_AUX"
+              usesDispositions="true"
+              version="2">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Nombre de la tabla de la base de datos de destino."
+                  expressionType="Notify"
+                  name="TableOrViewName"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">ERP_CLASEATR_AUX</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifique el número de filas por lote. El valor predeterminado es 0, que utiliza el mismo tamaño que el búfer interno de SSIS. "
+                  expressionType="Notify"
+                  name="BatchSize">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Número de segundos antes de que se agote el tiempo de espera de un comando. Un valor de 0 indica un tiempo de espera infinito. "
+                  expressionType="Notify"
+                  name="CommandTimeout">30</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Especifica si se debe usar la interfaz SqlBulkCopy para mejorar el rendimiento de las operaciones de inserción masiva. No todos los proveedores admiten esta interfaz."
+                  expressionType="Notify"
+                  name="UseBulkInsertWhenPossible">true</property>
+                <property
+                  dataType="System.String"
+                  name="UserComponentTypeName">Microsoft.ADONETDestination</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\AUX a ERP_CLASEATR_AUX\ERP_CLASEATR_AUX.Connections[IDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[NETPROVIDER_Hydra_prod.sa]"
+                  connectionManagerRefId="Package.ConnectionManagers[NETPROVIDER_Hydra_prod.sa]"
+                  description="Administrador de conexiones administrado"
+                  name="IDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\AUX a ERP_CLASEATR_AUX\ERP_CLASEATR_AUX.Inputs[Entrada de destino de ADO NET]"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="Entrada de destino de ADO NET">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\AUX a ERP_CLASEATR_AUX\ERP_CLASEATR_AUX.Inputs[Entrada de destino de ADO NET].Columns[Status]"
+                      cachedDataType="wstr"
+                      cachedLength="1"
+                      cachedName="Status"
+                      externalMetadataColumnId="Package\AUX a ERP_CLASEATR_AUX\ERP_CLASEATR_AUX.Inputs[Entrada de destino de ADO NET].ExternalColumns[Status]"
+                      lineageId="Package\AUX a ERP_CLASEATR_AUX\ERP_auxiliar.Outputs[Salida de origen de ADO NET].Columns[Status]" />
+                    <inputColumn
+                      refId="Package\AUX a ERP_CLASEATR_AUX\ERP_CLASEATR_AUX.Inputs[Entrada de destino de ADO NET].Columns[ZATRIB]"
+                      cachedDataType="wstr"
+                      cachedLength="11"
+                      cachedName="ZATRIB"
+                      externalMetadataColumnId="Package\AUX a ERP_CLASEATR_AUX\ERP_CLASEATR_AUX.Inputs[Entrada de destino de ADO NET].ExternalColumns[ZATRIB]"
+                      lineageId="Package\AUX a ERP_CLASEATR_AUX\ERP_auxiliar.Outputs[Salida de origen de ADO NET].Columns[ZATRIB]" />
+                    <inputColumn
+                      refId="Package\AUX a ERP_CLASEATR_AUX\ERP_CLASEATR_AUX.Inputs[Entrada de destino de ADO NET].Columns[NUMORD]"
+                      cachedDataType="wstr"
+                      cachedLength="7"
+                      cachedName="NUMORD"
+                      externalMetadataColumnId="Package\AUX a ERP_CLASEATR_AUX\ERP_CLASEATR_AUX.Inputs[Entrada de destino de ADO NET].ExternalColumns[NUMORD]"
+                      lineageId="Package\AUX a ERP_CLASEATR_AUX\ERP_auxiliar.Outputs[Salida de origen de ADO NET].Columns[NUMORD]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\AUX a ERP_CLASEATR_AUX\ERP_CLASEATR_AUX.Inputs[Entrada de destino de ADO NET].ExternalColumns[Status]"
+                      dataType="wstr"
+                      length="1"
+                      name="Status" />
+                    <externalMetadataColumn
+                      refId="Package\AUX a ERP_CLASEATR_AUX\ERP_CLASEATR_AUX.Inputs[Entrada de destino de ADO NET].ExternalColumns[ZATRIB]"
+                      dataType="wstr"
+                      length="11"
+                      name="ZATRIB" />
+                    <externalMetadataColumn
+                      refId="Package\AUX a ERP_CLASEATR_AUX\ERP_CLASEATR_AUX.Inputs[Entrada de destino de ADO NET].ExternalColumns[NUMORD]"
+                      dataType="wstr"
+                      length="7"
+                      name="NUMORD" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\AUX a ERP_CLASEATR_AUX\ERP_CLASEATR_AUX.Outputs[Salida de error de destino de ADO NET]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Salida de error de destino de ADO NET"
+                  synchronousInputId="Package\AUX a ERP_CLASEATR_AUX\ERP_CLASEATR_AUX.Inputs[Entrada de destino de ADO NET]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\AUX a ERP_CLASEATR_AUX\ERP_CLASEATR_AUX.Outputs[Salida de error de destino de ADO NET].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\AUX a ERP_CLASEATR_AUX\ERP_CLASEATR_AUX.Outputs[Salida de error de destino de ADO NET].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\AUX a ERP_CLASEATR_AUX\ERP_CLASEATR_AUX.Outputs[Salida de error de destino de ADO NET].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\AUX a ERP_CLASEATR_AUX\ERP_CLASEATR_AUX.Outputs[Salida de error de destino de ADO NET].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\AUX a ERP_CLASEATR_AUX.Paths[Salida de origen de ADO NET]"
+              endId="Package\AUX a ERP_CLASEATR_AUX\ERP_CLASEATR_AUX.Inputs[Entrada de destino de ADO NET]"
+              name="Salida de origen de ADO NET"
+              startId="Package\AUX a ERP_CLASEATR_AUX\ERP_auxiliar.Outputs[Salida de origen de ADO NET]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\AUX a ERP_CLASECON_AUX"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Tarea Flujo de datos"
+      DTS:DTSID="{3dd60755-ef4b-440f-9972-221c4102ce9d}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="AUX a ERP_CLASECON_AUX"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server v10; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          BLOBTempStoragePath=""
+          bufferTempStoragePath=""
+          version="1">
+          <components>
+            <component
+              refId="Package\AUX a ERP_CLASECON_AUX\ERP_auxiliar"
+              componentClassID="Microsoft.ManagedComponentHost"
+              contactInfo="Extrae datos de una base de datos relacional mediante un proveedor .NET.;Microsoft Corporation; Microsoft SqlServer v10; © 2007 Microsoft Corporation; Reservados todos los derechos; http://www.microsoft.com/sql/support;4"
+              description="Extrae datos de una base de datos relacional mediante un proveedor .NET."
+              name="ERP_auxiliar"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Especifica la instrucción SQL utilizada por el componente para extraer datos."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">-- CLASECON
+    SELECT * 
+    FROM
+    (
+        SELECT SUBSTRING(linea,1,1) AS Status,
+LTRIM(RTRIM(SUBSTRING(linea,2,1))) AS ZTPCOND,
+LTRIM(RTRIM(SUBSTRING(linea,3,1))) AS ZNUMORD,
+LTRIM(RTRIM(SUBSTRING(linea,4,20))) AS ZTXTCON,
+LTRIM(RTRIM(SUBSTRING(linea,24,4))) AS KSCHL,
+LTRIM(RTRIM(SUBSTRING(linea,28,1))) AS ZBQ0,
+LTRIM(RTRIM(SUBSTRING(linea,29,1))) AS ZBQ1,
+LTRIM(RTRIM(SUBSTRING(linea,30,1))) AS ZBQ2,
+LTRIM(RTRIM(SUBSTRING(linea,31,1))) AS ZBQ3,
+LTRIM(RTRIM(SUBSTRING(linea,32,1))) AS ZBQ4,
+LTRIM(RTRIM(SUBSTRING(linea,33,1))) AS ZBQ5
+--,id
+FROM ERP_auxiliar 
+        ) AS t
+        WHERE 1=1
+        --AND</property>
+                <property
+                  dataType="System.Int32"
+                  description="Número de segundos antes de que se agote el tiempo de espera de un comando. Un valor de 0 indica un tiempo de espera infinito."
+                  name="CommandTimeout">30</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indica si se debe permitir que columnas externas que no sean de cadenas se conviertan implícitamente en cadenas en las columnas de salida."
+                  name="AllowImplicitStringConversion">true</property>
+                <property
+                  dataType="System.String"
+                  description="Nombre de la tabla de la base de datos de destino."
+                  expressionType="Notify"
+                  name="TableOrViewName"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">"dbo"."ERP_auxiliar"</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especificar el modo de recuperar información de columnas externas"
+                  name="AccessMode"
+                  typeConverter="Microsoft.SqlServer.Dts.Pipeline.DataReaderSourceAdapter+EnumToStringConverter">2</property>
+                <property
+                  dataType="System.String"
+                  name="UserComponentTypeName">Microsoft.DataReaderSourceAdapter</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\AUX a ERP_CLASECON_AUX\ERP_auxiliar.Connections[IDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[NETPROVIDER_Hydra_prod.sa]"
+                  connectionManagerRefId="Package.ConnectionManagers[NETPROVIDER_Hydra_prod.sa]"
+                  description="Administrador de conexiones administrado"
+                  name="IDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\AUX a ERP_CLASECON_AUX\ERP_auxiliar.Outputs[Salida de origen de ADO NET]"
+                  name="Salida de origen de ADO NET">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\AUX a ERP_CLASECON_AUX\ERP_auxiliar.Outputs[Salida de origen de ADO NET].Columns[Status]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\AUX a ERP_CLASECON_AUX\ERP_auxiliar.Outputs[Salida de origen de ADO NET].ExternalColumns[Status]"
+                      length="1"
+                      lineageId="Package\AUX a ERP_CLASECON_AUX\ERP_auxiliar.Outputs[Salida de origen de ADO NET].Columns[Status]"
+                      name="Status"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\AUX a ERP_CLASECON_AUX\ERP_auxiliar.Outputs[Salida de origen de ADO NET].Columns[ZTPCOND]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\AUX a ERP_CLASECON_AUX\ERP_auxiliar.Outputs[Salida de origen de ADO NET].ExternalColumns[ZTPCOND]"
+                      length="1"
+                      lineageId="Package\AUX a ERP_CLASECON_AUX\ERP_auxiliar.Outputs[Salida de origen de ADO NET].Columns[ZTPCOND]"
+                      name="ZTPCOND"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\AUX a ERP_CLASECON_AUX\ERP_auxiliar.Outputs[Salida de origen de ADO NET].Columns[ZNUMORD]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\AUX a ERP_CLASECON_AUX\ERP_auxiliar.Outputs[Salida de origen de ADO NET].ExternalColumns[ZNUMORD]"
+                      length="1"
+                      lineageId="Package\AUX a ERP_CLASECON_AUX\ERP_auxiliar.Outputs[Salida de origen de ADO NET].Columns[ZNUMORD]"
+                      name="ZNUMORD"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\AUX a ERP_CLASECON_AUX\ERP_auxiliar.Outputs[Salida de origen de ADO NET].Columns[ZTXTCON]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\AUX a ERP_CLASECON_AUX\ERP_auxiliar.Outputs[Salida de origen de ADO NET].ExternalColumns[ZTXTCON]"
+                      length="20"
+                      lineageId="Package\AUX a ERP_CLASECON_AUX\ERP_auxiliar.Outputs[Salida de origen de ADO NET].Columns[ZTXTCON]"
+                      name="ZTXTCON"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\AUX a ERP_CLASECON_AUX\ERP_auxiliar.Outputs[Salida de origen de ADO NET].Columns[KSCHL]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\AUX a ERP_CLASECON_AUX\ERP_auxiliar.Outputs[Salida de origen de ADO NET].ExternalColumns[KSCHL]"
+                      length="4"
+                      lineageId="Package\AUX a ERP_CLASECON_AUX\ERP_auxiliar.Outputs[Salida de origen de ADO NET].Columns[KSCHL]"
+                      name="KSCHL"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\AUX a ERP_CLASECON_AUX\ERP_auxiliar.Outputs[Salida de origen de ADO NET].Columns[ZBQ0]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\AUX a ERP_CLASECON_AUX\ERP_auxiliar.Outputs[Salida de origen de ADO NET].ExternalColumns[ZBQ0]"
+                      length="1"
+                      lineageId="Package\AUX a ERP_CLASECON_AUX\ERP_auxiliar.Outputs[Salida de origen de ADO NET].Columns[ZBQ0]"
+                      name="ZBQ0"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\AUX a ERP_CLASECON_AUX\ERP_auxiliar.Outputs[Salida de origen de ADO NET].Columns[ZBQ1]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\AUX a ERP_CLASECON_AUX\ERP_auxiliar.Outputs[Salida de origen de ADO NET].ExternalColumns[ZBQ1]"
+                      length="1"
+                      lineageId="Package\AUX a ERP_CLASECON_AUX\ERP_auxiliar.Outputs[Salida de origen de ADO NET].Columns[ZBQ1]"
+                      name="ZBQ1"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\AUX a ERP_CLASECON_AUX\ERP_auxiliar.Outputs[Salida de origen de ADO NET].Columns[ZBQ2]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\AUX a ERP_CLASECON_AUX\ERP_auxiliar.Outputs[Salida de origen de ADO NET].ExternalColumns[ZBQ2]"
+                      length="1"
+                      lineageId="Package\AUX a ERP_CLASECON_AUX\ERP_auxiliar.Outputs[Salida de origen de ADO NET].Columns[ZBQ2]"
+                      name="ZBQ2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\AUX a ERP_CLASECON_AUX\ERP_auxiliar.Outputs[Salida de origen de ADO NET].Columns[ZBQ3]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\AUX a ERP_CLASECON_AUX\ERP_auxiliar.Outputs[Salida de origen de ADO NET].ExternalColumns[ZBQ3]"
+                      length="1"
+                      lineageId="Package\AUX a ERP_CLASECON_AUX\ERP_auxiliar.Outputs[Salida de origen de ADO NET].Columns[ZBQ3]"
+                      name="ZBQ3"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\AUX a ERP_CLASECON_AUX\ERP_auxiliar.Outputs[Salida de origen de ADO NET].Columns[ZBQ4]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\AUX a ERP_CLASECON_AUX\ERP_auxiliar.Outputs[Salida de origen de ADO NET].ExternalColumns[ZBQ4]"
+                      length="1"
+                      lineageId="Package\AUX a ERP_CLASECON_AUX\ERP_auxiliar.Outputs[Salida de origen de ADO NET].Columns[ZBQ4]"
+                      name="ZBQ4"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\AUX a ERP_CLASECON_AUX\ERP_auxiliar.Outputs[Salida de origen de ADO NET].Columns[ZBQ5]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\AUX a ERP_CLASECON_AUX\ERP_auxiliar.Outputs[Salida de origen de ADO NET].ExternalColumns[ZBQ5]"
+                      length="1"
+                      lineageId="Package\AUX a ERP_CLASECON_AUX\ERP_auxiliar.Outputs[Salida de origen de ADO NET].Columns[ZBQ5]"
+                      name="ZBQ5"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\AUX a ERP_CLASECON_AUX\ERP_auxiliar.Outputs[Salida de origen de ADO NET].ExternalColumns[Status]"
+                      dataType="wstr"
+                      length="1"
+                      name="Status" />
+                    <externalMetadataColumn
+                      refId="Package\AUX a ERP_CLASECON_AUX\ERP_auxiliar.Outputs[Salida de origen de ADO NET].ExternalColumns[ZTPCOND]"
+                      dataType="wstr"
+                      length="1"
+                      name="ZTPCOND" />
+                    <externalMetadataColumn
+                      refId="Package\AUX a ERP_CLASECON_AUX\ERP_auxiliar.Outputs[Salida de origen de ADO NET].ExternalColumns[ZNUMORD]"
+                      dataType="wstr"
+                      length="1"
+                      name="ZNUMORD" />
+                    <externalMetadataColumn
+                      refId="Package\AUX a ERP_CLASECON_AUX\ERP_auxiliar.Outputs[Salida de origen de ADO NET].ExternalColumns[ZTXTCON]"
+                      dataType="wstr"
+                      length="20"
+                      name="ZTXTCON" />
+                    <externalMetadataColumn
+                      refId="Package\AUX a ERP_CLASECON_AUX\ERP_auxiliar.Outputs[Salida de origen de ADO NET].ExternalColumns[KSCHL]"
+                      dataType="wstr"
+                      length="4"
+                      name="KSCHL" />
+                    <externalMetadataColumn
+                      refId="Package\AUX a ERP_CLASECON_AUX\ERP_auxiliar.Outputs[Salida de origen de ADO NET].ExternalColumns[ZBQ0]"
+                      dataType="wstr"
+                      length="1"
+                      name="ZBQ0" />
+                    <externalMetadataColumn
+                      refId="Package\AUX a ERP_CLASECON_AUX\ERP_auxiliar.Outputs[Salida de origen de ADO NET].ExternalColumns[ZBQ1]"
+                      dataType="wstr"
+                      length="1"
+                      name="ZBQ1" />
+                    <externalMetadataColumn
+                      refId="Package\AUX a ERP_CLASECON_AUX\ERP_auxiliar.Outputs[Salida de origen de ADO NET].ExternalColumns[ZBQ2]"
+                      dataType="wstr"
+                      length="1"
+                      name="ZBQ2" />
+                    <externalMetadataColumn
+                      refId="Package\AUX a ERP_CLASECON_AUX\ERP_auxiliar.Outputs[Salida de origen de ADO NET].ExternalColumns[ZBQ3]"
+                      dataType="wstr"
+                      length="1"
+                      name="ZBQ3" />
+                    <externalMetadataColumn
+                      refId="Package\AUX a ERP_CLASECON_AUX\ERP_auxiliar.Outputs[Salida de origen de ADO NET].ExternalColumns[ZBQ4]"
+                      dataType="wstr"
+                      length="1"
+                      name="ZBQ4" />
+                    <externalMetadataColumn
+                      refId="Package\AUX a ERP_CLASECON_AUX\ERP_auxiliar.Outputs[Salida de origen de ADO NET].ExternalColumns[ZBQ5]"
+                      dataType="wstr"
+                      length="1"
+                      name="ZBQ5" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\AUX a ERP_CLASECON_AUX\ERP_auxiliar.Outputs[Salida de error de origen de ADO NET]"
+                  isErrorOut="true"
+                  name="Salida de error de origen de ADO NET">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\AUX a ERP_CLASECON_AUX\ERP_auxiliar.Outputs[Salida de error de origen de ADO NET].Columns[Status]"
+                      dataType="wstr"
+                      length="1"
+                      lineageId="Package\AUX a ERP_CLASECON_AUX\ERP_auxiliar.Outputs[Salida de error de origen de ADO NET].Columns[Status]"
+                      name="Status" />
+                    <outputColumn
+                      refId="Package\AUX a ERP_CLASECON_AUX\ERP_auxiliar.Outputs[Salida de error de origen de ADO NET].Columns[ZTPCOND]"
+                      dataType="wstr"
+                      length="1"
+                      lineageId="Package\AUX a ERP_CLASECON_AUX\ERP_auxiliar.Outputs[Salida de error de origen de ADO NET].Columns[ZTPCOND]"
+                      name="ZTPCOND" />
+                    <outputColumn
+                      refId="Package\AUX a ERP_CLASECON_AUX\ERP_auxiliar.Outputs[Salida de error de origen de ADO NET].Columns[ZNUMORD]"
+                      dataType="wstr"
+                      length="1"
+                      lineageId="Package\AUX a ERP_CLASECON_AUX\ERP_auxiliar.Outputs[Salida de error de origen de ADO NET].Columns[ZNUMORD]"
+                      name="ZNUMORD" />
+                    <outputColumn
+                      refId="Package\AUX a ERP_CLASECON_AUX\ERP_auxiliar.Outputs[Salida de error de origen de ADO NET].Columns[ZTXTCON]"
+                      dataType="wstr"
+                      length="20"
+                      lineageId="Package\AUX a ERP_CLASECON_AUX\ERP_auxiliar.Outputs[Salida de error de origen de ADO NET].Columns[ZTXTCON]"
+                      name="ZTXTCON" />
+                    <outputColumn
+                      refId="Package\AUX a ERP_CLASECON_AUX\ERP_auxiliar.Outputs[Salida de error de origen de ADO NET].Columns[KSCHL]"
+                      dataType="wstr"
+                      length="4"
+                      lineageId="Package\AUX a ERP_CLASECON_AUX\ERP_auxiliar.Outputs[Salida de error de origen de ADO NET].Columns[KSCHL]"
+                      name="KSCHL" />
+                    <outputColumn
+                      refId="Package\AUX a ERP_CLASECON_AUX\ERP_auxiliar.Outputs[Salida de error de origen de ADO NET].Columns[ZBQ0]"
+                      dataType="wstr"
+                      length="1"
+                      lineageId="Package\AUX a ERP_CLASECON_AUX\ERP_auxiliar.Outputs[Salida de error de origen de ADO NET].Columns[ZBQ0]"
+                      name="ZBQ0" />
+                    <outputColumn
+                      refId="Package\AUX a ERP_CLASECON_AUX\ERP_auxiliar.Outputs[Salida de error de origen de ADO NET].Columns[ZBQ1]"
+                      dataType="wstr"
+                      length="1"
+                      lineageId="Package\AUX a ERP_CLASECON_AUX\ERP_auxiliar.Outputs[Salida de error de origen de ADO NET].Columns[ZBQ1]"
+                      name="ZBQ1" />
+                    <outputColumn
+                      refId="Package\AUX a ERP_CLASECON_AUX\ERP_auxiliar.Outputs[Salida de error de origen de ADO NET].Columns[ZBQ2]"
+                      dataType="wstr"
+                      length="1"
+                      lineageId="Package\AUX a ERP_CLASECON_AUX\ERP_auxiliar.Outputs[Salida de error de origen de ADO NET].Columns[ZBQ2]"
+                      name="ZBQ2" />
+                    <outputColumn
+                      refId="Package\AUX a ERP_CLASECON_AUX\ERP_auxiliar.Outputs[Salida de error de origen de ADO NET].Columns[ZBQ3]"
+                      dataType="wstr"
+                      length="1"
+                      lineageId="Package\AUX a ERP_CLASECON_AUX\ERP_auxiliar.Outputs[Salida de error de origen de ADO NET].Columns[ZBQ3]"
+                      name="ZBQ3" />
+                    <outputColumn
+                      refId="Package\AUX a ERP_CLASECON_AUX\ERP_auxiliar.Outputs[Salida de error de origen de ADO NET].Columns[ZBQ4]"
+                      dataType="wstr"
+                      length="1"
+                      lineageId="Package\AUX a ERP_CLASECON_AUX\ERP_auxiliar.Outputs[Salida de error de origen de ADO NET].Columns[ZBQ4]"
+                      name="ZBQ4" />
+                    <outputColumn
+                      refId="Package\AUX a ERP_CLASECON_AUX\ERP_auxiliar.Outputs[Salida de error de origen de ADO NET].Columns[ZBQ5]"
+                      dataType="wstr"
+                      length="1"
+                      lineageId="Package\AUX a ERP_CLASECON_AUX\ERP_auxiliar.Outputs[Salida de error de origen de ADO NET].Columns[ZBQ5]"
+                      name="ZBQ5" />
+                    <outputColumn
+                      refId="Package\AUX a ERP_CLASECON_AUX\ERP_auxiliar.Outputs[Salida de error de origen de ADO NET].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\AUX a ERP_CLASECON_AUX\ERP_auxiliar.Outputs[Salida de error de origen de ADO NET].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\AUX a ERP_CLASECON_AUX\ERP_auxiliar.Outputs[Salida de error de origen de ADO NET].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\AUX a ERP_CLASECON_AUX\ERP_auxiliar.Outputs[Salida de error de origen de ADO NET].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\AUX a ERP_CLASECON_AUX\ERP_CLASECON_AUX"
+              componentClassID="Microsoft.ManagedComponentHost"
+              contactInfo="Escribe en una base de datos utilizando el proveedor de ADO.NET.;Microsoft Corporation; Microsoft SqlServer v10; © 2007 Microsoft Corporation; Reservados todos los derechos; http://www.microsoft.com/sql/support;1"
+              description="Escribe en una base de datos utilizando el proveedor de ADO.NET."
+              localeId="3082"
+              name="ERP_CLASECON_AUX"
+              usesDispositions="true"
+              version="2">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Nombre de la tabla de la base de datos de destino."
+                  expressionType="Notify"
+                  name="TableOrViewName"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">ERP_CLASECON_AUX</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifique el número de filas por lote. El valor predeterminado es 0, que utiliza el mismo tamaño que el búfer interno de SSIS. "
+                  expressionType="Notify"
+                  name="BatchSize">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Número de segundos antes de que se agote el tiempo de espera de un comando. Un valor de 0 indica un tiempo de espera infinito. "
+                  expressionType="Notify"
+                  name="CommandTimeout">30</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Especifica si se debe usar la interfaz SqlBulkCopy para mejorar el rendimiento de las operaciones de inserción masiva. No todos los proveedores admiten esta interfaz."
+                  expressionType="Notify"
+                  name="UseBulkInsertWhenPossible">true</property>
+                <property
+                  dataType="System.String"
+                  name="UserComponentTypeName">Microsoft.ADONETDestination</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\AUX a ERP_CLASECON_AUX\ERP_CLASECON_AUX.Connections[IDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[NETPROVIDER_Hydra_prod.sa]"
+                  connectionManagerRefId="Package.ConnectionManagers[NETPROVIDER_Hydra_prod.sa]"
+                  description="Administrador de conexiones administrado"
+                  name="IDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\AUX a ERP_CLASECON_AUX\ERP_CLASECON_AUX.Inputs[Entrada de destino de ADO NET]"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="Entrada de destino de ADO NET">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\AUX a ERP_CLASECON_AUX\ERP_CLASECON_AUX.Inputs[Entrada de destino de ADO NET].Columns[Status]"
+                      cachedDataType="wstr"
+                      cachedLength="1"
+                      cachedName="Status"
+                      externalMetadataColumnId="Package\AUX a ERP_CLASECON_AUX\ERP_CLASECON_AUX.Inputs[Entrada de destino de ADO NET].ExternalColumns[Status]"
+                      lineageId="Package\AUX a ERP_CLASECON_AUX\ERP_auxiliar.Outputs[Salida de origen de ADO NET].Columns[Status]" />
+                    <inputColumn
+                      refId="Package\AUX a ERP_CLASECON_AUX\ERP_CLASECON_AUX.Inputs[Entrada de destino de ADO NET].Columns[ZTPCOND]"
+                      cachedDataType="wstr"
+                      cachedLength="1"
+                      cachedName="ZTPCOND"
+                      externalMetadataColumnId="Package\AUX a ERP_CLASECON_AUX\ERP_CLASECON_AUX.Inputs[Entrada de destino de ADO NET].ExternalColumns[ZTPCOND]"
+                      lineageId="Package\AUX a ERP_CLASECON_AUX\ERP_auxiliar.Outputs[Salida de origen de ADO NET].Columns[ZTPCOND]" />
+                    <inputColumn
+                      refId="Package\AUX a ERP_CLASECON_AUX\ERP_CLASECON_AUX.Inputs[Entrada de destino de ADO NET].Columns[ZNUMORD]"
+                      cachedDataType="wstr"
+                      cachedLength="1"
+                      cachedName="ZNUMORD"
+                      externalMetadataColumnId="Package\AUX a ERP_CLASECON_AUX\ERP_CLASECON_AUX.Inputs[Entrada de destino de ADO NET].ExternalColumns[ZNUMORD]"
+                      lineageId="Package\AUX a ERP_CLASECON_AUX\ERP_auxiliar.Outputs[Salida de origen de ADO NET].Columns[ZNUMORD]" />
+                    <inputColumn
+                      refId="Package\AUX a ERP_CLASECON_AUX\ERP_CLASECON_AUX.Inputs[Entrada de destino de ADO NET].Columns[ZTXTCON]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="ZTXTCON"
+                      externalMetadataColumnId="Package\AUX a ERP_CLASECON_AUX\ERP_CLASECON_AUX.Inputs[Entrada de destino de ADO NET].ExternalColumns[ZTXTCON]"
+                      lineageId="Package\AUX a ERP_CLASECON_AUX\ERP_auxiliar.Outputs[Salida de origen de ADO NET].Columns[ZTXTCON]" />
+                    <inputColumn
+                      refId="Package\AUX a ERP_CLASECON_AUX\ERP_CLASECON_AUX.Inputs[Entrada de destino de ADO NET].Columns[KSCHL]"
+                      cachedDataType="wstr"
+                      cachedLength="4"
+                      cachedName="KSCHL"
+                      externalMetadataColumnId="Package\AUX a ERP_CLASECON_AUX\ERP_CLASECON_AUX.Inputs[Entrada de destino de ADO NET].ExternalColumns[KSCHL]"
+                      lineageId="Package\AUX a ERP_CLASECON_AUX\ERP_auxiliar.Outputs[Salida de origen de ADO NET].Columns[KSCHL]" />
+                    <inputColumn
+                      refId="Package\AUX a ERP_CLASECON_AUX\ERP_CLASECON_AUX.Inputs[Entrada de destino de ADO NET].Columns[ZBQ0]"
+                      cachedDataType="wstr"
+                      cachedLength="1"
+                      cachedName="ZBQ0"
+                      externalMetadataColumnId="Package\AUX a ERP_CLASECON_AUX\ERP_CLASECON_AUX.Inputs[Entrada de destino de ADO NET].ExternalColumns[ZBQ0]"
+                      lineageId="Package\AUX a ERP_CLASECON_AUX\ERP_auxiliar.Outputs[Salida de origen de ADO NET].Columns[ZBQ0]" />
+                    <inputColumn
+                      refId="Package\AUX a ERP_CLASECON_AUX\ERP_CLASECON_AUX.Inputs[Entrada de destino de ADO NET].Columns[ZBQ1]"
+                      cachedDataType="wstr"
+                      cachedLength="1"
+                      cachedName="ZBQ1"
+                      externalMetadataColumnId="Package\AUX a ERP_CLASECON_AUX\ERP_CLASECON_AUX.Inputs[Entrada de destino de ADO NET].ExternalColumns[ZBQ1]"
+                      lineageId="Package\AUX a ERP_CLASECON_AUX\ERP_auxiliar.Outputs[Salida de origen de ADO NET].Columns[ZBQ1]" />
+                    <inputColumn
+                      refId="Package\AUX a ERP_CLASECON_AUX\ERP_CLASECON_AUX.Inputs[Entrada de destino de ADO NET].Columns[ZBQ2]"
+                      cachedDataType="wstr"
+                      cachedLength="1"
+                      cachedName="ZBQ2"
+                      externalMetadataColumnId="Package\AUX a ERP_CLASECON_AUX\ERP_CLASECON_AUX.Inputs[Entrada de destino de ADO NET].ExternalColumns[ZBQ2]"
+                      lineageId="Package\AUX a ERP_CLASECON_AUX\ERP_auxiliar.Outputs[Salida de origen de ADO NET].Columns[ZBQ2]" />
+                    <inputColumn
+                      refId="Package\AUX a ERP_CLASECON_AUX\ERP_CLASECON_AUX.Inputs[Entrada de destino de ADO NET].Columns[ZBQ3]"
+                      cachedDataType="wstr"
+                      cachedLength="1"
+                      cachedName="ZBQ3"
+                      externalMetadataColumnId="Package\AUX a ERP_CLASECON_AUX\ERP_CLASECON_AUX.Inputs[Entrada de destino de ADO NET].ExternalColumns[ZBQ3]"
+                      lineageId="Package\AUX a ERP_CLASECON_AUX\ERP_auxiliar.Outputs[Salida de origen de ADO NET].Columns[ZBQ3]" />
+                    <inputColumn
+                      refId="Package\AUX a ERP_CLASECON_AUX\ERP_CLASECON_AUX.Inputs[Entrada de destino de ADO NET].Columns[ZBQ4]"
+                      cachedDataType="wstr"
+                      cachedLength="1"
+                      cachedName="ZBQ4"
+                      externalMetadataColumnId="Package\AUX a ERP_CLASECON_AUX\ERP_CLASECON_AUX.Inputs[Entrada de destino de ADO NET].ExternalColumns[ZBQ4]"
+                      lineageId="Package\AUX a ERP_CLASECON_AUX\ERP_auxiliar.Outputs[Salida de origen de ADO NET].Columns[ZBQ4]" />
+                    <inputColumn
+                      refId="Package\AUX a ERP_CLASECON_AUX\ERP_CLASECON_AUX.Inputs[Entrada de destino de ADO NET].Columns[ZBQ5]"
+                      cachedDataType="wstr"
+                      cachedLength="1"
+                      cachedName="ZBQ5"
+                      externalMetadataColumnId="Package\AUX a ERP_CLASECON_AUX\ERP_CLASECON_AUX.Inputs[Entrada de destino de ADO NET].ExternalColumns[ZBQ5]"
+                      lineageId="Package\AUX a ERP_CLASECON_AUX\ERP_auxiliar.Outputs[Salida de origen de ADO NET].Columns[ZBQ5]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\AUX a ERP_CLASECON_AUX\ERP_CLASECON_AUX.Inputs[Entrada de destino de ADO NET].ExternalColumns[Status]"
+                      dataType="wstr"
+                      length="1"
+                      name="Status" />
+                    <externalMetadataColumn
+                      refId="Package\AUX a ERP_CLASECON_AUX\ERP_CLASECON_AUX.Inputs[Entrada de destino de ADO NET].ExternalColumns[ZTPCOND]"
+                      dataType="wstr"
+                      length="1"
+                      name="ZTPCOND" />
+                    <externalMetadataColumn
+                      refId="Package\AUX a ERP_CLASECON_AUX\ERP_CLASECON_AUX.Inputs[Entrada de destino de ADO NET].ExternalColumns[ZNUMORD]"
+                      dataType="wstr"
+                      length="1"
+                      name="ZNUMORD" />
+                    <externalMetadataColumn
+                      refId="Package\AUX a ERP_CLASECON_AUX\ERP_CLASECON_AUX.Inputs[Entrada de destino de ADO NET].ExternalColumns[ZTXTCON]"
+                      dataType="wstr"
+                      length="20"
+                      name="ZTXTCON" />
+                    <externalMetadataColumn
+                      refId="Package\AUX a ERP_CLASECON_AUX\ERP_CLASECON_AUX.Inputs[Entrada de destino de ADO NET].ExternalColumns[KSCHL]"
+                      dataType="wstr"
+                      length="4"
+                      name="KSCHL" />
+                    <externalMetadataColumn
+                      refId="Package\AUX a ERP_CLASECON_AUX\ERP_CLASECON_AUX.Inputs[Entrada de destino de ADO NET].ExternalColumns[ZBQ0]"
+                      dataType="wstr"
+                      length="1"
+                      name="ZBQ0" />
+                    <externalMetadataColumn
+                      refId="Package\AUX a ERP_CLASECON_AUX\ERP_CLASECON_AUX.Inputs[Entrada de destino de ADO NET].ExternalColumns[ZBQ1]"
+                      dataType="wstr"
+                      length="1"
+                      name="ZBQ1" />
+                    <externalMetadataColumn
+                      refId="Package\AUX a ERP_CLASECON_AUX\ERP_CLASECON_AUX.Inputs[Entrada de destino de ADO NET].ExternalColumns[ZBQ2]"
+                      dataType="wstr"
+                      length="1"
+                      name="ZBQ2" />
+                    <externalMetadataColumn
+                      refId="Package\AUX a ERP_CLASECON_AUX\ERP_CLASECON_AUX.Inputs[Entrada de destino de ADO NET].ExternalColumns[ZBQ3]"
+                      dataType="wstr"
+                      length="1"
+                      name="ZBQ3" />
+                    <externalMetadataColumn
+                      refId="Package\AUX a ERP_CLASECON_AUX\ERP_CLASECON_AUX.Inputs[Entrada de destino de ADO NET].ExternalColumns[ZBQ4]"
+                      dataType="wstr"
+                      length="1"
+                      name="ZBQ4" />
+                    <externalMetadataColumn
+                      refId="Package\AUX a ERP_CLASECON_AUX\ERP_CLASECON_AUX.Inputs[Entrada de destino de ADO NET].ExternalColumns[ZBQ5]"
+                      dataType="wstr"
+                      length="1"
+                      name="ZBQ5" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\AUX a ERP_CLASECON_AUX\ERP_CLASECON_AUX.Outputs[Salida de error de destino de ADO NET]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Salida de error de destino de ADO NET"
+                  synchronousInputId="Package\AUX a ERP_CLASECON_AUX\ERP_CLASECON_AUX.Inputs[Entrada de destino de ADO NET]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\AUX a ERP_CLASECON_AUX\ERP_CLASECON_AUX.Outputs[Salida de error de destino de ADO NET].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\AUX a ERP_CLASECON_AUX\ERP_CLASECON_AUX.Outputs[Salida de error de destino de ADO NET].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\AUX a ERP_CLASECON_AUX\ERP_CLASECON_AUX.Outputs[Salida de error de destino de ADO NET].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\AUX a ERP_CLASECON_AUX\ERP_CLASECON_AUX.Outputs[Salida de error de destino de ADO NET].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\AUX a ERP_CLASECON_AUX.Paths[Salida de origen de ADO NET]"
+              endId="Package\AUX a ERP_CLASECON_AUX\ERP_CLASECON_AUX.Inputs[Entrada de destino de ADO NET]"
+              name="Salida de origen de ADO NET"
+              startId="Package\AUX a ERP_CLASECON_AUX\ERP_auxiliar.Outputs[Salida de origen de ADO NET]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\AUX a ERP_FPIAAC_AUX"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Tarea Flujo de datos"
+      DTS:DTSID="{1558ed01-0000-4046-a931-916985af55f7}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="AUX a ERP_FPIAAC_AUX"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server v10; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          BLOBTempStoragePath=""
+          bufferTempStoragePath=""
+          version="1">
+          <components>
+            <component
+              refId="Package\AUX a ERP_FPIAAC_AUX\ERP_auxiliar"
+              componentClassID="Microsoft.ManagedComponentHost"
+              contactInfo="Extrae datos de una base de datos relacional mediante un proveedor .NET.;Microsoft Corporation; Microsoft SqlServer v10; © 2007 Microsoft Corporation; Reservados todos los derechos; http://www.microsoft.com/sql/support;4"
+              description="Extrae datos de una base de datos relacional mediante un proveedor .NET."
+              name="ERP_auxiliar"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Especifica la instrucción SQL utilizada por el componente para extraer datos."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">-- CONFIG
+    SELECT * 
+    FROM
+    (
+        SELECT SUBSTRING(linea,1,1) AS Status,
+LTRIM(RTRIM(SUBSTRING(linea,2,5))) AS ZTERMIN,
+LTRIM(RTRIM(SUBSTRING(linea,7,7))) AS ZCONTPED,
+LTRIM(RTRIM(SUBSTRING(linea,14,3))) AS ZCONTCLI,
+LTRIM(RTRIM(SUBSTRING(linea,17,8))) AS ZULTDIAT,
+LTRIM(RTRIM(SUBSTRING(linea,25,3))) AS CODPAI,
+LTRIM(RTRIM(SUBSTRING(linea,28,1))) AS CODEST,
+LTRIM(RTRIM(SUBSTRING(linea,29,1))) AS ZTIPOPRI,
+LTRIM(RTRIM(SUBSTRING(linea,30,1))) AS SPRAS
+--,id
+FROM ERP_auxiliar 
+        ) AS t
+        WHERE 1=1
+        --AND</property>
+                <property
+                  dataType="System.Int32"
+                  description="Número de segundos antes de que se agote el tiempo de espera de un comando. Un valor de 0 indica un tiempo de espera infinito."
+                  name="CommandTimeout">30</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indica si se debe permitir que columnas externas que no sean de cadenas se conviertan implícitamente en cadenas en las columnas de salida."
+                  name="AllowImplicitStringConversion">true</property>
+                <property
+                  dataType="System.String"
+                  description="Nombre de la tabla de la base de datos de destino."
+                  expressionType="Notify"
+                  name="TableOrViewName"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">"dbo"."ERP_auxiliar"</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especificar el modo de recuperar información de columnas externas"
+                  name="AccessMode"
+                  typeConverter="Microsoft.SqlServer.Dts.Pipeline.DataReaderSourceAdapter+EnumToStringConverter">2</property>
+                <property
+                  dataType="System.String"
+                  name="UserComponentTypeName">Microsoft.DataReaderSourceAdapter</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\AUX a ERP_FPIAAC_AUX\ERP_auxiliar.Connections[IDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[NETPROVIDER_Hydra_prod.sa]"
+                  connectionManagerRefId="Package.ConnectionManagers[NETPROVIDER_Hydra_prod.sa]"
+                  description="Administrador de conexiones administrado"
+                  name="IDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\AUX a ERP_FPIAAC_AUX\ERP_auxiliar.Outputs[Salida de origen de ADO NET]"
+                  name="Salida de origen de ADO NET">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\AUX a ERP_FPIAAC_AUX\ERP_auxiliar.Outputs[Salida de origen de ADO NET].Columns[Status]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\AUX a ERP_FPIAAC_AUX\ERP_auxiliar.Outputs[Salida de origen de ADO NET].ExternalColumns[Status]"
+                      length="1"
+                      lineageId="Package\AUX a ERP_FPIAAC_AUX\ERP_auxiliar.Outputs[Salida de origen de ADO NET].Columns[Status]"
+                      name="Status"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\AUX a ERP_FPIAAC_AUX\ERP_auxiliar.Outputs[Salida de origen de ADO NET].Columns[ZTERMIN]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\AUX a ERP_FPIAAC_AUX\ERP_auxiliar.Outputs[Salida de origen de ADO NET].ExternalColumns[ZTERMIN]"
+                      length="5"
+                      lineageId="Package\AUX a ERP_FPIAAC_AUX\ERP_auxiliar.Outputs[Salida de origen de ADO NET].Columns[ZTERMIN]"
+                      name="ZTERMIN"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\AUX a ERP_FPIAAC_AUX\ERP_auxiliar.Outputs[Salida de origen de ADO NET].Columns[ZCONTPED]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\AUX a ERP_FPIAAC_AUX\ERP_auxiliar.Outputs[Salida de origen de ADO NET].ExternalColumns[ZCONTPED]"
+                      length="7"
+                      lineageId="Package\AUX a ERP_FPIAAC_AUX\ERP_auxiliar.Outputs[Salida de origen de ADO NET].Columns[ZCONTPED]"
+                      name="ZCONTPED"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\AUX a ERP_FPIAAC_AUX\ERP_auxiliar.Outputs[Salida de origen de ADO NET].Columns[ZCONTCLI]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\AUX a ERP_FPIAAC_AUX\ERP_auxiliar.Outputs[Salida de origen de ADO NET].ExternalColumns[ZCONTCLI]"
+                      length="3"
+                      lineageId="Package\AUX a ERP_FPIAAC_AUX\ERP_auxiliar.Outputs[Salida de origen de ADO NET].Columns[ZCONTCLI]"
+                      name="ZCONTCLI"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\AUX a ERP_FPIAAC_AUX\ERP_auxiliar.Outputs[Salida de origen de ADO NET].Columns[ZULTDIAT]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\AUX a ERP_FPIAAC_AUX\ERP_auxiliar.Outputs[Salida de origen de ADO NET].ExternalColumns[ZULTDIAT]"
+                      length="8"
+                      lineageId="Package\AUX a ERP_FPIAAC_AUX\ERP_auxiliar.Outputs[Salida de origen de ADO NET].Columns[ZULTDIAT]"
+                      name="ZULTDIAT"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\AUX a ERP_FPIAAC_AUX\ERP_auxiliar.Outputs[Salida de origen de ADO NET].Columns[CODPAI]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\AUX a ERP_FPIAAC_AUX\ERP_auxiliar.Outputs[Salida de origen de ADO NET].ExternalColumns[CODPAI]"
+                      length="3"
+                      lineageId="Package\AUX a ERP_FPIAAC_AUX\ERP_auxiliar.Outputs[Salida de origen de ADO NET].Columns[CODPAI]"
+                      name="CODPAI"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\AUX a ERP_FPIAAC_AUX\ERP_auxiliar.Outputs[Salida de origen de ADO NET].Columns[CODEST]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\AUX a ERP_FPIAAC_AUX\ERP_auxiliar.Outputs[Salida de origen de ADO NET].ExternalColumns[CODEST]"
+                      length="1"
+                      lineageId="Package\AUX a ERP_FPIAAC_AUX\ERP_auxiliar.Outputs[Salida de origen de ADO NET].Columns[CODEST]"
+                      name="CODEST"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\AUX a ERP_FPIAAC_AUX\ERP_auxiliar.Outputs[Salida de origen de ADO NET].Columns[ZTIPOPRI]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\AUX a ERP_FPIAAC_AUX\ERP_auxiliar.Outputs[Salida de origen de ADO NET].ExternalColumns[ZTIPOPRI]"
+                      length="1"
+                      lineageId="Package\AUX a ERP_FPIAAC_AUX\ERP_auxiliar.Outputs[Salida de origen de ADO NET].Columns[ZTIPOPRI]"
+                      name="ZTIPOPRI"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\AUX a ERP_FPIAAC_AUX\ERP_auxiliar.Outputs[Salida de origen de ADO NET].Columns[SPRAS]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\AUX a ERP_FPIAAC_AUX\ERP_auxiliar.Outputs[Salida de origen de ADO NET].ExternalColumns[SPRAS]"
+                      length="1"
+                      lineageId="Package\AUX a ERP_FPIAAC_AUX\ERP_auxiliar.Outputs[Salida de origen de ADO NET].Columns[SPRAS]"
+                      name="SPRAS"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\AUX a ERP_FPIAAC_AUX\ERP_auxiliar.Outputs[Salida de origen de ADO NET].ExternalColumns[Status]"
+                      dataType="wstr"
+                      length="1"
+                      name="Status" />
+                    <externalMetadataColumn
+                      refId="Package\AUX a ERP_FPIAAC_AUX\ERP_auxiliar.Outputs[Salida de origen de ADO NET].ExternalColumns[ZTERMIN]"
+                      dataType="wstr"
+                      length="5"
+                      name="ZTERMIN" />
+                    <externalMetadataColumn
+                      refId="Package\AUX a ERP_FPIAAC_AUX\ERP_auxiliar.Outputs[Salida de origen de ADO NET].ExternalColumns[ZCONTPED]"
+                      dataType="wstr"
+                      length="7"
+                      name="ZCONTPED" />
+                    <externalMetadataColumn
+                      refId="Package\AUX a ERP_FPIAAC_AUX\ERP_auxiliar.Outputs[Salida de origen de ADO NET].ExternalColumns[ZCONTCLI]"
+                      dataType="wstr"
+                      length="3"
+                      name="ZCONTCLI" />
+                    <externalMetadataColumn
+                      refId="Package\AUX a ERP_FPIAAC_AUX\ERP_auxiliar.Outputs[Salida de origen de ADO NET].ExternalColumns[ZULTDIAT]"
+                      dataType="wstr"
+                      length="8"
+                      name="ZULTDIAT" />
+                    <externalMetadataColumn
+                      refId="Package\AUX a ERP_FPIAAC_AUX\ERP_auxiliar.Outputs[Salida de origen de ADO NET].ExternalColumns[CODPAI]"
+                      dataType="wstr"
+                      length="3"
+                      name="CODPAI" />
+                    <externalMetadataColumn
+                      refId="Package\AUX a ERP_FPIAAC_AUX\ERP_auxiliar.Outputs[Salida de origen de ADO NET].ExternalColumns[CODEST]"
+                      dataType="wstr"
+                      length="1"
+                      name="CODEST" />
+                    <externalMetadataColumn
+                      refId="Package\AUX a ERP_FPIAAC_AUX\ERP_auxiliar.Outputs[Salida de origen de ADO NET].ExternalColumns[ZTIPOPRI]"
+                      dataType="wstr"
+                      length="1"
+                      name="ZTIPOPRI" />
+                    <externalMetadataColumn
+                      refId="Package\AUX a ERP_FPIAAC_AUX\ERP_auxiliar.Outputs[Salida de origen de ADO NET].ExternalColumns[SPRAS]"
+                      dataType="wstr"
+                      length="1"
+                      name="SPRAS" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\AUX a ERP_FPIAAC_AUX\ERP_auxiliar.Outputs[Salida de error de origen de ADO NET]"
+                  isErrorOut="true"
+                  name="Salida de error de origen de ADO NET">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\AUX a ERP_FPIAAC_AUX\ERP_auxiliar.Outputs[Salida de error de origen de ADO NET].Columns[Status]"
+                      dataType="wstr"
+                      length="1"
+                      lineageId="Package\AUX a ERP_FPIAAC_AUX\ERP_auxiliar.Outputs[Salida de error de origen de ADO NET].Columns[Status]"
+                      name="Status" />
+                    <outputColumn
+                      refId="Package\AUX a ERP_FPIAAC_AUX\ERP_auxiliar.Outputs[Salida de error de origen de ADO NET].Columns[ZTERMIN]"
+                      dataType="wstr"
+                      length="5"
+                      lineageId="Package\AUX a ERP_FPIAAC_AUX\ERP_auxiliar.Outputs[Salida de error de origen de ADO NET].Columns[ZTERMIN]"
+                      name="ZTERMIN" />
+                    <outputColumn
+                      refId="Package\AUX a ERP_FPIAAC_AUX\ERP_auxiliar.Outputs[Salida de error de origen de ADO NET].Columns[ZCONTPED]"
+                      dataType="wstr"
+                      length="7"
+                      lineageId="Package\AUX a ERP_FPIAAC_AUX\ERP_auxiliar.Outputs[Salida de error de origen de ADO NET].Columns[ZCONTPED]"
+                      name="ZCONTPED" />
+                    <outputColumn
+                      refId="Package\AUX a ERP_FPIAAC_AUX\ERP_auxiliar.Outputs[Salida de error de origen de ADO NET].Columns[ZCONTCLI]"
+                      dataType="wstr"
+                      length="3"
+                      lineageId="Package\AUX a ERP_FPIAAC_AUX\ERP_auxiliar.Outputs[Salida de error de origen de ADO NET].Columns[ZCONTCLI]"
+                      name="ZCONTCLI" />
+                    <outputColumn
+                      refId="Package\AUX a ERP_FPIAAC_AUX\ERP_auxiliar.Outputs[Salida de error de origen de ADO NET].Columns[ZULTDIAT]"
+                      dataType="wstr"
+                      length="8"
+                      lineageId="Package\AUX a ERP_FPIAAC_AUX\ERP_auxiliar.Outputs[Salida de error de origen de ADO NET].Columns[ZULTDIAT]"
+                      name="ZULTDIAT" />
+                    <outputColumn
+                      refId="Package\AUX a ERP_FPIAAC_AUX\ERP_auxiliar.Outputs[Salida de error de origen de ADO NET].Columns[CODPAI]"
+                      dataType="wstr"
+                      length="3"
+                      lineageId="Package\AUX a ERP_FPIAAC_AUX\ERP_auxiliar.Outputs[Salida de error de origen de ADO NET].Columns[CODPAI]"
+                      name="CODPAI" />
+                    <outputColumn
+                      refId="Package\AUX a ERP_FPIAAC_AUX\ERP_auxiliar.Outputs[Salida de error de origen de ADO NET].Columns[CODEST]"
+                      dataType="wstr"
+                      length="1"
+                      lineageId="Package\AUX a ERP_FPIAAC_AUX\ERP_auxiliar.Outputs[Salida de error de origen de ADO NET].Columns[CODEST]"
+                      name="CODEST" />
+                    <outputColumn
+                      refId="Package\AUX a ERP_FPIAAC_AUX\ERP_auxiliar.Outputs[Salida de error de origen de ADO NET].Columns[ZTIPOPRI]"
+                      dataType="wstr"
+                      length="1"
+                      lineageId="Package\AUX a ERP_FPIAAC_AUX\ERP_auxiliar.Outputs[Salida de error de origen de ADO NET].Columns[ZTIPOPRI]"
+                      name="ZTIPOPRI" />
+                    <outputColumn
+                      refId="Package\AUX a ERP_FPIAAC_AUX\ERP_auxiliar.Outputs[Salida de error de origen de ADO NET].Columns[SPRAS]"
+                      dataType="wstr"
+                      length="1"
+                      lineageId="Package\AUX a ERP_FPIAAC_AUX\ERP_auxiliar.Outputs[Salida de error de origen de ADO NET].Columns[SPRAS]"
+                      name="SPRAS" />
+                    <outputColumn
+                      refId="Package\AUX a ERP_FPIAAC_AUX\ERP_auxiliar.Outputs[Salida de error de origen de ADO NET].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\AUX a ERP_FPIAAC_AUX\ERP_auxiliar.Outputs[Salida de error de origen de ADO NET].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\AUX a ERP_FPIAAC_AUX\ERP_auxiliar.Outputs[Salida de error de origen de ADO NET].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\AUX a ERP_FPIAAC_AUX\ERP_auxiliar.Outputs[Salida de error de origen de ADO NET].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\AUX a ERP_FPIAAC_AUX\ERP_CONFIG_AUX"
+              componentClassID="Microsoft.ManagedComponentHost"
+              contactInfo="Escribe en una base de datos utilizando el proveedor de ADO.NET.;Microsoft Corporation; Microsoft SqlServer v10; © 2007 Microsoft Corporation; Reservados todos los derechos; http://www.microsoft.com/sql/support;1"
+              description="Escribe en una base de datos utilizando el proveedor de ADO.NET."
+              localeId="3082"
+              name="ERP_CONFIG_AUX"
+              usesDispositions="true"
+              version="2">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Nombre de la tabla de la base de datos de destino."
+                  expressionType="Notify"
+                  name="TableOrViewName"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">ERP_CONFIG_AUX</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifique el número de filas por lote. El valor predeterminado es 0, que utiliza el mismo tamaño que el búfer interno de SSIS. "
+                  expressionType="Notify"
+                  name="BatchSize">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Número de segundos antes de que se agote el tiempo de espera de un comando. Un valor de 0 indica un tiempo de espera infinito. "
+                  expressionType="Notify"
+                  name="CommandTimeout">30</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Especifica si se debe usar la interfaz SqlBulkCopy para mejorar el rendimiento de las operaciones de inserción masiva. No todos los proveedores admiten esta interfaz."
+                  expressionType="Notify"
+                  name="UseBulkInsertWhenPossible">true</property>
+                <property
+                  dataType="System.String"
+                  name="UserComponentTypeName">Microsoft.ADONETDestination</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\AUX a ERP_FPIAAC_AUX\ERP_CONFIG_AUX.Connections[IDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[NETPROVIDER_Hydra_prod.sa]"
+                  connectionManagerRefId="Package.ConnectionManagers[NETPROVIDER_Hydra_prod.sa]"
+                  description="Administrador de conexiones administrado"
+                  name="IDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\AUX a ERP_FPIAAC_AUX\ERP_CONFIG_AUX.Inputs[Entrada de destino de ADO NET]"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="Entrada de destino de ADO NET">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\AUX a ERP_FPIAAC_AUX\ERP_CONFIG_AUX.Inputs[Entrada de destino de ADO NET].Columns[Status]"
+                      cachedDataType="wstr"
+                      cachedLength="1"
+                      cachedName="Status"
+                      externalMetadataColumnId="Package\AUX a ERP_FPIAAC_AUX\ERP_CONFIG_AUX.Inputs[Entrada de destino de ADO NET].ExternalColumns[Status]"
+                      lineageId="Package\AUX a ERP_FPIAAC_AUX\ERP_auxiliar.Outputs[Salida de origen de ADO NET].Columns[Status]" />
+                    <inputColumn
+                      refId="Package\AUX a ERP_FPIAAC_AUX\ERP_CONFIG_AUX.Inputs[Entrada de destino de ADO NET].Columns[ZTERMIN]"
+                      cachedDataType="wstr"
+                      cachedLength="5"
+                      cachedName="ZTERMIN"
+                      externalMetadataColumnId="Package\AUX a ERP_FPIAAC_AUX\ERP_CONFIG_AUX.Inputs[Entrada de destino de ADO NET].ExternalColumns[ZTERMIN]"
+                      lineageId="Package\AUX a ERP_FPIAAC_AUX\ERP_auxiliar.Outputs[Salida de origen de ADO NET].Columns[ZTERMIN]" />
+                    <inputColumn
+                      refId="Package\AUX a ERP_FPIAAC_AUX\ERP_CONFIG_AUX.Inputs[Entrada de destino de ADO NET].Columns[ZCONTPED]"
+                      cachedDataType="wstr"
+                      cachedLength="7"
+                      cachedName="ZCONTPED"
+                      externalMetadataColumnId="Package\AUX a ERP_FPIAAC_AUX\ERP_CONFIG_AUX.Inputs[Entrada de destino de ADO NET].ExternalColumns[ZCONTPED]"
+                      lineageId="Package\AUX a ERP_FPIAAC_AUX\ERP_auxiliar.Outputs[Salida de origen de ADO NET].Columns[ZCONTPED]" />
+                    <inputColumn
+                      refId="Package\AUX a ERP_FPIAAC_AUX\ERP_CONFIG_AUX.Inputs[Entrada de destino de ADO NET].Columns[ZCONTCLI]"
+                      cachedDataType="wstr"
+                      cachedLength="3"
+                      cachedName="ZCONTCLI"
+                      externalMetadataColumnId="Package\AUX a ERP_FPIAAC_AUX\ERP_CONFIG_AUX.Inputs[Entrada de destino de ADO NET].ExternalColumns[ZCONTCLI]"
+                      lineageId="Package\AUX a ERP_FPIAAC_AUX\ERP_auxiliar.Outputs[Salida de origen de ADO NET].Columns[ZCONTCLI]" />
+                    <inputColumn
+                      refId="Package\AUX a ERP_FPIAAC_AUX\ERP_CONFIG_AUX.Inputs[Entrada de destino de ADO NET].Columns[ZULTDIAT]"
+                      cachedDataType="wstr"
+                      cachedLength="8"
+                      cachedName="ZULTDIAT"
+                      externalMetadataColumnId="Package\AUX a ERP_FPIAAC_AUX\ERP_CONFIG_AUX.Inputs[Entrada de destino de ADO NET].ExternalColumns[ZULTDIAT]"
+                      lineageId="Package\AUX a ERP_FPIAAC_AUX\ERP_auxiliar.Outputs[Salida de origen de ADO NET].Columns[ZULTDIAT]" />
+                    <inputColumn
+                      refId="Package\AUX a ERP_FPIAAC_AUX\ERP_CONFIG_AUX.Inputs[Entrada de destino de ADO NET].Columns[CODPAI]"
+                      cachedDataType="wstr"
+                      cachedLength="3"
+                      cachedName="CODPAI"
+                      externalMetadataColumnId="Package\AUX a ERP_FPIAAC_AUX\ERP_CONFIG_AUX.Inputs[Entrada de destino de ADO NET].ExternalColumns[CODPAI]"
+                      lineageId="Package\AUX a ERP_FPIAAC_AUX\ERP_auxiliar.Outputs[Salida de origen de ADO NET].Columns[CODPAI]" />
+                    <inputColumn
+                      refId="Package\AUX a ERP_FPIAAC_AUX\ERP_CONFIG_AUX.Inputs[Entrada de destino de ADO NET].Columns[CODEST]"
+                      cachedDataType="wstr"
+                      cachedLength="1"
+                      cachedName="CODEST"
+                      externalMetadataColumnId="Package\AUX a ERP_FPIAAC_AUX\ERP_CONFIG_AUX.Inputs[Entrada de destino de ADO NET].ExternalColumns[CODEST]"
+                      lineageId="Package\AUX a ERP_FPIAAC_AUX\ERP_auxiliar.Outputs[Salida de origen de ADO NET].Columns[CODEST]" />
+                    <inputColumn
+                      refId="Package\AUX a ERP_FPIAAC_AUX\ERP_CONFIG_AUX.Inputs[Entrada de destino de ADO NET].Columns[ZTIPOPRI]"
+                      cachedDataType="wstr"
+                      cachedLength="1"
+                      cachedName="ZTIPOPRI"
+                      externalMetadataColumnId="Package\AUX a ERP_FPIAAC_AUX\ERP_CONFIG_AUX.Inputs[Entrada de destino de ADO NET].ExternalColumns[ZTIPOPRI]"
+                      lineageId="Package\AUX a ERP_FPIAAC_AUX\ERP_auxiliar.Outputs[Salida de origen de ADO NET].Columns[ZTIPOPRI]" />
+                    <inputColumn
+                      refId="Package\AUX a ERP_FPIAAC_AUX\ERP_CONFIG_AUX.Inputs[Entrada de destino de ADO NET].Columns[SPRAS]"
+                      cachedDataType="wstr"
+                      cachedLength="1"
+                      cachedName="SPRAS"
+                      externalMetadataColumnId="Package\AUX a ERP_FPIAAC_AUX\ERP_CONFIG_AUX.Inputs[Entrada de destino de ADO NET].ExternalColumns[SPRAS]"
+                      lineageId="Package\AUX a ERP_FPIAAC_AUX\ERP_auxiliar.Outputs[Salida de origen de ADO NET].Columns[SPRAS]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\AUX a ERP_FPIAAC_AUX\ERP_CONFIG_AUX.Inputs[Entrada de destino de ADO NET].ExternalColumns[Status]"
+                      dataType="wstr"
+                      length="1"
+                      name="Status" />
+                    <externalMetadataColumn
+                      refId="Package\AUX a ERP_FPIAAC_AUX\ERP_CONFIG_AUX.Inputs[Entrada de destino de ADO NET].ExternalColumns[ZTERMIN]"
+                      dataType="wstr"
+                      length="5"
+                      name="ZTERMIN" />
+                    <externalMetadataColumn
+                      refId="Package\AUX a ERP_FPIAAC_AUX\ERP_CONFIG_AUX.Inputs[Entrada de destino de ADO NET].ExternalColumns[ZCONTPED]"
+                      dataType="wstr"
+                      length="7"
+                      name="ZCONTPED" />
+                    <externalMetadataColumn
+                      refId="Package\AUX a ERP_FPIAAC_AUX\ERP_CONFIG_AUX.Inputs[Entrada de destino de ADO NET].ExternalColumns[ZCONTCLI]"
+                      dataType="wstr"
+                      length="3"
+                      name="ZCONTCLI" />
+                    <externalMetadataColumn
+                      refId="Package\AUX a ERP_FPIAAC_AUX\ERP_CONFIG_AUX.Inputs[Entrada de destino de ADO NET].ExternalColumns[ZULTDIAT]"
+                      dataType="wstr"
+                      length="8"
+                      name="ZULTDIAT" />
+                    <externalMetadataColumn
+                      refId="Package\AUX a ERP_FPIAAC_AUX\ERP_CONFIG_AUX.Inputs[Entrada de destino de ADO NET].ExternalColumns[CODPAI]"
+                      dataType="wstr"
+                      length="3"
+                      name="CODPAI" />
+                    <externalMetadataColumn
+                      refId="Package\AUX a ERP_FPIAAC_AUX\ERP_CONFIG_AUX.Inputs[Entrada de destino de ADO NET].ExternalColumns[CODEST]"
+                      dataType="wstr"
+                      length="1"
+                      name="CODEST" />
+                    <externalMetadataColumn
+                      refId="Package\AUX a ERP_FPIAAC_AUX\ERP_CONFIG_AUX.Inputs[Entrada de destino de ADO NET].ExternalColumns[ZTIPOPRI]"
+                      dataType="wstr"
+                      length="1"
+                      name="ZTIPOPRI" />
+                    <externalMetadataColumn
+                      refId="Package\AUX a ERP_FPIAAC_AUX\ERP_CONFIG_AUX.Inputs[Entrada de destino de ADO NET].ExternalColumns[SPRAS]"
+                      dataType="wstr"
+                      length="1"
+                      name="SPRAS" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\AUX a ERP_FPIAAC_AUX\ERP_CONFIG_AUX.Outputs[Salida de error de destino de ADO NET]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Salida de error de destino de ADO NET"
+                  synchronousInputId="Package\AUX a ERP_FPIAAC_AUX\ERP_CONFIG_AUX.Inputs[Entrada de destino de ADO NET]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\AUX a ERP_FPIAAC_AUX\ERP_CONFIG_AUX.Outputs[Salida de error de destino de ADO NET].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\AUX a ERP_FPIAAC_AUX\ERP_CONFIG_AUX.Outputs[Salida de error de destino de ADO NET].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\AUX a ERP_FPIAAC_AUX\ERP_CONFIG_AUX.Outputs[Salida de error de destino de ADO NET].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\AUX a ERP_FPIAAC_AUX\ERP_CONFIG_AUX.Outputs[Salida de error de destino de ADO NET].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\AUX a ERP_FPIAAC_AUX.Paths[Salida de origen de ADO NET]"
+              endId="Package\AUX a ERP_FPIAAC_AUX\ERP_CONFIG_AUX.Inputs[Entrada de destino de ADO NET]"
+              name="Salida de origen de ADO NET"
+              startId="Package\AUX a ERP_FPIAAC_AUX\ERP_auxiliar.Outputs[Salida de origen de ADO NET]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\BORRADO TABLAS ERP_XXX"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{C368563B-058B-4959-A717-7B1F4CCFE496}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:FailPackageOnFailure="True"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="BORRADO TABLAS ERP_XXX"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; Microsoft SQL Server 2008 R2; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:LoggingOptions
+        DTS:FilterKind="0" />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{2E5CC153-426E-489E-8971-75AC2BAC199C}"
+          SQLTask:BypassPrepare="False"
+          SQLTask:SqlStatementSource="TRUNCATE TABLE ERP_CLASEATR_AUX&#xA;TRUNCATE TABLE ERP_CLASECON_AUX&#xA;TRUNCATE TABLE ERP_CONFIG_AUX&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Lee @Archivo CLASEATR - ERP_auxiliar"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Tarea Flujo de datos"
+      DTS:DTSID="{0daaf82d-9e0c-47e2-a440-7554628ef3e1}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Lee @Archivo CLASEATR - ERP_auxiliar"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server v10; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          BLOBTempStoragePath=""
+          bufferTempStoragePath=""
+          version="1">
+          <components>
+            <component
+              refId="Package\Lee @Archivo CLASEATR - ERP_auxiliar\CLASEATR"
+              componentClassID="Microsoft.FlatFileSource"
+              contactInfo="Origen de archivo plano;Microsoft Corporation; Microsoft SqlServer v10; (C) Microsoft Corporation; Reservados todos los derechos; http://www.microsoft.com/sql/support;1"
+              description="Origen de archivo plano"
+              localeId="3082"
+              name="CLASEATR"
+              usesDispositions="true"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Especifica si las columnas de longitud cero se tratan como NULL."
+                  name="RetainNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica el nombre de una columna de salida que contiene el nombre de archivo. Si no se especifica ningún nombre, no se genera ninguna columna de salida con el nombre de archivo."
+                  name="FileNameColumnName"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Lee @Archivo CLASEATR - ERP_auxiliar\CLASEATR.Connections[FlatFileConnection]"
+                  connectionManagerID="Package.ConnectionManagers[cnx_crlf_ansi]"
+                  connectionManagerRefId="Package.ConnectionManagers[cnx_crlf_ansi]"
+                  name="FlatFileConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Lee @Archivo CLASEATR - ERP_auxiliar\CLASEATR.Outputs[Salida de origen de archivo plano]"
+                  name="Salida de origen de archivo plano">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Lee @Archivo CLASEATR - ERP_auxiliar\CLASEATR.Outputs[Salida de origen de archivo plano].Columns[linea]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Lee @Archivo CLASEATR - ERP_auxiliar\CLASEATR.Outputs[Salida de origen de archivo plano].ExternalColumns[linea]"
+                      length="255"
+                      lineageId="Package\Lee @Archivo CLASEATR - ERP_auxiliar\CLASEATR.Outputs[Salida de origen de archivo plano].Columns[linea]"
+                      name="linea"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indica si la columna usa las rutinas de análisis más rápidas independientes de la configuración regional."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indica si los datos están en formato binario."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Lee @Archivo CLASEATR - ERP_auxiliar\CLASEATR.Outputs[Salida de origen de archivo plano].ExternalColumns[linea]"
+                      codePage="1252"
+                      dataType="str"
+                      length="255"
+                      name="linea" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Lee @Archivo CLASEATR - ERP_auxiliar\CLASEATR.Outputs[Salida de error de origen de archivo plano]"
+                  isErrorOut="true"
+                  name="Salida de error de origen de archivo plano">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Lee @Archivo CLASEATR - ERP_auxiliar\CLASEATR.Outputs[Salida de error de origen de archivo plano].Columns[Columna de salida de error de origen de archivo plano]"
+                      codePage="65001"
+                      dataType="text"
+                      description="Columna de salida de error de origen de archivo plano"
+                      lineageId="Package\Lee @Archivo CLASEATR - ERP_auxiliar\CLASEATR.Outputs[Salida de error de origen de archivo plano].Columns[Columna de salida de error de origen de archivo plano]"
+                      name="Columna de salida de error de origen de archivo plano" />
+                    <outputColumn
+                      refId="Package\Lee @Archivo CLASEATR - ERP_auxiliar\CLASEATR.Outputs[Salida de error de origen de archivo plano].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Lee @Archivo CLASEATR - ERP_auxiliar\CLASEATR.Outputs[Salida de error de origen de archivo plano].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Lee @Archivo CLASEATR - ERP_auxiliar\CLASEATR.Outputs[Salida de error de origen de archivo plano].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Lee @Archivo CLASEATR - ERP_auxiliar\CLASEATR.Outputs[Salida de error de origen de archivo plano].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Lee @Archivo CLASEATR - ERP_auxiliar\ERP_Auxiliar"
+              componentClassID="Microsoft.ManagedComponentHost"
+              contactInfo="Escribe en una base de datos utilizando el proveedor de ADO.NET.;Microsoft Corporation; Microsoft SqlServer v10; © 2007 Microsoft Corporation; Reservados todos los derechos; http://www.microsoft.com/sql/support;1"
+              description="Escribe en una base de datos utilizando el proveedor de ADO.NET."
+              name="ERP_Auxiliar"
+              usesDispositions="true"
+              version="2">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Nombre de la tabla de la base de datos de destino."
+                  expressionType="Notify"
+                  name="TableOrViewName"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">"dbo"."ERP_auxiliar"</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifique el número de filas por lote. El valor predeterminado es 0, que utiliza el mismo tamaño que el búfer interno de SSIS. "
+                  expressionType="Notify"
+                  name="BatchSize">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Número de segundos antes de que se agote el tiempo de espera de un comando. Un valor de 0 indica un tiempo de espera infinito. "
+                  expressionType="Notify"
+                  name="CommandTimeout">30</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Especifica si se debe usar la interfaz SqlBulkCopy para mejorar el rendimiento de las operaciones de inserción masiva. No todos los proveedores admiten esta interfaz."
+                  expressionType="Notify"
+                  name="UseBulkInsertWhenPossible">true</property>
+                <property
+                  dataType="System.String"
+                  name="UserComponentTypeName">Microsoft.ADONETDestination</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Lee @Archivo CLASEATR - ERP_auxiliar\ERP_Auxiliar.Connections[IDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[NETPROVIDER_Hydra_prod.sa]"
+                  connectionManagerRefId="Package.ConnectionManagers[NETPROVIDER_Hydra_prod.sa]"
+                  description="Administrador de conexiones administrado"
+                  name="IDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Lee @Archivo CLASEATR - ERP_auxiliar\ERP_Auxiliar.Inputs[Entrada de destino de ADO NET]"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="Entrada de destino de ADO NET">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Lee @Archivo CLASEATR - ERP_auxiliar\ERP_Auxiliar.Inputs[Entrada de destino de ADO NET].Columns[linea]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="255"
+                      cachedName="linea"
+                      externalMetadataColumnId="Package\Lee @Archivo CLASEATR - ERP_auxiliar\ERP_Auxiliar.Inputs[Entrada de destino de ADO NET].ExternalColumns[linea]"
+                      lineageId="Package\Lee @Archivo CLASEATR - ERP_auxiliar\CLASEATR.Outputs[Salida de origen de archivo plano].Columns[linea]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Lee @Archivo CLASEATR - ERP_auxiliar\ERP_Auxiliar.Inputs[Entrada de destino de ADO NET].ExternalColumns[id]"
+                      dataType="i4"
+                      name="id" />
+                    <externalMetadataColumn
+                      refId="Package\Lee @Archivo CLASEATR - ERP_auxiliar\ERP_Auxiliar.Inputs[Entrada de destino de ADO NET].ExternalColumns[linea]"
+                      dataType="wstr"
+                      length="1000"
+                      name="linea" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Lee @Archivo CLASEATR - ERP_auxiliar\ERP_Auxiliar.Outputs[Salida de error de destino de ADO NET]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Salida de error de destino de ADO NET"
+                  synchronousInputId="Package\Lee @Archivo CLASEATR - ERP_auxiliar\ERP_Auxiliar.Inputs[Entrada de destino de ADO NET]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Lee @Archivo CLASEATR - ERP_auxiliar\ERP_Auxiliar.Outputs[Salida de error de destino de ADO NET].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Lee @Archivo CLASEATR - ERP_auxiliar\ERP_Auxiliar.Outputs[Salida de error de destino de ADO NET].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Lee @Archivo CLASEATR - ERP_auxiliar\ERP_Auxiliar.Outputs[Salida de error de destino de ADO NET].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Lee @Archivo CLASEATR - ERP_auxiliar\ERP_Auxiliar.Outputs[Salida de error de destino de ADO NET].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Lee @Archivo CLASEATR - ERP_auxiliar.Paths[Salida de origen de archivo plano]"
+              endId="Package\Lee @Archivo CLASEATR - ERP_auxiliar\ERP_Auxiliar.Inputs[Entrada de destino de ADO NET]"
+              name="Salida de origen de archivo plano"
+              startId="Package\Lee @Archivo CLASEATR - ERP_auxiliar\CLASEATR.Outputs[Salida de origen de archivo plano]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Lee @Archivo CLASECON - ERP_auxiliar"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Tarea Flujo de datos"
+      DTS:DTSID="{07d6176c-5c2f-4f04-8895-e122e5022f02}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Lee @Archivo CLASECON - ERP_auxiliar"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server v10; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          BLOBTempStoragePath=""
+          bufferTempStoragePath=""
+          version="1">
+          <components>
+            <component
+              refId="Package\Lee @Archivo CLASECON - ERP_auxiliar\CLASECON"
+              componentClassID="Microsoft.FlatFileSource"
+              contactInfo="Origen de archivo plano;Microsoft Corporation; Microsoft SqlServer v10; (C) Microsoft Corporation; Reservados todos los derechos; http://www.microsoft.com/sql/support;1"
+              description="Origen de archivo plano"
+              localeId="3082"
+              name="CLASECON"
+              usesDispositions="true"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Especifica si las columnas de longitud cero se tratan como NULL."
+                  name="RetainNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica el nombre de una columna de salida que contiene el nombre de archivo. Si no se especifica ningún nombre, no se genera ninguna columna de salida con el nombre de archivo."
+                  name="FileNameColumnName"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Lee @Archivo CLASECON - ERP_auxiliar\CLASECON.Connections[FlatFileConnection]"
+                  connectionManagerID="Package.ConnectionManagers[cnx_crlf_ansi]"
+                  connectionManagerRefId="Package.ConnectionManagers[cnx_crlf_ansi]"
+                  name="FlatFileConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Lee @Archivo CLASECON - ERP_auxiliar\CLASECON.Outputs[Salida de origen de archivo plano]"
+                  name="Salida de origen de archivo plano">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Lee @Archivo CLASECON - ERP_auxiliar\CLASECON.Outputs[Salida de origen de archivo plano].Columns[linea]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Lee @Archivo CLASECON - ERP_auxiliar\CLASECON.Outputs[Salida de origen de archivo plano].ExternalColumns[linea]"
+                      length="255"
+                      lineageId="Package\Lee @Archivo CLASECON - ERP_auxiliar\CLASECON.Outputs[Salida de origen de archivo plano].Columns[linea]"
+                      name="linea"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indica si la columna usa las rutinas de análisis más rápidas independientes de la configuración regional."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indica si los datos están en formato binario."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Lee @Archivo CLASECON - ERP_auxiliar\CLASECON.Outputs[Salida de origen de archivo plano].ExternalColumns[linea]"
+                      codePage="1252"
+                      dataType="str"
+                      length="255"
+                      name="linea" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Lee @Archivo CLASECON - ERP_auxiliar\CLASECON.Outputs[Salida de error de origen de archivo plano]"
+                  isErrorOut="true"
+                  name="Salida de error de origen de archivo plano">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Lee @Archivo CLASECON - ERP_auxiliar\CLASECON.Outputs[Salida de error de origen de archivo plano].Columns[Columna de salida de error de origen de archivo plano]"
+                      codePage="65001"
+                      dataType="text"
+                      description="Columna de salida de error de origen de archivo plano"
+                      lineageId="Package\Lee @Archivo CLASECON - ERP_auxiliar\CLASECON.Outputs[Salida de error de origen de archivo plano].Columns[Columna de salida de error de origen de archivo plano]"
+                      name="Columna de salida de error de origen de archivo plano" />
+                    <outputColumn
+                      refId="Package\Lee @Archivo CLASECON - ERP_auxiliar\CLASECON.Outputs[Salida de error de origen de archivo plano].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Lee @Archivo CLASECON - ERP_auxiliar\CLASECON.Outputs[Salida de error de origen de archivo plano].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Lee @Archivo CLASECON - ERP_auxiliar\CLASECON.Outputs[Salida de error de origen de archivo plano].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Lee @Archivo CLASECON - ERP_auxiliar\CLASECON.Outputs[Salida de error de origen de archivo plano].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Lee @Archivo CLASECON - ERP_auxiliar\ERP_Auxiliar"
+              componentClassID="Microsoft.ManagedComponentHost"
+              contactInfo="Escribe en una base de datos utilizando el proveedor de ADO.NET.;Microsoft Corporation; Microsoft SqlServer v10; © 2007 Microsoft Corporation; Reservados todos los derechos; http://www.microsoft.com/sql/support;1"
+              description="Escribe en una base de datos utilizando el proveedor de ADO.NET."
+              name="ERP_Auxiliar"
+              usesDispositions="true"
+              version="2">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Nombre de la tabla de la base de datos de destino."
+                  expressionType="Notify"
+                  name="TableOrViewName"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">"dbo"."ERP_auxiliar"</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifique el número de filas por lote. El valor predeterminado es 0, que utiliza el mismo tamaño que el búfer interno de SSIS. "
+                  expressionType="Notify"
+                  name="BatchSize">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Número de segundos antes de que se agote el tiempo de espera de un comando. Un valor de 0 indica un tiempo de espera infinito. "
+                  expressionType="Notify"
+                  name="CommandTimeout">30</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Especifica si se debe usar la interfaz SqlBulkCopy para mejorar el rendimiento de las operaciones de inserción masiva. No todos los proveedores admiten esta interfaz."
+                  expressionType="Notify"
+                  name="UseBulkInsertWhenPossible">true</property>
+                <property
+                  dataType="System.String"
+                  name="UserComponentTypeName">Microsoft.ADONETDestination</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Lee @Archivo CLASECON - ERP_auxiliar\ERP_Auxiliar.Connections[IDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[NETPROVIDER_Hydra_prod.sa]"
+                  connectionManagerRefId="Package.ConnectionManagers[NETPROVIDER_Hydra_prod.sa]"
+                  description="Administrador de conexiones administrado"
+                  name="IDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Lee @Archivo CLASECON - ERP_auxiliar\ERP_Auxiliar.Inputs[Entrada de destino de ADO NET]"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="Entrada de destino de ADO NET">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Lee @Archivo CLASECON - ERP_auxiliar\ERP_Auxiliar.Inputs[Entrada de destino de ADO NET].Columns[linea]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="255"
+                      cachedName="linea"
+                      externalMetadataColumnId="Package\Lee @Archivo CLASECON - ERP_auxiliar\ERP_Auxiliar.Inputs[Entrada de destino de ADO NET].ExternalColumns[linea]"
+                      lineageId="Package\Lee @Archivo CLASECON - ERP_auxiliar\CLASECON.Outputs[Salida de origen de archivo plano].Columns[linea]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Lee @Archivo CLASECON - ERP_auxiliar\ERP_Auxiliar.Inputs[Entrada de destino de ADO NET].ExternalColumns[id]"
+                      dataType="i4"
+                      name="id" />
+                    <externalMetadataColumn
+                      refId="Package\Lee @Archivo CLASECON - ERP_auxiliar\ERP_Auxiliar.Inputs[Entrada de destino de ADO NET].ExternalColumns[linea]"
+                      dataType="wstr"
+                      length="1000"
+                      name="linea" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Lee @Archivo CLASECON - ERP_auxiliar\ERP_Auxiliar.Outputs[Salida de error de destino de ADO NET]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Salida de error de destino de ADO NET"
+                  synchronousInputId="Package\Lee @Archivo CLASECON - ERP_auxiliar\ERP_Auxiliar.Inputs[Entrada de destino de ADO NET]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Lee @Archivo CLASECON - ERP_auxiliar\ERP_Auxiliar.Outputs[Salida de error de destino de ADO NET].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Lee @Archivo CLASECON - ERP_auxiliar\ERP_Auxiliar.Outputs[Salida de error de destino de ADO NET].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Lee @Archivo CLASECON - ERP_auxiliar\ERP_Auxiliar.Outputs[Salida de error de destino de ADO NET].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Lee @Archivo CLASECON - ERP_auxiliar\ERP_Auxiliar.Outputs[Salida de error de destino de ADO NET].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Lee @Archivo CLASECON - ERP_auxiliar.Paths[Salida de origen de archivo plano]"
+              endId="Package\Lee @Archivo CLASECON - ERP_auxiliar\ERP_Auxiliar.Inputs[Entrada de destino de ADO NET]"
+              name="Salida de origen de archivo plano"
+              startId="Package\Lee @Archivo CLASECON - ERP_auxiliar\CLASECON.Outputs[Salida de origen de archivo plano]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Lee @Archivo CONFIG - ERP_auxiliar"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Tarea Flujo de datos"
+      DTS:DTSID="{79d9557d-100f-4af5-8785-8b205eed0174}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Lee @Archivo CONFIG - ERP_auxiliar"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server v10; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          BLOBTempStoragePath=""
+          bufferTempStoragePath=""
+          version="1">
+          <components>
+            <component
+              refId="Package\Lee @Archivo CONFIG - ERP_auxiliar\ERP_Auxiliar"
+              componentClassID="Microsoft.ManagedComponentHost"
+              contactInfo="Escribe en una base de datos utilizando el proveedor de ADO.NET.;Microsoft Corporation; Microsoft SqlServer v10; © 2007 Microsoft Corporation; Reservados todos los derechos; http://www.microsoft.com/sql/support;1"
+              description="Escribe en una base de datos utilizando el proveedor de ADO.NET."
+              name="ERP_Auxiliar"
+              usesDispositions="true"
+              version="2">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Nombre de la tabla de la base de datos de destino."
+                  expressionType="Notify"
+                  name="TableOrViewName"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">"dbo"."ERP_auxiliar"</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifique el número de filas por lote. El valor predeterminado es 0, que utiliza el mismo tamaño que el búfer interno de SSIS. "
+                  expressionType="Notify"
+                  name="BatchSize">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Número de segundos antes de que se agote el tiempo de espera de un comando. Un valor de 0 indica un tiempo de espera infinito. "
+                  expressionType="Notify"
+                  name="CommandTimeout">30</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Especifica si se debe usar la interfaz SqlBulkCopy para mejorar el rendimiento de las operaciones de inserción masiva. No todos los proveedores admiten esta interfaz."
+                  expressionType="Notify"
+                  name="UseBulkInsertWhenPossible">true</property>
+                <property
+                  dataType="System.String"
+                  name="UserComponentTypeName">Microsoft.ADONETDestination</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Lee @Archivo CONFIG - ERP_auxiliar\ERP_Auxiliar.Connections[IDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[NETPROVIDER_Hydra_prod.sa]"
+                  connectionManagerRefId="Package.ConnectionManagers[NETPROVIDER_Hydra_prod.sa]"
+                  description="Administrador de conexiones administrado"
+                  name="IDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Lee @Archivo CONFIG - ERP_auxiliar\ERP_Auxiliar.Inputs[Entrada de destino de ADO NET]"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="Entrada de destino de ADO NET">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Lee @Archivo CONFIG - ERP_auxiliar\ERP_Auxiliar.Inputs[Entrada de destino de ADO NET].Columns[linea]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="255"
+                      cachedName="linea"
+                      externalMetadataColumnId="Package\Lee @Archivo CONFIG - ERP_auxiliar\ERP_Auxiliar.Inputs[Entrada de destino de ADO NET].ExternalColumns[linea]"
+                      lineageId="Package\Lee @Archivo CONFIG - ERP_auxiliar\FPIAAC.Outputs[Salida de origen de archivo plano].Columns[linea]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Lee @Archivo CONFIG - ERP_auxiliar\ERP_Auxiliar.Inputs[Entrada de destino de ADO NET].ExternalColumns[id]"
+                      dataType="i4"
+                      name="id" />
+                    <externalMetadataColumn
+                      refId="Package\Lee @Archivo CONFIG - ERP_auxiliar\ERP_Auxiliar.Inputs[Entrada de destino de ADO NET].ExternalColumns[linea]"
+                      dataType="wstr"
+                      length="1000"
+                      name="linea" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Lee @Archivo CONFIG - ERP_auxiliar\ERP_Auxiliar.Outputs[Salida de error de destino de ADO NET]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Salida de error de destino de ADO NET"
+                  synchronousInputId="Package\Lee @Archivo CONFIG - ERP_auxiliar\ERP_Auxiliar.Inputs[Entrada de destino de ADO NET]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Lee @Archivo CONFIG - ERP_auxiliar\ERP_Auxiliar.Outputs[Salida de error de destino de ADO NET].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Lee @Archivo CONFIG - ERP_auxiliar\ERP_Auxiliar.Outputs[Salida de error de destino de ADO NET].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Lee @Archivo CONFIG - ERP_auxiliar\ERP_Auxiliar.Outputs[Salida de error de destino de ADO NET].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Lee @Archivo CONFIG - ERP_auxiliar\ERP_Auxiliar.Outputs[Salida de error de destino de ADO NET].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Lee @Archivo CONFIG - ERP_auxiliar\ERP_Auxiliar 1"
+              componentClassID="Microsoft.ManagedComponentHost"
+              contactInfo="Escribe en una base de datos utilizando el proveedor de ADO.NET.;Microsoft Corporation; Microsoft SqlServer v10; © 2007 Microsoft Corporation; Reservados todos los derechos; http://www.microsoft.com/sql/support;1"
+              description="Escribe en una base de datos utilizando el proveedor de ADO.NET."
+              localeId="3082"
+              name="ERP_Auxiliar 1"
+              usesDispositions="true"
+              version="2">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Nombre de la tabla de la base de datos de destino."
+                  expressionType="Notify"
+                  name="TableOrViewName"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">"dbo"."ERP_auxiliar"</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifique el número de filas por lote. El valor predeterminado es 0, que utiliza el mismo tamaño que el búfer interno de SSIS. "
+                  expressionType="Notify"
+                  name="BatchSize">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Número de segundos antes de que se agote el tiempo de espera de un comando. Un valor de 0 indica un tiempo de espera infinito. "
+                  expressionType="Notify"
+                  name="CommandTimeout">30</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Especifica si se debe usar la interfaz SqlBulkCopy para mejorar el rendimiento de las operaciones de inserción masiva. No todos los proveedores admiten esta interfaz."
+                  expressionType="Notify"
+                  name="UseBulkInsertWhenPossible">true</property>
+                <property
+                  dataType="System.String"
+                  name="UserComponentTypeName">Microsoft.ADONETDestination</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Lee @Archivo CONFIG - ERP_auxiliar\ERP_Auxiliar 1.Connections[IDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[NETPROVIDER_Hydra_prod.sa]"
+                  connectionManagerRefId="Package.ConnectionManagers[NETPROVIDER_Hydra_prod.sa]"
+                  description="Administrador de conexiones administrado"
+                  name="IDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Lee @Archivo CONFIG - ERP_auxiliar\ERP_Auxiliar 1.Inputs[Entrada de destino de ADO NET]"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="Entrada de destino de ADO NET">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Lee @Archivo CONFIG - ERP_auxiliar\ERP_Auxiliar 1.Inputs[Entrada de destino de ADO NET].Columns[linea]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="255"
+                      cachedName="linea"
+                      externalMetadataColumnId="Package\Lee @Archivo CONFIG - ERP_auxiliar\ERP_Auxiliar 1.Inputs[Entrada de destino de ADO NET].ExternalColumns[linea]"
+                      lineageId="Package\Lee @Archivo CONFIG - ERP_auxiliar\FPIAAC 1.Outputs[Salida de origen de archivo plano].Columns[linea]"
+                      name="linea" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Lee @Archivo CONFIG - ERP_auxiliar\ERP_Auxiliar 1.Inputs[Entrada de destino de ADO NET].ExternalColumns[id]"
+                      dataType="i4"
+                      name="id" />
+                    <externalMetadataColumn
+                      refId="Package\Lee @Archivo CONFIG - ERP_auxiliar\ERP_Auxiliar 1.Inputs[Entrada de destino de ADO NET].ExternalColumns[linea]"
+                      dataType="wstr"
+                      length="1000"
+                      name="linea" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Lee @Archivo CONFIG - ERP_auxiliar\ERP_Auxiliar 1.Outputs[Salida de error de destino de ADO NET]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Salida de error de destino de ADO NET"
+                  synchronousInputId="Package\Lee @Archivo CONFIG - ERP_auxiliar\ERP_Auxiliar 1.Inputs[Entrada de destino de ADO NET]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Lee @Archivo CONFIG - ERP_auxiliar\ERP_Auxiliar 1.Outputs[Salida de error de destino de ADO NET].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Lee @Archivo CONFIG - ERP_auxiliar\ERP_Auxiliar 1.Outputs[Salida de error de destino de ADO NET].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Lee @Archivo CONFIG - ERP_auxiliar\ERP_Auxiliar 1.Outputs[Salida de error de destino de ADO NET].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Lee @Archivo CONFIG - ERP_auxiliar\ERP_Auxiliar 1.Outputs[Salida de error de destino de ADO NET].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Lee @Archivo CONFIG - ERP_auxiliar\FPIAAC"
+              componentClassID="Microsoft.FlatFileSource"
+              contactInfo="Origen de archivo plano;Microsoft Corporation; Microsoft SqlServer v10; (C) Microsoft Corporation; Reservados todos los derechos; http://www.microsoft.com/sql/support;1"
+              description="Origen de archivo plano"
+              localeId="3082"
+              name="FPIAAC"
+              usesDispositions="true"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Especifica si las columnas de longitud cero se tratan como NULL."
+                  name="RetainNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica el nombre de una columna de salida que contiene el nombre de archivo. Si no se especifica ningún nombre, no se genera ninguna columna de salida con el nombre de archivo."
+                  name="FileNameColumnName"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Lee @Archivo CONFIG - ERP_auxiliar\FPIAAC.Connections[FlatFileConnection]"
+                  connectionManagerID="Package.ConnectionManagers[cnx_crlf_ansi]"
+                  connectionManagerRefId="Package.ConnectionManagers[cnx_crlf_ansi]"
+                  name="FlatFileConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Lee @Archivo CONFIG - ERP_auxiliar\FPIAAC.Outputs[Salida de origen de archivo plano]"
+                  name="Salida de origen de archivo plano">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Lee @Archivo CONFIG - ERP_auxiliar\FPIAAC.Outputs[Salida de origen de archivo plano].Columns[linea]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Lee @Archivo CONFIG - ERP_auxiliar\FPIAAC.Outputs[Salida de origen de archivo plano].ExternalColumns[linea]"
+                      length="255"
+                      lineageId="Package\Lee @Archivo CONFIG - ERP_auxiliar\FPIAAC.Outputs[Salida de origen de archivo plano].Columns[linea]"
+                      name="linea"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indica si la columna usa las rutinas de análisis más rápidas independientes de la configuración regional."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indica si los datos están en formato binario."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Lee @Archivo CONFIG - ERP_auxiliar\FPIAAC.Outputs[Salida de origen de archivo plano].ExternalColumns[linea]"
+                      codePage="1252"
+                      dataType="str"
+                      length="255"
+                      name="linea" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Lee @Archivo CONFIG - ERP_auxiliar\FPIAAC.Outputs[Salida de error de origen de archivo plano]"
+                  isErrorOut="true"
+                  name="Salida de error de origen de archivo plano">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Lee @Archivo CONFIG - ERP_auxiliar\FPIAAC.Outputs[Salida de error de origen de archivo plano].Columns[Columna de salida de error de origen de archivo plano]"
+                      codePage="65001"
+                      dataType="text"
+                      description="Columna de salida de error de origen de archivo plano"
+                      lineageId="Package\Lee @Archivo CONFIG - ERP_auxiliar\FPIAAC.Outputs[Salida de error de origen de archivo plano].Columns[Columna de salida de error de origen de archivo plano]"
+                      name="Columna de salida de error de origen de archivo plano" />
+                    <outputColumn
+                      refId="Package\Lee @Archivo CONFIG - ERP_auxiliar\FPIAAC.Outputs[Salida de error de origen de archivo plano].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Lee @Archivo CONFIG - ERP_auxiliar\FPIAAC.Outputs[Salida de error de origen de archivo plano].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Lee @Archivo CONFIG - ERP_auxiliar\FPIAAC.Outputs[Salida de error de origen de archivo plano].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Lee @Archivo CONFIG - ERP_auxiliar\FPIAAC.Outputs[Salida de error de origen de archivo plano].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Lee @Archivo CONFIG - ERP_auxiliar\FPIAAC 1"
+              componentClassID="Microsoft.FlatFileSource"
+              contactInfo="Origen de archivo plano;Microsoft Corporation; Microsoft SqlServer v10; (C) Microsoft Corporation; Reservados todos los derechos; http://www.microsoft.com/sql/support;1"
+              description="Origen de archivo plano"
+              localeId="3082"
+              name="FPIAAC 1"
+              usesDispositions="true"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Especifica si las columnas de longitud cero se tratan como NULL."
+                  name="RetainNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica el nombre de una columna de salida que contiene el nombre de archivo. Si no se especifica ningún nombre, no se genera ninguna columna de salida con el nombre de archivo."
+                  name="FileNameColumnName"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Lee @Archivo CONFIG - ERP_auxiliar\FPIAAC 1.Connections[FlatFileConnection]"
+                  connectionManagerID="Package.ConnectionManagers[cnx_crlf_ansi]"
+                  connectionManagerRefId="Package.ConnectionManagers[cnx_crlf_ansi]"
+                  name="FlatFileConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Lee @Archivo CONFIG - ERP_auxiliar\FPIAAC 1.Outputs[Salida de origen de archivo plano]"
+                  name="Salida de origen de archivo plano">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Lee @Archivo CONFIG - ERP_auxiliar\FPIAAC 1.Outputs[Salida de origen de archivo plano].Columns[linea]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Lee @Archivo CONFIG - ERP_auxiliar\FPIAAC 1.Outputs[Salida de origen de archivo plano].ExternalColumns[linea]"
+                      length="255"
+                      lineageId="Package\Lee @Archivo CONFIG - ERP_auxiliar\FPIAAC 1.Outputs[Salida de origen de archivo plano].Columns[linea]"
+                      name="linea"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indica si la columna usa las rutinas de análisis más rápidas independientes de la configuración regional."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indica si los datos están en formato binario."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Lee @Archivo CONFIG - ERP_auxiliar\FPIAAC 1.Outputs[Salida de origen de archivo plano].ExternalColumns[linea]"
+                      codePage="1252"
+                      dataType="str"
+                      length="255"
+                      name="linea" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Lee @Archivo CONFIG - ERP_auxiliar\FPIAAC 1.Outputs[Salida de error de origen de archivo plano]"
+                  isErrorOut="true"
+                  name="Salida de error de origen de archivo plano">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Lee @Archivo CONFIG - ERP_auxiliar\FPIAAC 1.Outputs[Salida de error de origen de archivo plano].Columns[Columna de salida de error de origen de archivo plano]"
+                      codePage="65001"
+                      dataType="text"
+                      description="Columna de salida de error de origen de archivo plano"
+                      lineageId="Package\Lee @Archivo CONFIG - ERP_auxiliar\FPIAAC 1.Outputs[Salida de error de origen de archivo plano].Columns[Columna de salida de error de origen de archivo plano]"
+                      name="Columna de salida de error de origen de archivo plano" />
+                    <outputColumn
+                      refId="Package\Lee @Archivo CONFIG - ERP_auxiliar\FPIAAC 1.Outputs[Salida de error de origen de archivo plano].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Lee @Archivo CONFIG - ERP_auxiliar\FPIAAC 1.Outputs[Salida de error de origen de archivo plano].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Lee @Archivo CONFIG - ERP_auxiliar\FPIAAC 1.Outputs[Salida de error de origen de archivo plano].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Lee @Archivo CONFIG - ERP_auxiliar\FPIAAC 1.Outputs[Salida de error de origen de archivo plano].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Lee @Archivo CONFIG - ERP_auxiliar.Paths[Salida de origen de archivo plano]"
+              endId="Package\Lee @Archivo CONFIG - ERP_auxiliar\ERP_Auxiliar.Inputs[Entrada de destino de ADO NET]"
+              name="Salida de origen de archivo plano"
+              startId="Package\Lee @Archivo CONFIG - ERP_auxiliar\FPIAAC.Outputs[Salida de origen de archivo plano]" />
+            <path
+              refId="Package\Lee @Archivo CONFIG - ERP_auxiliar.Paths[Salida de origen de archivo plano1]"
+              endId="Package\Lee @Archivo CONFIG - ERP_auxiliar\ERP_Auxiliar 1.Inputs[Entrada de destino de ADO NET]"
+              name="Salida de origen de archivo plano"
+              startId="Package\Lee @Archivo CONFIG - ERP_auxiliar\FPIAAC 1.Outputs[Salida de origen de archivo plano]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\SET @Archivo CLASEATR"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Tarea Ejecutar SQL"
+      DTS:DTSID="{2a602059-7ddd-424b-818c-36ab832f7918}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="SET @Archivo CLASEATR"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; Microsoft SQL Server 2008 R2; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{62E61418-8CC2-4254-AE24-BF2CEFA6D27E}"
+          SQLTask:SqlStatementSource="SELECT 'CLASEATR' AS Archivo"
+          SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="Archivo"
+            SQLTask:DtsVariableName="User::Archivo" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\SET @Archivo CLASECON"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Tarea Ejecutar SQL"
+      DTS:DTSID="{ddcf88a9-529a-48ee-9801-687d55a0a18a}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="SET @Archivo CLASECON"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; Microsoft SQL Server 2008 R2; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{62E61418-8CC2-4254-AE24-BF2CEFA6D27E}"
+          SQLTask:SqlStatementSource="SELECT 'CLASECON' AS Archivo"
+          SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="Archivo"
+            SQLTask:DtsVariableName="User::Archivo" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\SET @Archivo CONFIG"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Tarea Ejecutar SQL"
+      DTS:DTSID="{1baaaa50-beca-43b9-8631-3deea88ba6c4}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="SET @Archivo CONFIG"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; Microsoft SQL Server 2008 R2; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{62E61418-8CC2-4254-AE24-BF2CEFA6D27E}"
+          SQLTask:SqlStatementSource="SELECT 'CONFIG' AS Archivo"
+          SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="Archivo"
+            SQLTask:DtsVariableName="User::Archivo" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\TRUNCATE ERP_auxiliar CLASEATR"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Tarea Ejecutar SQL"
+      DTS:DTSID="{5db06470-a22c-491a-a284-32d0af036c79}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="TRUNCATE ERP_auxiliar CLASEATR"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; Microsoft SQL Server 2008 R2; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{2E5CC153-426E-489E-8971-75AC2BAC199C}"
+          SQLTask:SqlStatementSource="TRUNCATE TABLE ERP_auxiliar" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\TRUNCATE ERP_auxiliar CLASECON"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Tarea Ejecutar SQL"
+      DTS:DTSID="{628e9241-9c75-4664-bfd3-c734afd46c68}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="TRUNCATE ERP_auxiliar CLASECON"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; Microsoft SQL Server 2008 R2; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{2E5CC153-426E-489E-8971-75AC2BAC199C}"
+          SQLTask:SqlStatementSource="TRUNCATE TABLE ERP_auxiliar" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\TRUNCATE ERP_auxiliar FCONFIG"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Tarea Ejecutar SQL"
+      DTS:DTSID="{c07d24ba-661e-4a2a-a69d-eb40693d4cf1}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="TRUNCATE ERP_auxiliar FCONFIG"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; Microsoft SQL Server 2008 R2; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{2E5CC153-426E-489E-8971-75AC2BAC199C}"
+          SQLTask:SqlStatementSource="TRUNCATE TABLE ERP_auxiliar" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Restricción]"
+      DTS:CreationName=""
+      DTS:DTSID="{91185AAD-F489-4A9F-A784-1418A72F905F}"
+      DTS:From="Package\BORRADO TABLAS ERP_XXX"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Restricción"
+      DTS:To="Package\TRUNCATE ERP_auxiliar FCONFIG" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Restricción 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{3BBE951B-3E9F-4507-A4D0-AF9EECD01E19}"
+      DTS:From="Package\AUX a ERP_FPIAAC_AUX"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Restricción 1"
+      DTS:To="Package\TRUNCATE ERP_auxiliar CLASEATR"
+      DTS:Value="2" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Restricción 139 1 1 2 1 1 1 1 1 1 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{2c33464b-55a8-45c9-ab5d-8088ae343588}"
+      DTS:From="Package\TRUNCATE ERP_auxiliar FCONFIG"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Restricción 139 1 1 2 1 1 1 1 1 1 2"
+      DTS:To="Package\SET @Archivo CONFIG" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Restricción 139 1 1 2 1 1 1 1 1 1 2 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{c840db20-ecd5-4d0b-aa38-eb2e9d080741}"
+      DTS:From="Package\TRUNCATE ERP_auxiliar CLASEATR"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Restricción 139 1 1 2 1 1 1 1 1 1 2 1"
+      DTS:To="Package\SET @Archivo CLASEATR" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Restricción 139 1 1 2 1 1 1 1 1 1 2 1 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{e5113b18-21b7-4cdd-9c2f-5bce1b35a08e}"
+      DTS:From="Package\TRUNCATE ERP_auxiliar CLASECON"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Restricción 139 1 1 2 1 1 1 1 1 1 2 1 1"
+      DTS:To="Package\SET @Archivo CLASECON" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Restricción 140 1 1 2 1 1 1 1 1 1 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{ed7f8166-37be-4d98-8e73-1a6ab07405fe}"
+      DTS:From="Package\SET @Archivo CONFIG"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Restricción 140 1 1 2 1 1 1 1 1 1 2"
+      DTS:To="Package\Lee @Archivo CONFIG - ERP_auxiliar" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Restricción 140 1 1 2 1 1 1 1 1 1 2 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{ce041da5-4a81-4d64-8bcf-e0ea1b59fe30}"
+      DTS:From="Package\SET @Archivo CLASEATR"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Restricción 140 1 1 2 1 1 1 1 1 1 2 1"
+      DTS:To="Package\Lee @Archivo CLASEATR - ERP_auxiliar" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Restricción 140 1 1 2 1 1 1 1 1 1 2 1 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{af0fb603-d7c7-4ab9-8bb7-fe5e557ce8af}"
+      DTS:From="Package\SET @Archivo CLASECON"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Restricción 140 1 1 2 1 1 1 1 1 1 2 1 1"
+      DTS:To="Package\Lee @Archivo CLASECON - ERP_auxiliar" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Restricción 141 1 1 2 1 1 1 1 1 1 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{42390447-f43f-48d7-b3dd-79b5ac7041b3}"
+      DTS:From="Package\Lee @Archivo CONFIG - ERP_auxiliar"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Restricción 141 1 1 2 1 1 1 1 1 1 2"
+      DTS:To="Package\AUX a ERP_FPIAAC_AUX"
+      DTS:Value="2" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Restricción 141 1 1 2 1 1 1 1 1 1 2 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{b0828b99-29ca-4589-b0a7-40edf898988f}"
+      DTS:From="Package\Lee @Archivo CLASEATR - ERP_auxiliar"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Restricción 141 1 1 2 1 1 1 1 1 1 2 1"
+      DTS:To="Package\AUX a ERP_CLASEATR_AUX"
+      DTS:Value="2" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Restricción 141 1 1 2 1 1 1 1 1 1 2 1 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{bb092559-c224-4864-a87e-86abf526abc4}"
+      DTS:From="Package\Lee @Archivo CLASECON - ERP_auxiliar"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Restricción 141 1 1 2 1 1 1 1 1 1 2 1 1"
+      DTS:To="Package\AUX a ERP_CLASECON_AUX"
+      DTS:Value="2" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Restricción 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{42B4BD5D-313F-4FCF-B2BF-11E5C8DD4086}"
+      DTS:From="Package\AUX a ERP_CLASEATR_AUX"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Restricción 2"
+      DTS:To="Package\TRUNCATE ERP_auxiliar CLASECON"
+      DTS:Value="2" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="160,44"
+          Id="Package\AUX a ERP_CLASEATR_AUX"
+          TopLeft="463.311320754717,194.141509433962" />
+        <NodeLayout
+          Size="165,44"
+          Id="Package\AUX a ERP_CLASECON_AUX"
+          TopLeft="11.0094339622642,355.462264150943" />
+        <NodeLayout
+          Size="136,44"
+          Id="Package\AUX a ERP_FPIAAC_AUX"
+          TopLeft="15.8396226415094,191.575471698113" />
+        <NodeLayout
+          Size="160,44"
+          Id="Package\BORRADO TABLAS ERP_XXX"
+          TopLeft="301.047169811321,5.5" />
+        <NodeLayout
+          Size="190,44"
+          Id="Package\Lee @Archivo CLASEATR - ERP_auxiliar"
+          TopLeft="664.481132075472,188.141509433962" />
+        <NodeLayout
+          Size="190,44"
+          Id="Package\Lee @Archivo CLASECON - ERP_auxiliar"
+          TopLeft="229.160377358491,353.424528301887" />
+        <NodeLayout
+          Size="190,44"
+          Id="Package\Lee @Archivo CONFIG - ERP_auxiliar"
+          TopLeft="217.009433962264,185.575471698113" />
+        <NodeLayout
+          Size="189,44"
+          Id="Package\SET @Archivo CLASEATR"
+          TopLeft="663.952830188679,119.575471698113" />
+        <NodeLayout
+          Size="189,44"
+          Id="Package\SET @Archivo CLASECON"
+          TopLeft="227.61320754717,295.839622641509" />
+        <NodeLayout
+          Size="189,44"
+          Id="Package\SET @Archivo CONFIG"
+          TopLeft="216.481132075472,117.009433962264" />
+        <NodeLayout
+          Size="169,44"
+          Id="Package\TRUNCATE ERP_auxiliar CLASEATR"
+          TopLeft="457.801886792453,122.254716981132" />
+        <NodeLayout
+          Size="169,44"
+          Id="Package\TRUNCATE ERP_auxiliar CLASECON"
+          TopLeft="5.5,297.537735849057" />
+        <NodeLayout
+          Size="169,44"
+          Id="Package\TRUNCATE ERP_auxiliar FCONFIG"
+          TopLeft="10.3301886792453,119.688679245283" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Restricción]"
+          TopLeft="380.896226415094,49.4245283018868">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="-286.22641509434,70.2641509433962"
+              Start="0,0"
+              End="-286.22641509434,62.7641509433962">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,35.1320754716981" />
+                  <mssgle:LineSegment
+                    End="-286.22641509434,35.1320754716981" />
+                  <mssgle:LineSegment
+                    End="-286.22641509434,62.7641509433962" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Restricción 1]"
+          TopLeft="83.7264150943397,191.575471698113">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="458.415094339623,-25.3962264150943"
+              Start="0,0"
+              End="458.415094339623,-17.8962264150943">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,-10.1509433962264" />
+                  <mssgle:LineSegment
+                    End="458.415094339623,-10.1509433962264" />
+                  <mssgle:LineSegment
+                    End="458.415094339623,-17.8962264150943" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="203.903094044811,-5.15094339622641,50.60890625,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Restricción 139 1 1 2 1 1 1 1 1 1 2]"
+          TopLeft="179.047169811321,141.650943396226">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="37.4339622641509,-2.67924528301887"
+              Start="0,0"
+              End="29.9339622641509,-2.67924528301887">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="18.7169811320755,0" />
+                  <mssgle:LineSegment
+                    End="18.7169811320755,-2.67924528301887" />
+                  <mssgle:LineSegment
+                    End="29.9339622641509,-2.67924528301887" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Restricción 139 1 1 2 1 1 1 1 1 1 2 1]"
+          TopLeft="626.518867924528,144.216981132075">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="37.4339622641509,-2.67924528301887"
+              Start="0,0"
+              End="29.9339622641509,-2.67924528301887">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="18.7169811320755,0" />
+                  <mssgle:LineSegment
+                    End="18.7169811320755,-2.67924528301887" />
+                  <mssgle:LineSegment
+                    End="29.9339622641509,-2.67924528301887" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Restricción 139 1 1 2 1 1 1 1 1 1 2 1 1]"
+          TopLeft="174.216981132075,319.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="53.3962264150944,-1.69811320754715"
+              Start="0,0"
+              End="45.8962264150944,-1.69811320754715">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="26.7169811320755,0" />
+                  <mssgle:LineSegment
+                    End="26.7169811320755,-1.69811320754715" />
+                  <mssgle:LineSegment
+                    End="45.8962264150944,-1.69811320754715" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Restricción 140 1 1 2 1 1 1 1 1 1 2]"
+          TopLeft="310.820754716981,160.933962264151">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="1.01886792452831,24.6415094339623"
+              Start="0,0"
+              End="1.01886792452831,17.1415094339623">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,12.3018867924528" />
+                  <mssgle:LineSegment
+                    End="1.01886792452831,12.3018867924528" />
+                  <mssgle:LineSegment
+                    End="1.01886792452831,17.1415094339623" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Restricción 140 1 1 2 1 1 1 1 1 1 2 1]"
+          TopLeft="758.292452830189,163.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="1.01886792452831,24.6415094339623"
+              Start="0,0"
+              End="1.01886792452831,17.1415094339623">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,12.3018867924528" />
+                  <mssgle:LineSegment
+                    End="1.01886792452831,12.3018867924528" />
+                  <mssgle:LineSegment
+                    End="1.01886792452831,17.1415094339623" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Restricción 140 1 1 2 1 1 1 1 1 1 2 1 1]"
+          TopLeft="321.952830188679,339.764150943396">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="2.03773584905662,13.6603773584906"
+              Start="0,0"
+              End="2.03773584905662,6.16037735849056">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,6.83018867924528" />
+                  <mssgle:LineSegment
+                    End="2.03773584905662,6.83018867924528" />
+                  <mssgle:LineSegment
+                    End="2.03773584905662,6.16037735849056" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Restricción 141 1 1 2 1 1 1 1 1 1 2]"
+          TopLeft="217.009433962264,207.537735849057">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="-65.3962264150944,6"
+              Start="0,0"
+              End="-57.8962264150944,6">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="-32.6792452830189,0" />
+                  <mssgle:LineSegment
+                    End="-32.6792452830189,6" />
+                  <mssgle:LineSegment
+                    End="-57.8962264150944,6" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-57.9836984080189,-21.609375,50.60890625,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Restricción 141 1 1 2 1 1 1 1 1 1 2 1]"
+          TopLeft="664.481132075472,210.103773584906">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="-41.4339622641509,6"
+              Start="0,0"
+              End="-33.9339622641509,6">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="-20.7169811320755,0" />
+                  <mssgle:LineSegment
+                    End="-20.7169811320755,6" />
+                  <mssgle:LineSegment
+                    End="-33.9339622641509,6" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-46.0214342570755,-21.609375,50.60890625,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Restricción 141 1 1 2 1 1 1 1 1 1 2 1 1]"
+          TopLeft="229.160377358491,375.38679245283">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="-53.4339622641509,2.03773584905659"
+              Start="0,0"
+              End="-45.9339622641509,2.03773584905659">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="-26.7169811320754,0" />
+                  <mssgle:LineSegment
+                    End="-26.7169811320754,2.03773584905659" />
+                  <mssgle:LineSegment
+                    End="-45.9339622641509,2.03773584905659" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-52.0214342570754,-21.609375,50.60890625,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Restricción 2]"
+          TopLeft="543.160377358491,238.066037735849">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="-453.320754716981,59.4716981132076"
+              Start="0,0"
+              End="-453.320754716981,51.9716981132076">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,29.7358490566038" />
+                  <mssgle:LineSegment
+                    End="-453.320754716981,29.7358490566038" />
+                  <mssgle:LineSegment
+                    End="-453.320754716981,51.9716981132076" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-251.964830483491,34.7358490566038,50.60890625,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\AUX a ERP_CLASEATR_AUX">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="NaN,NaN"
+          Id="Package\AUX a ERP_CLASEATR_AUX\ERP_CLASEATR_AUX"
+          TopLeft="NaN,NaN" />
+        <NodeLayout
+          Size="NaN,NaN"
+          Id="Package\AUX a ERP_CLASEATR_AUX\ERP_auxiliar"
+          TopLeft="NaN,NaN" />
+        <EdgeLayout
+          Id="Package\AUX a ERP_CLASEATR_AUX.Paths[Salida de origen de ADO NET]"
+          TopLeft="NaN,NaN">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="{x:Null}"
+              Start="0,0"
+              End="0,0">
+              <mssgle:Curve.Segments>
+                <x:Null />
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <TaskHost
+    design-time-name="Package\AUX a ERP_CLASECON_AUX">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="NaN,NaN"
+          Id="Package\AUX a ERP_CLASECON_AUX\ERP_CLASECON_AUX"
+          TopLeft="NaN,NaN" />
+        <NodeLayout
+          Size="NaN,NaN"
+          Id="Package\AUX a ERP_CLASECON_AUX\ERP_auxiliar"
+          TopLeft="NaN,NaN" />
+        <EdgeLayout
+          Id="Package\AUX a ERP_CLASECON_AUX.Paths[Salida de origen de ADO NET]"
+          TopLeft="NaN,NaN">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="{x:Null}"
+              Start="0,0"
+              End="0,0">
+              <mssgle:Curve.Segments>
+                <x:Null />
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <TaskHost
+    design-time-name="Package\AUX a ERP_FPIAAC_AUX">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="NaN,NaN"
+          Id="Package\AUX a ERP_FPIAAC_AUX\ERP_CONFIG_AUX"
+          TopLeft="NaN,NaN" />
+        <NodeLayout
+          Size="NaN,NaN"
+          Id="Package\AUX a ERP_FPIAAC_AUX\ERP_auxiliar"
+          TopLeft="NaN,NaN" />
+        <EdgeLayout
+          Id="Package\AUX a ERP_FPIAAC_AUX.Paths[Salida de origen de ADO NET]"
+          TopLeft="NaN,NaN">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="{x:Null}"
+              Start="0,0"
+              End="0,0">
+              <mssgle:Curve.Segments>
+                <x:Null />
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <TaskHost
+    design-time-name="Package\Lee @Archivo CLASEATR - ERP_auxiliar">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="NaN,NaN"
+          Id="Package\Lee @Archivo CLASEATR - ERP_auxiliar\CLASEATR"
+          TopLeft="NaN,NaN" />
+        <NodeLayout
+          Size="NaN,NaN"
+          Id="Package\Lee @Archivo CLASEATR - ERP_auxiliar\ERP_Auxiliar"
+          TopLeft="NaN,NaN" />
+        <EdgeLayout
+          Id="Package\Lee @Archivo CLASEATR - ERP_auxiliar.Paths[Salida de origen de archivo plano]"
+          TopLeft="NaN,NaN">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="{x:Null}"
+              Start="0,0"
+              End="0,0">
+              <mssgle:Curve.Segments>
+                <x:Null />
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <TaskHost
+    design-time-name="Package\Lee @Archivo CLASECON - ERP_auxiliar">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="NaN,NaN"
+          Id="Package\Lee @Archivo CLASECON - ERP_auxiliar\CLASECON"
+          TopLeft="NaN,NaN" />
+        <NodeLayout
+          Size="NaN,NaN"
+          Id="Package\Lee @Archivo CLASECON - ERP_auxiliar\ERP_Auxiliar"
+          TopLeft="NaN,NaN" />
+        <EdgeLayout
+          Id="Package\Lee @Archivo CLASECON - ERP_auxiliar.Paths[Salida de origen de archivo plano]"
+          TopLeft="NaN,NaN">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="{x:Null}"
+              Start="0,0"
+              End="0,0">
+              <mssgle:Curve.Segments>
+                <x:Null />
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <TaskHost
+    design-time-name="Package\Lee @Archivo CONFIG - ERP_auxiliar">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="NaN,NaN"
+          Id="Package\Lee @Archivo CONFIG - ERP_auxiliar\FPIAAC"
+          TopLeft="NaN,NaN" />
+        <NodeLayout
+          Size="NaN,NaN"
+          Id="Package\Lee @Archivo CONFIG - ERP_auxiliar\ERP_Auxiliar 1"
+          TopLeft="NaN,NaN" />
+        <NodeLayout
+          Size="NaN,NaN"
+          Id="Package\Lee @Archivo CONFIG - ERP_auxiliar\FPIAAC 1"
+          TopLeft="NaN,NaN" />
+        <NodeLayout
+          Size="NaN,NaN"
+          Id="Package\Lee @Archivo CONFIG - ERP_auxiliar\ERP_Auxiliar"
+          TopLeft="NaN,NaN" />
+        <EdgeLayout
+          Id="Package\Lee @Archivo CONFIG - ERP_auxiliar.Paths[Salida de origen de archivo plano1]"
+          TopLeft="NaN,NaN">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="{x:Null}"
+              Start="0,0"
+              End="0,0">
+              <mssgle:Curve.Segments>
+                <x:Null />
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Lee @Archivo CONFIG - ERP_auxiliar.Paths[Salida de origen de archivo plano]"
+          TopLeft="NaN,NaN">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="{x:Null}"
+              Start="0,0"
+              End="0,0">
+              <mssgle:Curve.Segments>
+                <x:Null />
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
