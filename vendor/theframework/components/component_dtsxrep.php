@@ -133,35 +133,37 @@ class ComponentDtsxrep
         $arFiles = $this->get_files_iif();
         foreach($arFiles as $sFile)
         {
+            $sFilePath = $this->sDir."/".$sFile;
+            $isFound = 0;
             echo " $sFile\n\t";
 
-            $sContet = file_get_contents($this->sDir."/".$sFile);
-            $arContent = explode("\n",$sContet);
+            $sContent = file_get_contents($sFilePath);
+            $arContent = explode("\n",$sContent);
             foreach($arContent as $i=>$sLine)
             {
                 //IIF(ISNULL(ERP_FAGEMA.STATUS,'')='',0,9) AS Transfer_Status, 
+                //0,IIF(xxx.STATUS='T',0,9)) AS Transfer_Status
                 if(strstr($sLine,"IIF(ISNULL(") && strstr($sLine,"STATUS,'')='',0,9) AS Transfer_Status"))
                 {
+                    $isFound = 1;
                     echo "$i => ";
                     $arName = $this->get_name_iniif($sLine);
-                    print_r($arName);
-                    //echo $sLine;
-                    echo "\n";
+                    $sTable = $arName[1];
+                    
+                    $sNew = "0,IIF($sTable.STATUS='T',0,9)) AS Transfer_Status";
+                    $sLine = str_replace("0,9) AS Transfer_Status",$sNew,$sLine);
+                    
+                    $arContent[$i] = $sLine;
                 }
             }
-            echo "\n";
             
-//            foreach($arTables as $sTableAux)
-//            {
-//                $sTable = str_replace(".STATUS,'')='',0,9) AS Transfer_Status",".STATUS,'')=0,IIF(ERP_FAGEMA.STATUS='T',0,9)) AS Transfer_Status",$sTableAux);
-//                if(strstr($sRep,$sTable))
-//                {
-//                    echo "\t$sTableAux\n";
-//                    $sRep = str_replace($sTable,$sTableAux,$sRep); 
-//                }
-//            }
-//            $this->save($sRep,"ok_".$sFile);
-        }
-    }
+            if($isFound)
+            {
+                $sContent = implode("\n",$arContent);
+                $this->save($sContent,"ok_$sFile");
+                die;
+            }
+        }//foreach($arfiles)
+    }//replace_status
 
 }//class
