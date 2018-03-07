@@ -133,6 +133,9 @@ class ComponentDtsxrep
         $arFiles = $this->get_files_iif();
         foreach($arFiles as $sFile)
         {
+            if(!strstr($sFile,"erp_master_pick"))
+                continue;
+            
             $sFilePath = $this->sDir."/".$sFile;
             $isFound = 0;
             echo " $sFile\n\t";
