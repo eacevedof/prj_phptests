@@ -13,8 +13,11 @@ class ComponentErpaux
 /*
 /*
  CONFIG -- NO TIENE CLAVES, (DATOS PARTICULARES DE CADA TERMINAL)
+ * 
 FTIIVA  -- DEBERIA APLICAR CLAVES, PERO CON SU CI HAY REPETIDOS POR CLAVES. (TIPOS DE IVA)
 LIKP  -- NO TIENE CLAVES (DOCUMENTOS DE VENTAS - ENTREGAS X PEDIDO)
+ 
+ * stpo añadidas claves
 STPO -- DEBERIA APLICAR COMO CLAVE CAMPO STLNR, PERO HAY REPETIDOS EN SU CI  (MATERIALES - DETALE LLISTA MATERIALES)
 T002T -- DEBERIA TENER CLAVES (SPRAS,SPRSL), PERO HAY REPTEIDOS EN SU CI (IDIOMAS)
  * 
@@ -148,7 +151,7 @@ T002T -- DEBERIA TENER CLAVES (SPRAS,SPRSL), PERO HAY REPTEIDOS EN SU CI (IDIOMA
         
         foreach($arQueries as $sTable => $arQ)
         {
-            echo "-- =========================================\n";
+            //echo "-- =========================================\n";
             echo "-- $sTable generado con component_erpaux.php\n";
             echo "-- =========================================\n";
             echo $arQ[0]."\n";
