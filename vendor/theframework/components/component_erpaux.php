@@ -17,6 +17,8 @@ FTIIVA  -- DEBERIA APLICAR CLAVES, PERO CON SU CI HAY REPETIDOS POR CLAVES. (TIP
 LIKP  -- NO TIENE CLAVES (DOCUMENTOS DE VENTAS - ENTREGAS X PEDIDO)
 STPO -- DEBERIA APLICAR COMO CLAVE CAMPO STLNR, PERO HAY REPETIDOS EN SU CI  (MATERIALES - DETALE LLISTA MATERIALES)
 T002T -- DEBERIA TENER CLAVES (SPRAS,SPRSL), PERO HAY REPTEIDOS EN SU CI (IDIOMAS)
+ * 
+ * FCLIPL eliminada
 */        
         $sSQL = "
         SELECT DISTINCT TOP 200 tablename
@@ -74,29 +76,49 @@ T002T -- DEBERIA TENER CLAVES (SPRAS,SPRSL), PERO HAY REPTEIDOS EN SU CI (IDIOMA
     public function get_delete($sTableAux,$arPks)
     {
         $sTableFull = str_replace("_AUX","",$sTableAux);
-        $sSQL = "
+        $sComm = "";
+        if(!$arPks) $sComm = "-- NOPKS";        
+        $sSQL = " $sComm
         DELETE FROM $sTableFull 
         FROM $sTableAux
         INNER JOIN $sTableFull
         ON ";
-        $arOns = [];
+        $arNopks = [];
+        if(!$arPks)
+        {
+            $arNopks = $this->get_nopks($sTableAux);
+            $arNopks = array_column($arNopks,"fieldname");
+            $arPks = $arNopks;
+        }        
         foreach ($arPks as $sPk)
             $arOns[] = "$sTableAux.$sPk = $sTableFull.$sPk";
         $sSQL .= implode("\nAND ",$arOns);
+
         return $sSQL;
     }
     
     public function get_insert($sTableAux,$arPks)
     {
         $sTableFull = str_replace("_AUX","",$sTableAux);
-        $sSQL = "
+        
+        $sComm = "";
+        if(!$arPks) $sComm = "-- NOPKS";
+        $sSQL = " $sComm
         INSERT INTO $sTableFull 
         SELECT $sTableAux.*
         FROM $sTableAux
         LEFT OUTER JOIN $sTableFull
         ON ";
         $arOns = [];
-        $sPk = "-- ERROR NO PKS ---";
+        
+        $arNopks = [];
+        if(!$arPks)
+        {
+            $arNopks = $this->get_nopks($sTableAux);
+            $arNopks = array_column($arNopks,"fieldname");
+            $arPks = $arNopks;
+        }
+        
         foreach ($arPks as $sPk)
             $arOns[] = "$sTableAux.$sPk = $sTableFull.$sPk";
         $sSQL .= implode("\nAND ",$arOns);
@@ -126,9 +148,9 @@ T002T -- DEBERIA TENER CLAVES (SPRAS,SPRSL), PERO HAY REPTEIDOS EN SU CI (IDIOMA
         
         foreach($arQueries as $sTable => $arQ)
         {
-            echo "-- ==========================\n";
-            echo "--        $sTable\n";
-            echo "-- ==========================\n";
+            echo "-- =========================================\n";
+            echo "-- $sTable generado con component_erpaux.php\n";
+            echo "-- =========================================\n";
             echo $arQ[0]."\n";
             echo $arQ[1]."\n";
         }
