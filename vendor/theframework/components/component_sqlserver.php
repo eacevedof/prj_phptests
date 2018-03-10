@@ -3,7 +3,7 @@
  * @author Eduardo Acevedo Farje.
  * @link www.eduardoaf.com
  * @name TheFramework\Components\ComponentSqlserver 
- * @file component_sqlserver.php v1.0.1
+ * @file component_sqlserver.php v1.0.2
  * @date 19-09-2017 04:56 SPAIN
  * @observations
  */
@@ -12,13 +12,15 @@ namespace TheFramework\Components;
 class ComponentSqlserver 
 {
 
-   public function query()
+    public function query($query)
     {
+        //echo $query;
+        $arResult = [];
         $arDb["server"] = "EALEXEI-W7\MSSQLSERVER2012";
-        //$arDb["server"] = "";
+        $arDb["server"] = "192.168.5.2\sql2012";
+        //$arDb["server"] = "sql.desa1\sql2012";
         $arDb["database"] = "crm3_flamagas";
-        $arDb["user"] = "sa";
-        $arDb["password"] = "Sasql2012";
+
            
         //bug($arDb);
         try
@@ -29,18 +31,24 @@ class ComponentSqlserver
 //            $db = new \PDO("odbc:Driver={SQL Server};Server={$arDb["server"]};Database={$arDb["database"]}"
 //                            ,$arDb["user"],$arDb["password"]);
 //            bug($db);
-            $db->setAttribute(\PDO::SQLSRV_ATTR_ENCODING, \PDO::SQLSRV_ENCODING_SYSTEM);
-            $query =  "select * from core_users";
-            foreach ($db->query($query) as $row)
-            {
-                print_r($row);
-            }
+            $db->setAttribute(\PDO::ATTR_ERRMODE,\PDO::ERRMODE_EXCEPTION );  
+            //$db->setAttribute(\PDO::SQLSRV_ATTR_ENCODING, \PDO::SQLSRV_ENCODING_SYSTEM);
+
+            $stmt = $db->query($query);
+            //var_dump($stmt);
+            while ( $row = $stmt->fetch(\PDO::FETCH_ASSOC) )
+            {   
+                //var_dump($row);
+                $arResult[] = $row;
+            } 
+            
         }
         catch(PDOException $oE)
         {
-            echo "exception";
+            echo "<pre>exception {$oE->getMessage()} : $query";
             //bug($oE->getMessage());
         }
+        return $arResult;
     }
 
     
@@ -48,7 +56,7 @@ class ComponentSqlserver
 
 
 /*include("DB.php");
-ini_set("mssql.datetimeconvert",0);*/
+ini_set("mssql.datetimeconvert",0);
 
 class crm {
  function db_connect($dsn="") {
@@ -115,7 +123,7 @@ class recordset extends crm {
   if(is_object($db)) {
    if($db->autoCommit($stat)!=DB_OK) writelog("sync","Error BD[autocommit]");
  }}
-*/
+*
  function numRows($res) {
    return $res->rowCount();
  }
@@ -140,3 +148,4 @@ class recordset extends crm {
    $res->closeCursor();
  }
 }
+*/
