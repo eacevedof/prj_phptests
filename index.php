@@ -1,5 +1,6 @@
 <?php
-//index.php 2.0.3
+//index.php 2.0.4
+//phpinfo();die;
 
 //<editor-fold defaultstate="collapsed" desc="HELPERS">
 /**
