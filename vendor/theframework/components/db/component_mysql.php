@@ -2,116 +2,100 @@
 /**
  * @author Eduardo Acevedo Farje.
  * @link www.eduardoaf.com
- * @name TheFramework\Components\Db\ComponentDbMysql 
- * @file component_db_mysql.php v1.1.0
+ * @name TheFramework\Components\Db\ComponentMysql 
+ * @file component_mysql.php v1.0.0
  * @date 19-09-2017 04:56 SPAIN
  * @observations
  */
 namespace TheFramework\Components\Db;
 
-class ComponentDbMysql 
+class ComponentMysql 
 {
-    /**
-     * @var mysqli
-     */
-    private static $oConn;    
-    private $sDbServer;
-    private $sDbUser;
-    private $sDbPassword;
-    private $sDbName;
-    private $arMessages;
-
+    private $arConn;
     private $isError;
-    private $isPersistent;
+    private $arErrors;    
+    private $iAffected;
     
-    public function __construct($sDbName,$sDbPass,$sDbUser="root",$sDbServer="localhost") 
+    public function __construct($arConn=[]) 
     {
-        $this->sDbServer = $sDbServer;
-        $this->sDbUser = $sDbUser;
-        $this->sDbPassword = $sDbPass;
-        $this->sDbName = $sDbName;
-        $this->arMessages = [];
         $this->isError = FALSE;
-        $this->isPersistent = FALSE;
+        $this->arErrors = [];
+        $this->arConn = $arConn;
     }
-    
-    private function is_configok()
+
+    private function get_conn_string()
     {
-        $isOk = TRUE;
-        $isOk = ($isOk && $this->sDbServer);
-        $isOk = ($isOk && $this->sDbUser);
-        $isOk = ($isOk && $this->sDbName);
-        return $isOk;
-    }
-    
-    private function conn_open()
-    {
-        if(!$this->is_configok())
-        {
-            $sMessage= "conn_open.error in config";
-            $this->add_message($sMessage);
-        }
-        try
-        {
-            self::$oConn = new \mysqli($this->sDbServer
-                    ,$this->sDbUser, $this->sDbPassword, $this->sDbName);
-            //bug(self::$oConn);
-            self::$oConn->set_charset("utf8mb4");
-            if(self::$oConn->connect_error)
-            {
-                $sMessage = "conn_open.mysqli_connect error:".self::$oConn->connect_error();
-                $this->add_message($sMessage);
-            }
-        }
-        catch (mysqli_sql_exception $oE)
-        {
-            $sMessage = "Exception:".$oE->getMessage();
-            $this->add_message($sMessage);
-        }
-    }
-    
-    private function add_message($sMessage,$sType="error")
-    {
-        if($sType==="error")
-            $this->isError = TRUE;
-        $this->arMessages[$sType][] = $sMessage;
-    }
-    
-    private function conn_close()
-    {
-        if(self::$oConn->ping() && !$this->isPersistent)
-            self::$oConn->close();
-    }
-    
+        $arCon["mysql:host"] = (isset($this->arConn["server"])?$this->arConn["server"]:"");
+        $arCon["dbname"] = (isset($this->arConn["database"])?$this->arConn["database"]:"");
+        //$arCon["ConnectionPooling"] = (isset($this->arConn["pool"])?$this->arConn["pool"]:"0");
+        
+        $sString = "";
+        foreach($arCon as $sK=>$sV)
+            $sString .= "$sK=$sV;";
+        
+        return $sString;
+    }//get_conn_string
+
     public function query($sSQL)
     {
-        if(trim($sSQL))
+        try 
         {
-            $this->conn_open();
-            if(self::$oConn->ping())
+            $sConn = $this->get_conn_string();
+            //https://stackoverflow.com/questions/38671330/error-with-php7-and-sql-server-on-windows
+            $oPdo = new \PDO($sConn,$this->arConn["user"],$this->arConn["password"]
+                    ,[\PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"]);
+            $oPdo->setAttribute(\PDO::ATTR_ERRMODE,\PDO::ERRMODE_EXCEPTION );  
+            $oCursor = $oPdo->query($sSQL);
+            if($oCursor===FALSE)
             {
-                $oResult = self::$oConn->query($sSQL);
-                $arRows = [];
-                while($arRow = $oResult->fetch_assoc()) 
-                    $arRows[] = $arRow;
-                $oResult->free();
-                return $arRows;
+                $this->add_error("exec-error: $sSQL");
             }
-            $this->conn_close();   
+            else
+            {
+                //var_dump($stmt);
+                $arResult = [];
+                while($arRow = $oCursor->fetch(\PDO::FETCH_ASSOC))
+                    $arResult[] = $arRow;
+                $this->iAffected = count($arResult);
+            }
         }
-        else 
+        catch(PDOException $oE)
         {
-            $sMessage = "query.sql empty";
-            $this->add_message($sMessage);
+            $sMessage = "exception:{$oE->getMessage()}";
+            $this->add_error($sMessage);
         }
-        return [];
+        return $arResult;
     }//query
     
-    public function is_persistent($isOn=TRUE){$this->isPersistent=$isOn;}
-    public function set_server($sValue){$this->sDbServer=$sValue;}
-    public function set_user($sValue){$this->sDbUser=$sValue;}
-    public function set_password($sValue){$this->sDbPassword=$sValue;}
-    public function set_dbname($sValue){$this->sDbName=$sValue;}
-    public function get_errors(){return isset($this->arMessages["error"])?$this->arMessages["error"]:[];}
+    public function exec($sSQL)
+    {
+        try 
+        {
+            $sConn = $this->get_conn_string();
+            //https://stackoverflow.com/questions/19577056/using-pdo-to-create-table
+            $oPdo = new \PDO($sConn,$this->arConn["user"],$this->arConn["password"]
+                    ,[\PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"]);
+            $oPdo->setAttribute(\PDO::ATTR_ERRMODE,\PDO::ERRMODE_EXCEPTION );  
+            $mxR = $oPdo->exec($sSQL);
+            $this->iAffected = $mxR;
+            if($mxR===FALSE)
+            {
+                $this->add_error("exec-error: $sSQL");
+            }
+        }
+        catch(PDOException $oE)
+        {
+            $sMessage = "exception:{$oE->getMessage()}";
+            $this->add_error($sMessage);
+        }
+    }//exec    
     
-}//ComponentDbMysql
+    private function add_error($sMessage){$this->isError = TRUE;$this->iAffected=-1; $this->arErrors[]=$sMessage;}    
+    public function is_error(){return $this->isError;}
+    public function get_errors(){return $this->arErrors;}
+    public function show_errors(){echo "<pre>".var_export($this->arErrors,1);}
+    
+    public function add_conn($k,$v){$this->arConn[$k]=$v;}
+    public function get_affected(){return $this->iAffected;}
+    
+}//ComponentMysql
