@@ -83,11 +83,22 @@ require_once "vendor/theframework/components/autoload.php";
 //$oQ = new ComponentErpaux();
 //$oQ->get_all();
 
+use TheFramework\Components\Db\ComponentMssql;
+$oMs = new ComponentMssql();
+$oMs->add_conn("server","localhost\MSSQLSERVER2014");
+$oMs->add_conn("database","db_theframework");
+
+$arRows = $oMs->query("SELECT * FROM app_customer");
+
+echo "<pre>";
+print_r($arRows);
+
+/*
 use TheFramework\Components\ComponentDtsxrep;
 $o = new ComponentDtsxrep();
 //$o->replace();
 $o->replace_status();
-
+*/
 
 /**
 require_once "vendor/theframework/components/autoload.php";
