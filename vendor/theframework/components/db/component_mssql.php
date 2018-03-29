@@ -3,7 +3,7 @@
  * @author Eduardo Acevedo Farje.
  * @link www.eduardoaf.com
  * @name TheFramework\Components\Db\ComponentMssql 
- * @file component_mssql.php v1.1.0
+ * @file component_mssql.php v1.2.0
  * @date 19-09-2017 04:56 SPAIN
  * @observations
  */
@@ -14,6 +14,7 @@ class ComponentMssql
     private $arConn;
     private $isError;
     private $arErrors;    
+    private $iAffected;
     
     public function __construct($arConn=[]) 
     {
@@ -45,9 +46,18 @@ class ComponentMssql
             $oPdo->setAttribute(\PDO::ATTR_ERRMODE,\PDO::ERRMODE_EXCEPTION );  
             //$oPdo->setAttribute(\PDO::SQLSRV_ATTR_ENCODING, \PDO::SQLSRV_ENCODING_SYSTEM);
             $oCursor = $oPdo->query($sSQL);
-            //var_dump($stmt);
-            while($arRow = $oCursor->fetch(\PDO::FETCH_ASSOC))
-                $arResult[] = $arRow;
+            if($oCursor===FALSE)
+            {
+                $this->add_error("exec-error: $sSQL");
+            }
+            else
+            {
+                //var_dump($stmt);
+                $arResult = [];
+                while($arRow = $oCursor->fetch(\PDO::FETCH_ASSOC))
+                    $arResult[] = $arRow;
+                $this->iAffected = count($arResult);
+            }
         }
         catch(PDOException $oE)
         {
@@ -57,11 +67,33 @@ class ComponentMssql
         return $arResult;
     }//query
     
-    private function add_error($sMessage){$this->isError = TRUE;$this->arErrors[]=$sMessage;}    
+    public function exec($sSQL)
+    {
+        try 
+        {
+            $sConn = $this->get_conn_string();
+            //https://stackoverflow.com/questions/19577056/using-pdo-to-create-table
+            $oPdo = new \PDO($sConn,$this->arConn["user"],$this->arConn["password"]);
+            $oPdo->setAttribute(\PDO::ATTR_ERRMODE,\PDO::ERRMODE_EXCEPTION );  
+            $mxR = $oPdo->exec($sSQL);
+            if($mxR===FALSE)
+            {
+                $this->add_error("exec-error: $sSQL");
+            }
+        }
+        catch(PDOException $oE)
+        {
+            $sMessage = "exception:{$oE->getMessage()}";
+            $this->add_error($sMessage);
+        }
+    }//exec    
+    
+    private function add_error($sMessage){$this->isError = TRUE;$this->iAffected=-1; $this->arErrors[]=$sMessage;}    
     public function is_error(){return $this->isError;}
     public function get_errors(){return $this->arErrors;}
     public function show_errors(){echo "<pre>".var_export($this->arErrors,1);}
     
     public function add_conn($k,$v){$this->arConn[$k]=$v;}
+    public function get_affected(){return $this->iAffected;}
     
 }//ComponentMssql
