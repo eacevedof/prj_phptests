@@ -1,5 +1,5 @@
 <?php
-//index.php 2.0.4
+//index.php 2.0.5
 //phpinfo();die;
 
 //<editor-fold defaultstate="collapsed" desc="HELPERS">
@@ -87,11 +87,38 @@ use TheFramework\Components\Db\ComponentMssql;
 $oMs = new ComponentMssql();
 $oMs->add_conn("server","localhost\MSSQLSERVER2014");
 $oMs->add_conn("database","db_theframework");
-
+$oMs->add_conn("user","donut");
+$oMs->add_conn("password","12345678");
 $arRows = $oMs->query("SELECT * FROM app_customer");
 
-echo "<pre>";
-print_r($arRows);
+echo "<br>{$oMs->get_affected()}";
+if($oMs->is_error())
+{
+    $oMs->show_errors();
+    die();
+}
+/*
++--------------+-------------------+------+---------+--------+
+|    Tabla     |      Columna      | ispk |  Tipo   | Tamaño |
++--------------+-------------------+------+---------+--------+
+| app_activity | code_erp          |      | varchar |     25 |
+| app_activity | date_accomplished |      | varchar |      8 |
+| app_activity | date_programmed   |      | varchar |      8 |
+| app_activity | description       |      | varchar |    200 |
++--------------+-------------------+------+---------+--------+
+*/
+
+$sSQL = "INSERT INTO app_activity(code_erp,date_accomplished,date_programmed,description)
+        VALUES('AA','BBB','CCCC','DDDDDDDDDDD')
+        ";
+$oMs->exec($sSQL);
+if($oMs->is_error())
+{
+    $oMs->show_errors();
+    die();
+}
+echo "<br>{$oMs->get_affected()}";
+
 
 /*
 use TheFramework\Components\ComponentDtsxrep;
