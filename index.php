@@ -1,5 +1,5 @@
 <?php
-//index.php 2.0.5
+//index.php 2.0.6
 //phpinfo();die;
 
 //<editor-fold defaultstate="collapsed" desc="HELPERS">
@@ -84,6 +84,8 @@ require_once "vendor/theframework/components/autoload.php";
 //$oQ->get_all();
 
 use TheFramework\Components\Db\ComponentMssql;
+use TheFramework\Components\Db\ComponentMysql;
+
 $oMs = new ComponentMssql();
 $oMs->add_conn("server","localhost\MSSQLSERVER2014");
 $oMs->add_conn("database","db_theframework");
@@ -91,7 +93,7 @@ $oMs->add_conn("user","donut");
 $oMs->add_conn("password","12345678");
 $arRows = $oMs->query("SELECT * FROM app_customer");
 
-echo "<br>{$oMs->get_affected()}";
+echo "<br>{$oMs->get_affected()}<br/>";
 if($oMs->is_error())
 {
     $oMs->show_errors();
@@ -117,8 +119,20 @@ if($oMs->is_error())
     $oMs->show_errors();
     die();
 }
-echo "<br>{$oMs->get_affected()}";
+echo "<br>{$oMs->get_affected()}<br/>";
 
+$oMs = new ComponentMysql();
+$oMs->add_conn("server","localhost");
+$oMs->add_conn("database","db_killme");
+$oMs->add_conn("user","root");
+$oMs->add_conn("password","");
+$arRows = $oMs->query("SELECT * FROM app_customer");
+echo "<br>MYSQL: {$oMs->get_affected()}<br/>";
+if($oMs->is_error())
+{
+    $oMs->show_errors();
+    die();
+}
 
 /*
 use TheFramework\Components\ComponentDtsxrep;
