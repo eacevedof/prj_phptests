@@ -1,3 +1,4 @@
+<?php
 partial_queries.php 
 
 //<editor-fold defaultstate="collapsed" desc="QUERY EXPORT">
