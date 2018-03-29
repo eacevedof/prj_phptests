@@ -3,7 +3,7 @@
  * @author Eduardo Acevedo Farje.
  * @link www.eduardoaf.com
  * @name TheFramework\Components\Db\ComponentMssql 
- * @file component_mssql.php v1.2.0
+ * @file component_mssql.php v1.3.0
  * @date 19-09-2017 04:56 SPAIN
  * @observations
  */
@@ -76,6 +76,7 @@ class ComponentMssql
             $oPdo = new \PDO($sConn,$this->arConn["user"],$this->arConn["password"]);
             $oPdo->setAttribute(\PDO::ATTR_ERRMODE,\PDO::ERRMODE_EXCEPTION );  
             $mxR = $oPdo->exec($sSQL);
+            $this->iAffected = $mxR;
             if($mxR===FALSE)
             {
                 $this->add_error("exec-error: $sSQL");
