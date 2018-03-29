@@ -1,5 +1,5 @@
 <?php
-//index.php 2.0.6
+//index.php 2.0.7
 //phpinfo();die;
 
 //<editor-fold defaultstate="collapsed" desc="HELPERS">
@@ -89,8 +89,8 @@ use TheFramework\Components\Db\ComponentMysql;
 $oMs = new ComponentMssql();
 $oMs->add_conn("server","localhost\MSSQLSERVER2014");
 $oMs->add_conn("database","db_theframework");
-$oMs->add_conn("user","donut");
-$oMs->add_conn("password","12345678");
+$oMs->add_conn("user","alf");
+$oMs->add_conn("password","misAcko");
 $arRows = $oMs->query("SELECT * FROM app_customer");
 
 echo "<br>{$oMs->get_affected()}<br/>";
@@ -111,7 +111,7 @@ if($oMs->is_error())
 */
 
 $sSQL = "INSERT INTO app_activity(code_erp,date_accomplished,date_programmed,description)
-        VALUES('AA','BBB','CCCC','DDDDDDDDDDD')
+        VALUES('AA','BBB','CCçÇC','ññññÜ')
         ";
 $oMs->exec($sSQL);
 if($oMs->is_error())
@@ -126,14 +126,23 @@ $oMs->add_conn("server","localhost");
 $oMs->add_conn("database","db_killme");
 $oMs->add_conn("user","root");
 $oMs->add_conn("password","");
-$arRows = $oMs->query("SELECT * FROM app_customer");
+$arRows = $oMs->query("SELECT * FROM base_user");
 echo "<br>MYSQL: {$oMs->get_affected()}<br/>";
 if($oMs->is_error())
 {
     $oMs->show_errors();
     die();
 }
-
+$sSQL = "INSERT INTO app_activity(code_erp,date_accomplished,date_programmed,description)
+        VALUES('111','555çÇ','ññññ','kkkhh888')
+        ";
+$oMs->exec($sSQL);
+if($oMs->is_error())
+{
+    $oMs->show_errors();
+    die();
+}
+echo "<br>{$oMs->get_affected()}<br/>";
 /*
 use TheFramework\Components\ComponentDtsxrep;
 $o = new ComponentDtsxrep();
