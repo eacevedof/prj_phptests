@@ -3,7 +3,7 @@
  * @author Eduardo Acevedo Farje.
  * @link www.eduardoaf.com
  * @name TheFramework\Components\Db\ComponentMssql 
- * @file component_mssql.php v1.0.1
+ * @file component_mssql.php v1.1.0
  * @date 19-09-2017 04:56 SPAIN
  * @observations
  */
@@ -12,9 +12,13 @@ namespace TheFramework\Components\Db;
 class ComponentMssql 
 {
     private $arConn;
+    private $isError;
+    private $arErrors;    
     
     public function __construct($arConn=[]) 
     {
+        $this->isError = FALSE;
+        $this->arErrors = [];
         $this->arConn = $arConn;
     }
 
@@ -47,11 +51,16 @@ class ComponentMssql
         }
         catch(PDOException $oE)
         {
-            echo "<pre>exception {$oE->getMessage()} : $sSQL";
-            //bug($oE->getMessage());
+            $sMessage = "exception:{$oE->getMessage()}";
+            $this->add_error($sMessage);
         }
         return $arResult;
     }//query
+    
+    private function add_error($sMessage){$this->isError = TRUE;$this->arErrors[]=$sMessage;}    
+    public function is_error(){return $this->isError;}
+    public function get_errors(){return $this->arErrors;}
+    public function show_errors(){echo "<pre>".var_export($this->arErrors,1);}
     
     public function add_conn($k,$v){$this->arConn[$k]=$v;}
     
