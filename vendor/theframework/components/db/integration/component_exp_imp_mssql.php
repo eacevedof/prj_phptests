@@ -3,7 +3,7 @@
  * @author Eduardo Acevedo Farje.
  * @link www.eduardoaf.com
  * @name TheFramework\Components\Db\ComponentExpImpMssql 
- * @file component_exp_imp_mssql.php v1.2.0
+ * @file component_exp_imp_mssql.php v1.3.0
  * @date 30-03-2018 12:06 SPAIN
  * @observations
  */
@@ -19,6 +19,11 @@ class ComponentExpImpMssql
     private $arErrors;    
     private $iAffected;
     private $oDb;
+    
+    private $arNumeric = ["float","real","int","smallint","money"];    
+    private $arString = ["varchar","text","char"];
+    private $arDate = ["datetime","smalldatetime"];
+    private $arNoLen = ["float","datetime","real","smalldatetime","int","text","smallint","money"];
     
     public function __construct($arConn=["server"=>"","database"=>"","user"=>"","password"=>""]) 
     {
@@ -39,18 +44,16 @@ class ComponentExpImpMssql
     public function get_tables()
     {
         $sSQL = "/*ComponentExpImpMssql.get_tables*/
-        SELECT DISTINCT LOWER(sqltable.name) AS id
-        ,sqltable.name AS description
+        SELECT DISTINCT LOWER(sqltable.name) AS table_id
+        ,sqltable.name AS table_name
+        ,LTRIM(RTRIM(LOWER(sqltable.xtype))) AS otype
         FROM sysobjects sqltable
         WHERE 1=1
-        AND (sqltable.xtype = 'U' OR sqltable.xtype = 'V')
-        ORDER BY sqltable.name";
+        AND (sqltable.xtype = 'U'/*tablees*/ OR sqltable.xtype = 'V'/*views*/)
+        ORDER BY sqltable.name
+        ";
         
-        $arTmp = $this->oDb->query($sSQL);
-        
-        foreach($arTmp as $arT)
-            $arTables[$arT["id"]] = $arT["description"];
-        
+        $arTables = $this->oDb->query($sSQL);
         return $arTables;        
     }//get_tables
     
@@ -83,66 +86,132 @@ class ComponentExpImpMssql
     {
         $sSQL = "/*ComponentExpImpMssql.get_fields_info*/
         SELECT field_name
-        ,field_type
-        ,CASE field_type
-            WHEN 'varchar' THEN CONVERT(VARCHAR,mxlen)
-            WHEN 'int' THEN '11'
-            WHEN 'float' THEN '-'
-            WHEN 'real' THEN '-'
-            WHEN 'money' THEN '10,0'
-            WHEN 'datetime' THEN '-'
-            WHEN 'smalldatetime' THEN '-'
-            WHEN 'numeric' THEN CONVERT(VARCHAR,intpos)+','+CONVERT(VARCHAR,floatpos)
-            WHEN 'decimal' THEN CONVERT(VARCHAR,intpos)+','+CONVERT(VARCHAR,floatpos)
-            ELSE
-                CONVERT(VARCHAR,mxlen)
-        END AS field_length
-        ,REPLACE(REPLACE(ISNULL(defvalue,'NULL'),'(',''),')','') defvalue
-        ,is_nullable
-        ,ispk
+        ,MAX(field_type) AS field_type
+        ,MAX(field_length) AS field_length
+        ,MAX(defvalue) AS defvalue
+        ,MAX(is_nullable) AS is_nullable
+        ,MAX(ispk) AS ispk
+        ,MAX(column_id) AS column_id
         FROM
         (
-            SELECT syscols.name AS field_name
-            ,systypes.name AS field_type 
-            ,syscols.max_length AS mxlen
-            ,syscols.precision AS intpos
-            ,syscols.scale AS floatpos
-            ,syscols.is_nullable AS 'is_nullable'
-            ,extra.defvalue
-            ,ISNULL(sysindexes.is_primary_key,0) AS ispk
-            ,syscols.column_id
-            FROM sys.columns AS syscols
-            INNER JOIN 
+            SELECT DISTINCT field_name
+            ,field_type
+            ,CASE field_type
+                WHEN 'varchar' THEN CONVERT(VARCHAR,mxlen)
+                WHEN 'int' THEN '11'
+                WHEN 'float' THEN '-'
+                WHEN 'real' THEN '-'
+                WHEN 'money' THEN '10,0'
+                WHEN 'datetime' THEN '-'
+                WHEN 'smalldatetime' THEN '-'
+                WHEN 'numeric' THEN CONVERT(VARCHAR,intpos)+','+CONVERT(VARCHAR,floatpos)
+                WHEN 'decimal' THEN CONVERT(VARCHAR,intpos)+','+CONVERT(VARCHAR,floatpos)
+                ELSE
+                        CONVERT(VARCHAR,mxlen)
+            END AS field_length
+            ,REPLACE(REPLACE(ISNULL(defvalue,'NULL'),'(',''),')','') defvalue
+            ,CONVERT(VARCHAR(30),is_nullable) is_nullable
+            ,CONVERT(VARCHAR(30),ispk) ispk
+            ,column_id
+            FROM
             (
-                SELECT TABLE_NAME AS table_name
-                ,COLUMN_NAME AS field_name
-                ,COLUMN_DEFAULT AS defvalue
-                FROM INFORMATION_SCHEMA.COLUMNS
-                WHERE TABLE_NAME='$sTableName'
-            ) AS extra
-            ON syscols.object_id = OBJECT_ID(extra.table_name)
-            AND syscols.name = extra.field_name
-            INNER JOIN sys.types AS systypes 
-            ON syscols.user_type_id = systypes.user_type_id
-            LEFT OUTER JOIN sys.index_columns AS colsidx 
-            ON colsidx.object_id = syscols.object_id 
-            AND colsidx.column_id = syscols.column_id
-            LEFT OUTER JOIN sys.indexes AS sysindexes
-            ON colsidx.object_id = sysindexes.object_id 
-            AND colsidx.index_id = sysindexes.index_id
-            WHERE 1=1
-            AND syscols.object_id = OBJECT_ID('$sTableName')
-        ) AS tabledef
-        ORDER BY tabledef.column_id";
+                SELECT DISTINCT syscols.name AS field_name
+                ,systypes.name AS field_type 
+                ,syscols.max_length AS mxlen
+                ,syscols.precision AS intpos
+                ,syscols.scale AS floatpos
+                ,syscols.is_nullable AS 'is_nullable'
+                ,extra.defvalue
+                ,ISNULL(sysindexes.is_primary_key,0) AS ispk
+                ,syscols.column_id
+                FROM sys.columns AS syscols
+                INNER JOIN 
+                (
+                    SELECT TABLE_NAME AS table_name
+                    ,COLUMN_NAME AS field_name
+                    ,COLUMN_DEFAULT AS defvalue
+                    FROM INFORMATION_SCHEMA.COLUMNS
+                    WHERE 1=1
+                    AND TABLE_NAME='$sTableName'
+                    AND TABLE_CATALOG='{$this->arConn["database"]}'
+                ) AS extra
+                ON syscols.object_id = OBJECT_ID(extra.table_name)
+                AND syscols.name = extra.field_name
+                INNER JOIN sys.types AS systypes 
+                ON syscols.user_type_id = systypes.user_type_id
+                LEFT OUTER JOIN sys.index_columns AS colsidx 
+                ON colsidx.object_id = syscols.object_id 
+                AND colsidx.column_id = syscols.column_id
+                LEFT OUTER JOIN sys.indexes AS sysindexes
+                ON colsidx.object_id = sysindexes.object_id 
+                AND colsidx.index_id = sysindexes.index_id
+                WHERE 1=1
+                AND syscols.object_id = OBJECT_ID('$sTableName')
+            ) AS tabledef
+        ) AS a
+        GROUP BY field_name
+        ORDER BY column_id
+        ";
         
         $arFields = $this->oDb->query($sSQL);
         return $arFields;          
     }//get_fields_info    
     
-    public function get_inserts($sTableName)
+    public function get_insert_bulk($sTableName,$isDelete=1)
     {
-        
-    }//get_create_table
+        $arTables = $this->get_tables();
+        //echo "<pre>"; print_r($arTables);die;
+        $arLines = [];
+        foreach($arTables as $arTable)
+        {
+            //vistas
+            if($arTable["otype"]=="v") continue;
+            $sTableName = $arTable["table_name"];
+
+            $arFields = $this->get_fields_info($sTableName,1);
+            //print_r($arFields);die;
+            $arSelect = [];
+            foreach($arFields as $arField)
+                $arSelect[] = $arField["field_name"];
+
+            $sOrderBy = "1";
+            if(in_array("id",$arSelect)) $sOrderBy = "id";
+            if(in_array("idn",$arSelect)) $sOrderBy = "idn";
+            
+            $sSelect = implode("],[",$arSelect);
+            $sSelect = "[$sSelect]";
+            
+            $sSQL = "SELECT $sSelect FROM $sTableName ORDER BY $sOrderBy ASC";
+            //print_r($sSQL);die;
+            $arRows = $this->oDb->query($sSQL);
+            if($arRows)
+            {
+                $sInsert = "INSERT INTO $sTableName ($sSelect) VALUES"; 
+                $arEnd = end($arRows);
+                foreach($arRows as $arRow)
+                {
+                    $sInsert = "(";
+                    $arIns = [];
+                    foreach($arSelect as $sField)
+                    {
+                        $sValue = $arRow[$sField];
+                        $sValue = str_replace("'","''",$sValue);
+                        $arIns[] = "'$sValue'";
+                    }
+                    $sInsert .= implode(",",$arIns);
+                    $sInsert .= ")";
+                    
+                    if($arEnd==$arRow) $sInsert .= ";";
+                    else $sInsert .= ",";
+                    
+                    $arLines[] = $sInsert;
+                }//foreach arRows
+
+            }//if arRows
+        }//foreach tables
+        $sInsert = implode("\n",$arLines);
+        return $sInsert;         
+    }//get_insert_bulk
     
     public function get_create_table($sTableName,$isDrop=1)
     {
@@ -157,6 +226,7 @@ class ComponentExpImpMssql
         
         $arSQLf = [];
         $arPks = $this->get_pks($arFields);
+
         foreach($arFields as $arFld)
         {
             $sDefault = "";
@@ -164,13 +234,13 @@ class ComponentExpImpMssql
            
             $sFieldName = $arFld["field_name"];
             $sFieldType = $arFld["field_type"];
-            $sFieldLen = "({$arFld["field_length"]})"; 
-            if($sFieldType==="int") $sFieldLen = "";
+            $sFieldLen = "({$arFld["field_length"]})";
+            if(in_array($sFieldType,$this->arNoLen)) $sFieldLen = "";
             
             //trato el default
             $sFieldDef = $arFld["defvalue"];
             $sDefKey = strtolower($sTableName)."_".strtolower($sFieldName);
-            if($sFieldDef!=="NULL")
+            if($sFieldDef!=="NULL" && strlen($sFieldDef)<20)
                 $sDefault = "CONSTRAINT [DF_$sDefKey] DEFAULT ($sFieldDef)";
             
             if($arFld["ispk"]) $sPk = "";
@@ -195,6 +265,19 @@ class ComponentExpImpMssql
         $sSQL = implode("\n",$arSQL);
         return $sSQL;        
     }//get_create_table
+    
+    public function get_schema($asString=1)
+    {
+        $arTables = $this->get_tables();
+
+        $arLines = [];
+        foreach($arTables as $arTable)
+            if($arTable["otype"]=="u")
+                $arLines[] = $this->get_create_table($arTable["table_name"]);
+        
+        if($asString) return implode("\n/* -- end table -- */\n",$arLines);
+        return $arLines;
+    }//get_schema
     
     public function get_pks($arFields)
     {
