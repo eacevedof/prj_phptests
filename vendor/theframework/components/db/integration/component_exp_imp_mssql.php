@@ -3,7 +3,7 @@
  * @author Eduardo Acevedo Farje.
  * @link www.eduardoaf.com
  * @name TheFramework\Components\Db\ComponentExpImpMssql 
- * @file component_exp_imp_mssql.php v1.1.0
+ * @file component_exp_imp_mssql.php v1.2.0
  * @date 30-03-2018 12:06 SPAIN
  * @observations
  */
@@ -138,6 +138,74 @@ class ComponentExpImpMssql
         $arFields = $this->oDb->query($sSQL);
         return $arFields;          
     }//get_fields_info    
+    
+    public function get_inserts($sTableName)
+    {
+        
+    }//get_create_table
+    
+    public function get_create_table($sTableName,$isDrop=1)
+    {
+        $arSQL = [];
+        if($isDrop)
+            //$arSQL[] = "IF EXISTS(SELECT * FROM dbo.$sTableName) DROP TABLE dbo.$sTableName";
+            $arSQL[] = "IF (OBJECT_ID('$sTableName', 'U') IS NOT NULL) DROP TABLE dbo.$sTableName ";
+        
+        $arFields = $this->get_fields_info($sTableName);
+        
+        $arSQL[] = "CREATE TABLE [$sTableName] (";
+        
+        $arSQLf = [];
+        $arPks = $this->get_pks($arFields);
+        foreach($arFields as $arFld)
+        {
+            $sDefault = "";
+            $sPk = "NULL";
+           
+            $sFieldName = $arFld["field_name"];
+            $sFieldType = $arFld["field_type"];
+            $sFieldLen = "({$arFld["field_length"]})"; 
+            if($sFieldType==="int") $sFieldLen = "";
+            
+            //trato el default
+            $sFieldDef = $arFld["defvalue"];
+            $sDefKey = strtolower($sTableName)."_".strtolower($sFieldName);
+            if($sFieldDef!=="NULL")
+                $sDefault = "CONSTRAINT [DF_$sDefKey] DEFAULT ($sFieldDef)";
+            
+            if($arFld["ispk"]) $sPk = "";
+            
+            $arSQLf[] = "[$sFieldName] [$sFieldType]$sFieldLen $sPk $sDefault";
+        }//foreach
+        
+        $arSQL[] = implode(",\n",$arSQLf);
+        if($arPks)
+        {
+            $sTableLow = strtolower($sTableName);
+            $arSQL[] = ",CONSTRAINT [PK_{$sTableLow}] PRIMARY KEY CLUSTERED (";
+            
+            $arTmp = [];
+            foreach($arPks as $sFieldName)
+                $arTmp[] = "[$sFieldName] ASC";
+            
+            $arSQL[] = implode(",",$arTmp).") ";
+            $arSQL[] = "WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]";
+        }
+        $arSQL[] = ") ON [PRIMARY]";
+        $sSQL = implode("\n",$arSQL);
+        return $sSQL;        
+    }//get_create_table
+    
+    public function get_pks($arFields)
+    {
+        $arReturn = [];
+        foreach($arFields as $arField)
+        {
+            if($arField["ispk"])
+                $arReturn[] = $arField["field_name"];
+        }
+        return $arReturn;
+    }//get_pks
     
     private function add_error($sMessage){$this->isError = TRUE;$this->iAffected=-1; $this->arErrors[]=$sMessage;}    
     public function is_error(){return $this->isError;}
