@@ -3,7 +3,7 @@
  * @author Eduardo Acevedo Farje.
  * @link www.eduardoaf.com
  * @name TheFramework\Components\Db\ComponentExpImpMssql 
- * @file component_mssql.php v1.0.0
+ * @file component_exp_imp_mssql.php v1.1.0
  * @date 30-03-2018 12:06 SPAIN
  * @observations
  */
@@ -26,7 +26,7 @@ class ComponentExpImpMssql
         $this->arErrors = [];
         $this->arConn = $arConn;
         $this->oDb = new ComponentMssql($this->arConn);
-    }
+    }//__construct
     
     private function log($sText,$sTitle="",$sType="debug")
     {
@@ -48,7 +48,6 @@ class ComponentExpImpMssql
         
         $arTmp = $this->oDb->query($sSQL);
         
-        $arTables = array(""=>tr_main_none);
         foreach($arTmp as $arT)
             $arTables[$arT["id"]] = $arT["description"];
         
