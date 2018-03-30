@@ -3,7 +3,7 @@
  * @author Eduardo Acevedo Farje.
  * @link www.eduardoaf.com
  * @name TheFramework\Components\Db\ComponentExpImpMssql 
- * @file component_exp_imp_mssql.php v1.6.0
+ * @file component_exp_imp_mssql.php v1.7.0
  * @date 30-03-2018 12:06 SPAIN
  * @observations
  */
@@ -32,6 +32,116 @@ class ComponentExpImpMssql
         $this->arConn = $arConn;
         $this->oDb = new ComponentMssql($this->arConn);
     }//__construct
+    
+    private function get_fieldmap()
+    {
+        $arTypeMap = [];
+        $arTypeMap["mssql"]["1"]="float";
+        $arTypeMap["mssql"]["2"]="int";
+        $arTypeMap["mssql"]["3"]="numeric";
+        $arTypeMap["mssql"]["4"]="varchar";
+        $arTypeMap["mssql"]["5"]="datetime";
+        $arTypeMap["mssql"]["6"]="real";
+        $arTypeMap["mssql"]["7"]="smalldatetime";
+        $arTypeMap["mssql"]["8"]="decimal";
+        $arTypeMap["mssql"]["9"]="money";
+
+        $arTypeMap["mysql"]["1"]="float";
+        $arTypeMap["mysql"]["2"]="int";
+        $arTypeMap["mysql"]["3"]="decimal";
+        $arTypeMap["mysql"]["4"]="varchar";
+        $arTypeMap["mysql"]["5"]="datetime";
+        $arTypeMap["mysql"]["6"]="decimal";
+        $arTypeMap["mysql"]["7"]="datetime";
+        $arTypeMap["mysql"]["8"]="decimal";//10,8
+        $arTypeMap["mysql"]["9"]="decimal";//10,0    
+    }//get_fieldmap
+    
+    private function get_type_tr($sType,$sMotorSrc,$sMotorTrg)
+    {
+        $arTypes = [
+            "mssql"=>[
+                "int"=>[
+                    "sqlite"=>"INTEGER",
+                    "mysql"=>"INT"
+                    ],
+                "tinyint"=>[
+                    "sqlite"=>"INTEGER",
+                    "mysql"=>"INT"
+                    ],
+                "smallint"=>[
+                    "sqlite"=>"INTEGER",
+                    "mysql"=>"INT"
+                    ],                
+                "varchar"=>[
+                    "sqlite"=>"TEXT",
+                    "mysql"=>"VARCHAR"
+                ],
+                "char"=>[
+                    "sqlite"=>"TEXT",
+                    "mysql"=>"CHAR"
+                ],        
+                "text"=>[
+                    "sqlite"=>"TEXT",
+                    "mysql"=>"TEXT"
+                ], 
+                "datetime"=>[
+                    "sqlite"=>"TEXT",
+                    "mysql"=>"VARCHAR"
+                ],                 
+                "decimal"=>[
+                    "sqlite"=>"REAL",
+                    "mysql"=>"NUMERIC"
+                ],
+                "float"=>[
+                    "sqlite"=>"REAL",
+                    "mysql"=>"NUMERIC"
+                ]
+            ],//mssql            
+            "mysql"=>[
+                "int"=>[
+                    "sqlite"=>"INTEGER",
+                    "mssql"=>"INT"
+                    ],
+                "tinyint"=>[
+                    "sqlite"=>"INTEGER",
+                    "mssql"=>"tinyint"
+                    ],
+                "smallint"=>[
+                    "sqlite"=>"INTEGER",
+                    "mssql"=>"INT"
+                    ],                
+                "varchar"=>[
+                    "sqlite"=>"TEXT",
+                    "mssql"=>"VARCHAR"
+                ],
+                "char"=>[
+                    "sqlite"=>"TEXT",
+                    "mssql"=>"CHAR"
+                ],        
+                "text"=>[
+                    "sqlite"=>"TEXT",
+                    "mssql"=>"TEXT"
+                ], 
+                "datetime"=>[
+                    "sqlite"=>"TEXT",
+                    "mssql"=>"VARCHAR"
+                ],                 
+                "decimal"=>[
+                    "sqlite"=>"REAL",
+                    "mssql"=>"NUMERIC"
+                ],
+                "float"=>[
+                    "sqlite"=>"REAL",
+                    "mssql"=>"NUMERIC"
+                ]
+            ],//mysql
+            "mssql"=>[
+                
+            ]
+        ];
+        return isset($arTypes[$sMotorSrc][$sType][$sMotorTrg])?$arTypes[$sMotorSrc][$sType][$sMotorTrg]:[];
+    }//get_type_tr
     
     private function log($sText,$sTitle="",$sType="debug")
     {
