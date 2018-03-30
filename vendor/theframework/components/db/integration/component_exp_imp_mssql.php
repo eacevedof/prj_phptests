@@ -3,7 +3,7 @@
  * @author Eduardo Acevedo Farje.
  * @link www.eduardoaf.com
  * @name TheFramework\Components\Db\ComponentExpImpMssql 
- * @file component_exp_imp_mssql.php v1.4.0
+ * @file component_exp_imp_mssql.php v1.6.0
  * @date 30-03-2018 12:06 SPAIN
  * @observations
  */
@@ -44,6 +44,8 @@ class ComponentExpImpMssql
     public function get_tables()
     {
         $sSQL = "/*ComponentExpImpMssql.get_tables*/
+        -- a esta consulta no le hace falta la base de datos. Se ajusta solo a las tablas del 
+        -- esquema en el que se esta
         SELECT DISTINCT LOWER(sqltable.name) AS table_id
         ,sqltable.name AS table_name
         ,LTRIM(RTRIM(LOWER(sqltable.xtype))) AS otype
@@ -159,15 +161,27 @@ class ComponentExpImpMssql
     
     public function get_insert_bulk($sTableName,$isDelete=1)
     {
+        $sNow = date("Ymd-His");
         $arTables = $this->get_tables();
+        if($sTableName)
+            $arTables = array_filter($arTables,function($arItem) use($sTableName) {
+                //print_r($arItem);
+                return $arItem["table_name"] === $sTableName;
+            });
+        //die;
         //echo "<pre>"; print_r($arTables);die;
-        $arLines = [];
+        $arLines = ["/*database $sNow*/\n USE {$this->arConn["database"]}-x"];
+        $arLines = ["/*database $sNow*/\n USE db_killme"];
+        
         foreach($arTables as $arTable)
         {
             //vistas
             if($arTable["otype"]=="v") continue;
             $sTableName = $arTable["table_name"];
-
+            
+            if($isDelete)
+                $arLines[] = "-- DELETE FROM $sTableName;";
+            
             $arFields = $this->get_fields_info($sTableName,1);
             //print_r($arFields);die;
             $arSelect = [];
@@ -186,27 +200,34 @@ class ComponentExpImpMssql
             $arRows = $this->oDb->query($sSQL);
             if($arRows)
             {
-                $sInsert = "INSERT INTO $sTableName ($sSelect) VALUES"; 
                 $arEnd = end($arRows);
                 foreach($arRows as $arRow)
                 {
-                    $sInsert = "(";
+                    $sInsert = "INSERT INTO $sTableName ($sSelect) VALUES(";
                     $arIns = [];
-                    foreach($arSelect as $sField)
+                    foreach($arSelect as $sFieldName)
                     {
-                        $sValue = $arRow[$sField];
+                        $sFieldType = $this->get_fieldtype($sFieldName,$arFields);
+                        $sValue = $arRow[$sFieldName];
                         $sValue = str_replace("'","''",$sValue);
-                        $arIns[] = "'$sValue'";
+                        $sValue = "'$sValue'";
+                        if($sValue==="''")
+                        {
+                            if($this->is_nullable($sFieldName,$arFields)
+                               || in_array($sFieldType,$this->arNumeric)
+                               || in_array($sFieldType,$this->arDate))
+                                $sValue = "NULL";
+                        }
+                        $arIns[] = $sValue;
                     }
                     $sInsert .= implode(",",$arIns);
                     $sInsert .= ")";
                     
                     if($arEnd==$arRow) $sInsert .= ";";
-                    else $sInsert .= ",";
+                    else $sInsert .= ";";
                     
                     $arLines[] = $sInsert;
                 }//foreach arRows
-
             }//if arRows
         }//foreach tables
         $sInsert = implode("\n",$arLines);
@@ -280,7 +301,7 @@ class ComponentExpImpMssql
         return $arLines;
     }//get_schema
     
-    public function get_pks($arFields)
+    private function get_pks($arFields)
     {
         $arReturn = [];
         foreach($arFields as $arField)
@@ -290,6 +311,26 @@ class ComponentExpImpMssql
         }
         return $arReturn;
     }//get_pks
+    
+    private function get_fieldtype($sFieldName,$arFields=[])
+    {
+        foreach($arFields as $arField)
+        {
+            if($arField["field_name"]==$sFieldName)
+                return $arField["field_type"];
+        }
+        return "";        
+    }//get_fieldtype
+    
+    private function is_nullable($sFieldName,$arFields=[])
+    {
+        foreach($arFields as $arField)
+        {
+            if($arField["field_name"]==$sFieldName)
+                return $arField["is_nullable"];
+        }
+        return 0;        
+    }//get_fieldtype
     
     private function add_error($sMessage){$this->isError = TRUE;$this->iAffected=-1; $this->arErrors[]=$sMessage;}    
     public function is_error(){return $this->isError;}
