@@ -1,5 +1,5 @@
 <?php
-//index.php 2.0.7
+//index.php 2.0.8
 //phpinfo();die;
 
 //<editor-fold defaultstate="collapsed" desc="HELPERS">
@@ -76,21 +76,26 @@ $oForm->show();
 /**
  * COMPONENTES
  **/
-
 ini_set('max_execution_time',3000);
 require_once "vendor/theframework/components/autoload.php";
 //use TheFramework\Components\ComponentErpaux;
 //$oQ = new ComponentErpaux();
 //$oQ->get_all();
 
+use TheFramework\Components\Db\Integration\ComponentExpImpMssql;
+
+$arConn["server"]="localhost\MSSQLSERVER2014";
+$arConn["database"]="db_theframework";
+
+$oExImp = new ComponentExpImpMssql($arConn);
+$arTables = $oExImp->get_tables();
+echo "<br/><pre>";
+print_r($arTables);
+
 use TheFramework\Components\Db\ComponentMssql;
 use TheFramework\Components\Db\ComponentMysql;
 
-$oMs = new ComponentMssql();
-$oMs->add_conn("server","localhost\MSSQLSERVER2014");
-$oMs->add_conn("database","db_theframework");
-$oMs->add_conn("user","alf");
-$oMs->add_conn("password","misAcko");
+$oMs = new ComponentMssql($arConn);
 $arRows = $oMs->query("SELECT * FROM app_customer");
 
 echo "<br>{$oMs->get_affected()}<br/>";
