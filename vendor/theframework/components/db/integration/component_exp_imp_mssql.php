@@ -3,7 +3,7 @@
  * @author Eduardo Acevedo Farje.
  * @link www.eduardoaf.com
  * @name TheFramework\Components\Db\ComponentExpImpMssql 
- * @file component_exp_imp_mssql.php v1.3.0
+ * @file component_exp_imp_mssql.php v1.4.0
  * @date 30-03-2018 12:06 SPAIN
  * @observations
  */
@@ -268,9 +268,10 @@ class ComponentExpImpMssql
     
     public function get_schema($asString=1)
     {
+        $sNow = date("Ymd-His");
         $arTables = $this->get_tables();
 
-        $arLines = [];
+        $arLines = ["/*database $sNow*/\n USE {$this->arConn["database"]}-x"];
         foreach($arTables as $arTable)
             if($arTable["otype"]=="u")
                 $arLines[] = $this->get_create_table($arTable["table_name"]);
