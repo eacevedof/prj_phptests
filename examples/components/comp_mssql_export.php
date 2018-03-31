@@ -1,27 +1,20 @@
 <?php
-//file: comp_gd2.php 1.0.0
 /*
- * NOTES:
- * 
+ * @file: comp_mssql_export.php 1.0.0
+ * @info: proyecto general
+ * Ejemplos: ComponentMssqlExport->get_insert_bulk(...) y ComponentMssqlExport->get_schema()
 */
+include("vendor/theframework/components/autoload.php");
 ini_set('max_execution_time',3000);
-require_once "vendor/theframework/components/autoload.php";
-//use TheFramework\Components\ComponentErpaux;
-//$oQ = new ComponentErpaux();
-//$oQ->get_all();
-
-use TheFramework\Components\Db\Integration\ComponentExpImpMssql;
-
+use TheFramework\Components\Db\Integration\ComponentMssqlExport;
 $arConn["server"]="localhost\MSSQLSERVER2014";
 $arConn["database"]="theframework";
 $arConn["user"]="sa";
 $arConn["password"]="Sasql2014";
 
-$oExImp = new ComponentExpImpMssql($arConn);
+$oExImp = new ComponentMssqlExport($arConn);
 //$arTemp = $oExImp->get_fields_info("app_order_line");
 $arTemp = $oExImp->get_insert_bulk("app_order_line");
 //$arTemp = $oExImp->get_schema();
-echo "<br/><pre>";
 print_r($arTemp);
-
-die;
+//pr($arTemp);
