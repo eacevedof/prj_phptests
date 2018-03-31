@@ -1,9 +1,10 @@
 <?php
-//file: comp_gd2.php 1.0.0
 /*
- * NOTES:
- * 
+ * @file: comp_mysql.php 1.0.0
+ * @info: proyecto general
+ * Ejemplos: ComponentMysql->query(Select * from...) y ComponentMysql->exec(insert into...)
 */
+include("vendor/theframework/components/autoload.php");
 use TheFramework\Components\Db\ComponentMysql;
 $oMs = new ComponentMysql();
 $oMs->add_conn("server","localhost");
