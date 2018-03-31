@@ -29,6 +29,6 @@ preg_match($sPattern,$sContent,$arMatches);
 //$arMatches[] = preg_replace("/(?<=^)([A-Z])/","_$1","ComponentDtsxrepSuperBowl");
 echo "<pre>";
 print_r($arMatches);
-print_r($arMatchAll);
+//print_r($arMatchAll);
 echo "<hr/>";
 echo htmlentities($sContent);

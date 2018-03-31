@@ -19,13 +19,9 @@ require_once "../vendor/autoload.php";//generdo por composer
     <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
   </div>
  
-use TheFramework\Components\ComponentSqlserver;
 
 use TheFramework\Helpers\HelperLabel;
 use TheFramework\Helpers\HelperDate;
-
-$oSql = new ComponentSqlserver();
-$oSql->query();
 
 $oLabel = new HelperLabel("datBirthdate","Birthdate","lblBirthdate");
 $oDate = new HelperDate();

@@ -4,9 +4,10 @@
  * NOTES:
  * 
 */
+include("vendor/theframework/components/autoload.php");
 use TheFramework\Components\Db\ComponentMssql;
 
-
+$arConn = ["server"=>"localhost/MSSQL2014","database"=>"theframework","user"=>"sa","password"=>"xYz"];
 $oMs = new ComponentMssql($arConn);
 $arRows = $oMs->query("SELECT * FROM app_customer");
 
