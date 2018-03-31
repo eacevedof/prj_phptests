@@ -1,6 +1,6 @@
 <?php
 /**
- * index.php 4.0.0
+ * index.php 5.0.0
  */
 function addto_incpath($sPath)
 {
@@ -49,7 +49,8 @@ $arExamples["mixed"] = array_filter(scandir($arPaths["mixed"]),function($sFileNa
 $arExamples["mixed"]["path"] = $arPaths["mixed"];
 //var_dump($arExamples);
 
-if(!isset($_GET["f"]))
+//si no es ni archivo ni contenido
+if(!(isset($_GET["f"]) || isset($_GET["c"])))
 {
     $sLast = "";
     $arHtml = [];
@@ -66,15 +67,25 @@ if(!isset($_GET["f"]))
         {
             if($k=="path") continue;
             $sFileName = str_replace(".php","",$sFileName);
-            $arHtml[] = "<li><a href=\"/?f=$sFileName\" target=\"_blank\">$sFileName</a></li>";
-        }
-    }
+            $arHtml[] = "<li><a href=\"/?f=$sFileName\" target=\"_blank\">$sFileName</a> "
+                    . "<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+                    . "<a href=\"/?c=$sFileName\" target=\"_blank\">$sFileName - content</a></li>";
+        }//foreach($arExample)
+    }//foreach($arExamples)
     echo implode("\n",$arHtml);
-
 }
-else
+//hay parámetro f
+elseif(isset($_GET["f"]) || isset($_GET["c"]))
 {
-    $sF = strtolower(trim($_GET["f"]));
+    //die("dos");
+    $isContent = FALSE;
+    if(isset($_GET["f"])) $sF = strtolower(trim($_GET["f"]));       
+    if(isset($_GET["c"]))
+    {
+        $sF = strtolower(trim($_GET["c"]));
+        $isContent = TRUE;
+    }
+    
     $sFile = "$sF.php";
     $sKey = array_search($sFile,$arExamples["components"]);
     $sKey = ($sKey || array_search($sFile,$arExamples["helpers"]));
@@ -85,14 +96,30 @@ else
         echo "<a href=\"/\"> home </a>";
         exit();
     }
-    elseif(!in_array($sF,$arForbidden))
-    {
-        include($sFile);
-    }
-    else
+    elseif(in_array($sF,$arForbidden))
     {
         echo "<pre> file forbidden<b>: $sF </b>";
         echo "<a href=\"/\"> home </a>";
         exit();
+    }
+    else
+    {
+        if($isContent)
+        {
+            $sFileContent = "";
+            $sPathFile = $arExamples["components"]["path"].DS.$sFile;
+            if(is_file($sPathFile) && !$sFileContent) $sFileContent= $sPathFile;
+            $sPathFile = $arExamples["helpers"]["path"].DS.$sFile;
+            if(is_file($sPathFile) && !$sFileContent) $sFileContent= $sPathFile;            
+            $sPathFile = $arExamples["mixed"]["path"].DS.$sFile;
+            if(is_file($sPathFile) && !$sFileContent) $sFileContent= $sPathFile;            
+            
+            $sContent = file_get_contents($sFileContent);
+            echo "<pre>";
+            echo htmlentities($sContent);
+            
+        }
+        else
+            include($sFile);        
     }
 }
