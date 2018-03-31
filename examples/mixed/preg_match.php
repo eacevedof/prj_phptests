@@ -9,8 +9,9 @@ $sPathFile = $_SERVER["DOCUMENT_ROOT"].DIRECTORY_SEPARATOR."examples/components/
 $sContent = file_get_contents($sPathFile);
 //extrae substring
 $arMatches = []; $arMatchAll = [];
+//http://www.rexegg.com/regex-quickstart.html  cheat sheet
 $sPattern = "/@info\:(.*?)\*\/|@[a-z]\:/s";
-$sPattern = "/@[a-z,A-Z]*\:(.*?)((@[a-z,A-Z]*\:))/s";
+$sPattern = "/@[a-z,A-Z]*\:(.*?)((@[a-z,A-Z]*\:)|(\*\/))/s";
 
 //\*\/|
 preg_match($sPattern,$sContent,$arMatches);
