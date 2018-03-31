@@ -4,8 +4,8 @@
  * @link www.eduardoaf.com
  * @name ComponentGd2
  * @file component_gd2.php
- * @version 1.0.0
- * @date 29-01-2018 11:48
+ * @version 1.1.0
+ * @date 31-03-2018 17:41
  * @observations
  */
 namespace TheFramework\Components;
@@ -20,9 +20,8 @@ class ComponentGd2
     //$GLOBALS["config_app_dir"].$GLOBALS["config_web_folder"].config_bar.$GLOBALS["config_res_dir"].config_bar."products_picture".config_bar.$Nom_Photo
     public function __construct() 
     {
-        define("DS",defined("config_bar")?config_bar:DIRECTORY_SEPARATOR);
-        
-        
+        if(!defined("DS"))define("DS",defined("config_bar")?config_bar:DIRECTORY_SEPARATOR);  
+        $this->define_resdir();
         $this->isError = FALSE;
         $this->arErrors = array();
         $this->arFrom = array("pathfolder"=>PATH_RESDIR.DS."products_picture".DS,"filename"=>"");
@@ -32,9 +31,9 @@ class ComponentGd2
     
     private function define_resdir()
     {
-        define("PATH_RESDIR",realpath($GLOBALS["config_app_dir"].$GLOBALS["config_web_folder"].DS.$GLOBALS["config_res_dir"]));        
+        if(!defined("PATH_RESDIR"))
+            define("PATH_RESDIR",realpath($GLOBALS["config_app_dir"].$GLOBALS["config_web_folder"].DS.$GLOBALS["config_res_dir"]));        
     }
-    
     
     private function get_type($sFilename){return end(explode(".",trim($sFilename)));}
     
