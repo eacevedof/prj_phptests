@@ -1,8 +1,8 @@
 <?php
-//file: comp_gd2.php 1.0.0
 /*
- * NOTES:
- * 
+ * @file: comp_mssql.php 1.0.0
+ * @info: proyecto Hydra
+ * ComponentMssql->query(...) y ComponentMssql->exec(...)
 */
 include("vendor/theframework/components/autoload.php");
 use TheFramework\Components\Db\ComponentMssql;
