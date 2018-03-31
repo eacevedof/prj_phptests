@@ -2,8 +2,8 @@
 /**
  * @author Eduardo Acevedo Farje.
  * @link www.eduardoaf.com
- * @name TheFramework\Components\Db\ComponentExpImpMssql 
- * @file component_exp_imp_mssql.php v1.7.0
+ * @name TheFramework\Components\Db\ComponentMssqlExport 
+ * @file component_mssql_export.php v1.8.0
  * @date 30-03-2018 12:06 SPAIN
  * @observations
  */
@@ -12,7 +12,7 @@ namespace TheFramework\Components\Db\Integration;
 use TheFramework\Components\ComponentLog;
 use TheFramework\Components\Db\ComponentMssql;
 
-class ComponentExpImpMssql 
+class ComponentMssqlExport 
 {
     private $arConn;
     private $isError;
@@ -63,31 +63,31 @@ class ComponentExpImpMssql
             "mssql"=>[
                 "int"=>[
                     "sqlite"=>"INTEGER",
-                    "mysql"=>"INT"
+                    "mysql"=>"int"
                     ],
                 "tinyint"=>[
                     "sqlite"=>"INTEGER",
-                    "mysql"=>"INT"
+                    "mysql"=>"int"
                     ],
                 "smallint"=>[
                     "sqlite"=>"INTEGER",
-                    "mysql"=>"INT"
+                    "mysql"=>"smallint"
                     ],                
                 "varchar"=>[
                     "sqlite"=>"TEXT",
-                    "mysql"=>"VARCHAR"
+                    "mysql"=>"varchar"
                 ],
                 "char"=>[
                     "sqlite"=>"TEXT",
-                    "mysql"=>"CHAR"
+                    "mysql"=>"char"
                 ],        
                 "text"=>[
                     "sqlite"=>"TEXT",
-                    "mysql"=>"TEXT"
+                    "mysql"=>"text"
                 ], 
                 "datetime"=>[
                     "sqlite"=>"TEXT",
-                    "mysql"=>"VARCHAR"
+                    "mysql"=>"varchar"
                 ],                 
                 "decimal"=>[
                     "sqlite"=>"REAL",
@@ -101,7 +101,7 @@ class ComponentExpImpMssql
             "mysql"=>[
                 "int"=>[
                     "sqlite"=>"INTEGER",
-                    "mssql"=>"INT"
+                    "mssql"=>"int"
                     ],
                 "tinyint"=>[
                     "sqlite"=>"INTEGER",
@@ -109,35 +109,54 @@ class ComponentExpImpMssql
                     ],
                 "smallint"=>[
                     "sqlite"=>"INTEGER",
-                    "mssql"=>"INT"
+                    "mssql"=>"smallint"
                     ],                
                 "varchar"=>[
                     "sqlite"=>"TEXT",
-                    "mssql"=>"VARCHAR"
+                    "mssql"=>"varchar"
                 ],
                 "char"=>[
                     "sqlite"=>"TEXT",
-                    "mssql"=>"CHAR"
+                    "mssql"=>"char"
                 ],        
                 "text"=>[
                     "sqlite"=>"TEXT",
-                    "mssql"=>"TEXT"
+                    "mssql"=>"text"
                 ], 
                 "datetime"=>[
                     "sqlite"=>"TEXT",
-                    "mssql"=>"VARCHAR"
+                    "mssql"=>"varchar"
                 ],                 
                 "decimal"=>[
                     "sqlite"=>"REAL",
-                    "mssql"=>"NUMERIC"
+                    "mssql"=>"numeric"
                 ],
                 "float"=>[
                     "sqlite"=>"REAL",
-                    "mssql"=>"NUMERIC"
+                    "mssql"=>"numeric"
                 ]
             ],//mysql
-            "mssql"=>[
-                
+            "sqlite"=>[
+                "INTEGER"=>[
+                    "mysql"=>"int",
+                    "mssql"=>"int"
+                ], 
+                "NUMERIC"=>[
+                    "mysql"=>"decimal",
+                    "mssql"=>"numeric"
+                ],                 
+                "REAL"=>[
+                    "mysql"=>"decimal",
+                    "mssql"=>"float"
+                ],       
+                "TEXT"=>[
+                    "mysql"=>"text",
+                    "mssql"=>"text"
+                ],  
+                "BLOB"=>[
+                    "mysql"=>"blob",
+                    "mssql"=>"-"
+                ],                 
             ]
         ];
         return isset($arTypes[$sMotorSrc][$sType][$sMotorTrg])?$arTypes[$sMotorSrc][$sType][$sMotorTrg]:[];
@@ -153,7 +172,7 @@ class ComponentExpImpMssql
 
     public function get_tables()
     {
-        $sSQL = "/*ComponentExpImpMssql.get_tables*/
+        $sSQL = "/*ComponentMssqlExport.get_tables*/
         -- a esta consulta no le hace falta la base de datos. Se ajusta solo a las tablas del 
         -- esquema en el que se esta
         SELECT DISTINCT LOWER(sqltable.name) AS table_id
@@ -171,7 +190,7 @@ class ComponentExpImpMssql
     
     public function get_fields($sTableName)
     {
-        $sSQL = "/*ComponentExpImpMssql.get_fields*/
+        $sSQL = "/*ComponentMssqlExport.get_fields*/
         SELECT LOWER(cols.name) AS id
         ,' '+LOWER(cols.name)+' - '+types.name +'('
         +CASE types.name 
@@ -196,7 +215,7 @@ class ComponentExpImpMssql
     
     public function get_fields_info($sTableName)
     {
-        $sSQL = "/*ComponentExpImpMssql.get_fields_info*/
+        $sSQL = "/*ComponentMssqlExport.get_fields_info*/
         SELECT field_name
         ,MAX(field_type) AS field_type
         ,MAX(field_length) AS field_length
@@ -449,4 +468,4 @@ class ComponentExpImpMssql
     
     public function add_conn($k,$v){$this->arConn[$k]=$v;}
     
-}//ComponentExpImpMssql
+}//ComponentMssqlExport

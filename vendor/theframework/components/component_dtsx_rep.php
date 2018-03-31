@@ -1,9 +1,9 @@
 <?php
 namespace TheFramework\Components;
 
-use TheFramework\Components\ComponentSqlserver;
+use TheFramework\Components\Db\ComponentMssql;
 
-class ComponentDtsxrep
+class ComponentDtsxRep
 {
     private $sDir;
     
@@ -25,7 +25,7 @@ class ComponentDtsxrep
         AND tablename LIKE 'ERP_%_AUX'
         --AND tablename IN ('ERP_CONFIG_AUX','ERP_FTIIVA_AUX','ERP_LIKP_AUX','ERP_STPO_AUX','ERP_T002T_AUX')
         ORDER BY tablename";
-        $oComp = new ComponentSqlserver();
+        $oComp = new ComponentMssql(["server"=>"localhost/MSSQL2014","database"=>"crm3_flamagas","user"=>"sa","password"=>"xYz"]);
         $arRows = $oComp->query($sSQL);
         return $arRows;        
     }

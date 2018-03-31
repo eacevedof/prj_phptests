@@ -21,10 +21,12 @@ spl_autoload_register(function($sNSClassName)
     // (?<=...) and (?<!...) are positive and negative look-behinds (respectively) 
     // because they look to the left of the current position rather than the right 
     $sClassName = preg_replace("/(?<!^)([A-Z])/","_\\1",$sClassName);
+    //print_r("classname:".$sClassName);
     $sClassName = str_replace("Component","",$sClassName);
     $sClassName = strtolower($sClassName);
     //if(strstr($sClassName,"xp"))die($sClassName);
     $sClassName = "component$sClassName.php";
+    //print_r("classname include:".$sClassName);
     if(stream_resolve_include_path($sClassName))
         include_once $sClassName;
     elseif(function_exists("lg"))

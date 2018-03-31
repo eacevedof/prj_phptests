@@ -1,9 +1,9 @@
 <?php
 namespace TheFramework\Components;
 
-use TheFramework\Components\ComponentSqlserver;
+use TheFramework\Components\Db\ComponentMssql;
 
-class ComponentErpaux
+class ComponentDtsQueryrep
 {
     public function __consturct(){;}
     
@@ -36,7 +36,7 @@ La clave de LIKP es VBELN, que corresponde al número de entrega. (sigue sin fun
         AND tablename LIKE 'ERP_%_AUX'
         AND tablename IN ('ERP_CONFIG_AUX','ERP_FTIIVA_AUX','ERP_LIKP_AUX','ERP_STPO_AUX','ERP_T002T_AUX')
         ORDER BY tablename";
-        $oComp = new ComponentSqlserver();
+        $oComp = new ComponentMssql(["server"=>"localhost/MSSQL2014","database"=>"crm3_flamagas","user"=>"sa","password"=>"xYz"]);
         $arRows = $oComp->query($sSQL);
         return $arRows;        
     }
@@ -49,7 +49,7 @@ La clave de LIKP es VBELN, que corresponde al número de entrega. (sigue sin fun
         WHERE 1=1
         AND tablename LIKE '$sTableAux'
         ORDER BY fieldname";
-        $oComp = new ComponentSqlserver();
+        $oComp = new ComponentMssql(["server"=>"localhost/MSSQL2014","database"=>"crm3_flamagas","user"=>"sa","password"=>"xYz"]);
         $arRows = $oComp->query($sSQL);
         return $arRows;        
     }    
@@ -63,7 +63,7 @@ La clave de LIKP es VBELN, que corresponde al número de entrega. (sigue sin fun
         AND tablename LIKE '$sTableAux'
         AND ispk='Y'
         ORDER BY fieldname";
-        $oComp = new ComponentSqlserver();
+        $oComp = new ComponentMssql(["server"=>"localhost/MSSQL2014","database"=>"crm3_flamagas","user"=>"sa","password"=>"xYz"]);
         $arRows = $oComp->query($sSQL);
         return $arRows;        
     }
@@ -77,7 +77,7 @@ La clave de LIKP es VBELN, que corresponde al número de entrega. (sigue sin fun
         AND tablename LIKE '$sTableAux'
         AND ispk=''
         ORDER BY fieldname";
-        $oComp = new ComponentSqlserver();
+        $oComp = new ComponentMssql(["server"=>"localhost/MSSQL2014","database"=>"crm3_flamagas","user"=>"sa","password"=>"xYz"]);
         $arRows = $oComp->query($sSQL);
         return $arRows;        
     }    
@@ -191,4 +191,4 @@ WHERE (ERP_T001_1.BUKRS IS NULL)
     
     
 
-}//ComponentSqlserver
+}//ComponentDtsQueryrep

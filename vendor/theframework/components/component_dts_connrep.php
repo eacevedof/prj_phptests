@@ -2,8 +2,8 @@
 /**
  * @author Eduardo Acevedo Farje.
  * @link www.eduardoaf.com
- * @name ComponentExtract
- * @file component_extract.php
+ * @name ComponentDtsConnrep
+ * @file component_dts_connrep.php
  * @version 1.0.1
  * @date 01-06-2014 12:45
  * @observations
@@ -12,7 +12,7 @@
  */
 namespace TheFramework\Components;
 
-class ComponentExtract 
+class ComponentDtsConnrep 
 {
     private $sRegexp;
     private $sFilePath;
@@ -85,4 +85,4 @@ class ComponentExtract
     
     public function get_extracted(){return $this->arLines;}
     
-}//ComponentExtract
+}//ComponentDtsConnrep
