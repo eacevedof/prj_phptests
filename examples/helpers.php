@@ -1,5 +1,10 @@
 <?php
 //file: helpers.php 1.0.0
+/*
+ * NOTES:
+ * testing of TheFramework\Helpers\
+ * http://helpers.theframework.es
+*/
 
 //<editor-fold defaultstate="" desc="HELPERS">
 /**
