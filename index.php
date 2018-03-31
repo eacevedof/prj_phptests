@@ -2,19 +2,35 @@
 /**
  * index.php 5.0.0
  */
-function addto_incpath($sPath)
+function addto_incpath($sPathDir)
 {
-    if(is_dir($sPath))
+    if(is_dir($sPathDir))
     {
         $arPaths = explode(PATH_SEPARATOR,get_include_path());
-        $arPaths[] = $sPath;
+        $arPaths[] = $sPathDir;
         $arPaths = array_unique($arPaths);
         $sPathInclude = implode(PATH_SEPARATOR,$arPaths);
         set_include_path($sPathInclude);
     }
     else
-        echo "<pre> not a dir <b>: $sPath";
-}
+        echo "<pre> not a dir <b>: $sPathDir";
+}//addto_incpath
+
+function get_info($sPathFile)
+{
+    $sContent = file_get_contents($sPathFile);
+    $arMatches = [];
+    $sPattern = "/@[a-z,A-Z]*\:(.*?)((@[a-z,A-Z]*\:)|(\*\/))/s";
+    preg_match($sPattern,$sContent,$arMatches);
+    //preg_match_all($sPattern,$sContent,$arMatches);
+    //echo "<pre>";print_r($arMatches);
+    if(isset($arMatches[1]))
+    {
+        $sPattern = "/\n\s\*/";
+        return htmlentities(trim(preg_replace($sPattern,"\n",$arMatches[1])));
+    }
+    return "";
+}//get_info
 
 define("DS",DIRECTORY_SEPARATOR);
 define("TFW_DOCROOT",$_SERVER["DOCUMENT_ROOT"]);
@@ -63,13 +79,18 @@ if(!(isset($_GET["f"]) || isset($_GET["c"])))
     foreach($arExamples as $sType=>$arExample)
     {
         $arHtml[] = "<h3>examples/$sType:</h3>";
+        $sPathDirDS = $arExample["path"].DS;
+        
         foreach($arExample as $k=>$sFileName)
         {
             if($k=="path") continue;
+            $sInfo = get_info($sPathDirDS.$sFileName);
             $sFileName = str_replace(".php","",$sFileName);
             $arHtml[] = "<li><a href=\"/?f=$sFileName\" target=\"_blank\">$sFileName</a> "
                     . "<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
-                    . "<a href=\"/?c=$sFileName\" target=\"_blank\">$sFileName - content</a></li>";
+                    . "<a href=\"/?c=$sFileName\" target=\"_blank\">$sFileName - content</a></li>"
+                    . "<pre>$sInfo</pre>";
+            
         }//foreach($arExample)
     }//foreach($arExamples)
     echo implode("\n",$arHtml);
