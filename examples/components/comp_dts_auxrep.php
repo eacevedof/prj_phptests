@@ -7,9 +7,10 @@
  * 
 */
 include("vendor/theframework/components/autoload.php");
-use TheFramework\Components\ComponentDtsxrep;
-$oComp = new ComponentDtsxrep();
+use TheFramework\Components\ComponentDtsxRep;
+$oComp = new ComponentDtsxRep();
 
+//usa la vista view_gettable
 //cambia las tablas erp_archivo por erp_archivo_aux
 //guarda el archivo remplazado con ok_<nombre-archivo>
 $oComp->replace();
