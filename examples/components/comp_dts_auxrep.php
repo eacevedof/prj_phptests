@@ -1,5 +1,4 @@
 <?php
-//file: comp_gd2.php 1.0.0
 /*
  * @file: comp_dts_auxrep 1.0.0
  * @info: proyecto Flamagas
