@@ -1,6 +1,6 @@
 <?php
 /*
- * @file: comp_hydra_logs 1.0.0
+ * @file: comp_hydra_pk 1.0.0
  * @info: proyecto Hydra
  * Lee el archivo C:\shared\constraints.sql que lleva todas las claves privadas
  * esto sirve para añadir las claves despues de volcar todos los datos.
