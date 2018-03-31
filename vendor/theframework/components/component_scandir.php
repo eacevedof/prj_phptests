@@ -4,8 +4,8 @@
  * @link www.eduardoaf.com
  * @name ComponentScandir
  * @file component_scandir.php
- * @version 1.0.1
- * @date 27-07-2017 12:06
+ * @version 1.1.0
+ * @date 31-03-2018 17:34
  * @observations
  * Flamagas devuelve todos los archivos .XNT que nos han pasado
  */
@@ -19,10 +19,10 @@ class ComponentScandir
     public function __construct() 
     {
         $this->arPaths = [
-            "C:/xampp/htdocs/proy_hydra_flamagas/dts/update_20170620_pricing",
-            "C:/xampp/htdocs/proy_hydra_flamagas/dts/update_20170705_tablas_enblanco",
-            "C:/xampp/htdocs/proy_hydra_flamagas/dts/update_20170706_campo_en_knb1",
-            "C:/xampp/htdocs/proy_hydra_flamagas/dts/Datos/IN/BackUP"
+            "E:/xampp/htdocs/proy_hydra_flamagas/dts/update_20170620_pricing",
+            "E:/xampp/htdocs/proy_hydra_flamagas/dts/update_20170705_tablas_enblanco",
+            "E:/xampp/htdocs/proy_hydra_flamagas/dts/update_20170706_campo_en_knb1",
+            "e:/xampp/htdocs/proy_hydra_flamagas/dts/Datos/IN/BackUP"
         ];
         
         $this->arFiles = [];
@@ -48,20 +48,24 @@ class ComponentScandir
     {
         foreach($this->arPaths as $sPath)
         {
-            $arFiles = scandir($sPath);
-            $sPath = explode("/",$sPath);
-            $sPath = end($sPath);
-            foreach($arFiles as $sFileName)
+            if(is_dir($sPath))
             {
-                if($this->in_string([".XNT"],$sFileName))
+                $arFiles = scandir($sPath);
+                $sPath = explode("/",$sPath);
+                $sPath = end($sPath);
+                foreach($arFiles as $sFileName)
                 {
-                    $this->clean([".XNT"],$sFileName);
-                    if(strlen($sFileName)>(14+3))
-                        $sFileName = substr($sFileName,14);
-                    $this->arFiles[$sPath][] = $sFileName;
+                    if($this->in_string([".XNT"],$sFileName))
+                    {
+                        $this->clean([".XNT"],$sFileName);
+                        if(strlen($sFileName)>(14+3))
+                            $sFileName = substr($sFileName,14);
+                        $this->arFiles[$sPath][] = $sFileName;
+                    }
                 }
+                if(isset($this->arFiles[$sPath]))
+                    asort($this->arFiles[$sPath]);
             }
-            asort($this->arFiles[$sPath]);
         }
         return $this->arFiles;
     }
