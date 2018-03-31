@@ -4,7 +4,7 @@
  * @link www.eduardoaf.com
  * @name ComponentHydralogs
  * @file component_hydralogs.php
- * @version 1.0.0
+ * @version 1.0.1
  * @date 30-01-2018 11:24
  * @observations
  * Genera un archivo log work_total con todos los archivos de trabajo de admin y developer
@@ -123,19 +123,24 @@ class ComponentHydralogs
     
     public function run()
     {
-        $arRm = scandir($this->sPathLogs);
-        unset($arRm[0]); unset($arRm[1]);
-
-        $arLogs = $this->get_worklogs();
-        foreach($arRm as $sFileName)
+        if(is_dir($this->sPathLogs))
         {
-            if(!in_array($sFileName,$arLogs))
+            $arRm = scandir($this->sPathLogs);
+            unset($arRm[0]); unset($arRm[1]);
+
+            $arLogs = $this->get_worklogs();
+            foreach($arRm as $sFileName)
             {
-                $iR = unlink($this->sPathLogs.DIRECTORY_SEPARATOR.$sFileName);
-                $this->debug("borrado $sFileName,r:$iR");
+                if(!in_array($sFileName,$arLogs))
+                {
+                    $iR = unlink($this->sPathLogs.DIRECTORY_SEPARATOR.$sFileName);
+                    $this->debug("borrado $sFileName,r:$iR");
+                }
+                //$this->load_lines($this->sPathLogs.DIRECTORY_SEPARATOR.$sFileName);            
             }
-            //$this->load_lines($this->sPathLogs.DIRECTORY_SEPARATOR.$sFileName);            
         }
+        else
+            $this->add_error("sPathLogs:$this->sPathLogs no es un dir");
     }//run()
     
     public function debug($mxVar){echo "<pre>".var_export($mxVar,1);}    
