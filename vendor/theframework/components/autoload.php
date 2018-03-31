@@ -17,6 +17,9 @@ spl_autoload_register(function($sNSClassName)
 {
     $arClass = explode("\\",$sNSClassName);
     $sClassName = end($arClass);
+    //https://autohotkey.com/docs/misc/RegEx-QuickRef.htm
+    // (?<=...) and (?<!...) are positive and negative look-behinds (respectively) 
+    // because they look to the left of the current position rather than the right 
     $sClassName = preg_replace("/(?<!^)([A-Z])/","_\\1",$sClassName);
     $sClassName = str_replace("Component","",$sClassName);
     $sClassName = strtolower($sClassName);
