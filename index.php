@@ -1,6 +1,6 @@
 <?php
 /**
- * index.php 3.0.0
+ * index.php 4.0.0
  */
 function addto_incpath($sPath)
 {
@@ -32,30 +32,67 @@ $arPaths = array_map(function($sPath){
 foreach($arPaths as $sPath)
     addto_incpath($sPath);
 
-if(!$_GET)
-{
+//excluyo los que no quiero mostrar
+$arForbidden = ["phpinfo"];
 
-    $arExamples["components"] = array_filter(scandir($arPaths["components"]),function($sFileName){
-        return !in_array($sFileName,[".",".."]) && strstr($sFileName,".php");
-    });
-    $arExamples["components"]["path"] = $arPaths["components"];
-    $arExamples["helpers"] = array_filter(scandir($arPaths["helpers"]),function($sFileName){
-        return !in_array($sFileName,[".",".."]) && strstr($sFileName,".php");
-    });   
-    $arExamples["helpers"]["path"] = $arPaths["helpers"];
-    $arExamples["mixed"] = array_filter(scandir($arPaths["mixed"]),function($sFileName){
-        return !in_array($sFileName,[".",".."]) && strstr($sFileName,".php");
-    });
-    $arExamples["mixed"]["path"] = $arPaths["mixed"];
-    //var_dump($arExamples);
-    
+$arExamples["components"] = array_filter(scandir($arPaths["components"]),function($sFileName){
+    return !in_array($sFileName,[".",".."]) && strstr($sFileName,".php");
+});
+$arExamples["components"]["path"] = $arPaths["components"];
+$arExamples["helpers"] = array_filter(scandir($arPaths["helpers"]),function($sFileName){
+    return !in_array($sFileName,[".",".."]) && strstr($sFileName,".php");
+});   
+$arExamples["helpers"]["path"] = $arPaths["helpers"];
+$arExamples["mixed"] = array_filter(scandir($arPaths["mixed"]),function($sFileName){
+    return !in_array($sFileName,[".",".."]) && strstr($sFileName,".php");
+});
+$arExamples["mixed"]["path"] = $arPaths["mixed"];
+//var_dump($arExamples);
+
+if(!isset($_GET["f"]))
+{
     $sLast = "";
-    $arHtml = "";
+    $arHtml = [];
+    $arHtml[] = "<h1><a href=\"/\">home</a></h1>";    
+    $arHtml[] = "<h2>"
+            . "<a href=\"https://github.com/eacevedof/prj_phptests\" target=\"_blank\">"
+            . "github repo: prj_phptests</a>"
+            . "</h2>";
+    
     foreach($arExamples as $sType=>$arExample)
     {
-        if($sLast!=$sType)
-            
- 
+        $arHtml[] = "<h3>examples/$sType:</h3>";
+        foreach($arExample as $k=>$sFileName)
+        {
+            if($k=="path") continue;
+            $sFileName = str_replace(".php","",$sFileName);
+            $arHtml[] = "<li><a href=\"/?f=$sFileName\" target=\"_blank\">$sFileName</a></li>";
+        }
     }
+    echo implode("\n",$arHtml);
 
+}
+else
+{
+    $sF = strtolower(trim($_GET["f"]));
+    $sFile = "$sF.php";
+    $sKey = array_search($sFile,$arExamples["components"]);
+    $sKey = ($sKey || array_search($sFile,$arExamples["helpers"]));
+    $sKey = ($sKey || array_search($sFile,$arExamples["mixed"]));
+    if(!$sKey)
+    {
+        echo "<pre> file not found<b>: $sFile </b> in examples <br/>";
+        echo "<a href=\"/\"> home </a>";
+        exit();
+    }
+    elseif(!in_array($sF,$arForbidden))
+    {
+        include($sFile);
+    }
+    else
+    {
+        echo "<pre> file forbidden<b>: $sF </b>";
+        echo "<a href=\"/\"> home </a>";
+        exit();
+    }
 }
