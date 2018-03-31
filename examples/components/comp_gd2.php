@@ -4,7 +4,8 @@
  * @info: proyecto Hydra
  * Clase prototipo para trabajar con gd2
  * Espera variables globales propias de hydra. No se ha terminado, se quedo en fase de prueba
- * contiene errores.
+ * contiene errores tipo: 
+ * Notice: Undefined index: config_app_dir in E:\xampp\htdocs\tests\vendor\theframework\components\component_gd2.php on line 35
 */
 include("vendor/theframework/components/autoload.php");
 use TheFramework\Components\ComponentGd2;
