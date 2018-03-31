@@ -1,8 +1,8 @@
 <?php
 /*
  * @file: comp_mssql.php 1.0.0
- * @info: proyecto Hydra
- * ComponentMssql->query(...) y ComponentMssql->exec(...)
+ * @info: proyecto general
+ * Ejemplos: ComponentMssql->query(Select * from...) y ComponentMssql->exec(insert into...)
 */
 include("vendor/theframework/components/autoload.php");
 use TheFramework\Components\Db\ComponentMssql;
