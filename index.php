@@ -1,7 +1,10 @@
 <?php
 /**
- * index.php 5.0.0
+ * index.php 5.1.0
  */
+
+function pr($var){echo "<pre>". htmlentities(var_export($var,1))."<pre>";}
+
 function addto_incpath($sPathDir)
 {
     if(is_dir($sPathDir))
@@ -20,7 +23,7 @@ function get_info($sPathFile)
 {
     $sContent = file_get_contents($sPathFile);
     $arMatches = [];
-    $sPattern = "/@[a-z,A-Z]*\:(.*?)((@[a-z,A-Z]*\:)|(\*\/))/s";
+    $sPattern = "/@info\:(.*?)((@[a-z,A-Z]*\:)|(\*\/))/s";
     preg_match($sPattern,$sContent,$arMatches);
     //preg_match_all($sPattern,$sContent,$arMatches);
     //echo "<pre>";print_r($arMatches);
@@ -36,6 +39,7 @@ define("DS",DIRECTORY_SEPARATOR);
 define("TFW_DOCROOT",$_SERVER["DOCUMENT_ROOT"]);
 define("TFW_DOCROOTDS",TFW_DOCROOT.DS);
 
+$arPaths["root"] = TFW_DOCROOTDS;
 $arPaths["examples"] = TFW_DOCROOTDS."examples".DS;
 $arPaths["components"] = TFW_DOCROOTDS."examples".DS."components";
 $arPaths["helpers"] = TFW_DOCROOTDS."examples".DS."helpers";
@@ -89,7 +93,7 @@ if(!(isset($_GET["f"]) || isset($_GET["c"])))
             $arHtml[] = "<li><a href=\"/?f=$sFileName\" target=\"_blank\">$sFileName</a> "
                     . "<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
                     . "<a href=\"/?c=$sFileName\" target=\"_blank\">$sFileName - content</a></li>"
-                    . "<pre>$sInfo</pre>";
+                    . "<p>$sInfo</p>";
             
         }//foreach($arExample)
     }//foreach($arExamples)
