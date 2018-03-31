@@ -1,14 +1,16 @@
 <?php
-//file: comp_hydralogs.php 1.0.0
 /*
- * NOTES:
- * 
+ * @file: comp_hydra_logs 1.0.0
+ * @info: proyecto Hydra
+ * Recupera y muestra por pantalla todos los logs que cumplen ciertas condiciones.
+ * Son logs de trabajo de determinados usuarios
 */
-
+include("vendor/theframework/components/autoload.php");
 use TheFramework\Components\ComponentHydralogs;
 $oWLogs = new ComponentHydralogs();
 $oWLogs->run();
-
+if($oWLogs->is_error())
+    $oWLogs->show_errors();
 
 
 //$sText = file_get_contents("c:\\shared\\flamagas_logs\\work_crm3_flamagas_2_20180126.log");
