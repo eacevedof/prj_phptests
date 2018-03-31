@@ -1,9 +1,13 @@
 <?php
 /**
- * index.php 5.1.0
+ * index.php 5.2.0
  */
 
-function pr($var){echo "<pre>". htmlentities(var_export($var,1))."<pre>";}
+function pr($var){
+    echo "<pre style=\"background:yellow;border:1px solid;\">"
+        .htmlentities(var_export($var,1))
+        ."<pre>";
+}
 
 function addto_incpath($sPathDir)
 {
