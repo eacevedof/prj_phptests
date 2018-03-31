@@ -1,11 +1,11 @@
 <?php
-
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-//recupero los alter table
+/*
+ * @file: comp_hydra_logs 1.0.0
+ * @info: proyecto Hydra
+ * Lee el archivo C:\shared\constraints.sql que lleva todas las claves privadas
+ * esto sirve para añadir las claves despues de volcar todos los datos.
+ * El archivo constraints.sql se saca desde el admin de hydra.
+*/
+include("vendor/theframework/components/autoload.php");
 $oComp = new \TheFramework\Components\ComponentHydrapk();
 $oComp->run();
