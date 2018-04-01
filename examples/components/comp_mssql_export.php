@@ -1,6 +1,6 @@
 <?php
 /*
- * @file: comp_mssql_export.php 1.0.1
+ * @file: comp_mssql_export.php 1.0.2
  * @info: proyecto general
  * Ejemplos: ComponentMssqlExport->get_insert_bulk(...) y ComponentMssqlExport->get_schema()
 */
@@ -13,12 +13,16 @@ $arConn["user"]="sa";
 $arConn["password"]="Sasql2014";
 
 $oExImp = new ComponentMssqlExport($arConn);
+$oExImp->set_motor("mysql");
+$arCreate = $oExImp->get_create_table_mysql("app_order_line");
+
+
 //$arSchema = $oExImp->get_schema();
 //print_r($arSchema);
 
 //$arFields = $oExImp->get_fields_info("app_order_line");
-print_r($arFields);
+//print_r($arFields);
 
-$arBulk = $oExImp->get_insert_bulk("app_order_line");
-print_r($arBulk);
-//pr($arTemp);
+//$arBulk = $oExImp->get_insert_bulk("app_order_line");
+//print_r($arBulk);
+
