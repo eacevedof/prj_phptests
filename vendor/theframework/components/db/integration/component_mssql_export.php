@@ -3,7 +3,7 @@
  * @author Eduardo Acevedo Farje.
  * @link www.eduardoaf.com
  * @name TheFramework\Components\Db\ComponentMssqlExport 
- * @file component_mssql_export.php v2.0.0.B.4
+ * @file component_mssql_export.php v2.0.0.B.5
  * @date 30-03-2018 12:06 SPAIN
  * @observations
  */
@@ -423,7 +423,7 @@ class ComponentMssqlExport
             $sTableName = $arTable["table_name"];
             
             if($isDelete)
-                $arLines[] = "-- DELETE FROM `$sTableName`;";
+                $arLines[] = " DELETE FROM `$sTableName`;";
             
             $arFields = $this->get_fields_info($sTableName,1);
             //print_r($arFields);die;
