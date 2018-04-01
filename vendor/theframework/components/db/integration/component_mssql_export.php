@@ -3,7 +3,7 @@
  * @author Eduardo Acevedo Farje.
  * @link www.eduardoaf.com
  * @name TheFramework\Components\Db\ComponentMssqlExport 
- * @file component_mssql_export.php v2.0.0.B.6
+ * @file component_mssql_export.php v2.0.0.B.7
  * @date 30-03-2018 12:06 SPAIN
  * @observations
  */
@@ -63,6 +63,10 @@ class ComponentMssqlExport
     {
         $arTypes = [
             "mssql"=>[
+                "bit"=>[
+                    "mysql"=>"tinyint",
+                    "sqlite"=>"INTEGER",
+                    ],                
                 "int"=>[
                     "mysql"=>"int",
                     "sqlite"=>"INTEGER",
@@ -80,14 +84,26 @@ class ComponentMssqlExport
                     "mysql"=>"varchar",                    
                     "sqlite"=>"TEXT",
                 ],
+                "nvarchar"=>[
+                    "mysql"=>"varchar",                    
+                    "sqlite"=>"TEXT",
+                ],                
                 "char"=>[
                     "mysql"=>"char",                    
                     "sqlite"=>"TEXT",
-                ],        
+                ],  
+                "nchar"=>[
+                    "mysql"=>"char",                    
+                    "sqlite"=>"TEXT",
+                ],                   
                 "text"=>[
                     "mysql"=>"text",                    
                     "sqlite"=>"TEXT",
                 ], 
+                "ntext"=>[
+                    "mysql"=>"text",                    
+                    "sqlite"=>"TEXT",
+                ],                 
                 "datetime"=>[
                     "mysql"=>"varchar",                    
                     "sqlite"=>"TEXT",
@@ -115,7 +131,15 @@ class ComponentMssqlExport
                 "money"=>[
                     "mysql"=>"numeric",                    
                     "sqlite"=>"REAL"
-                ]                
+                ],
+                "image"=>[
+                    "mysql"=>"longblob",                    
+                    "sqlite"=>"TEXT"                    
+                ],
+                "varbinary"=>[
+                    "mysql"=>"longblob",                    
+                    "sqlite"=>"TEXT"                    
+                ],                
             ],//mssql            
             "mysql"=>[
                 "int"=>[
@@ -573,7 +597,7 @@ class ComponentMssqlExport
             $arSQLf = [];
             $arPks = $this->get_pks($arFields);
 
-            foreach($arFields as $arFld)
+            foreach($arFields as $i=>$arFld)
             {
                 $sDefault = "";
                 $sPk = "NULL";
@@ -582,7 +606,7 @@ class ComponentMssqlExport
                 $sFieldName = $arFld["field_name"];
                 $sFieldType = $arFld["field_type"];
                 $sFieldTypeTo = $this->get_fieldtype_map($sFieldType,"mssql","mysql");
-                if(is_array($sFieldTypeTo)){pr("name:$sFieldName,type:$sFieldType");pr($sFieldTypeTo);die;}
+                if(is_array($sFieldTypeTo)){pr("Error traduccion campo: table:$sTableName,name:$sFieldName,type:$sFieldType,order:$i");die;}
                 $sFieldLen = "({$arFld["field_length"]})";
                 if(in_array($sFieldType,$this->arNoLen)) $sFieldLen = "";
 
