@@ -64,40 +64,45 @@ class ComponentMssqlExport
         $arTypes = [
             "mssql"=>[
                 "int"=>[
+                    "mysql"=>"int",
                     "sqlite"=>"INTEGER",
-                    "mysql"=>"int"
+                    
                     ],
                 "tinyint"=>[
+                    "mysql"=>"int",
                     "sqlite"=>"INTEGER",
-                    "mysql"=>"int"
                     ],
                 "smallint"=>[
+                    "mysql"=>"smallint",                    
                     "sqlite"=>"INTEGER",
-                    "mysql"=>"smallint"
-                    ],                
+                    ],          
                 "varchar"=>[
+                    "mysql"=>"varchar",                    
                     "sqlite"=>"TEXT",
-                    "mysql"=>"varchar"
                 ],
                 "char"=>[
+                    "mysql"=>"char",                    
                     "sqlite"=>"TEXT",
-                    "mysql"=>"char"
                 ],        
                 "text"=>[
+                    "mysql"=>"text",                    
                     "sqlite"=>"TEXT",
-                    "mysql"=>"text"
                 ], 
                 "datetime"=>[
+                    "mysql"=>"varchar",                    
                     "sqlite"=>"TEXT",
-                    "mysql"=>"varchar"
-                ],                 
+                ],    
+                "numeric"=>[
+                    "mysql"=>"numeric",                    
+                    "sqlite"=>"REAL"
+                ],                
                 "decimal"=>[
-                    "sqlite"=>"REAL",
-                    "mysql"=>"NUMERIC"
+                    "mysql"=>"numeric",                    
+                    "sqlite"=>"REAL"
                 ],
                 "float"=>[
-                    "sqlite"=>"REAL",
-                    "mysql"=>"NUMERIC"
+                    "mysql"=>"numeric",                    
+                    "sqlite"=>"REAL"
                 ]
             ],//mssql            
             "mysql"=>[
@@ -444,17 +449,25 @@ class ComponentMssqlExport
                 $sDefault = "";
                 $sPk = "NULL";
 
-                $sDefault = $arFld["defvalue"];
+                $sFieldDef = $arFld["defvalue"];
                 $sFieldName = $arFld["field_name"];
                 $sFieldType = $arFld["field_type"];
                 $sFieldTypeTo = $this->get_fieldtype_map($sFieldType,"mssql","mysql");
-                //pr($sFieldType);die;
+                if(is_array($sFieldTypeTo)){pr("name:$sFieldName,type:$sFieldType");pr($sFieldTypeTo);die;}
                 $sFieldLen = "({$arFld["field_length"]})";
                 if(in_array($sFieldType,$this->arNoLen)) $sFieldLen = "";
 
-                 if($arFld["ispk"]) $sPk = "NOT NULL";
+                if($sFieldDef!=="NULL")
+                    $sDefault = "DEFAULT $sFieldDef";
+                
+                if($arFld["ispk"]) 
+                {
+                    $sPk = "NOT NULL";
+                    $sDefault = "";
+                }
+                
                 //todo si el default lleva comillas hay que tratarlo
-                $arSQLf[] = "`$sFieldName` $sFieldTypeTo$sFieldLen $sPk DEFAULT $sDefault";
+                $arSQLf[] = "`$sFieldName` $sFieldTypeTo$sFieldLen $sPk $sDefault";
             }//foreach
 
             $arSQL[] = implode(",\n",$arSQLf);
