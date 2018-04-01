@@ -3,7 +3,7 @@ namespace TheFramework\Components;
 
 use TheFramework\Components\Db\ComponentMssql;
 
-class ComponentDtsxRep
+class ComponentDtsAuxrepl
 {
     private $sDir;
     
@@ -169,4 +169,4 @@ class ComponentDtsxRep
         }//foreach($arfiles)
     }//replace_status
 
-}//class
+}//ComponentDtsAuxrepl

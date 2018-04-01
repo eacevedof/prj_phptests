@@ -13,7 +13,7 @@
 */
 include("vendor/theframework/components/autoload.php");
 //archivos .XNT que nos han proporcionado
-$oComp = new \TheFramework\Components\ComponentScandir();
+$oComp = new \TheFramework\Components\ComponentDtsExtract();
 
 /*
  *  "C:/xampp/htdocs/proy_hydra_flamagas/dts/update_20170620_pricing",

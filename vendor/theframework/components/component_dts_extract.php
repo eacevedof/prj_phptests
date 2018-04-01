@@ -2,16 +2,16 @@
 /**
  * @author Eduardo Acevedo Farje.
  * @link www.eduardoaf.com
- * @name ComponentScandir
- * @file component_scandir.php
- * @version 1.1.0
+ * @name ComponentDtsExtract
+ * @file component_dts_extract.php
+ * @version 1.0.0
  * @date 31-03-2018 17:34
  * @observations
  * Flamagas devuelve todos los archivos .XNT que nos han pasado
  */
 namespace TheFramework\Components;
 
-class ComponentScandir 
+class ComponentDtsExtract 
 {
     private $arPaths;
     private $arFiles;
@@ -78,4 +78,4 @@ class ComponentScandir
 
     public function add_path($value){}
     
-}//ComponentScandir
+}//ComponentDtsExtract
