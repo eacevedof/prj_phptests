@@ -3,7 +3,7 @@
  * @author Eduardo Acevedo Farje.
  * @link www.eduardoaf.com
  * @name TheFramework\Components\Db\ComponentMssqlExport 
- * @file component_mssql_export.php v2.0.0.B.3
+ * @file component_mssql_export.php v2.0.0.B.4
  * @date 30-03-2018 12:06 SPAIN
  * @observations
  */
@@ -91,9 +91,17 @@ class ComponentMssqlExport
                 "datetime"=>[
                     "mysql"=>"varchar",                    
                     "sqlite"=>"TEXT",
-                ],    
+                ],
+                "smalldatetime"=>[
+                    "mysql"=>"varchar",                    
+                    "sqlite"=>"TEXT",
+                ],                
                 "numeric"=>[
                     "mysql"=>"numeric",                    
+                    "sqlite"=>"REAL"
+                ],
+                "real"=>[
+                    "mysql"=>"real",                    
                     "sqlite"=>"REAL"
                 ],                
                 "decimal"=>[
@@ -103,7 +111,11 @@ class ComponentMssqlExport
                 "float"=>[
                     "mysql"=>"numeric",                    
                     "sqlite"=>"REAL"
-                ]
+                ],
+                "money"=>[
+                    "mysql"=>"numeric",                    
+                    "sqlite"=>"REAL"
+                ]                
             ],//mssql            
             "mysql"=>[
                 "int"=>[
@@ -297,6 +309,22 @@ class ComponentMssqlExport
     
     public function get_insert_bulk($sTableName,$isDelete=1)
     {
+        switch($this->sMotorTo) 
+        {
+            case "mysql":
+                return $this->get_insert_bulk_mysql($sTableName,$isDelete);
+            break;
+            case "sqlite":
+                return $this->get_insert_bulk_self($sTableName,$isDelete);
+            break;
+            default:
+                return $this->get_insert_bulk_self($sTableName,$isDelete);
+            break;
+        }
+    }//get_insert_bulk
+    
+    private function get_insert_bulk_self($sTableName,$isDelete=1)
+    {
         $sNow = date("Ymd-His");
         $arTables = $this->get_tables();
         if($sTableName)
@@ -368,9 +396,9 @@ class ComponentMssqlExport
         }//foreach tables
         $sInsert = implode("\n",$arLines);
         return $sInsert;         
-    }//get_insert_bulk
+    }//get_insert_bulk_self    
        
-    public function get_insert_bulk_mysql($sTableName,$isDelete=1)
+    private function get_insert_bulk_mysql($sTableName,$isDelete=1)
     {
         $sNow = date("Ymd-His");
         $arTables = $this->get_tables();
@@ -452,6 +480,19 @@ class ComponentMssqlExport
     
     public function get_create_table($sTableName,$isDrop=1)
     {
+        switch($this->sMotorTo) 
+        {
+            case "mysql":
+                return $this->get_create_table_mysql($sTableName,$isDrop);
+            case "sqlite":
+                return $this->get_create_table_self($sTableName,$isDrop);
+            default:
+                return $this->get_create_table_self($sTableName,$isDrop);
+        }
+    }//get_create_table
+    
+    private function get_create_table_self($sTableName,$isDrop=1)
+    {
         $arFields = $this->get_fields_info($sTableName);
         if($arFields)
         {
@@ -506,9 +547,9 @@ class ComponentMssqlExport
             $this->add_error("get_create_table tabla:$sTableName sin campos");
         
         return "";
-    }//get_create_table
+    }//get_create_table_self    
     
-    public function get_create_table_mysql($sTableName,$isDrop=1)
+    private function get_create_table_mysql($sTableName,$isDrop=1)
     {
         $arFields = $this->get_fields_info($sTableName);
         
@@ -566,6 +607,22 @@ class ComponentMssqlExport
     
     public function get_schema($asString=1)
     {
+        switch($this->sMotorTo) 
+        {
+            case "mysql":
+                return $this->get_schema_mysql($asString);
+            break;
+            case "sqlite":
+                return $this->get_schema_self($asString);
+            break;
+            default:
+                return $this->get_schema_self($asString);
+            break;
+        }
+    }//get_schema
+    
+    public function get_schema_self($asString=1)
+    {
         $sNow = date("Ymd-His");
         $arTables = $this->get_tables();
 
@@ -576,7 +633,21 @@ class ComponentMssqlExport
         
         if($asString) return implode("\n/* -- end table -- */\n",$arLines);
         return $arLines;
-    }//get_schema
+    }//get_schema_self
+
+    private function get_schema_mysql($asString=1)
+    {
+        $sNow = date("Ymd-His");
+        $arTables = $this->get_tables();
+
+        $arLines = ["/*database $sNow*/\n USE {$this->arConn["database"]}-x;"];
+        foreach($arTables as $arTable)
+            if($arTable["otype"]=="u")
+                $arLines[] = $this->get_create_table($arTable["table_name"]);
+        
+        if($asString) return implode("\n/* -- end table -- */\n",$arLines);
+        return $arLines;
+    }//get_schema_mysql    
     
     private function get_pks($arFields)
     {
