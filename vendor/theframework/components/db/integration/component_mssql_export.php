@@ -3,7 +3,7 @@
  * @author Eduardo Acevedo Farje.
  * @link www.eduardoaf.com
  * @name TheFramework\Components\Db\ComponentMssqlExport 
- * @file component_mssql_export.php v2.0.0.B.7
+ * @file component_mssql_export.php v2.0.0.B.9
  * @date 30-03-2018 12:06 SPAIN
  * @observations
  */
@@ -23,7 +23,8 @@ class ComponentMssqlExport
     private $arNumeric = ["float","real","int","smallint","money"];    
     private $arString = ["varchar","text","char"];
     private $arDate = ["datetime","smalldatetime"];
-    private $arNoLen = ["float","datetime","real","smalldatetime","int","text","smallint","money"];
+    private $arNoLen = ["float","datetime","real","smalldatetime","int","text","smallint","money"
+                        ,"image","varbinary"];
     
     private $sMotorTo = "mssql";
     
@@ -61,6 +62,7 @@ class ComponentMssqlExport
     
     private function get_fieldtype_map($sType,$sMotorSrc,$sMotorTrg)
     {
+        //https://support.dbconvert.com/hc/en-us/articles/202952551-Mapping-MySQL-and-SQL-Server-Data-Types
         $arTypes = [
             "mssql"=>[
                 "bit"=>[
@@ -73,11 +75,11 @@ class ComponentMssqlExport
                     
                     ],
                 "tinyint"=>[
-                    "mysql"=>"int",
+                    "mysql"=>"TINYINT",
                     "sqlite"=>"INTEGER",
                     ],
                 "smallint"=>[
-                    "mysql"=>"smallint",                    
+                    "mysql"=>"SMALLINT",                    
                     "sqlite"=>"INTEGER",
                     ],          
                 "varchar"=>[
@@ -85,7 +87,7 @@ class ComponentMssqlExport
                     "sqlite"=>"TEXT",
                 ],
                 "nvarchar"=>[
-                    "mysql"=>"varchar",                    
+                    "mysql"=>"TEXT",                 
                     "sqlite"=>"TEXT",
                 ],                
                 "char"=>[
@@ -105,11 +107,11 @@ class ComponentMssqlExport
                     "sqlite"=>"TEXT",
                 ],                 
                 "datetime"=>[
-                    "mysql"=>"varchar",                    
+                    "mysql"=>"DATETIME",                    
                     "sqlite"=>"TEXT",
                 ],
                 "smalldatetime"=>[
-                    "mysql"=>"varchar",                    
+                    "mysql"=>"TIMESTAMP",                    
                     "sqlite"=>"TEXT",
                 ],                
                 "numeric"=>[
@@ -125,7 +127,7 @@ class ComponentMssqlExport
                     "sqlite"=>"REAL"
                 ],
                 "float"=>[
-                    "mysql"=>"numeric",                    
+                    "mysql"=>"float",                    
                     "sqlite"=>"REAL"
                 ],
                 "money"=>[
@@ -133,11 +135,11 @@ class ComponentMssqlExport
                     "sqlite"=>"REAL"
                 ],
                 "image"=>[
-                    "mysql"=>"longblob",                    
+                    "mysql"=>"LONGBLOB",                    
                     "sqlite"=>"TEXT"                    
                 ],
                 "varbinary"=>[
-                    "mysql"=>"longblob",                    
+                    "mysql"=>"LONGBLOB",                    
                     "sqlite"=>"TEXT"                    
                 ],                
             ],//mssql            
@@ -278,10 +280,12 @@ class ComponentMssqlExport
                 WHEN 'money' THEN '10,0'
                 WHEN 'datetime' THEN '-'
                 WHEN 'smalldatetime' THEN '-'
+                WHEN 'varbinary' THEN '-'
+                WHEN 'image' THEN '-'
                 WHEN 'numeric' THEN CONVERT(VARCHAR,intpos)+','+CONVERT(VARCHAR,floatpos)
                 WHEN 'decimal' THEN CONVERT(VARCHAR,intpos)+','+CONVERT(VARCHAR,floatpos)
                 ELSE
-                        CONVERT(VARCHAR,mxlen)
+                    CONVERT(VARCHAR,mxlen)
             END AS field_length
             ,REPLACE(REPLACE(ISNULL(defvalue,'NULL'),'(',''),')','') defvalue
             ,CONVERT(VARCHAR(30),is_nullable) is_nullable
@@ -605,9 +609,10 @@ class ComponentMssqlExport
                 $sFieldDef = $arFld["defvalue"];
                 $sFieldName = $arFld["field_name"];
                 $sFieldType = $arFld["field_type"];
+                $sFieldLen = $arFld["field_length"];
                 $sFieldTypeTo = $this->get_fieldtype_map($sFieldType,"mssql","mysql");
                 if(is_array($sFieldTypeTo)){pr("Error traduccion campo: table:$sTableName,name:$sFieldName,type:$sFieldType,order:$i");die;}
-                $sFieldLen = "({$arFld["field_length"]})";
+                $sFieldLen = "($sFieldLen)";
                 if(in_array($sFieldType,$this->arNoLen)) $sFieldLen = "";
 
                 if($sFieldDef!=="NULL" && strlen($sFieldDef)<20)
