@@ -17,9 +17,9 @@ $oExImp->set_motor("mysql");
 //$arCreate = $oExImp->get_create_table("version_db");
 //print_r($arCreate);
 
-//$sSchema = $oExImp->get_schema();
-//file_put_contents("C:\Users\ioedu\Desktop\schema.sql",$sSchema);
-//pr("total caracteres escritos schema:".strlen($sSchema));
+$sSchema = $oExImp->get_schema();
+file_put_contents("C:\Users\ioedu\Desktop\schema.sql",$sSchema);
+pr("total caracteres escritos schema:".strlen($sSchema));
 
 $sBulk = $oExImp->get_insert_bulk();
 file_put_contents("C:\Users\ioedu\Desktop\insert.sql",$sBulk);
