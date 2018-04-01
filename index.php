@@ -1,11 +1,15 @@
 <?php
 /**
- * index.php 5.2.0
+ * index.php 5.2.1
  */
 
-function pr($var){
+function pr($var,$asHtml=0){
+    $sContent=$var;
+    if($asHtml)
+        $sContent = htmlentities($sContent);
+    
     echo "<pre style=\"background:yellow;border:1px solid;\">"
-        .htmlentities(var_export($var,1))
+        .$sContent
         ."<pre>";
 }
 
@@ -103,9 +107,10 @@ if(!(isset($_GET["f"]) || isset($_GET["c"])))
     }//foreach($arExamples)
     echo implode("\n",$arHtml);
 }
-//hay parámetro f
+//hay parÃ¡metro f
 elseif(isset($_GET["f"]) || isset($_GET["c"]))
 {
+    echo "/*<a href=\"/\">home</a><hr/>*/";
     //die("dos");
     $isContent = FALSE;
     if(isset($_GET["f"])) $sF = strtolower(trim($_GET["f"]));       
@@ -122,14 +127,10 @@ elseif(isset($_GET["f"]) || isset($_GET["c"]))
     if(!$sKey)
     {
         echo "<pre> file not found<b>: $sFile </b> in examples <br/>";
-        echo "<a href=\"/\"> home </a>";
-        exit();
     }
     elseif(in_array($sF,$arForbidden))
     {
         echo "<pre> file forbidden<b>: $sF </b>";
-        echo "<a href=\"/\"> home </a>";
-        exit();
     }
     else
     {
