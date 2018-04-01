@@ -3,7 +3,7 @@
  * @author Eduardo Acevedo Farje.
  * @link www.eduardoaf.com
  * @name TheFramework\Components\Db\ComponentMssqlExport 
- * @file component_mssql_export.php v1.8.0
+ * @file component_mssql_export.php v2.0.0B
  * @date 30-03-2018 12:06 SPAIN
  * @observations
  */
@@ -24,6 +24,8 @@ class ComponentMssqlExport
     private $arString = ["varchar","text","char"];
     private $arDate = ["datetime","smalldatetime"];
     private $arNoLen = ["float","datetime","real","smalldatetime","int","text","smallint","money"];
+    
+    private $sMotorTo = "mssql";
     
     public function __construct($arConn=["server"=>"","database"=>"","user"=>"","password"=>""]) 
     {
@@ -57,7 +59,7 @@ class ComponentMssqlExport
         $arTypeMap["mysql"]["9"]="decimal";//10,0    
     }//get_fieldmap
     
-    private function get_type_tr($sType,$sMotorSrc,$sMotorTrg)
+    private function get_fieldtype_map($sType,$sMotorSrc,$sMotorTrg)
     {
         $arTypes = [
             "mssql"=>[
@@ -160,8 +162,8 @@ class ComponentMssqlExport
             ]
         ];
         return isset($arTypes[$sMotorSrc][$sType][$sMotorTrg])?$arTypes[$sMotorSrc][$sType][$sMotorTrg]:[];
-    }//get_type_tr
-    
+    }//get_fieldtype_map
+   
     private function log($sText,$sTitle="",$sType="debug")
     {
         $sPathLogs = $_SERVER["DOCUMENT_ROOT"].DIRECTORY_SEPARATOR."logs";
@@ -183,7 +185,7 @@ class ComponentMssqlExport
         AND (sqltable.xtype = 'U'/*tablees*/ OR sqltable.xtype = 'V'/*views*/)
         ORDER BY sqltable.name
         ";
-        
+        $this->log($sSQL,"get_tables");
         $arTables = $this->oDb->query($sSQL);
         return $arTables;        
     }//get_tables
@@ -205,8 +207,8 @@ class ComponentMssqlExport
         AND tables.name = '$sTableName'
         ORDER BY cols.colid ASC";
         
+        $this->log($sSQL,"get_fields");
         $arTmp = $this->oDb->query($sSQL);
-        
         foreach($arTmp as $arT)
             $arTables[$arT["id"]] = $arT["description"];
         
@@ -283,7 +285,7 @@ class ComponentMssqlExport
         GROUP BY field_name
         ORDER BY column_id
         ";
-        
+        $this->log($sSQL,"get_fields_info");
         $arFields = $this->oDb->query($sSQL);
         return $arFields;          
     }//get_fields_info    
@@ -362,59 +364,112 @@ class ComponentMssqlExport
         $sInsert = implode("\n",$arLines);
         return $sInsert;         
     }//get_insert_bulk
-    
+       
     public function get_create_table($sTableName,$isDrop=1)
     {
-        $arSQL = [];
-        if($isDrop)
-            //$arSQL[] = "IF EXISTS(SELECT * FROM dbo.$sTableName) DROP TABLE dbo.$sTableName";
-            $arSQL[] = "IF (OBJECT_ID('$sTableName', 'U') IS NOT NULL) DROP TABLE dbo.$sTableName ";
+        $arFields = $this->get_fields_info($sTableName);
+        if($arFields)
+        {
+            $arSQL = [];
+            if($isDrop)
+                $arSQL[] = "IF (OBJECT_ID('$sTableName', 'U') IS NOT NULL) DROP TABLE dbo.$sTableName ";
+            
+            $arSQL[] = "CREATE TABLE [$sTableName] (";
+            
+            $arSQLf = [];
+            $arPks = $this->get_pks($arFields);
+
+            foreach($arFields as $arFld)
+            {
+                $sDefault = "";
+                $sPk = "NULL";
+
+                $sFieldDef = $arFld["defvalue"];
+                $sFieldName = $arFld["field_name"];
+                $sFieldType = $arFld["field_type"];
+                $sFieldLen = "({$arFld["field_length"]})";
+                if(in_array($sFieldType,$this->arNoLen)) $sFieldLen = "";
+
+                //trato el default
+                $sDefKey = strtolower($sTableName)."_".strtolower($sFieldName);
+                if($sFieldDef!=="NULL" && strlen($sFieldDef)<20)
+                    $sDefault = "CONSTRAINT [DF_$sDefKey] DEFAULT ($sFieldDef)";
+
+                if($arFld["ispk"]) $sPk = "";
+
+                $arSQLf[] = "[$sFieldName] [$sFieldType]$sFieldLen $sPk $sDefault";
+            }//foreach
+
+            $arSQL[] = implode(",\n",$arSQLf);
+            if($arPks)
+            {
+                $sTableLow = strtolower($sTableName);
+                $arSQL[] = ",CONSTRAINT [PK_{$sTableLow}] PRIMARY KEY CLUSTERED (";
+
+                $arTmp = [];
+                foreach($arPks as $sFieldName)
+                    $arTmp[] = "[$sFieldName] ASC";
+
+                $arSQL[] = implode(",",$arTmp).") ";
+                $arSQL[] = "WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]";
+            }
+            $arSQL[] = ") ON [PRIMARY]";
+            $sSQL = implode("\n",$arSQL);
+            return $sSQL;      
+        }
+        else
+            $this->add_error("get_create_table tabla:$sTableName sin campos");
         
+        return "";
+    }//get_create_table
+    
+    public function get_create_table_mysql($sTableName,$isDrop=1)
+    {
         $arFields = $this->get_fields_info($sTableName);
         
-        $arSQL[] = "CREATE TABLE [$sTableName] (";
-        
-        $arSQLf = [];
-        $arPks = $this->get_pks($arFields);
+        if($arFields)
+        {
+            $arSQL = [];
+            if($isDrop)
+                $arSQL[] = "DROP TABLE IF EXISTS `$sTableName`;";
 
-        foreach($arFields as $arFld)
-        {
-            $sDefault = "";
-            $sPk = "NULL";
-           
-            $sFieldName = $arFld["field_name"];
-            $sFieldType = $arFld["field_type"];
-            $sFieldLen = "({$arFld["field_length"]})";
-            if(in_array($sFieldType,$this->arNoLen)) $sFieldLen = "";
-            
-            //trato el default
-            $sFieldDef = $arFld["defvalue"];
-            $sDefKey = strtolower($sTableName)."_".strtolower($sFieldName);
-            if($sFieldDef!=="NULL" && strlen($sFieldDef)<20)
-                $sDefault = "CONSTRAINT [DF_$sDefKey] DEFAULT ($sFieldDef)";
-            
-            if($arFld["ispk"]) $sPk = "";
-            
-            $arSQLf[] = "[$sFieldName] [$sFieldType]$sFieldLen $sPk $sDefault";
-        }//foreach
-        
-        $arSQL[] = implode(",\n",$arSQLf);
-        if($arPks)
-        {
-            $sTableLow = strtolower($sTableName);
-            $arSQL[] = ",CONSTRAINT [PK_{$sTableLow}] PRIMARY KEY CLUSTERED (";
-            
-            $arTmp = [];
-            foreach($arPks as $sFieldName)
-                $arTmp[] = "[$sFieldName] ASC";
-            
-            $arSQL[] = implode(",",$arTmp).") ";
-            $arSQL[] = "WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]";
+            $arSQL[] = "CREATE TABLE `$sTableName` (";
+
+            //sentencias para campos
+            $arSQLf = [];
+            $arPks = $this->get_pks($arFields);
+
+            foreach($arFields as $arFld)
+            {
+                $sDefault = "";
+                $sPk = "NULL";
+
+                $sDefault = $arFld["defvalue"];
+                $sFieldName = $arFld["field_name"];
+                $sFieldType = $arFld["field_type"];
+                $sFieldTypeTo = $this->get_fieldtype_map($sFieldType,"mssql","mysql");
+                //pr($sFieldType);die;
+                $sFieldLen = "({$arFld["field_length"]})";
+                if(in_array($sFieldType,$this->arNoLen)) $sFieldLen = "";
+
+                 if($arFld["ispk"]) $sPk = "NOT NULL";
+                //todo si el default lleva comillas hay que tratarlo
+                $arSQLf[] = "`$sFieldName` $sFieldTypeTo$sFieldLen $sPk DEFAULT $sDefault";
+            }//foreach
+
+            $arSQL[] = implode(",\n",$arSQLf);
+            if($arPks)
+            {
+                $arSQL[] = ",PRIMARY KEY (`".implode("`,`",$arPks)."`)";
+            }
+            $arSQL[] = ");";
+            $sSQL = implode("\n",$arSQL);
+            return $sSQL;      
         }
-        $arSQL[] = ") ON [PRIMARY]";
-        $sSQL = implode("\n",$arSQL);
-        return $sSQL;        
-    }//get_create_table
+        else
+            $this->add_error("get_create_table_mysql tabla:$sTableName sin campos");
+        return "";
+    }//get_create_table_mysql    
     
     public function get_schema($asString=1)
     {
@@ -468,4 +523,9 @@ class ComponentMssqlExport
     
     public function add_conn($k,$v){$this->arConn[$k]=$v;}
     
+    /**
+     * El formato de destino. En caso de querer exportar para mysql o sqlite
+     * @param string $value mysql,sqlite
+     */
+    public function set_motor($value){$this->sMotorTo=$value;}
 }//ComponentMssqlExport
