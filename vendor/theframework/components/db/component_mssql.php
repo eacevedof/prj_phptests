@@ -3,7 +3,7 @@
  * @author Eduardo Acevedo Farje.
  * @link www.eduardoaf.com
  * @name TheFramework\Components\Db\ComponentMssql 
- * @file component_mssql.php v1.3.0
+ * @file component_mssql.php v1.4.0.B
  * @date 19-09-2017 04:56 SPAIN
  * @observations
  */
@@ -25,12 +25,13 @@ class ComponentMssql
 
     private function get_conn_string()
     {
-        $arCon["sqlsrv:Server"] = (isset($this->arConn["server"])?$this->arConn["server"]:"");
-        $arCon["Database"] = (isset($this->arConn["database"])?$this->arConn["database"]:"");
-        $arCon["ConnectionPooling"] = (isset($this->arConn["pool"])?$this->arConn["pool"]:"0");
+        $arConn["sqlsrv:Server"] = (isset($this->arConn["server"])?$this->arConn["server"]:"");
+        $arConn["Database"] = (isset($this->arConn["database"])?$this->arConn["database"]:"");
+        $arConn["ConnectionPooling"] = (isset($this->arConn["pool"])?$this->arConn["pool"]:"0");
+        $arConn["charset"] = (isset($this->arConn["charset"])?$this->arConn["charset"]:"UTF-8");
         
         $sString = "";
-        foreach($arCon as $sK=>$sV)
+        foreach($arConn as $sK=>$sV)
             $sString .= "$sK=$sV;";
         
         return $sString;
