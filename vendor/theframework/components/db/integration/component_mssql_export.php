@@ -307,7 +307,7 @@ class ComponentMssqlExport
         return $arFields;          
     }//get_fields_info    
     
-    public function get_insert_bulk($sTableName,$isDelete=1)
+    public function get_insert_bulk($sTableName=NULL,$isDelete=1)
     {
         switch($this->sMotorTo) 
         {
@@ -323,7 +323,7 @@ class ComponentMssqlExport
         }
     }//get_insert_bulk
     
-    private function get_insert_bulk_self($sTableName,$isDelete=1)
+    private function get_insert_bulk_self($sTableName=NULL,$isDelete=1)
     {
         $sNow = date("Ymd-His");
         $arTables = $this->get_tables();
@@ -393,12 +393,16 @@ class ComponentMssqlExport
                     $arLines[] = $sInsert;
                 }//foreach arRows
             }//if arRows
+            else
+            {
+                $arLines[] = "-- no rows for $sTableName";
+            }            
         }//foreach tables
         $sInsert = implode("\n",$arLines);
         return $sInsert;         
     }//get_insert_bulk_self    
        
-    private function get_insert_bulk_mysql($sTableName,$isDelete=1)
+    private function get_insert_bulk_mysql($sTableName=NULL,$isDelete=1)
     {
         $sNow = date("Ymd-His");
         $arTables = $this->get_tables();
@@ -452,7 +456,7 @@ class ComponentMssqlExport
                     {
                         $sFieldType = $this->get_fieldtype($sFieldName,$arFields);
                         $sValue = $arRow[$sFieldName];
-                        $sValue = str_replace("'","\\\'",$sValue);
+                        $sValue = str_replace("'","\\'",$sValue);
                         $sValue = "'$sValue'";
                         if($sValue==="''")
                         {
@@ -473,6 +477,10 @@ class ComponentMssqlExport
                     $arLines[] = $sInsert;
                 }//foreach arRows
             }//if arRows
+            else
+            {
+                $arLines[] = "-- no rows for $sTableName";
+            }
         }//foreach tables
         $sInsert = implode("\n",$arLines);
         return $sInsert;     
