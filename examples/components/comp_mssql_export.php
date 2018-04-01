@@ -1,6 +1,6 @@
 <?php
 /*
- * @file: comp_mssql_export.php 1.0.2
+ * @file: comp_mssql_export.php 1.0.3
  * @info: proyecto general
  * Ejemplos: ComponentMssqlExport->get_insert_bulk(...) y ComponentMssqlExport->get_schema()
 */
@@ -14,8 +14,8 @@ $arConn["password"]="Sasql2014";
 
 $oExImp = new ComponentMssqlExport($arConn);
 $oExImp->set_motor("mysql");
-$arCreate = $oExImp->get_create_table_mysql("app_order_line");
-
+$arCreate = $oExImp->get_create_table_mysql("version_db");
+print_r($arCreate);
 
 //$arSchema = $oExImp->get_schema();
 //print_r($arSchema);
