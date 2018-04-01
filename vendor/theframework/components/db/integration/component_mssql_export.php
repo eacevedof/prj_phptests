@@ -3,7 +3,7 @@
  * @author Eduardo Acevedo Farje.
  * @link www.eduardoaf.com
  * @name TheFramework\Components\Db\ComponentMssqlExport 
- * @file component_mssql_export.php v2.0.0.B.2
+ * @file component_mssql_export.php v2.0.0.B.3
  * @date 30-03-2018 12:06 SPAIN
  * @observations
  */
@@ -370,6 +370,86 @@ class ComponentMssqlExport
         return $sInsert;         
     }//get_insert_bulk
        
+    public function get_insert_bulk_mysql($sTableName,$isDelete=1)
+    {
+        $sNow = date("Ymd-His");
+        $arTables = $this->get_tables();
+        if($sTableName)
+            $arTables = array_filter($arTables,function($arItem) use($sTableName) {
+                //print_r($arItem);
+                return $arItem["table_name"] === $sTableName;
+            });
+        //die;
+        //echo "<pre>"; print_r($arTables);die;
+        //$arLines = ["/*database $sNow*/\n USE {$this->arConn["database"]}-x"];
+        //$arLines = ["/*database $sNow*/\n USE db_killme"];
+        
+        foreach($arTables as $arTable)
+        {
+            //vistas
+            if($arTable["otype"]=="v") continue;
+            $sTableName = $arTable["table_name"];
+            
+            if($isDelete)
+                $arLines[] = "-- DELETE FROM `$sTableName`;";
+            
+            $arFields = $this->get_fields_info($sTableName,1);
+            //print_r($arFields);die;
+            $arSelect = [];
+            foreach($arFields as $arField)
+                $arSelect[] = $arField["field_name"];
+
+            $sOrderBy = "1";
+            if(in_array("id",$arSelect)) $sOrderBy = "id";
+            if(in_array("idn",$arSelect)) $sOrderBy = "idn";
+            
+            $sSelect = implode("],[",$arSelect);
+            $sSelect = "[$sSelect]";
+            
+            $sSelectMy = implode("`,`",$arSelect);
+            $sSelectMy = "`$sSelectMy`";
+            
+            $sSQL = "SELECT $sSelect FROM $sTableName ORDER BY $sOrderBy ASC";
+            //print_r($sSQL);die;
+            $arRows = $this->oDb->query($sSQL);
+            if($arRows)
+            {
+                $arEnd = end($arRows);
+                $arLines[] = "INSERT INTO `$sTableName` ($sSelectMy) VALUES ";
+                
+                foreach($arRows as $arRow)
+                {
+                    $arIns = [];
+                    foreach($arSelect as $sFieldName)
+                    {
+                        $sFieldType = $this->get_fieldtype($sFieldName,$arFields);
+                        $sValue = $arRow[$sFieldName];
+                        $sValue = str_replace("'","\\\'",$sValue);
+                        $sValue = "'$sValue'";
+                        if($sValue==="''")
+                        {
+                            if($this->is_nullable($sFieldName,$arFields)
+                               || in_array($sFieldType,$this->arNumeric)
+                               || in_array($sFieldType,$this->arDate))
+                                $sValue = "NULL";
+                        }
+                        $arIns[] = $sValue;
+                    }
+                    $sInsert = "(";
+                    $sInsert .= implode(",",$arIns);
+                    $sInsert .= ")";
+                    
+                    if($arEnd==$arRow) $sInsert .= ";";
+                    else $sInsert .= ",";
+                    
+                    $arLines[] = $sInsert;
+                }//foreach arRows
+            }//if arRows
+        }//foreach tables
+        $sInsert = implode("\n",$arLines);
+        return $sInsert;     
+    }//get_insert_bulk_mysql
+    
     public function get_create_table($sTableName,$isDrop=1)
     {
         $arFields = $this->get_fields_info($sTableName);
