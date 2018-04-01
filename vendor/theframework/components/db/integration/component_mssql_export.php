@@ -3,7 +3,7 @@
  * @author Eduardo Acevedo Farje.
  * @link www.eduardoaf.com
  * @name TheFramework\Components\Db\ComponentMssqlExport 
- * @file component_mssql_export.php v2.0.0.B.1
+ * @file component_mssql_export.php v2.0.0.B.2
  * @date 30-03-2018 12:06 SPAIN
  * @observations
  */
@@ -457,7 +457,7 @@ class ComponentMssqlExport
                 $sFieldLen = "({$arFld["field_length"]})";
                 if(in_array($sFieldType,$this->arNoLen)) $sFieldLen = "";
 
-                if($sFieldDef!=="NULL")
+                if($sFieldDef!=="NULL" && strlen($sFieldDef)<20)
                     $sDefault = "DEFAULT $sFieldDef";
                 
                 if($arFld["ispk"]) 
