@@ -107,7 +107,7 @@ if(!(isset($_GET["f"]) || isset($_GET["c"])))
     }//foreach($arExamples)
     echo implode("\n",$arHtml);
 }
-//hay parÃ¡metro f
+//hay parámetro f
 elseif(isset($_GET["f"]) || isset($_GET["c"]))
 {
     echo "/*<a href=\"/\">home</a><hr/>*/";
