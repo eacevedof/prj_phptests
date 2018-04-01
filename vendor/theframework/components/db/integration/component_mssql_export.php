@@ -3,7 +3,7 @@
  * @author Eduardo Acevedo Farje.
  * @link www.eduardoaf.com
  * @name TheFramework\Components\Db\ComponentMssqlExport 
- * @file component_mssql_export.php v2.0.0.B.5
+ * @file component_mssql_export.php v2.0.0.B.6
  * @date 30-03-2018 12:06 SPAIN
  * @observations
  */
