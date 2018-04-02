@@ -3,7 +3,7 @@
  * @author Eduardo Acevedo Farje.
  * @link www.eduardoaf.com
  * @name TheFramework\Components\Db\ComponentMssqlExport 
- * @file component_mssql_export.php v2.0.0.B.9
+ * @file component_mssql_export.php v2.0.0.B.10
  * @date 30-03-2018 12:06 SPAIN
  * @observations
  */
@@ -20,11 +20,13 @@ class ComponentMssqlExport
     private $iAffected;
     private $oDb;
     
-    private $arNumeric = ["float","real","int","smallint","money"];    
+    private $arNumeric = ["float","real","int","smallint","money","bit"];    
     private $arString = ["varchar","text","char"];
     private $arDate = ["datetime","smalldatetime"];
     private $arNoLen = ["float","datetime","real","smalldatetime","int","text","smallint","money"
                         ,"image","varbinary"];
+    //binarios
+    private $arBinary = ["image","varbinary"];
     
     private $sMotorTo = "mssql";
     
@@ -457,7 +459,12 @@ class ComponentMssqlExport
             //print_r($arFields);die;
             $arSelect = [];
             foreach($arFields as $arField)
+            {
+                $sFieldType = $arField["field_type"];
+                if(in_array($sFieldType,$this->arBinary))
+                    continue;
                 $arSelect[] = $arField["field_name"];
+            }
 
             $sOrderBy = "1";
             if(in_array("id",$arSelect)) $sOrderBy = "id";
@@ -474,33 +481,40 @@ class ComponentMssqlExport
             $arRows = $this->oDb->query($sSQL);
             if($arRows)
             {
-                $arEnd = end($arRows);
-                $arLines[] = "INSERT INTO `$sTableName` ($sSelectMy) VALUES ";
+                //$arRows = array_unique($arRows);
+                $iRows = count($arRows);
+                //$arLines[] = "INSERT INTO `$sTableName` ($sSelectMy) VALUES ";
                 
-                foreach($arRows as $arRow)
+                foreach($arRows as $i=>$arRow)
                 {
                     $arIns = [];
                     foreach($arSelect as $sFieldName)
                     {
                         $sFieldType = $this->get_fieldtype($sFieldName,$arFields);
                         $sValue = $arRow[$sFieldName];
-                        $sValue = str_replace("'","\\'",$sValue);
-                        $sValue = "'$sValue'";
-                        if($sValue==="''")
+                        
+                        if(in_array($sValue,["",NULL]))
                         {
                             if($this->is_nullable($sFieldName,$arFields)
                                || in_array($sFieldType,$this->arNumeric)
                                || in_array($sFieldType,$this->arDate))
                                 $sValue = "NULL";
                         }
+                        else
+                        {
+                            $sValue = str_replace("'","\\'",$sValue);
+                            if(!in_array($sFieldType,$this->arNumeric))
+                                $sValue = "'$sValue'";
+                        }
+                        
                         $arIns[] = $sValue;
                     }
-                    $sInsert = "(";
+                    $sInsert = "INSERT INTO `$sTableName` ($sSelectMy) VALUES(";
                     $sInsert .= implode(",",$arIns);
-                    $sInsert .= ")";
+                    $sInsert .= ");";
                     
-                    if($arEnd==$arRow) $sInsert .= ";";
-                    else $sInsert .= ",";
+                    //if(($iRows-1)===$i) $sInsert .= ";";
+                    //else $sInsert .= ",";
                     
                     $arLines[] = $sInsert;
                 }//foreach arRows
