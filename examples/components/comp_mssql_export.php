@@ -1,11 +1,12 @@
 <?php
 /*
- * @file: comp_mssql_export.php 1.0.4
+ * @file: comp_mssql_export.php 1.0.5
  * @info: proyecto general
  * Ejemplos: ComponentMssqlExport->get_insert_bulk(...) y ComponentMssqlExport->get_schema()
 */
 include("vendor/theframework/components/autoload.php");
 ini_set("max_execution_time",3000);
+ini_set('memory_limit', '-1');
 use TheFramework\Components\Db\Integration\ComponentMssqlExport;
 $arConn["server"]="localhost\MSSQLSERVER2014";
 $arConn["database"]="GemiCar1";
