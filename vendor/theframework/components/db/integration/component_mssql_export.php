@@ -3,7 +3,7 @@
  * @author Eduardo Acevedo Farje.
  * @link www.eduardoaf.com
  * @name TheFramework\Components\Db\ComponentMssqlExport 
- * @file component_mssql_export.php v2.0.0.B.10
+ * @file component_mssql_export.php v2.0.0.B.11
  * @date 30-03-2018 12:06 SPAIN
  * @observations
  */
@@ -499,6 +499,10 @@ class ComponentMssqlExport
                                || in_array($sFieldType,$this->arNumeric)
                                || in_array($sFieldType,$this->arDate))
                                 $sValue = "NULL";
+                            else 
+                            {
+                                $sValue="''";
+                            }
                         }
                         else
                         {
