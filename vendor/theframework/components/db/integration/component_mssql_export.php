@@ -3,7 +3,7 @@
  * @author Eduardo Acevedo Farje.
  * @link www.eduardoaf.com
  * @name TheFramework\Components\Db\ComponentMssqlExport 
- * @file component_mssql_export.php v2.0.0.B.11
+ * @file component_mssql_export.php v2.0.0
  * @date 30-03-2018 12:06 SPAIN
  * @observations
  */
@@ -734,6 +734,39 @@ class ComponentMssqlExport
         }
         return 0;        
     }//get_fieldtype
+    
+    private function get_numrows($sTableName="")
+    {
+        if($sTableName)
+            $sTableName = "AND TABLE_NAME = '$sTableName'";
+        $sSQL = "-- get_numrows
+        SELECT t.*,r.irows
+        FROM
+        (
+            SELECT OBJECT_ID as objid
+            ,OBJECT_NAME(OBJECT_ID) AS tablename
+            ,SUM(row_count) AS irows
+            FROM sys.dm_db_partition_stats
+            WHERE index_id = 0/*heap*/ 
+            OR index_id = 1/*clustered index*/
+            GROUP BY OBJECT_ID
+        ) AS r
+        INNER JOIN
+        (
+            SELECT DISTINCT 
+            TABLE_CATALOG AS db
+            ,TABLE_NAME AS tablename
+            FROM INFORMATION_SCHEMA.COLUMNS
+            WHERE 1=1
+            AND TABLE_CATALOG='{$this->arConn["database"]}'
+            $sTableName
+        ) AS t
+        ON r.tablename = t.tablename            
+        ";
+        $this->log($sSQL,"get_numrows");
+        $arRows = $this->oDb->query($sSQL);
+        return $arRows;  
+    }
     
     private function add_error($sMessage){$this->isError = TRUE;$this->iAffected=-1; $this->arErrors[]=$sMessage;}    
     public function is_error(){return $this->isError;}
