@@ -24,9 +24,9 @@ $oExImp->set_motor("mysql");
 //pr("total caracteres escritos schema:".strlen($sSchema));
 //print_r($sSchema);
 
-$sBulk = $oExImp->get_insert_bulk();
-file_put_contents("C:\Users\ioedu\Desktop\insert.sql",$sBulk);
-pr("total caracteres escritos insert:".strlen($sBulk));
+//$sBulk = $oExImp->get_insert_bulk();
+//file_put_contents("C:\Users\ioedu\Desktop\insert.sql",$sBulk);
+//pr("total caracteres escritos insert:".strlen($sBulk));
 
 //$arFields = $oExImp->get_fields_info("app_order_line");
 //print_r($arFields);
@@ -34,3 +34,5 @@ pr("total caracteres escritos insert:".strlen($sBulk));
 //$arBulk = $oExImp->get_insert_bulk("app_order_line");
 //print_r($arBulk);
 
+$sSQL = $oExImp->get_notnull_fields("Articulo",1);
+pr($sSQL);
