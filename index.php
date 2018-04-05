@@ -1,10 +1,10 @@
 <?php
 /**
- * index.php 5.2.1
+ * index.php 5.2.2
  */
 
 function pr($var,$asHtml=0){
-    $sContent=$var;
+    $sContent= var_export($var,1);
     if($asHtml)
         $sContent = htmlentities($sContent);
     
