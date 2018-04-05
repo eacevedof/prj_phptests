@@ -3,7 +3,7 @@
  * @author Eduardo Acevedo Farje.
  * @link www.eduardoaf.com
  * @name TheFramework\Components\Db\ComponentMssqlExport 
- * @file component_mssql_export.php v2.0.0
+ * @file component_mssql_export.php v2.1.0B
  * @date 30-03-2018 12:06 SPAIN
  * @observations
  */
@@ -735,7 +735,7 @@ class ComponentMssqlExport
         return 0;        
     }//get_fieldtype
     
-    private function get_numrows($sTableName="")
+    public function get_numrows($sTableName="")
     {
         if($sTableName)
             $sTableName = "AND TABLE_NAME = '$sTableName'";
@@ -766,7 +766,62 @@ class ComponentMssqlExport
         $this->log($sSQL,"get_numrows");
         $arRows = $this->oDb->query($sSQL);
         return $arRows;  
-    }
+    }//get_numrows
+    
+    public function get_notnull_fields($sTableName="")
+    {
+        $arNotNull = [];
+        if($sTableName)
+        {
+            $sSQL = "-- get_notnull_fields
+            SELECT * FROM $sTableName
+            ";
+            $arRows = $this->oDb->query($sSQL);
+            if($arRows)
+            {
+                $arNotNull[$sTableName] = [];
+                $arFields = array_keys($arRows[0]);
+                foreach($arFields as $sFieldName)
+                {
+                    //los valores de la columna
+                    $arTmp = array_column($arRows,$sFieldName);
+                    $arDist = array_unique($arTmp);
+                    //pr($arDist);
+                    $iDist = count($arDist);
+                    if($iDist===0)
+                    {
+                        continue;
+                    }
+                    elseif($iDist===1)
+                    {
+                        //pr($arDist);die;
+                        $sK = array_keys($arDist);
+                        $sK = $sK[0];
+                        if(in_array($arDist[$sK],["",NULL,"0",0]))
+                            continue;
+                        else
+                            $arNotNull[$sTableName][] = ["field"=>$sFieldName,"distinct"=>$iDist];
+                    }
+                    else
+                        $arNotNull[$sTableName][] = ["field"=>$sFieldName,"distinct"=>$iDist];
+                }//foreach(arFields)
+            }//if(arRows)
+        }
+        if(isset($arNotNull[$sTableName]) && count($arNotNull[$sTableName]))
+        {
+            $arFields = $arNotNull[$sTableName];
+            usort($arFields,function($a,$b){
+                return $a["distinct"]<$b["distinct"];
+            });
+            //pr($arFields);
+            $sFields = implode(",\n", array_column($arFields,"field"));
+            $sSQL = " -- get_notnull_fields
+            SELECT $sFields 
+            FROM $sTableName";
+            $arNotNull[$sTableName]["sql"] = $sSQL;
+        }
+        return $arNotNull;  
+    }//get_numrows
     
     private function add_error($sMessage){$this->isError = TRUE;$this->iAffected=-1; $this->arErrors[]=$sMessage;}    
     public function is_error(){return $this->isError;}
