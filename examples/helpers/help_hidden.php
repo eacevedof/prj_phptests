@@ -8,7 +8,7 @@ use TheFramework\Helpers\HelperForm;
 
 if(isset($_POST["hidOne"]))//required
     //pr(): is an echo function
-    pr("{hidOne:{$_POST["hidOne"]},hidTwo:{$_POST["hidTwo"]}}","\$_POST");
+    pr("{_POST[hidOne]:{$_POST["hidOne"]}, _POST[hidTwo]:{$_POST["hidTwo"]}}","\$_POST");
 
 $oHidden1 = new HelperInputHidden();
 $oHidden1->set_id("hidOne");
@@ -23,10 +23,11 @@ $oHidden2->set_value((isset($_POST["hidTwo"])?$_POST["hidTwo"]:"some value for t
 $oButton = new HelperButtonBasic();
 $oButton->set_type("submit");
 $oButton->add_class("btn btn-primary");
-$oButton->set_innerhtml("Submit");
+$oButton->set_innerhtml("Test");
 
 $oForm = new HelperForm();
 $oForm->set_id("myForm");
+//$oForm->set_action("/");
 $oForm->set_method("post");
 $oForm->add_style("border:1px dashed #4f9fcf;");
 $oForm->add_style("padding:5px;");
