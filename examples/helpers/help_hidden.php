@@ -1,6 +1,6 @@
 <?php
 //\helpers\help_hidden.php
-use TheFramework\Helpers\HelperInputText;
+use TheFramework\Helpers\HelperHidden;
 use TheFramework\Helpers\HelperButtonBasic;
 use TheFramework\Helpers\HelperForm;
 
@@ -8,14 +8,15 @@ if(isset($_POST["hidOne"]))//required
     //pr(): is an echo function
     pr("{hidOne:{$_POST["hidOne"]},hidTwo:{$_POST["hidTwo"]}}","\$_POST");
 
-$oDate = new HelperInputText();
-$oDate->set_type("date"); //you can change to phone format.
-$oDate->set_separator("/");
-$oDate->set_id("datDate");
-$oDate->set_name("datDate");
-$oDate->add_class("form-control col-2");
-$oDate->set_value((isset($_POST["datDate"])?$_POST["datDate"]:NULL));
+$oHidden1 = new HelperHidden();
+$oHidden1->set_id("hidOne");
+$oHidden1->set_name("hidOne");
+$oHidden1->set_value((isset($_POST["hidOne"])?$_POST["hidOne"]:"some value for one"));
 
+$oHidden2 = new HelperHidden();
+$oHidden2->set_id("hidTwo");
+$oHidden2->set_name("hidTwo");
+$oHidden2->set_value((isset($_POST["hidOne"])?$_POST["hidOne"]:"some value for two"));
 
 $oButton = new HelperButtonBasic();
 $oButton->set_type("submit");
@@ -30,4 +31,4 @@ $oForm->add_style("padding:5px;");
 $oForm->add_inner_object($oHidden1);
 $oForm->add_inner_object($oHidden2);
 $oForm->add_inner_object($oButton);
-$oForm->show(); //show() is the same as echo $oForm->get_html();
+$oForm->show(); 
