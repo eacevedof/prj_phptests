@@ -10,7 +10,7 @@
 /**
  * HELPERS
  **/
-require_once "../vendor/autoload.php";//generdo por composer
+include_once("vendor/autoload.php");
 use TheFramework\Helpers\HelperLabel;
 use TheFramework\Helpers\HelperInputText;
 use TheFramework\Helpers\HelperDiv;

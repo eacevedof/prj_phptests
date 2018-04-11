@@ -10,7 +10,7 @@
 /**
  * HELPERS
  **/
-require_once "../vendor/autoload.php";//generdo por composer
+include_once("vendor/autoload.php");
 
 /*
 <div class="form-group">
