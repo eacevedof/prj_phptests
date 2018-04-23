@@ -1,6 +1,6 @@
 <?php
 /*
- * @file: comp_mssql_export.php 1.0.6
+ * @file: comp_mssql_export.php 1.0.7
  * @info: proyecto general
  * Ejemplos: ComponentMssqlExport->get_insert_bulk(...) y ComponentMssqlExport->get_schema()
 */
@@ -36,5 +36,8 @@ $oExImp = new ComponentMssqlExport($arConn);
 //print_r($arBulk);
 
 //$sSQL = $oExImp->get_notnull_fields("Articulo",1);
-$sSQL = $oExImp->get_notnull_fields("accounts",1);
+//$sSQL = $oExImp->get_notnull_fields("accounts",1);
+//$sSQL = $oExImp->get_empty_fields("accounts");
+//$sSQL = $oExImp->get_empty_fields("prj_accounts");
+$sSQL = $oExImp->get_empty_fields("ERP_IMP_accounts");
 pr($sSQL);

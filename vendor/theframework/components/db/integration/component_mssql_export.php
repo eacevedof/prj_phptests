@@ -3,8 +3,8 @@
  * @author Eduardo Acevedo Farje.
  * @link www.eduardoaf.com
  * @name TheFramework\Components\Db\ComponentMssqlExport 
- * @file component_mssql_export.php v2.1.0B
- * @date 30-03-2018 12:06 SPAIN
+ * @file component_mssql_export.php v2.2.0
+ * @date 23-04-2018 10:16 SPAIN
  * @observations
  */
 namespace TheFramework\Components\Db\Integration;
@@ -821,7 +821,50 @@ class ComponentMssqlExport
             $arNotNull[$sTableName]["sql"] = $sSQL;
         }
         return $arNotNull;  
-    }//get_numrows
+    }//get_notnull_fields
+    
+    public function get_just1_value($arRows,$sValue=NULL)
+    {
+        $arEmpty = [];
+        if($arRows)
+        {
+            //pr($arRows);die;
+            $arFields = array_keys($arRows[0]);
+            foreach($arFields as $sFieldName)
+            {
+                //los valores de la columna
+                $arValues = array_column($arRows,$sFieldName);
+                $arDistVal = array_unique($arValues);
+                //pr($arDist);
+                $iDist = count($arDistVal);
+                if($iDist===1)
+                {
+                    if(($sValue===NULL && $arDistVal[0]=="") 
+                        || $arDistVal[0]==$sValue)
+                        $arEmpty[] = $sFieldName;
+                }
+            }//foreach(arFields)  
+        }//arRows
+        return $arEmpty;
+    }//get_just_value
+    
+    public function get_empty_fields($sTableName)
+    {
+        $arEmpty = [];
+        if($sTableName)
+        {
+            $sSQL = "-- get_empty_fields
+            SELECT * FROM $sTableName
+            ";
+            
+            $arRows = $this->oDb->query($sSQL);
+            $arEmpty = $this->get_just1_value($arRows);           
+            $arEmpty = ["fields"=>$arEmpty
+                ,"sql"=>"SELECT ".implode("\n,",$arEmpty)."\n FROM $sTableName"];
+            
+        }//tablename
+        return $arEmpty;
+    }//get_empty_fields
     
     private function add_error($sMessage){$this->isError = TRUE;$this->iAffected=-1; $this->arErrors[]=$sMessage;}    
     public function is_error(){return $this->isError;}
@@ -835,4 +878,5 @@ class ComponentMssqlExport
      * @param string $value mysql,sqlite
      */
     public function set_motor($value){$this->sMotorTo=$value;}
+    
 }//ComponentMssqlExport
