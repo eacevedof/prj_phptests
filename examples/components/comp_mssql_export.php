@@ -14,7 +14,6 @@ $arConn["user"]="sa";
 $arConn["password"]="Sasql2014";
 
 
-
 $oExImp = new ComponentMssqlExport($arConn);
 //$oExImp->set_motor("mysql");
 //$arCreate = $oExImp->get_create_table("version_db");
