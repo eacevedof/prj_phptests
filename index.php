@@ -1,6 +1,6 @@
 <?php
 /**
- * index.php 5.2.2
+ * index.php 5.2.3
  */
 
 function pr($var,$asHtml=0){
@@ -62,6 +62,7 @@ foreach($arPaths as $sPath)
 
 //excluyo los que no quiero mostrar
 $arForbidden = ["phpinfo"];
+//$arForbidden = [];
 
 $arExamples["components"] = array_filter(scandir($arPaths["components"]),function($sFileName){
     return !in_array($sFileName,[".",".."]) && strstr($sFileName,".php");
