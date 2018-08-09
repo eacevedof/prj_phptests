@@ -50,6 +50,7 @@ class ComponentPushapple
         $sFilePem = realpath($sFilePem);
         
         $this->log("send_push()");
+        $this->log("alert: $this->sMessage");
         $this->log("[[  url:$sUrlApple, passphrase:$sPassphrase, filepem:$sFilePem, devicetoken:$this->sDeviceToken ]]");
         $iError = NULL; //Numero de error del socket
         $sError = ""; //mensaje de error
