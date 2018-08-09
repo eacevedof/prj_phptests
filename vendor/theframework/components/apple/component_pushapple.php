@@ -21,7 +21,7 @@ class ComponentPushapple
     private $sDeviceToken = "e0a19e36938ac4afce7ee58a03e38b8fee23ca8d8746392c09e039c42e0e409e";//Iphone Prod
     private $sPassphraseDev = "pushchat";
     private $sCertificateDev = "ckdev.pem";
-    private $sUrlDev = "ssl://17.172.232.45:2195";
+    private $sUrlDev = "ssl://17.172.232.45:2195";//PROD: ssl://17.110.226.90:2195
     private $sPathPemDev = ""; //c:/procesos/wfManagerGereparto/push_alert/ web.test
     
     public function __construct() 
@@ -78,7 +78,7 @@ class ComponentPushapple
         $this->log("END: send_push()");
     }//send_push()    
   
-    private function log($mxVar){echo "<pre>".var_export($mxVar,1)."</pre>";}
+    private function log($mxVar){echo "<pre> - ".var_export($mxVar,1)."</pre>";}
     private function add_error($sMessage){$this->isError = TRUE;$this->arErrors[]=$sMessage;}
     public function add_from($sKey,$sValue){$this->arFrom[$sKey] = $sValue;}
     public function add_to($sKey,$sValue){$this->arTo[$sKey] = $sValue;}
