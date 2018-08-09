@@ -15,6 +15,9 @@ class ComponentPushapple
     private $isError;
     private $arErrors;
 
+    //private $sDeviceToken = "c7223d8a00fe114c74ce8bbe4cb27cc7f3d11ccabfcd20c737d459a085d4fef2";//Ipad mini
+    //private $sDeviceToken = "587cbe29da44b6ebde27eb2123e7d7434c4db4c4168233665ec78a28f082488a";//Iphone Daniela
+    //private $sDeviceToken = "2a4d9174cbd46df28b1016241643e9db188e3f0a96df56e88d6091e9c3afb3a1";//Ipad Prod    
     private $sDeviceToken = "e0a19e36938ac4afce7ee58a03e38b8fee23ca8d8746392c09e039c42e0e409e";//Iphone Prod
     private $sPassphraseDev = "pushchat";
     private $sCertificateDev = "ckdev.pem";
@@ -75,7 +78,7 @@ class ComponentPushapple
         $this->log("END: send_push()");
     }//send_push()    
   
-    private function log($mxVar){echo var_export($mxVar,1);}
+    private function log($mxVar){echo "<pre>".var_export($mxVar,1)."</pre>";}
     private function add_error($sMessage){$this->isError = TRUE;$this->arErrors[]=$sMessage;}
     public function add_from($sKey,$sValue){$this->arFrom[$sKey] = $sValue;}
     public function add_to($sKey,$sValue){$this->arTo[$sKey] = $sValue;}
