@@ -27,10 +27,10 @@ class ComponentPushapple
     
     public function __construct() 
     {
-        //$this->sUrlDev = "ssl://gateway.sandbox.push.apple.com:2195";
+        $this->sUrlDev = "ssl://gateway.sandbox.push.apple.com:2195";
         $this->sMessage = "TEST: esto es un mensaje a enviar FIN.";
         $this->sPathPemDev = __DIR__."/";
-        $this->load_prod();
+        //$this->load_prod();
     }
     
     public function load_prod()
