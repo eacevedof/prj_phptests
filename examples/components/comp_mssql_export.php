@@ -13,6 +13,8 @@ $arConn["database"]="GemiCar1";
 $arConn["user"]="sa";
 $arConn["password"]="Sasql2014";
 
+ $arConn = ["server"=>"192.168.5.2\sql2012","database"=>"crm3_flamagas"
+    ,"user"=>"sa","password"=>"Enblanco2015"];
 
 $oExImp = new ComponentMssqlExport($arConn);
 //$oExImp->set_motor("mysql");
@@ -37,7 +39,13 @@ $oExImp = new ComponentMssqlExport($arConn);
 
 //$sSQL = $oExImp->get_notnull_fields("Articulo",1);
 //$sSQL = $oExImp->get_notnull_fields("accounts",1);
+//$sSQL = $oExImp->get_notnull_fields("prj_accounts",1);
+//$sSQL = $oExImp->get_notnull_fields("accounts_organization",1);
+//$sSQL = $oExImp->get_notnull_fields("prj_accounts_organization",1);
+$sSQL = $oExImp->get_notnull_fields("prj_orders_lines");
+
 //$sSQL = $oExImp->get_empty_fields("accounts");
 //$sSQL = $oExImp->get_empty_fields("prj_accounts");
-$sSQL = $oExImp->get_empty_fields("ERP_IMP_accounts");
+//$sSQL = $oExImp->get_empty_fields("accounts_organization");
+//$sSQL = $oExImp->get_empty_fields("prj_accounts_organization");
 pr($sSQL);
