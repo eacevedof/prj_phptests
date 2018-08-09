@@ -15,15 +15,16 @@ class ComponentPushapple
     private $isError;
     private $arErrors;
 
-    private $sUrlDev;
-    private $sPassphraseDev;
-    private $sPathPemDev;
-    private $sCertificateDev;
+    private $sDeviceToken = "e0a19e36938ac4afce7ee58a03e38b8fee23ca8d8746392c09e039c42e0e409e";//Iphone Prod
+    private $sPassphraseDev = "pushchat";
+    private $sCertificateDev = "ckdev.pem";
+    private $sUrlDev = "ssl://17.172.232.45:2195";
+    private $sPathPemDev = ""; //c:/procesos/wfManagerGereparto/push_alert/ web.test
     
     public function __construct() 
     {
-        $this->sUrlDev = "ssl://17.172.232.45:2195";
-        $this->sCertificateDev = "";
+        $this->sMessage = "INICIO esto es un mensaje a enviar FIN.";
+        $this->sPathPemDev = __DIR__."/";
     }
     
     public function send_push()
