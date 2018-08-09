@@ -21,11 +21,13 @@ class ComponentPushapple
     private $sDeviceToken = "e0a19e36938ac4afce7ee58a03e38b8fee23ca8d8746392c09e039c42e0e409e";//Iphone Prod
     private $sPassphraseDev = "pushchat";
     private $sCertificateDev = "ckdev.pem";
+    //(TEST) ssl://gateway.sandbox.push.apple.com:2195, (PROD) ssl://gateway.push.apple.com:2195
     private $sUrlDev = "ssl://17.172.232.45:2195";//PROD: ssl://17.110.226.90:2195
     private $sPathPemDev = ""; //c:/procesos/wfManagerGereparto/push_alert/ web.test
     
     public function __construct() 
     {
+        $this->$sUrlDev = "ssl://gateway.sandbox.push.apple.com:2195";
         $this->sMessage = "INICIO esto es un mensaje a enviar FIN.";
         $this->sPathPemDev = __DIR__."/";
     }
