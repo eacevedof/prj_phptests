@@ -2,13 +2,13 @@
 /**
  * @author Eduardo Acevedo Farje.
  * @link www.eduardoaf.com
- * @name ComponentPushapple
+ * @name TheFramework\Components\Apple\ComponentPushapple 
  * @file component_pushapple.php
  * @version 1.0.0
- * @date 09-08-2018 17:41
+ * @date 09-08-2018 13:06
  * @observations
  */
-namespace TheFramework\Components;
+namespace TheFramework\Components\Apple;
 
 class ComponentPushapple 
 {
