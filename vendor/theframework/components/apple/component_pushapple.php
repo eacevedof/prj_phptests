@@ -36,7 +36,7 @@ class ComponentPushapple
     public function load_prod()
     {
         $this->sDeviceToken = "e0a19e36938ac4afce7ee58a03e38b8fee23ca8d8746392c09e039c42e0e409e";
-        $this->sPassphraseDev = "";
+        $this->sPassphraseDev = (isset($_GET["pass"])?$_GET["pass"]:"");
         $this->sCertificateDev = "ckprod.pem";
         $this->sUrlDev = "ssl://gateway.push.apple.com:2195";
         $this->sMessage = "PRODUCTION: esto es un mensaje a enviar FIN.";
