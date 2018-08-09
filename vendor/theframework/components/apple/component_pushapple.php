@@ -16,20 +16,30 @@ class ComponentPushapple
     private $arErrors;
 
     //private $sDeviceToken = "c7223d8a00fe114c74ce8bbe4cb27cc7f3d11ccabfcd20c737d459a085d4fef2";//Ipad mini
-    //private $sDeviceToken = "587cbe29da44b6ebde27eb2123e7d7434c4db4c4168233665ec78a28f082488a";//Iphone Daniela
+    private $sDeviceToken = "587cbe29da44b6ebde27eb2123e7d7434c4db4c4168233665ec78a28f082488a";//Iphone Daniela
     //private $sDeviceToken = "2a4d9174cbd46df28b1016241643e9db188e3f0a96df56e88d6091e9c3afb3a1";//Ipad Prod    
-    private $sDeviceToken = "e0a19e36938ac4afce7ee58a03e38b8fee23ca8d8746392c09e039c42e0e409e";//Iphone Prod
+    //private $sDeviceToken = "e0a19e36938ac4afce7ee58a03e38b8fee23ca8d8746392c09e039c42e0e409e";//Iphone Prod
     private $sPassphraseDev = "pushchat";
     private $sCertificateDev = "ckdev.pem";
     //(TEST) ssl://gateway.sandbox.push.apple.com:2195, (PROD) ssl://gateway.push.apple.com:2195
-    private $sUrlDev = "ssl://17.172.232.45:2195";//PROD: ssl://17.110.226.90:2195
+    private $sUrlDev = "ssl://17.188.137.58:2195";//PROD: ssl://17.110.226.90:2195
     private $sPathPemDev = ""; //c:/procesos/wfManagerGereparto/push_alert/ web.test
     
     public function __construct() 
     {
-        $this->sUrlDev = "ssl://gateway.sandbox.push.apple.com:2195";
-        $this->sMessage = "INICIO esto es un mensaje a enviar FIN.";
+        //$this->sUrlDev = "ssl://gateway.sandbox.push.apple.com:2195";
+        $this->sMessage = "TEST: esto es un mensaje a enviar FIN.";
         $this->sPathPemDev = __DIR__."/";
+        $this->load_prod();
+    }
+    
+    public function load_prod()
+    {
+        $this->sDeviceToken = "e0a19e36938ac4afce7ee58a03e38b8fee23ca8d8746392c09e039c42e0e409e";
+
+        $this->sCertificateDev = "ckprod.pem";
+        $this->sUrlDev = "ssl://gateway.push.apple.com:2195";
+        $this->sMessage = "PRODUCTION: esto es un mensaje a enviar FIN.";
     }
     
     public function send_push()
