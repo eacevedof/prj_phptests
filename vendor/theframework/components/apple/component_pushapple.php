@@ -37,7 +37,8 @@ class ComponentPushapple
         $sUrlApple = $this->sUrlDev;
         $sPassphrase = $this->sPassphraseDev;
         $sFilePem = $this->sPathPemDev.$this->sCertificateDev;  
- 
+        $sFilePem = realpath($sFilePem);
+        
         $this->log("send_push()");
         $this->log("[[  url:$sUrlApple, passphrase:$sPassphrase, filepem:$sFilePem, devicetoken:$this->sDeviceToken ]]");
         $iError = NULL; //Numero de error del socket
