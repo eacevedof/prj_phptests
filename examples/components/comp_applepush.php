@@ -10,7 +10,7 @@ $oComp = new ComponentPushapple();
 //carga configuración de desarrollo ckdev.pem
 $oComp->load_dev();
 //carga configuración de produccion ckprod.pem
-$oComp->load_prod();
+//$oComp->load_prod();
 //usa la vista view_gettable
 //cambia las tablas erp_archivo por erp_archivo_aux
 //guarda el archivo remplazado con ok_<nombre-archivo>

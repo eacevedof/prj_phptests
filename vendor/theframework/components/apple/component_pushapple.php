@@ -28,11 +28,11 @@ class ComponentPushapple
     
     public function load_dev()
     {
-        $this->sDeviceToken =  (isset($_GET["device"])?$_GET["device"]:"c7223d8a00fe114c74ce8bbe4cb27cc7f3d11ccabfcd20c737d459a085d4fef2");
+        $this->sDeviceToken =  (isset($_GET["device"])?$_GET["device"]:"9f48cab8a0e0b8a49ee194c5c77532fc9aec07a14357ae2f9c9c12cb784301f3");
         $this->sPassphrase = (isset($_GET["pass"])?$_GET["pass"]:"pushchat");
         $this->sPemCertificate = "ckdev.pem";
         $this->sUrlApn = "ssl://gateway.sandbox.push.apple.com:2195";
-        $this->sMessage = "TEST: esto es un mensaje a enviar FIN.";        
+        $this->sMessage = "TEST: esto es un mensaje a enviar FIN.".date("Y-m-d H:i:s");        
     }
     
     public function load_prod()
@@ -62,16 +62,18 @@ class ComponentPushapple
         $sError = ""; //mensaje de error
         
         $oStreamContext = stream_context_create();
+        $this->log($oStreamContext,"oStreamContext 1");
         //ck.pem: Certificado generado para entorno de desarrollo. La dif de desarr y prod es q el de des caduca en 3 meses
         stream_context_set_option($oStreamContext,"ssl","local_cert",$sFilePem);
-        stream_context_set_option($oStreamContext,"ssl","passphrase",$sPassphrase);
+        //stream_context_set_option($oStreamContext,"ssl","passphrase",$sPassphrase);
 
+        $this->log($oStreamContext,"oStreamContext 2");
         $this->log("stream_socket_client(..):$sUrlApple");
         //Open a connection to the APNS (Apple push notification service) server
         $oStreamToApple = stream_socket_client($sUrlApple,$iError,$sError,60
                                     ,STREAM_CLIENT_CONNECT|STREAM_CLIENT_PERSISTENT, $oStreamContext);
         $this->log("after stream_sockek_client(..)");
-
+        $this->log($oStreamToApple,"streamtoapple");
         if(!$oStreamToApple)
         {
             $this->log("Error: Failed to connect: iError:$iError, sError:$sError");
@@ -81,13 +83,15 @@ class ComponentPushapple
 
         $this->log($iError,"iError");
         $this->log($sError,"sError");
-        $this->log($oStreamContext,"streamcontext");
-        $this->log($oStreamToApple,"streamtoapple");
         $this->log("Connected to APNS".PHP_EOL);
         //Create the payload body
         $arPayload["aps"] = array("alert"=>$this->sMessage,"sound"=>"default");
+        //parametros personalizados
+        $arPayload["codekey"] = "P";
+        $arPayload["numr"] = "0000000074";
         //Encode the payload as JSON
         $sJsonPayload = json_encode($arPayload);
+        $this->log($sJsonPayload,"payload");
         //Build the binary notification.chr():Ascii value, Pack(): Pack data into binary string. H:Hex, n:unsigned short (always 16 bit, big endian byte order)
         $sBinMessage = chr(0).pack("n",32).pack("H*",$this->sDeviceToken).pack("n",strlen($sJsonPayload)).$sJsonPayload;
         //Send it to the server
