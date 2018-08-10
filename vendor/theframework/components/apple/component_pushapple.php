@@ -4,8 +4,8 @@
  * @link www.eduardoaf.com
  * @name TheFramework\Components\Apple\ComponentPushapple 
  * @file component_pushapple.php
- * @version 1.0.0
- * @date 09-08-2018 13:06
+ * @version 2.0.0
+ * @date 10-08-2018 08:06
  * @observations
  */
 namespace TheFramework\Components\Apple;
@@ -15,44 +15,49 @@ class ComponentPushapple
     private $isError;
     private $arErrors;
 
-    //private $sDeviceToken = "c7223d8a00fe114c74ce8bbe4cb27cc7f3d11ccabfcd20c737d459a085d4fef2";//Ipad mini
-    private $sDeviceToken = "587cbe29da44b6ebde27eb2123e7d7434c4db4c4168233665ec78a28f082488a";//Iphone Daniela
-    //private $sDeviceToken = "2a4d9174cbd46df28b1016241643e9db188e3f0a96df56e88d6091e9c3afb3a1";//Ipad Prod    
-    //private $sDeviceToken = "e0a19e36938ac4afce7ee58a03e38b8fee23ca8d8746392c09e039c42e0e409e";//Iphone Prod
-    private $sPassphraseDev = "pushchat";
-    private $sCertificateDev = "ckdev.pem";
-    //(TEST) ssl://gateway.sandbox.push.apple.com:2195, (PROD) ssl://gateway.push.apple.com:2195
-    private $sUrlDev = "ssl://17.188.137.58:2195";//PROD: ssl://17.110.226.90:2195
-    private $sPathPemDev = ""; //c:/procesos/wfManagerGereparto/push_alert/ web.test
+    private $sDeviceToken = "";
+    private $sPassphrase = "some-passw";
+    private $sPemCertificate = "file.pem";
+    private $sUrlApn = "ssl://17.188.137.58:2195";
+    private $sPathPemDev = ""; //c:/procesos/wfManagerGereparto/push_alert/
     
     public function __construct() 
     {
-        $this->sUrlDev = "ssl://gateway.sandbox.push.apple.com:2195";
-        $this->sMessage = "TEST: esto es un mensaje a enviar FIN.";
         $this->sPathPemDev = __DIR__."/";
-        $this->load_prod();
+    }
+    
+    public function load_dev()
+    {
+        $this->sDeviceToken =  (isset($_GET["device"])?$_GET["device"]:"c7223d8a00fe114c74ce8bbe4cb27cc7f3d11ccabfcd20c737d459a085d4fef2");
+        $this->sPassphrase = (isset($_GET["pass"])?$_GET["pass"]:"pushchat");
+        $this->sPemCertificate = "ckdev.pem";
+        $this->sUrlApn = "ssl://gateway.sandbox.push.apple.com:2195";
+        $this->sMessage = "TEST: esto es un mensaje a enviar FIN.";        
     }
     
     public function load_prod()
     {
         //javi
-        $this->sDeviceToken = "";
-        $this->sPassphraseDev = (isset($_GET["pass"])?$_GET["pass"]:"");
-        $this->sCertificateDev = "ckprod.pem";
-        $this->sUrlDev = "ssl://gateway.push.apple.com:2195";
+        $this->sDeviceToken =  (isset($_GET["device"])?$_GET["device"]:"9f48cab8a0e0b8a49ee194c5c77532fc9aec07a14357ae2f9c9c12cb784301f3");
+        $this->sPassphrase = (isset($_GET["pass"])?$_GET["pass"]:"");
+        $this->sPemCertificate = "ckprod.pem";
+        $this->sUrlApn = "ssl://gateway.push.apple.com:2195";
         $this->sMessage = "PRODUCTION: esto es un mensaje a enviar FIN.";
     }
     
     public function send_push()
     {
-        $sUrlApple = $this->sUrlDev;
-        $sPassphrase = $this->sPassphraseDev;
-        $sFilePem = $this->sPathPemDev.$this->sCertificateDev;  
+        $this->load_dev();
+        $this->load_prod();
+        
+        $sUrlApple = $this->sUrlApn;
+        $sPassphrase = $this->sPassphrase;
+        $sFilePem = $this->sPathPemDev.$this->sPemCertificate;  
         $sFilePem = realpath($sFilePem);
         
         $this->log("send_push()");
         $this->log("alert: $this->sMessage");
-        $this->log("[[  url:$sUrlApple, passphrase:$sPassphrase, filepem:$sFilePem, devicetoken:$this->sDeviceToken ]]");
+        $this->log("{url:$sUrlApple, passphrase:$sPassphrase, filepem:$sFilePem, devicetoken:$this->sDeviceToken}");
         $iError = NULL; //Numero de error del socket
         $sError = ""; //mensaje de error
         
@@ -93,12 +98,12 @@ class ComponentPushapple
         $this->log("END: send_push()");
     }//send_push()    
   
+    public function set_message($sValue){$this->sMessage=$sValue;}
+    
     private function log($mxVar){echo "<pre> - ".var_export($mxVar,1)."</pre>";}
     private function add_error($sMessage){$this->isError = TRUE;$this->arErrors[]=$sMessage;}
-    public function add_from($sKey,$sValue){$this->arFrom[$sKey] = $sValue;}
-    public function add_to($sKey,$sValue){$this->arTo[$sKey] = $sValue;}
     public function is_error(){return $this->isError;}
     public function get_errors(){return $this->arErrors;}
-    public function show_errors(){echo "<pre>".var_export($this->arErrors,1);}
+    public function show_errors(){echo "<pre>Errors:<br/>\n".var_export($this->arErrors,1)."</pre>";}
 }//class ComponentPushapple
 
