@@ -1,14 +1,16 @@
 <?php
 /*
- * @file: comp_applepush 1.0.0
+ * @file: comp_applepush 2.0.0
  * @info: proyecto reparto
- * Lee envia notificacion push a APN
- * 
-*/
+ * Envia notificacion push a APN
+ */
 include("vendor/theframework/components/autoload.php");
 use TheFramework\Components\Apple\ComponentPushapple;
 $oComp = new ComponentPushapple();
-
+//carga configuración de desarrollo ckdev.pem
+$oComp->load_dev();
+//carga configuración de produccion ckprod.pem
+$oComp->load_prod();
 //usa la vista view_gettable
 //cambia las tablas erp_archivo por erp_archivo_aux
 //guarda el archivo remplazado con ok_<nombre-archivo>
