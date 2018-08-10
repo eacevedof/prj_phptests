@@ -4,7 +4,7 @@
  * @link www.eduardoaf.com
  * @name TheFramework\Components\Apple\ComponentPushapple 
  * @file component_pushapple.php
- * @version 2.0.0
+ * @version 2.1.0
  * @date 10-08-2018 08:06
  * @observations
  */
@@ -18,13 +18,13 @@ class ComponentPushapple
     private $sDeviceToken = "";
     private $sPassphrase = "some-passw";
     private $sPemCertificate = "file.pem";
-    private $sUrlApn = "ssl://17.188.137.58:2195";
-    private $sPathPemDev = ""; //c:/procesos/wfManagerGereparto/push_alert/
+    private $sUrlApn = "https://emm.how/t/apns-ports-hostnames/224";
+    private $sPathDirpemDS = ""; //c:/procesos/wfManagerGereparto/push_alert/
     
     public function __construct() 
     {
-        $this->sPathPemDev = __DIR__."/";
-    }
+        $this->sPathDirpemDS = __DIR__."/";
+    }//__construct
     
     public function load_dev()
     {
@@ -47,12 +47,12 @@ class ComponentPushapple
     
     public function send_push()
     {
-        $this->load_dev();
-        $this->load_prod();
+        //$this->load_dev();
+        //$this->load_prod();
         
         $sUrlApple = $this->sUrlApn;
         $sPassphrase = $this->sPassphrase;
-        $sFilePem = $this->sPathPemDev.$this->sPemCertificate;  
+        $sFilePem = $this->sPathDirpemDS.$this->sPemCertificate;  
         $sFilePem = realpath($sFilePem);
         
         $this->log("send_push()");
@@ -98,6 +98,9 @@ class ComponentPushapple
         $this->log("END: send_push()");
     }//send_push()    
   
+    public function set_pathpemdir($sValue){$this->sPathDirpemDS=$sValue;}
+    public function set_pathpemfile($sValue){$this->sPemCertificate=$sValue;}
+    public function set_password($sValue){$this->sPassphrase=$sValue;}
     public function set_message($sValue){$this->sMessage=$sValue;}
     
     private function log($mxVar){echo "<pre> - ".var_export($mxVar,1)."</pre>";}
