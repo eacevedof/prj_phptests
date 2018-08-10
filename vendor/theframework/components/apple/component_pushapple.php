@@ -18,7 +18,7 @@ class ComponentPushapple
     private $sDeviceToken = "";
     private $sPassphrase = "some-passw";
     private $sPemCertificate = "file.pem";
-    private $sUrlApn = "https://emm.how/t/apns-ports-hostnames/224";
+    private $sUrlApn = "https://pushtry.com/";
     private $sPathDirpemDS = ""; //c:/procesos/wfManagerGereparto/push_alert/
     
     public function __construct() 
@@ -55,9 +55,9 @@ class ComponentPushapple
         $sFilePem = $this->sPathDirpemDS.$this->sPemCertificate;  
         $sFilePem = realpath($sFilePem);
         
-        $this->log("send_push()");
+        $this->log("send_push() -  ".date("Y-m-d H:i.s"));
         $this->log("alert: $this->sMessage");
-        $this->log("{url:$sUrlApple, passphrase:$sPassphrase, filepem:$sFilePem, devicetoken:$this->sDeviceToken}");
+        $this->log("{url: $sUrlApple,\npassphrase: $sPassphrase,\nfilepem: $sFilePem,\ndevicetoken: $this->sDeviceToken}");
         $iError = NULL; //Numero de error del socket
         $sError = ""; //mensaje de error
         
@@ -79,6 +79,10 @@ class ComponentPushapple
             return;
         }
 
+        $this->log($iError,"iError");
+        $this->log($sError,"sError");
+        $this->log($oStreamContext,"streamcontext");
+        $this->log($oStreamToApple,"streamtoapple");
         $this->log("Connected to APNS".PHP_EOL);
         //Create the payload body
         $arPayload["aps"] = array("alert"=>$this->sMessage,"sound"=>"default");
@@ -103,7 +107,7 @@ class ComponentPushapple
     public function set_password($sValue){$this->sPassphrase=$sValue;}
     public function set_message($sValue){$this->sMessage=$sValue;}
     
-    private function log($mxVar){echo "<pre> - ".var_export($mxVar,1)."</pre>";}
+    private function log($mxVar,$sTitle=""){echo "<pre> - $sTitle: ".var_export($mxVar,1)."</pre>";}
     private function add_error($sMessage){$this->isError = TRUE;$this->arErrors[]=$sMessage;}
     public function is_error(){return $this->isError;}
     public function get_errors(){return $this->arErrors;}
