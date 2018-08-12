@@ -1,6 +1,6 @@
 <?php
 /**
- * index.php 5.2.3
+ * index.php 5.2.4
  */
 
 function pr($var,$asHtml=0){
@@ -111,7 +111,7 @@ if(!(isset($_GET["f"]) || isset($_GET["c"])))
 //hay parámetro f
 elseif(isset($_GET["f"]) || isset($_GET["c"]))
 {
-    echo "/*<a href=\"/\">home</a><hr/>*/";
+    echo "<a href=\"/\">home</a><hr/>\n\n";
     //die("dos");
     $isContent = FALSE;
     if(isset($_GET["f"])) $sF = strtolower(trim($_GET["f"]));       
@@ -148,9 +148,8 @@ elseif(isset($_GET["f"]) || isset($_GET["c"]))
             $sContent = file_get_contents($sFileContent);
             echo "<pre>";
             echo htmlentities($sContent);
-            
         }
         else
             include($sFile);        
     }
-}
+}//hay parametro $_GET[f]
