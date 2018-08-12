@@ -16,7 +16,7 @@ set_include_path($sPathInclude);
 
 spl_autoload_register(function($sNSClassName)
 {
-   //si existe la palabra TheFramework
+    //si existe la palabra TheFramework
     if(strstr($sNSClassName,"TheFramework"))
     {
         $arClass = explode("\\",$sNSClassName);
@@ -54,4 +54,3 @@ spl_autoload_register(function($sNSClassName)
         }
     }
 });//spl_autoload_register
-
