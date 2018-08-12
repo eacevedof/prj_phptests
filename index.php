@@ -1,7 +1,9 @@
 <?php
 /**
- * index.php 5.2.4
+ * index.php 5.3.0
  */
+//clase para trazas
+require_once "dg.php";
 
 function pr($var,$asHtml=0){
     $sContent= var_export($var,1);
