@@ -2,10 +2,10 @@
 /**
  * @author Eduardo Acevedo Farje.
  * @link www.eduardoaf.com
- * @version 1.0.13
+ * @version 1.1.0
  * @name HelperDate
  * @file helper_input_date.php
- * @date 21-11-2016 09:08 (SPAIN)
+ * @date 27-06-2018 10:48 (SPAIN)
  * @observations:
  * @requires:
  */
@@ -21,8 +21,8 @@ class HelperDate extends TheFrameworkHelper
     public function __construct
     ($id="", $name="", $value="", $arExtras=array(), $maxlength="", $class="", HelperLabel $oLabel=NULL)
     {
-        //$this->_type = "date";
-        $this->_type = "text";//12/11/2013 lo cambio a text pq el tipo date en dispositivos moviles no se comporta como se desea
+        $this->_type = "date";
+        //$this->_type = "text";//12/11/2013 lo cambio a text pq el tipo date en dispositivos moviles no se comporta como se desea
         $this->_idprefix = "";//dtb
         $this->cSeparator = "/";
         $this->_id = $id;
@@ -32,7 +32,7 @@ class HelperDate extends TheFrameworkHelper
         if($class) $this->arClasses[] = $class;        
         $this->arExtras = $arExtras;
         $this->oLabel = $oLabel;        
-    }
+    }//__construct
 
     private function to_user_date($sAnyDate)
     {
@@ -59,7 +59,7 @@ class HelperDate extends TheFrameworkHelper
                 $sUserDate = $sAnyDate;
         }
         return $sUserDate;
-    }
+    }//to_user_date
     
     public function get_html()
     {  
@@ -112,7 +112,7 @@ class HelperDate extends TheFrameworkHelper
         if($this->_style) $sHtmlToReturn .= " style=\"$this->_style\"";
         
         //atributos extras 18/04/2014 este atributo lo dejo siempre para cualquier terminal
-        if(!$this->_isReadOnly) $sHtmlToReturn .= " as=\"date\"";
+        //if(!$this->_isReadOnly) $sHtmlToReturn .= " as=\"date\"";
             
         if($this->_placeholder) $sHtmlToReturn .= " placeholder=\"$this->_placeholder\"";
         if($this->_isPrimaryKey) $sHtmlToReturn .= " pk=\"pk\"";
@@ -120,16 +120,14 @@ class HelperDate extends TheFrameworkHelper
         if($this->_attr_dbtype) $sHtmlToReturn .= " dbtype=\"$this->_attr_dbtype\"";              
         if($this->arExtras) $sHtmlToReturn .= " ".$this->get_extras();
         //if($this->_inFieldsetDiv) $sHtmlDate = $sHtmlFieldSet.$sHtmlDate.$sHtmlFieldSetEnd;
-        
         //no funciona de este modo data-options=\"'useClearButton':true}\" con comillas simples encerrrando
         //a useClearButton
-        if($this->_type=="date" && $this->_useClearButton)
-        {    $sHtmlToReturn .= " data-options='{\"useClearButton\":true}'"; }
-        elseif($this->_type=="date" && !$this->_useClearButton) 
-        {    $sHtmlToReturn .= " data-options='{\"useClearButton\":false}'"; }
+        //if($this->_type=="date" && $this->_useClearButton) $sHtmlToReturn .= " data-options='{\"useClearButton\":true}'"; 
+        //elseif($this->_type=="date" && !$this->_useClearButton) $sHtmlToReturn .= " data-options='{\"useClearButton\":false}'";
+        
         $sHtmlToReturn .= ">";
         return $sHtmlToReturn;
-    }
+    }//get_html
 
     //**********************************
     //             SETS
@@ -137,11 +135,11 @@ class HelperDate extends TheFrameworkHelper
     public function set_name($value){$this->_name = $value;}
     public function set_value($value,$asEntity=0){($asEntity)?$this->_value = htmlentities($value):$this->_value=$value;}
     public function set_today(){$this->_convert_date_before_show = false;$this->_value = date("d/m/Y");}
-    public function in_fieldsetdiv($isOn=true){$this->_inFieldsetDiv = $isOn;}
-    public function use_clearbutton($isOn=true){$this->_useClearButton = $isOn;}
-    public function set_is_ipadiphone($isOn=true){$this->isIpadIphone = $isOn;}
+    //public function in_fieldsetdiv($isOn=true){$this->_inFieldsetDiv = $isOn;}
+    //public function use_clearbutton($isOn=true){$this->_useClearButton = $isOn;}
+    //public function set_is_ipadiphone($isOn=true){$this->isIpadIphone = $isOn;}
     public function set_separator($sValue){$this->cSeparator = $sValue;}
-    public function required($isRequired = true){$this->_isRequired=$isRequired;}
+    public function required($isRequired = true){$this->_isRequired = $isRequired;}
     public function readonly($isReadOnly = true){$this->_isReadOnly = $isReadOnly;}
      
     //**********************************
@@ -150,7 +148,7 @@ class HelperDate extends TheFrameworkHelper
     public function get_name(){return $this->_name;}
     public function get_value($asEntity=0){if($asEntity) return htmlentities($this->_value); else return $this->_value;}
    
-}
+}//HelperDate
 
 /*
 <fieldset data-role="controlgroup" data-type="horizontal">
