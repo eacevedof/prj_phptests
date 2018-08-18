@@ -28,7 +28,7 @@ class Customer
    }
    
    //this is another responsability
-   public function generate_customer(String $customerName)
+   public function generate_customer_repport(String $customerName)
    {
        //generate a repport
    }
