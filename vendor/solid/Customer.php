@@ -18,7 +18,7 @@ class Customer
    private $name;
    
    //getter and setter methods:
-   public function set_name($value){$this->name=$value;}
+   public function set_name(String $name){$this->name=$name;}
    public function get_name(){return $this->name;}
    
    //this is one responsability
