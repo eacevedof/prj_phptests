@@ -13,10 +13,19 @@
  */
 namespace Solid\LspViolation;
 
-use Solid\LspViolation\Shape;
+use Solid\LspViolation\Rectangle;
 
 class Liskov
 {
     public static function main()
-    {}
+    {
+        $oRectangle = new Rectangle();
+        $oRectangle->set_height(2);
+        $oRectangle->set_height(5);
+        
+        if($oRectangle->get_area()==10)
+        {
+            echo $oRectangle->get_area();
+        }
+    }
 }//Liskov
