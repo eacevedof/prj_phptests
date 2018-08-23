@@ -13,6 +13,7 @@
  */
 namespace Solid\DipViolation;
 
+use Solid\DipViolation\Product;
 use Solid\DipViolation\DeliveryDriver;
 
 class DeliveryCompany 

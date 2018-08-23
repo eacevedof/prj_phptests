@@ -11,7 +11,7 @@
  *  Tutorial: https://www.youtube.com/watch?v=j_ZnM8FJcmA
  *  Ejemplos: https://android.jlelse.eu/solid-principles-the-definitive-guide-75e30a284dea
  */
-namespace Solid\Dip;
+namespace Solid\DipViolation;
 
 class Product 
 {
