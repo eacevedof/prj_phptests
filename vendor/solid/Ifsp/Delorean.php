@@ -18,20 +18,24 @@ use Solid\Ifsp\IfTimeMachine;
 
 class Delorean implements IfCar,IfTimeMachine
 {
+    //@override
     public function start_engine()
     {
         //start engine
     }
     
+    //@override
     public function accelerate()
     {
         //accelerate
     }
     
+    //@override
     public function back_to_past() {
         ;
     }
     
+    //@override
     public function back_to_the_future() {
         ;
     }
