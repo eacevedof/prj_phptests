@@ -17,3 +17,7 @@
     - Many client-specific interfaces are better than one general-purpose interface
 
 5. Dependency Inversion Principle (DIP)
+    - High-level modules should not depend on low-level modules. 
+    - Both should depend on abstractions.
+    - Abstractions should not depend on details. 
+    - Details should depend on abstractions.
