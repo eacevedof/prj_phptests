@@ -26,4 +26,12 @@ class Delorean implements IfCar
     {
         //accelerate
     }
+    
+    public function back_to_past() {
+        ;
+    }
+    
+    public function back_to_the_future() {
+        ;
+    }
 }//Delorean

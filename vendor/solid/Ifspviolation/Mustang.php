@@ -26,4 +26,15 @@ class Mustang implements IfCar
     {
         //accelerate
     }
+    
+    public function back_to_past() 
+    {
+        throw new Exception("UnsupportedOperationException");
+    }
+    
+    public function back_to_the_future() 
+    {
+        throw new Exception("UnsupportedOperationException");
+    }   
+    
 }//Mustang
