@@ -1,0 +1,3 @@
+-   Note that DeliveryCompany creates and uses DeliveryDriver concretions. 
+-   Therefore DeliveryCompany which is a high-level class is dependent on a lower 
+    level class and this is a violation of Dependency Inversion Principle.
