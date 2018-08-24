@@ -1,4 +1,5 @@
 <?php
+include_once("vendor/autoload.php");
 
 use DesignPatterns\Observer\MyObserver1;
 use DesignPatterns\Observer\MyObserver2;
