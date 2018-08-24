@@ -10,9 +10,25 @@ class ComposerStaticIniteb8af4c17bda3ba9f5f77a559a198a5f
         '7105d5637871b054652b86b32699f538' => __DIR__ . '/..' . '/theframework/helpers/autoload.php',
     );
 
+    public static $prefixLengthsPsr4 = array (
+        'D' => 
+        array (
+            'DesignPatterns\\' => 15,
+        ),
+    );
+
+    public static $prefixDirsPsr4 = array (
+        'DesignPatterns\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/DesignPatterns',
+        ),
+    );
+
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
+            $loader->prefixLengthsPsr4 = ComposerStaticIniteb8af4c17bda3ba9f5f77a559a198a5f::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticIniteb8af4c17bda3ba9f5f77a559a198a5f::$prefixDirsPsr4;
 
         }, null, ClassLoader::class);
     }
