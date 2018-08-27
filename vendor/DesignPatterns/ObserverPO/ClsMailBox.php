@@ -28,6 +28,8 @@ class ClsMailBox implements IfObserver
     {
         if($oIfSubj->get_address() == $this->sAddress)
             \dg::p("You have new mail in $this->sAddress");
+        //else
+            //\dg::p("NO MAIL for: $this->sAddress, mail goes to:".$oIfSubj->get_address());
     }//update
 
 }//ClsMailBox
