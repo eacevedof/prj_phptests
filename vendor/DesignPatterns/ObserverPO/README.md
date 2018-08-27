@@ -1,4 +1,4 @@
-# [Observer Pattern](https://youtu.be/rWvXJo3OAzs)
+# [Youtube - Observer Pattern by Mohammad Alqerm](https://youtu.be/rWvXJo3OAzs)
 ## Post Office System
 
 - Que pasaria si tuvieras que ir todos los días a la oficina de correos para comprobar si tienes correspondencia
