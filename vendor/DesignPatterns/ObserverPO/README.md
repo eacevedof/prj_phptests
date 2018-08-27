@@ -19,12 +19,12 @@
         - notify_observers()
 
     - **If**Observer (el observador)
-        - update()
+        - update(IfSubject)
     
     - **Cls**PostOffice : IfSubject
         - **add_observer()**
         - **remove_observer()**
-        - **notify_observers()** llama a todos los `oMailBox.update()`
+        - **notify_observers()** llama a todos los `oMailBox.update(this)`
         - get_address()
         - post_office()
         - new_mail()
@@ -39,4 +39,53 @@
 - se notificaria siempre a todos los observadores independientemente de que la direccion
 - de la correspondencia sea de alguno de ellos.
 
+```php
+<?php
+class ClsMailBox implements IfObserver
+
+    public function update(IfSubject $oIfSubj) 
+    {
+        if($oIfSubj->get_address() == $this->sAddress)
+            \dg::p("You have new mail in $this->sAddress");
+        //else
+            //\dg::p("NO MAIL for: $this->sAddress, mail goes to:".$oIfSubj->get_address());
+    }//update
+```
+
+```php
+<?php
+class ClsMain 
+{
+    public static function main(Array $arArgs=[])
+    {
+        $arAddress = ["abc 123","cde 543","efg 987","rstu 0997"
+            ,"kjf 8987","ere 456","opi 2454","werw 3636","erwc 879"
+            ,"ety 741","lkj 369"];
+        
+        $iAttemps = 100;
+        for($i=0;$i<$iAttemps;$i++)
+        {
+            $sAddressPo = array_rand($arAddress,1);
+            $sAddressPo = $arAddress[$sAddressPo];
+            $sAddressMb = array_rand($arAddress,1);
+            $sAddressMb = $arAddress[$sAddressMb];
+            
+            \dg::p("po: $sAddressPo, mb: $sAddressMb","i=$i");
+
+            $oMailBox1 = new ClsMailBox($sAddressMb);     
+            $oPostOff = new ClsPostOffice($sAddressPo);
+
+            //mailbox 1 comprueba si tiene email
+            $oPostOff->add_observer($oMailBox1);
+            //pregunta si hay email y si hay muestra por pantalla You have mail (oMailbox.update())
+            $oPostOff->new_mail();
+            //deja de observar
+            $oPostOff->remove_observer($oMailBox1);
+        }
+        
+        \dg::p("Main.main(): mails checked!!");
+    }//main
+    
+}//ClsMain
+```
 
