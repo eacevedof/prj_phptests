@@ -15,7 +15,8 @@ class ClsMain
 {
     public static function main(Array $arArgs=[])
     {
-        $oMailBox1 = new ClsMailBox("");     
+        
+        $oMailBox1 = new ClsMailBox("street xxx123");     
         $oPostOff = new ClsPostOffice("street xxx123");
         
         //mailbox 1 comprueba si tiene email
@@ -24,6 +25,7 @@ class ClsMain
         $oPostOff->new_mail();
         //deja de observar
         $oPostOff->remove_observer($oMailBox1);
+        \dg::p("Main.main(): mails checked!!");
     }//main
     
 }//ClsMain
