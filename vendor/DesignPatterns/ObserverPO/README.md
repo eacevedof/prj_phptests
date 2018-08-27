@@ -30,7 +30,7 @@
         - new_mail()
 
     - **Cls**MailBox : IfObserver
-        - **update()**
+        - **update(IfSubject)**
         - mail_box()
 
 ## Notas
