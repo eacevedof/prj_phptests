@@ -33,19 +33,10 @@
         - **update()**
         - mail_box()
 
+## Notas
 
-- <img src="" height="200" width="400">
-- <img src="" height="200" width="400">
-- <img src="" height="200" width="400">
-- <img src="" height="200" width="400">
-- <img src="" height="200" width="400">
-- <img src="" height="200" width="400">
-- <img src="" height="200" width="400">
-- <img src="" height="200" width="400">
-- <img src="" height="200" width="400">
-- <img src="" height="200" width="400">
-- <img src="" height="200" width="400">
-- <img src="" height="200" width="400">
-- <img src="" height="200" width="400">
-- <img src="" height="200" width="400">
-- <img src="" height="200" width="400">
+- He visto que si despliego tal cual está el ejemplo en java 
+- se notificaria siempre a todos los observadores independientemente de que la direccion
+- de la correspondencia sea de alguno de ellos.
+
+
