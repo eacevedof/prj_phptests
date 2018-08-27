@@ -10,6 +10,7 @@
  *  Patrones de diseño en laravel 
  *  Tutorial: [Análisis de los patrones de diseño con larave](https://youtu.be/SCpigk7UToM?t=1037)
  *  Ejemplo: [El interfaz SplSubject](http://php.net/manual/es/class.splsubject.php)
+ *  Ejemplo Post Office: [Post Office](https://www.youtube.com/watch?v=rWvXJo3OAzs)
  */
 namespace DesignPatterns\Observer;
 
