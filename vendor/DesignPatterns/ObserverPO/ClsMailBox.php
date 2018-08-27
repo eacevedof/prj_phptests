@@ -4,7 +4,7 @@
  * @link www.eduardoaf.com
  * @name DesignPatterns\ObserverPO
  * @file ClsMailBox.php
- * @version 1.1.0
+ * @version 1.2.0
  * @date 27-08-2018 12:56
  * @observations
  *  Ejemplo: [MailBox.java](https://youtu.be/rWvXJo3OAzs?t=267)
@@ -27,7 +27,8 @@ class ClsMailBox implements IfObserver
     public function update(IfSubject $oIfSubj) 
     {
         if($oIfSubj->get_address() == $this->sAddress)
-            \dg::p("You have new mail in $this->sAddress");
+            //\dg::p("You have new mail in $this->sAddress");
+            echo "<pre style=\"background:blue;color:white;\">You have new mail in {$this->sAddress}</pre>";
         //else
             //\dg::p("NO MAIL for: $this->sAddress, mail goes to:".$oIfSubj->get_address());
     }//update
