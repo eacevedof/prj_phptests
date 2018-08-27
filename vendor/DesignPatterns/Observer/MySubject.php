@@ -8,7 +8,8 @@
  * @date 24-08-2018 20:19
  * @observations
  *  Patrones de diseño en laravel 
- *  Tutorial: https://youtu.be/SCpigk7UToM?t=1037
+ *  Tutorial: [Análisis de los patrones de diseño con larave](https://youtu.be/SCpigk7UToM?t=1037)
+ *  Ejemplo: [El interfaz SplSubject](http://php.net/manual/es/class.splsubject.php)
  */
 namespace DesignPatterns\Observer;
 
@@ -34,7 +35,9 @@ class MySubject implements SplSubject {
     }
 
     public function notify() {
+        \dg::p($this->_observers,"notify()._observers");
         foreach ($this->_observers as $observer) {
+            \dg::p($observer,"foreach.observer");
             $observer->update($this);
         }
     }

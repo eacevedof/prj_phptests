@@ -1,4 +1,7 @@
 <?php
+//pattern_obserpver.php
+//[Observer Pattern - Design Pattern](https://www.youtube.com/watch?v=rWvXJo3OAzs)
+include_once("vendor/autoload.php");
 
 use DesignPatterns\Observer\MyObserver1;
 use DesignPatterns\Observer\MyObserver2;
