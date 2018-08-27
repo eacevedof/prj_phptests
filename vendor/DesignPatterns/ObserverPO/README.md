@@ -13,15 +13,15 @@
 - Diagrama UML 
     - <img src="https://trello-attachments.s3.amazonaws.com/5b014dcaf4507eacfc1b4540/5b83d1d85831ec8cb01083e3/98445e15f8e4cd4baa3a2d886b5be4c2/image.png" height="200" width="400">
 - Piezas:
-    - IfSubject (el observado)
+    - **If**Subject (el observado)
         - add_observer()
         - remove_observer()
         - notify_observers()
 
-    - IfObserver (el observador)
+    - **If**Observer (el observador)
         - update()
     
-    - ClsPostOffice : IfSubject
+    - **Cls**PostOffice : IfSubject
         - **add_observer()**
         - **remove_observer()**
         - **notify_observers()** llama a todos los `oMailBox.update()`
@@ -29,7 +29,7 @@
         - post_office()
         - new_mail()
 
-    - ClsMailBox : IfObserver
+    - **Cls**MailBox : IfObserver
         - **update()**
         - mail_box()
 
