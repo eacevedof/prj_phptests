@@ -1,7 +1,7 @@
 <?php
 /**
- * pattern_observer.php
- * [php.net El interfaz SplSubject](http://php.net/manual/es/class.splsubject.php)
+ * @file: pattern_observer.php
+ * @info: [php.net El interfaz SplSubject](http://php.net/manual/es/class.splsubject.php)
  */
 include_once("vendor/autoload.php");
 
