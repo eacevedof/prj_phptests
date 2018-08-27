@@ -1,6 +1,8 @@
 <?php
-//pattern_obserpver.php
-//[Observer Pattern - Design Pattern](https://www.youtube.com/watch?v=rWvXJo3OAzs)
+/**
+ * pattern_observer.php
+ * [php.net El interfaz SplSubject](http://php.net/manual/es/class.splsubject.php)
+ */
 include_once("vendor/autoload.php");
 
 use DesignPatterns\Observer\MyObserver1;
