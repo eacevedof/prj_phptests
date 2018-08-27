@@ -7,5 +7,23 @@
 - Se define un **Subject = POST OFFICE** (el objeto a observar)
 - Se define un/unos observadores **Observers = Homes** 
     - <img src="https://trello-attachments.s3.amazonaws.com/5b014dcaf4507eacfc1b4540/5b83d1d85831ec8cb01083e3/2c9ee13785067b1cf1f66b60111dae93/image.png" height="200" width="400">
+- El patrón observador depende de los suscriptores. Solo si estas suscrito eres un observador.
+    - <img src="https://trello-attachments.s3.amazonaws.com/5b014dcaf4507eacfc1b4540/5b83d1d85831ec8cb01083e3/ba62f50b5c020149292d7ba1e22657ea/image.png" height="200" width="400">
+- 
+
+- <img src="" height="200" width="400">
+- <img src="" height="200" width="400">
+- <img src="" height="200" width="400">
+- <img src="" height="200" width="400">
+- <img src="" height="200" width="400">
+- <img src="" height="200" width="400">
+- <img src="" height="200" width="400">
+- <img src="" height="200" width="400">
+- <img src="" height="200" width="400">
+- <img src="" height="200" width="400">
+- <img src="" height="200" width="400">
+- <img src="" height="200" width="400">
+- <img src="" height="200" width="400">
+- <img src="" height="200" width="400">
 - <img src="" height="200" width="400">
 - <img src="" height="200" width="400">
