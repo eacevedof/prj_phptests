@@ -1,7 +1,7 @@
 <?php
 /**
- * pattern_observerpo.php
- * [Observer Pattern - Design Pattern](https://www.youtube.com/watch?v=rWvXJo3OAzs)
+ * @file: pattern_observerpo.php
+ * @info: [Observer Pattern - Design Pattern](https://www.youtube.com/watch?v=rWvXJo3OAzs)
  */
 include_once("vendor/autoload.php");
 
