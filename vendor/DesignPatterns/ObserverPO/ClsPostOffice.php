@@ -4,7 +4,7 @@
  * @link www.eduardoaf.com
  * @name DesignPatterns\ObserverPO
  * @file ClsPostOffice.php
- * @version 1.0.0
+ * @version 1.1.0
  * @date 27-08-2018 12:56
  * @observations
  *  Ejemplo [PostOffice.java](https://youtu.be/rWvXJo3OAzs?t=227)
@@ -48,7 +48,7 @@ class ClsPostOffice implements IfSubject
     {
         foreach($this->arObservers as $oObs)
             if(method_exists($oObs,"update"))
-                $oObs->update();
+                $oObs->update($this);
     }//notify_observers
 
     function get_address(){return $this->sAddress;}

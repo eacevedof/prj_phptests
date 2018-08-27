@@ -4,14 +4,15 @@
  * @link www.eduardoaf.com
  * @name DesignPatterns\ObserverPO
  * @file ClsMailBox.php
- * @version 1.0.0
+ * @version 1.1.0
  * @date 27-08-2018 12:56
  * @observations
- *  Ejemplo Post Office: [Post Office](https://www.youtube.com/watch?v=rWvXJo3OAzs)
+ *  Ejemplo: [MailBox.java](https://youtu.be/rWvXJo3OAzs?t=267)
  */
 namespace DesignPatterns\ObserverPO;
 
 use DesignPatterns\ObserverPO\IfObserver;
+use DesignPatterns\ObserverPO\IfSubject;
 
 class ClsMailBox implements IfObserver
 {
@@ -23,9 +24,10 @@ class ClsMailBox implements IfObserver
     }
 
     //@override
-    public function update() 
+    public function update(IfSubject $oIfSubj) 
     {
-        \dg::p("You have new mail in $this->sAddress");
+        if($oIfSubj->get_address() == $this->sAddress)
+            \dg::p("You have new mail in $this->sAddress");
     }//update
 
 }//ClsMailBox
