@@ -1,4 +1,4 @@
-# The Gang of Four
+# The Gang of Four (GOF)
 # [Youtube - Curso de Patrones de diseño by MitoCode](https://www.youtube.com/watch?v=gocJeOHtj9w&list=PLvimn1Ins-41Uiugt1WbpyFo1XT1WOquL)
 - [Este repo](https://github.com/eacevedof/prj_phptests/tree/master/vendor/DesignPatterns/Gof)
 
@@ -17,7 +17,7 @@
 
 ## [2 - Singleton](https://www.youtube.com/watch?v=gocJeOHtj9w&list=PLvimn1Ins-41Uiugt1WbpyFo1XT1WOquL&index=2)
 - Ejemplo clase conexíon
-- [UML ](https://www.tutorialspoint.com/design_pattern/singleton_pattern.htm)
+- [UML - Singleton](https://www.tutorialspoint.com/design_pattern/singleton_pattern.htm)
 
 ## [3 - ]()
 
