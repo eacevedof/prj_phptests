@@ -1,6 +1,6 @@
 <?php
 /**
- * 
+ * index.php 6.1.1
  */
 //clase para trazas
 require_once "dg.php";
@@ -51,10 +51,10 @@ define("TFW_DOCROOTDS",TFW_DOCROOT.DS);
 
 $arPaths["root"] = TFW_DOCROOTDS;
 $arPaths["examples"] = TFW_DOCROOTDS."examples".DS;
+$arPaths["designpatterns"] = TFW_DOCROOTDS."examples".DS."designpatterns";
 $arPaths["components"] = TFW_DOCROOTDS."examples".DS."components";
 $arPaths["helpers"] = TFW_DOCROOTDS."examples".DS."helpers";
 $arPaths["mixed"] = TFW_DOCROOTDS."examples".DS."mixed";
-$arPaths["designpatterns"] = TFW_DOCROOTDS."examples".DS."designpatterns";
 
 $arPaths = array_map(function($sPath){
     return realpath($sPath);
