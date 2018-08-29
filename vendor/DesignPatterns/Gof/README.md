@@ -18,6 +18,7 @@
 
 ## [2 - Singleton](https://www.youtube.com/watch?v=gocJeOHtj9w&list=PLvimn1Ins-41Uiugt1WbpyFo1XT1WOquL&index=2)
 - Ejemplo clase conexíon
+- Ejemplo libro único
 - [UML - Singleton](https://www.tutorialspoint.com/design_pattern/singleton_pattern.htm)
 - [Casos de uso](https://sourcemaking.com/design_patterns/singleton)
 - [Clase Conexion](https://github.com/eacevedof/prj_phptests/blob/master/vendor/DesignPatterns/Gof/Singleton/Conexion.php)
