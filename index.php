@@ -1,6 +1,6 @@
 <?php
 /**
- * index.php 6.1.1
+ * index.php 6.2.0
  */
 //clase para trazas
 require_once "dg.php";
@@ -110,9 +110,9 @@ if(!(isset($_GET["f"]) || isset($_GET["c"])))
             if($k=="path") continue;
             $sInfo = get_info($sPathDirDS.$sFileName);
             $sFileName = str_replace(".php","",$sFileName);
-            $arHtml[] = "<li><a href=\"/?f=$sFileName\" target=\"_blank\">$sFileName</a> "
+            $arHtml[] = "<li><a href=\"/index.php?f=$sFileName\" target=\"_blank\">$sFileName</a> "
                     . "<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
-                    . "<a href=\"/?c=$sFileName\" target=\"_blank\">$sFileName - content</a></li>"
+                    . "<a href=\"/index.php?c=$sFileName\" target=\"_blank\">$sFileName - content</a></li>"
                     . "<p>$sInfo</p>";
             
         }//foreach($arExample)
