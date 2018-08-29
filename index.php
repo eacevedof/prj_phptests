@@ -1,6 +1,6 @@
 <?php
 /**
- * index.php 6.2.0
+ * index.php 6.2.1
  */
 //clase para trazas
 require_once "dg.php";
@@ -98,8 +98,10 @@ if(!(isset($_GET["f"]) || isset($_GET["c"])))
     $arHtml[] = "<h2>"
             . "<a href=\"https://github.com/eacevedof/prj_phptests\" target=\"_blank\">"
             . "github repo: prj_phptests</a>"
+            . "<a href=\"https://github.com/eacevedof/prj_phptests/tree/master/vendor\" target=\"_blank\">"
+            . "github repo: prj_phptests\vendor</a>"
             . "</h2>";
-    
+
     foreach($arExamples as $sType=>$arExample)
     {
         $arHtml[] = "<h3>examples/$sType:</h3>";
