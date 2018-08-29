@@ -97,9 +97,9 @@ if(!(isset($_GET["f"]) || isset($_GET["c"])))
     $arHtml[] = "<h1><a href=\"/\">home</a></h1>";    
     $arHtml[] = "<h2>"
             . "<a href=\"https://github.com/eacevedof/prj_phptests\" target=\"_blank\">"
-            . "github repo: prj_phptests</a>"
+            . "github repo: prj_phptests</a><br/>"
             . "<a href=\"https://github.com/eacevedof/prj_phptests/tree/master/vendor\" target=\"_blank\">"
-            . "github repo: prj_phptests\vendor</a>"
+            . "github repo: prj_phptests/vendor</a>"
             . "</h2>";
 
     foreach($arExamples as $sType=>$arExample)
