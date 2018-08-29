@@ -12,9 +12,12 @@
     - Creacionales:
     - Estructurales:
     - Comportamiento:
-    - <img src="https://trello-attachments.s3.amazonaws.com/5b014dcaf4507eacfc1b4540/5b868426d6835a7f513bca60/2486d2aa1759be671d65281d7f426759/image.png" height="100" width="200">
+    - <img src="https://trello-attachments.s3.amazonaws.com/5b014dcaf4507eacfc1b4540/5b868426d6835a7f513bca60/2486d2aa1759be671d65281d7f426759/image.png" height="200" width="400">
+- [https://www.tutorialspoint.com/design_pattern/](https://www.tutorialspoint.com/design_pattern/)
 
-## [2 - Singleton]()
+## [2 - Singleton](https://www.youtube.com/watch?v=gocJeOHtj9w&list=PLvimn1Ins-41Uiugt1WbpyFo1XT1WOquL&index=2)
+- Ejemplo clase conexíon
+- [UML ](https://www.tutorialspoint.com/design_pattern/singleton_pattern.htm)
 
 ## [3 - ]()
 
@@ -25,6 +28,18 @@
 ## [6 - ]()
 
 ## [7 - ]()
+
+## [8 - ]()
+
+## [9 - ]()
+
+## [10 - ]()
+
+## [11 - ]()
+
+## [12 - ]()
+
+## [13 - ]()
 
 ## LINKS
 - [PDF - Slide resumido de patrones](http://siul02.si.ehu.es/~alfredo/iso/06Patrones.pdf)
