@@ -1,6 +1,6 @@
 <?php
 /**
- * index.php 6.0.0
+ * 
  */
 //clase para trazas
 require_once "dg.php";
@@ -136,6 +136,7 @@ elseif(isset($_GET["f"]) || isset($_GET["c"]))
     $sKey = array_search($sFile,$arExamples["components"]);
     $sKey = ($sKey || array_search($sFile,$arExamples["helpers"]));
     $sKey = ($sKey || array_search($sFile,$arExamples["mixed"]));
+    $sKey = ($sKey || array_search($sFile,$arExamples["designpatterns"]));
     if(!$sKey)
     {
         echo "<pre> file not found<b>: $sFile </b> in examples <br/>";
@@ -155,6 +156,8 @@ elseif(isset($_GET["f"]) || isset($_GET["c"]))
             if(is_file($sPathFile) && !$sFileContent) $sFileContent= $sPathFile;            
             $sPathFile = $arExamples["mixed"]["path"].DS.$sFile;
             if(is_file($sPathFile) && !$sFileContent) $sFileContent= $sPathFile;            
+            $sPathFile = $arExamples["designpatterns"]["path"].DS.$sFile;
+            if(is_file($sPathFile) && !$sFileContent) $sFileContent= $sPathFile;                        
             
             $sContent = file_get_contents($sFileContent);
             echo "<pre>";
