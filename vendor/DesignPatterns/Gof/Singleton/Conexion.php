@@ -10,6 +10,7 @@
  *  Ejemplo []()
  */
 namespace Conexion\Gof\Singleton;
+
 class Conexion
 {
     /**
@@ -26,8 +27,10 @@ class Conexion
     public static function get_instancia()
     {
         if(!static::$oSingleton)
+        {
+            \dg::p("Conexion.get_instancia()");
             static::$oSingleton = new Conexion();
-        
+        }
         return static::$oSingleton;
     }//get_instancia
     
