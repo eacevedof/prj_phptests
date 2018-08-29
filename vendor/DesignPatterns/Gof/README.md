@@ -23,7 +23,8 @@
 - [Casos de uso](https://sourcemaking.com/design_patterns/singleton)
 - [Clase Conexion](https://github.com/eacevedof/prj_phptests/blob/master/vendor/DesignPatterns/Gof/Singleton/Conexion.php)
 
-## [3 - ]()
+## [3 - Factory](https://www.youtube.com/watch?v=R6Ef64hDwGo&list=PLvimn1Ins-41Uiugt1WbpyFo1XT1WOquL&index=3)
+- 
 
 ## [4 - ]()
 
