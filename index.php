@@ -1,6 +1,6 @@
 <?php
 /**
- * index.php 5.3.0
+ * index.php 6.0.0
  */
 //clase para trazas
 require_once "dg.php";
@@ -71,14 +71,22 @@ $arExamples["components"] = array_filter(scandir($arPaths["components"]),functio
     return !in_array($sFileName,[".",".."]) && strstr($sFileName,".php");
 });
 $arExamples["components"]["path"] = $arPaths["components"];
+
 $arExamples["helpers"] = array_filter(scandir($arPaths["helpers"]),function($sFileName){
     return !in_array($sFileName,[".",".."]) && strstr($sFileName,".php");
 });   
 $arExamples["helpers"]["path"] = $arPaths["helpers"];
+
 $arExamples["mixed"] = array_filter(scandir($arPaths["mixed"]),function($sFileName){
     return !in_array($sFileName,[".",".."]) && strstr($sFileName,".php");
 });
 $arExamples["mixed"]["path"] = $arPaths["mixed"];
+
+$arExamples["designpatterns"] = array_filter(scandir($arPaths["designpatterns"]),function($sFileName){
+    return !in_array($sFileName,[".",".."]) && strstr($sFileName,".php");
+});
+$arExamples["designpatterns"]["path"] = $arPaths["designpatterns"];
+
 //var_dump($arExamples);
 
 //si no es ni archivo ni contenido
