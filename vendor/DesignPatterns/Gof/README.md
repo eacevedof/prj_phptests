@@ -7,6 +7,7 @@
 - Arquitectura orientada a patrones **POSA Pattern Oriented Software Architecture**
 - POSA - 5 volumenes el que se tratara es el volumen 4 **GOF** The Gang of Four
 - [Slide - POSA by Sebastian Ramirez](https://es.slideshare.net/SebastianRamrez2/patrones-diseo-1)
+- [sourcemaking.com](https://sourcemaking.com/design_patterns)
 - Distribución de patrones 
 - Tipos de patrones:
     - Creacionales:
@@ -18,6 +19,8 @@
 ## [2 - Singleton](https://www.youtube.com/watch?v=gocJeOHtj9w&list=PLvimn1Ins-41Uiugt1WbpyFo1XT1WOquL&index=2)
 - Ejemplo clase conexíon
 - [UML - Singleton](https://www.tutorialspoint.com/design_pattern/singleton_pattern.htm)
+- [Casos de uso](https://sourcemaking.com/design_patterns/singleton)
+- [Clase Conexion](https://github.com/eacevedof/prj_phptests/blob/master/vendor/DesignPatterns/Gof/Singleton/Conexion.php)
 
 ## [3 - ]()
 

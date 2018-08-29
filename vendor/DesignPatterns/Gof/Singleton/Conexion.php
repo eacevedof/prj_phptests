@@ -9,7 +9,7 @@
  * @observations
  *  Ejemplo []()
  */
-namespace Conexion\Gof\Singleton;
+namespace DesignPatterns\Gof\Singleton;
 
 class Conexion
 {
