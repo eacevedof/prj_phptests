@@ -2,22 +2,22 @@
 /**
  * @author Eduardo Acevedo Farje.
  * @link www.eduardoaf.com
- * @name DesignPatterns\Gof\Singleton
- * @file ClsMain.php
- * @version 2.0.0
- * @date 27-08-2018 14:12
+ * @name DesignPatterns\Gof\Singleton\Main
+ * @file Main.php
+ * @version 1.0.0
+ * @date 29-08-2018 14:04
  * @observations
  *  Ejemplo []()
  */
 namespace DesignPatterns\Gof\Singleton;
 
-class ClsMain 
+class Main 
 {
     public static function main(Array $arArgs=[])
     {
 
         
-        \dg::p("ClsMain.main() executed!!");
+        \dg::p("Main.main() executed!!");
     }//main
     
-}//ClsMain
+}//Main
