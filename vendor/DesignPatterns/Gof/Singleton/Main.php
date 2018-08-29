@@ -11,6 +11,8 @@
  */
 namespace DesignPatterns\Gof\Singleton;
 
+use DesignPatterns\Gof\Singleton\Conexion;
+
 class Main 
 {
     public static function main(Array $arArgs=[])
@@ -22,7 +24,7 @@ class Main
         foreach($arConx as $sUser)
         {
             echo "INICIO {usuario:$sUser}\n";
-            $oConx = \Conexion::get_instancia();
+            $oConx = Conexion::get_instancia();
             $oConx->conectar();
             $oConx->desconectar();
             echo "FIN {usuario:$sUser}\n";
