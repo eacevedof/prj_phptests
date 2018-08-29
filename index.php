@@ -54,6 +54,7 @@ $arPaths["examples"] = TFW_DOCROOTDS."examples".DS;
 $arPaths["components"] = TFW_DOCROOTDS."examples".DS."components";
 $arPaths["helpers"] = TFW_DOCROOTDS."examples".DS."helpers";
 $arPaths["mixed"] = TFW_DOCROOTDS."examples".DS."mixed";
+$arPaths["designpatterns"] = TFW_DOCROOTDS."examples".DS."designpatterns";
 
 $arPaths = array_map(function($sPath){
     return realpath($sPath);
