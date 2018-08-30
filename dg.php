@@ -6,6 +6,7 @@
  * @file dg.php 1.0.0
  * @date 12/08/2018
  * @observations
+ *  https://github.com/eacevedof/prj_phptests/blob/master/dg.php
  */
 class dg
 {
