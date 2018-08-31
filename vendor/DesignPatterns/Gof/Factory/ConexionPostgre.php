@@ -15,10 +15,10 @@ use DesignPatterns\Gof\Factory\IfConexion;
 
 class ConexionPostgre implements IfConexion
 {
-    private host;
-    private puerto;
-    private usuario;
-    private contrasena;
+    private $host;
+    private $puerto;
+    private $usuario;
+    private $contrasena;
 
     public function __construct()
     {

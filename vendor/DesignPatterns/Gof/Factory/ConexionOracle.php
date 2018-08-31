@@ -15,10 +15,10 @@ use DesignPatterns\Gof\Factory\IfConexion;
 
 class ConexionOracle implements IfConexion
 {
-    private host;
-    private puerto;
-    private usuario;
-    private contrasena;
+    private $host;
+    private $puerto;
+    private $usuario;
+    private $contrasena;
 
     public function __construct()
     {
