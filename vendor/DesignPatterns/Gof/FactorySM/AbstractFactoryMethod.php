@@ -7,7 +7,7 @@
  * @version 1.0.0
  * @date 29-08-2018 13:59
  * @observations
- *  Ejemplo []()
+*  Ejemplo [sourcemaking](https://sourcemaking.com/design_patterns/factory_method/php/1)
  */
 namespace DesignPatterns\Gof\FactorySM;
 
