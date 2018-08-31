@@ -13,6 +13,7 @@ namespace DesignPatterns\Gof\FactorySM;
 
 use DesignPatterns\Gof\FactorySM\AbstractFactoryMethod;
 
+//AbstractFactoryMethod aporta makePHPBook
 class SamsFactoryMethod extends AbstractFactoryMethod 
 {
     private $context = "Sams";

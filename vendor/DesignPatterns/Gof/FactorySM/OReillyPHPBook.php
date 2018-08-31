@@ -13,6 +13,7 @@ namespace DesignPatterns\Gof\FactorySM;
 
 use DesignPatterns\Gof\FactorySM\AbstractPHPBook;
 
+//AbstractPHPBook solo aporta $subject
 class OReillyPHPBook extends AbstractPHPBook 
 {
     private $author;
