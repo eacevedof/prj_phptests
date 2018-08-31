@@ -2,8 +2,8 @@
 /**
  * @author Eduardo Acevedo Farje.
  * @link www.eduardoaf.com
- * @name DesignPatterns\Gof\Factory\Conexion
- * @file Conexion.php
+ * @name DesignPatterns\Gof\Factory\IfConexion
+ * @file IfConexion.php
  * @version 1.0.0
  * @date 29-08-2018 13:59
  * @observations
@@ -11,7 +11,8 @@
  */
 namespace DesignPatterns\Gof\Factory;
 
-class Conexion
+interface IfConexion
 {
-
-}//Conexion
+    public function conectar();
+    public function desconectar();
+}//IfConexion
