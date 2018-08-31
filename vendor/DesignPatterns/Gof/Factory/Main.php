@@ -11,24 +11,26 @@
  */
 namespace DesignPatterns\Gof\Factory;
 
-use DesignPatterns\Gof\Factory\Conexion;
+use DesignPatterns\Gof\Factory\FabricConexion;
+use DesignPatterns\Gof\Factory\IfConexion;
 
 class Main 
 {
     public static function main(Array $arArgs=[])
     {
-        $arConx = ["usuario1","usuario2","usuario3","usuario4","usuario5"];
-        
+        $oFabrica = new FabricConexion();
 
-        //emulamos las peticiones de distintos usuarios
-        foreach($arConx as $sUser)
-        {
-            echo "INICIO {usuario:$sUser}\n";
-            $oConx = Conexion::get_instancia();
-            $oConx->conectar();
-            $oConx->desconectar();
-            echo "FIN {usuario:$sUser}\n";
-        }
+        $oIfCnx1 = $oFabrica->get_conexion("oracle");
+        $oIfCnx1->conectar();
+        $oIfCnx1->desconectar();
+
+        $oIfCnx1 = $oFabrica->get_conexion("mysql");
+        $oIfCnx1->conectar();
+        $oIfCnx1->desconectar();
+
+        $oIfCnx1 = $oFabrica->get_conexion("h2");
+        $oIfCnx1->conectar();
+        $oIfCnx1->desconectar();        
         
         \dg::p("Main.main() executed!!");
     }//main
