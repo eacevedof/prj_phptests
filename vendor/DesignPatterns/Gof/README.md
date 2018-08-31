@@ -25,8 +25,9 @@
 
 ## [3 - Factory - video](https://www.youtube.com/watch?v=R6Ef64hDwGo&list=PLvimn1Ins-41Uiugt1WbpyFo1XT1WOquL&index=3)
 - Ejemplo clase FactoryConexion **video**
-- [sourcemaking - Ejemplo creacion libros php](https://sourcemaking.com/design_patterns/factory_method/php/1)
+- [sourcemaking - Ejemplo creacion libros de distintas editoriales](https://sourcemaking.com/design_patterns/factory_method/php/1)
     - Se hace con clases abstractas
+    - [Github - Archivos](https://github.com/eacevedof/prj_phptests/tree/master/vendor/DesignPatterns/Gof/FactorySM)
 - [tutorialspoint- UML - Factory](https://www.tutorialspoint.com/design_pattern/factory_pattern.htm)
 - [sourcemaking - Casos de uso](https://sourcemaking.com/design_patterns/factory_method)
 - [Github - Clase FactoryConexion](https://github.com/eacevedof/prj_phptests/blob/master/vendor/DesignPatterns/Gof/Singleton/FactoryConexion.php)
