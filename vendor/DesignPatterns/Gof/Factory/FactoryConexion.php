@@ -17,7 +17,7 @@ use DesignPatterns\Gof\Factory\ConexionOracle;
 use DesignPatterns\Gof\Factory\ConexionPostgre;
 use DesignPatterns\Gof\Factory\ConexionVacia;
 
-class FabricConexion 
+class FactoryConexion 
 {
     public function get_conexion(String $sMotor)
     {

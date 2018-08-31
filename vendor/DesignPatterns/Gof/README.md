@@ -17,14 +17,18 @@
 - [https://www.tutorialspoint.com/design_pattern/](https://www.tutorialspoint.com/design_pattern/)
 
 ## [2 - Singleton](https://www.youtube.com/watch?v=gocJeOHtj9w&list=PLvimn1Ins-41Uiugt1WbpyFo1XT1WOquL&index=2)
-- Ejemplo clase conexíon
-- Ejemplo libro único
-- [UML - Singleton](https://www.tutorialspoint.com/design_pattern/singleton_pattern.htm)
-- [Casos de uso](https://sourcemaking.com/design_patterns/singleton)
-- [Clase Conexion](https://github.com/eacevedof/prj_phptests/blob/master/vendor/DesignPatterns/Gof/Singleton/Conexion.php)
+- Ejemplo clase conexíon **video**
+- [sourcemaking - Ejemplo libro único] (https://sourcemaking.com/design_patterns/singleton/php/1)
+- [tutorialspoint- UML - Singleton](https://www.tutorialspoint.com/design_pattern/singleton_pattern.htm)
+- [sourcemaking - Casos de uso](https://sourcemaking.com/design_patterns/singleton)
+- [Github - Clase Conexion](https://github.com/eacevedof/prj_phptests/blob/master/vendor/DesignPatterns/Gof/Singleton/Conexion.php)
 
 ## [3 - Factory](https://www.youtube.com/watch?v=R6Ef64hDwGo&list=PLvimn1Ins-41Uiugt1WbpyFo1XT1WOquL&index=3)
-- 
+- Ejemplo clase FactoryConexion **video**
+- [sourcemaking - Ejemplo libro único] (https://sourcemaking.com/design_patterns/factory_method/php/1)
+- [tutorialspoint- UML - Factory](https://www.tutorialspoint.com/design_pattern/factory_pattern.htm)
+- [sourcemaking - Casos de uso](https://sourcemaking.com/design_patterns/factory_method)
+- [Github - Clase FactoryConexion](https://github.com/eacevedof/prj_phptests/blob/master/vendor/DesignPatterns/Gof/Singleton/FactoryConexion.php)
 
 ## [4 - ]()
 

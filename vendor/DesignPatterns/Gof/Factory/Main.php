@@ -11,14 +11,14 @@
  */
 namespace DesignPatterns\Gof\Factory;
 
-use DesignPatterns\Gof\Factory\FabricConexion;
+use DesignPatterns\Gof\Factory\FactoryConexion;
 use DesignPatterns\Gof\Factory\IfConexion;
 
 class Main 
 {
     public static function main(Array $arArgs=[])
     {
-        $oFabrica = new FabricConexion();
+        $oFabrica = new FactoryConexion();
 
         $oIfCnx1 = $oFabrica->get_conexion("oracle");
         $oIfCnx1->conectar();
