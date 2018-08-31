@@ -11,28 +11,12 @@
  */
 namespace DesignPatterns\Gof\FactorySM;
 
-use DesignPatterns\Gof\FactorySM\FactorySMConexion;
-use DesignPatterns\Gof\FactorySM\IfConexion;
-
 class Main 
 {
     public static function main(Array $arArgs=[])
-    {
-        $oFabrica = new FactorySMConexion();
-
-        $oIfCnx1 = $oFabrica->get_conexion("oracle");
-        $oIfCnx1->conectar();
-        $oIfCnx1->desconectar();
-
-        $oIfCnx1 = $oFabrica->get_conexion("mysql");
-        $oIfCnx1->conectar();
-        $oIfCnx1->desconectar();
-
-        $oIfCnx1 = $oFabrica->get_conexion("h2");
-        $oIfCnx1->conectar();
-        $oIfCnx1->desconectar();        
-        
+    {       
         \dg::p("Main.main() executed!!");
     }//main
     
 }//Main
+
