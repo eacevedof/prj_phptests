@@ -13,24 +13,27 @@ namespace DesignPatterns\Gof\FactorySM;
 
 use DesignPatterns\Gof\FactorySM\AbstractFactoryMethod;
 
-class SamsFactoryMethod extends AbstractFactoryMethod {
+class SamsFactoryMethod extends AbstractFactoryMethod 
+{
     private $context = "Sams";
-    function makePHPBook($param) {
-        $book = NULL;
-        switch ($param) {
+    function makePHPBook($sEditorial) 
+    {
+        $oBook = NULL;
+        switch ($sEditorial) 
+        {
             case "us":
-                $book = new SamsPHPBook;
+                $oBook = new SamsPHPBook;
             break;      
             case "other":
-                $book = new OReillyPHPBook;
+                $oBook = new OReillyPHPBook;
             break;
             case "otherother":
-                $book = new VisualQuickstartPHPBook;
+                $oBook = new VisualQuickstartPHPBook;
             break;
             default:
-                $book = new SamsPHPBook;
+                $oBook = new SamsPHPBook;
             break;    
-        }     
-        return $book;
+        }//switch
+        return $oBook;
     }
 }//SamsFactoryMethod

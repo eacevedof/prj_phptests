@@ -11,6 +11,7 @@
  */
 namespace DesignPatterns\Gof\FactorySM;
 
-abstract class AbstractPHPBook {
+abstract class AbstractPHPBook 
+{
     private $subject = "PHP";
 }//AbstractPHPBook

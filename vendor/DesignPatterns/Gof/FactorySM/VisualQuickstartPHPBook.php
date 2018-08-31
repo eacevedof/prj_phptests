@@ -13,13 +13,18 @@ namespace DesignPatterns\Gof\FactorySM;
 
 use DesignPatterns\Gof\FactorySM\AbstractPHPBook;
 
-class VisualQuickstartPHPBook extends AbstractPHPBook {
+class VisualQuickstartPHPBook extends AbstractPHPBook 
+{
     private $author;
     private $title;
-    function __construct() {
-      $this->author = 'Larry Ullman';
-      $this->title  = 'PHP for the World Wide Web';
-    }
+
+    function __construct() 
+    {
+        $this->author = "Larry Ullman";
+        $this->title  = "PHP for the World Wide Web";
+    }//__construct
+
     function getAuthor() {return $this->author;}
     function getTitle() {return $this->title;}
+    
 }//VisualQuickstartPHPBook
