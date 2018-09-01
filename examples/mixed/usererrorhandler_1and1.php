@@ -1,6 +1,6 @@
 <?php
 /**
- * @file:funciton_error_1and1.php
+ * @file:usererrorhandler_1and1.php
  */
 error_reporting(0); 
 $old_error_handler = set_error_handler("userErrorHandler"); 
