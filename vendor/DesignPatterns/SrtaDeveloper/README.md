@@ -163,8 +163,9 @@
 - Implementaciones de otros servicios del modelo de dominio y de la app como puede ser el **Commad Bus y/o Mailer**
 - 
 
-
-  
+### Estructura de archivos:
+- <img src="https://trello-attachments.s3.amazonaws.com/5b014dcaf4507eacfc1b4540/5b8bf24a217c8e0d0c69973e/ec91626ebebcbb3359e290312b025cec/image.png" width="100" height="300">
+- <img src="https://trello-attachments.s3.amazonaws.com/5b014dcaf4507eacfc1b4540/5b8bf24a217c8e0d0c69973e/05c59c4c62955f65ffb6550ba6ca2d16/image.png" width="100" height="300">
 
 
 
