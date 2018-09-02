@@ -135,11 +135,12 @@
             - El evento del dominio que es de alto nivel no hacerlo depender de symfony que es de bajo nivel
     - Hay que desacoplar los componentes del dominio de tecnologias de terceros
     - <img src="https://trello-attachments.s3.amazonaws.com/5b8bf24a217c8e0d0c69973e/600x511/3dea3251020285db5124e106af4e9e45/image.png" width="200" height="150"/>     
-    - [Clase \App\Domain\UserAccount sin dependencias](https://github.com/eacevedof/prj_phptests/blob/master/vendor/DesignPatterns/SrtaDeveloper/App/Domain/UserAccount.php)  
-    - Independientemente que la persistencia seria una bd utilizando el ORM de doctrine
-    - La clase [UserAccountRegisteredEvent](https://github.com/eacevedof/prj_phptests/blob/master/vendor/DesignPatterns/SrtaDeveloper/App/Domain/Event/UserAccountRegisteredEvent.php)
-    - La clase [DoctrineORMUserAccount](https://github.com/eacevedof/prj_phptests/blob/master/vendor/DesignPatterns/SrtaDeveloper/App/Infrastructure/Doctrine/ORM/DoctrineORMUserAccount.php)
-    
+- [Clase \App\Domain\UserAccount sin dependencias](https://github.com/eacevedof/prj_phptests/blob/master/vendor/DesignPatterns/SrtaDeveloper/App/Domain/UserAccount.php)  
+- Independientemente que la persistencia seria una bd utilizando el ORM de doctrine
+- La clase [UserAccountRegisteredEvent](https://github.com/eacevedof/prj_phptests/blob/master/vendor/DesignPatterns/SrtaDeveloper/App/Domain/Event/UserAccountRegisteredEvent.php)
+- La clase [DoctrineORMUserAccount](https://github.com/eacevedof/prj_phptests/blob/master/vendor/DesignPatterns/SrtaDeveloper/App/Infrastructure/Doctrine/ORM/DoctrineORMUserAccount.php)
+- [Dos clases muy importantes:](https://youtu.be/mttFVrUBh3w?t=1814)
+    - 
 
 
 
