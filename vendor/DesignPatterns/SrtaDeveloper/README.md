@@ -100,18 +100,41 @@
 - <img src="https://trello-attachments.s3.amazonaws.com/5b8bf24a217c8e0d0c69973e/600x424/4b98f2f9e3ba227218e7c9640dbbe111/image.png" width="200" height="150"/>  
 - No es indispensable
 - Se podria hacer lo mismo con comandos autoejecutables.  Que es?...
-- Se usa commandbus para que los comandos sigan siendo simples mensajes, como "data transfer object" y que la responsabilidad de como se gestiona y lo que son sean responsabilidades distintas.
+- Se usa commandbus para que los comandos sigan siendo simples mensajes, como **"data transfer object"** y que la responsabilidad de como se gestiona y lo que son sean responsabilidades distintas.
 - Pq el decimos que el commandbus es una entrada a la app? Pq la implementación interna del bus lo que va a contener internamente es un mapa de correspondencia entre los comandos y el servicio de app que sabe gestionar el comando
 - Los **servicio de aplicación** que saben manejar los comandos son los **Handler**
     - Se puede optar por n comandos => n handlers
-    - o una çunica clas Handler que tenga n metodos y en algun sitio tener definido que metodo se encarga de gestionar que comando.
+    - o una única clase Handler que tenga n metodos y en algun sitio tener definido que metodo se encarga de gestionar que comando.
 
 ### Command Handler
-- [DesignPatterns\App\Handler\RegisterUserAccountCommandHandler](https://github.com/eacevedof/prj_phptests/blob/master/vendor/DesignPatterns/SrtaDeveloper/App/Handlers/RegisterUserAccountCommandHandler.php)
+- [DesignPatterns\App\Handler\RegisterUserAccountCommandHandler implements CommandHandlerInterface](https://github.com/eacevedof/prj_phptests/blob/master/vendor/DesignPatterns/SrtaDeveloper/App/Handlers/RegisterUserAccountCommandHandler.php)
 - [Patrón repositorio](http://fernandoescolar.github.io/2013/01/07/patrones-de-diseo-repository/)
     - La idea es que un objeto “Repository” actúe como una colección en memoria del modelo de dominio. A esta colección de objetos podremos añadirle o quitarle elementos y además realizar búsquedas filtradas
     - una capa dentro de nuestra aplicación cuya misión sea mover la información entre los objetos de c# y la base de datos. Además esta capa va a aislar el comportamiento de la base de datos, del de nuestros objetos, haciendo que nuestra aplicación no esté acoplada con nuestra fuente de almacenamiento 
+- Todos los Command Handler deben implementar CommandHandlerInterface (solo metodo handle(RegisterUserAccountCommand $command))
+- Toda la lógica de negocio deberia ir aqui y no en el controlador ni en ningún otro lado, asi las pruebas seran más fiables.
 
+### [Dominio](https://youtu.be/mttFVrUBh3w?t=1260)
+- Lo que no es conveniente hacer:
+    - Parece logico que si se esta manejando cuentas de usuario se tenga una clase **UserAccount**
+    - Sera tipo Entidad con unos atributos que la definen
+    - La clase no debe ser la que sugiere Doctrine con sus anotaciones 
+    - [Metodos de Lifecycle Events - Doctrine y Symfony](https://www.doctrine-project.org/projects/doctrine-orm/en/latest/reference/events.html#lifecycle-events)
+        - son los eventos que ocurren en el proceso del **CRUD**
+    - La clase de evento de dominio[ **UserAccountRegisteredEvent extends SymfonyEvent**](https://youtu.be/mttFVrUBh3w?t=1472) 
+        - Se lanza cuando una cuenta de usuario es creada
+        - No parece tan engorroso como las anotaciones de doctrine
+        - Si es un evento es un mensaje que se lanza como consecuencia de que ha pasado algo en la app
+        - Necesito realmente que para que se lance un evento sea un evento de Symfony?. No
+        - Se esta vinculando un evento propio a una tecnología de terceros. (SymfonyEventDispatcher)
+        - Esto contradice SOLID - Inversión de dependencia.
+            - Las clases de alto nivel no deben depender de las de bajo nivel
+            - Las abstracciones no deben depender de los detalles. Los detalles deben hacerlo de las abstracciones.
+            - Ejemplos:
+            - La **UserAccount** que es de **alto nivel** no hacerla depender de algo de **bajo nivel** como es la **persistencia de doctrine**
+            - 
+        
+    - 
 
 
   

@@ -11,7 +11,7 @@
  */
 namespace DesignPatterns\SrtaDeveloper\App\Handler;
 
-class RegisterUserAccountCommandHandler implements CommandInterface
+class RegisterUserAccountCommandHandler implements CommandHandlerInterface
 {
     private $factory;
     private $repository;
