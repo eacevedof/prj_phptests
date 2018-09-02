@@ -39,7 +39,7 @@
         - adaptador7    Alguna BD
 
 - [Clean Architecture - Esquema](https://youtu.be/mttFVrUBh3w?t=472)
-    - <img src=" https://trello-attachments.s3.amazonaws.com/5b014dcaf4507eacfc1b4540/5b8bf24a217c8e0d0c69973e/a49fb63d3f59c785e2ce1fcb08fdb26f/image.png" width="300" height="250"/>
+    - <img src="https://trello-attachments.s3.amazonaws.com/5b014dcaf4507eacfc1b4540/5b8bf24a217c8e0d0c69973e/a49fb63d3f59c785e2ce1fcb08fdb26f/image.png" width="300" height="250"/>
     - Tiene un concepto similar
 
 - 
