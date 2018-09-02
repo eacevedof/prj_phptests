@@ -164,6 +164,45 @@
 - 
 
 ### Estructura de archivos:
+- **comando win: tree /f**
+```php
+───App
+│   ├───Command
+│   │   │   RegisterUserAccountCommand.php
+│   │   │
+│   │   └───CommandInterface
+│   │           CommandBusInterface.php
+│   │
+│   ├───Domain
+│   │   │   UserAccount.php
+│   │   │   UserAccountFactoryInterface.php
+│   │   │   UserAccountRepositoryInterface.php
+│   │   │
+│   │   ├───Event
+│   │   │       UserAccountRegisteredEvent.php
+│   │   │
+│   │   └───Service
+│   │           MailerAdapterInterface.php
+│   │           MailerFactory.php
+│   │
+│   ├───Handlers
+│   │       RegisterUserAccountCommandHandler.php
+│   │
+│   └───Infrastructure
+│       ├───CommandBus
+│       │       CommandBus.php
+│       │
+│       ├───Doctrine
+│       │   └───ORM
+│       │           DoctrineORMUserAccount.php
+│       │           DoctrineORMUserAccount.yaml
+│       │           DoctrineORMUserAccountManager.php
+│       │           InMemoryUserAccountManager.php
+│       │
+│       └───Mailer
+│               SwiftMailerAdapter.php
+│
+```
 - <img src="https://trello-attachments.s3.amazonaws.com/5b014dcaf4507eacfc1b4540/5b8bf24a217c8e0d0c69973e/ec91626ebebcbb3359e290312b025cec/image.png" width="200" height="400">
 - <img src="https://trello-attachments.s3.amazonaws.com/5b014dcaf4507eacfc1b4540/5b8bf24a217c8e0d0c69973e/05c59c4c62955f65ffb6550ba6ca2d16/image.png" width="200" height="50">
 
