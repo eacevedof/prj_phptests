@@ -21,7 +21,8 @@
 
 ### [Esquema](https://youtu.be/mttFVrUBh3w?t=347)
 - <img src="https://trello-attachments.s3.amazonaws.com/5b014dcaf4507eacfc1b4540/5b8bf24a217c8e0d0c69973e/622db0fe57d98923053cbee633501933/image.png" width="300" height="250"/>
-
+-
+```yalm
 - Inputs
     - Http          adaptador1
     - Cli           adaptador2
@@ -37,12 +38,14 @@
         - adaptador6    Email
     - Persistencia
         - adaptador7    Alguna BD
-
+```
 - [Clean Architecture - Esquema](https://youtu.be/mttFVrUBh3w?t=472)
     - <img src="https://trello-attachments.s3.amazonaws.com/5b014dcaf4507eacfc1b4540/5b8bf24a217c8e0d0c69973e/a49fb63d3f59c785e2ce1fcb08fdb26f/image.png" width="300" height="250"/>
     - Tiene un concepto similar
 
+### [Héxagono de Aplicación](https://youtu.be/mttFVrUBh3w?t=489)
 - 
+
 
 
 
