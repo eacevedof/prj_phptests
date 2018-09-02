@@ -1,7 +1,7 @@
 # [Youtube - Arquitectura Hexagonal con Adoración González](https://www.youtube.com/watch?v=mttFVrUBh3w)
-- [Diapositivas](https://speakerdeck.com/gtoboso/arquitectura-hexagonal-phpmad)
-- [@srtaDeveloper](https://twitter.com/srtaDeveloper)
-- [Este repo](https://github.com/eacevedof/prj_phptests/tree/master/vendor/DesignPatterns/SrtaDeveloper)
+- [speakerdeck.com - Diapositivas](https://speakerdeck.com/gtoboso/arquitectura-hexagonal-phpmad)
+- [Twitter: @srtaDeveloper](https://twitter.com/srtaDeveloper)
+- [Github - Este repo](https://github.com/eacevedof/prj_phptests/tree/master/vendor/DesignPatterns/SrtaDeveloper)
 - [Behat - PHP Framework for testing](http://behat.org/en/latest/index.html)
 
 ## Charla del 23 de septiembre de 2015. Grupo desarrolladores PHP - PHPMad
@@ -19,9 +19,24 @@
 - Usamos **adaptadores** para transformar inputs y outputs
 - Organizamos y diseñamos clase para desacoplar (**interfaces**)
 
-### Esquema
+### [Esquema](https://youtu.be/mttFVrUBh3w?t=347)
 - <img src="https://trello-attachments.s3.amazonaws.com/5b014dcaf4507eacfc1b4540/5b8bf24a217c8e0d0c69973e/622db0fe57d98923053cbee633501933/image.png" width="300" height="250"/>
 
+- Inputs
+    - Http          adaptador1
+    - Cli           adaptador2
+    - Integracion   adaptador3
+- hexagono
+    - puertos de entrada
+    - aplicación
+    - dominio
+    - puertos de salida
+- Outputs
+    - Notificación
+        - adaptador5    Cola de mensajes
+        - adaptador6    Email
+    - Persistencia
+        - adaptador7    Alguna BD
 
 
 
