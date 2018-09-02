@@ -17,6 +17,9 @@ class TestUserAccount
         $this->getCommandBus()->execute($command);
     }//queSolicitoRegistrarmeConLosDatos
 
+    /**
+     * @Then se crea el usuario con email :email
+     */
     public function seCreaElUsuarioConEmail($email)
     {
         $userAccountRepository = $this->getContainer()->get("app.domain.user_account.repository");
