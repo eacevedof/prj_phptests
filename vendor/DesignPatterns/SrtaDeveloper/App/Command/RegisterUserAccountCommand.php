@@ -9,7 +9,7 @@
  * @observations
  *  Ejemplo []()
  */
-namespace DesignPatterns\App\Command;
+namespace DesignPatterns\SrtaDeveloper\App\Command;
 
 class RegisterUserAccountCommand implements CommandInterface
 {
