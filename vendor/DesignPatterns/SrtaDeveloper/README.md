@@ -44,6 +44,22 @@
     - Tiene un concepto similar
 
 ### [Héxagono de Aplicación](https://youtu.be/mttFVrUBh3w?t=489)
+- Lo que tiene
+- Modelo de dominio
+    - Clases, interfaces y servicios del dominio
+- Servicios propios de la app
+- Subscribers y listeners de eventos del dominio
+    - @to-do Que son eventos de dominio?
+- Eventos de la app
+    - @to-do Que son los eventos de la app?
+- Comandos
+    - [Acciones a realizar a partir de la inyección de un objeto](https://www.arquitecturajava.com/command-pattern-tareas/)
+    - Ejemplo: validarProducto,imprimirProducto,enviarPorCorreo
+
+- Bus de comandos
+    - Enrutador de comandos
+
+### [Antes de descubir la arq hex](https://youtu.be/mttFVrUBh3w?t=528)
 - 
 
 
