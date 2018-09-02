@@ -6,7 +6,7 @@
  * @file InMemoryUserAccountManager.php
  * @version 1.0.0
  * @date 02-09-2018 17:21
- * @observations
+ * @observations TESTS
  *  Ejemplo []()
  */
 namespace DesignPatterns\SrtaDeveloper\App\Infrastructure\Doctrine\ORM;
