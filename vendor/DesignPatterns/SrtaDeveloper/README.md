@@ -91,11 +91,11 @@
 - Como los datos van a llegar desde distintos origenes necesito un elemento que me gestione todas esas entradas
 - Unifique y adapte a la app. Es un puerto de entrada. Es un **comando** [`class RegisterUserAccountCommand implements CommandInterface`](https://github.com/eacevedof/prj_phptests/blob/master/vendor/DesignPatterns/SrtaDeveloper/App/Command/RegisterUserAccountCommand.php)
 - El origen puede variar:
-    - **WebController**
+    - [**WebController**](https://youtu.be/mttFVrUBh3w?t=971)
     - <img src="https://trello-attachments.s3.amazonaws.com/5b014dcaf4507eacfc1b4540/5b8bf24a217c8e0d0c69973e/8961d56242b2c5c086ef5535b6395048/image.png" width="300" height="250"/>
-    - **Symfony Console Command**
+    - [**Symfony Console Command**](https://youtu.be/mttFVrUBh3w?t=991)
     - <img src="https://trello-attachments.s3.amazonaws.com/5b8bf24a217c8e0d0c69973e/600x441/02883d7737a85328c44a3c28be5d0952/image.png" width="300" height="250"/>
-    
+
 
 
 
