@@ -140,13 +140,28 @@
 - La clase [UserAccountRegisteredEvent](https://github.com/eacevedof/prj_phptests/blob/master/vendor/DesignPatterns/SrtaDeveloper/App/Domain/Event/UserAccountRegisteredEvent.php)
 - La clase [DoctrineORMUserAccount](https://github.com/eacevedof/prj_phptests/blob/master/vendor/DesignPatterns/SrtaDeveloper/App/Infrastructure/Doctrine/ORM/DoctrineORMUserAccount.php)
 - [Dos clases muy importantes:](https://youtu.be/mttFVrUBh3w?t=1814)
+    - Single Responsability
     - [UserAccountFactoryInterface](https://github.com/eacevedof/prj_phptests/blob/master/vendor/DesignPatterns/SrtaDeveloper/App/Domain/UserAccountFactoryInterface.php)
         - `public function createUserAccount($email,$password,$firstname,$lastname);`
     - [UserAccountRepositoryInterface](https://github.com/eacevedof/prj_phptests/blob/master/vendor/DesignPatterns/SrtaDeveloper/App/Domain/UserAccountRepositoryInterface.php)
         - `findById($id);`
         - `findByEmail($id);`
         - `add(UserAccount $userAccount);` 
+- En el dominio lo único que debe haber son las interfaces del repositorio y la factoria con los metodos que tiene que implementar cualquier clase ubicada en la infraestructura que funcione como un repositorio o como factoría de cuentas de usuarios independientemente de la tecnología que haya debajo.
+    - <img src="https://trello-attachments.s3.amazonaws.com/5b8bf24a217c8e0d0c69973e/600x447/89613d3560ff13bf108b68d8e0e39165/image.png" width="200" height="150"/>  
+- Los repositorios son puertos de salida
+- Las implementaciones concretas del repositorio van a ser los **adaptadores** de la persistencia en la bd que tengamos
+- [Utilizando la Herencia e Interfaces para el desacoplado](https://youtu.be/mttFVrUBh3w?t=1980)
+- [Interfaces](https://youtu.be/mttFVrUBh3w?t=2011)
+    - Invierten el control "forzado" a la implementación concreta a cumplir lo definido en el modelo.
+    - Hacemos que la tecnología se adapte a lo que define la app
+    - Modelo y aplicación desacoplados de la tecnologia externa
+    - Muy mantenible
 
+### [La infraestructura](https://youtu.be/mttFVrUBh3w?t=2054)
+- Es el sitio donde se pone la conf del mapeo de nuestra entidad a la bd
+- Implementaciones de otros servicios del modelo de dominio y de la app como puede ser el **Commad Bus y/o Mailer**
+- 
 
 
   

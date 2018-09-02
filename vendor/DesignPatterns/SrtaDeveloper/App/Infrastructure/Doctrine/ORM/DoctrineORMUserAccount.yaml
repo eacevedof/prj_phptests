@@ -1,0 +1,31 @@
+DesignPatterns\SrtaDeveloper\App\Infrastructure\Doctrine\ORM:
+    type: entity
+    uniqueConstraints:
+        idx_user_email:
+            colums:
+                - email
+                - organization_id
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: NONE
+    fields:
+        organization_id:
+            type: integer
+        email: 
+            type: string
+        username:
+            type: string
+        password:
+            type: string
+        firstname:
+            type: string
+        lastname:
+            type: string
+        creationDate:
+            type: datetimetz
+        state:
+            type: string
+        enhabled:
+            type: boolean
