@@ -106,6 +106,13 @@
     - Se puede optar por n comandos => n handlers
     - o una çunica clas Handler que tenga n metodos y en algun sitio tener definido que metodo se encarga de gestionar que comando.
 
+### Command Handler
+- [DesignPatterns\App\Handler\RegisterUserAccountCommandHandler](https://github.com/eacevedof/prj_phptests/blob/master/vendor/DesignPatterns/SrtaDeveloper/App/Handlers/RegisterUserAccountCommandHandler.php)
+- [Patrón repositorio](http://fernandoescolar.github.io/2013/01/07/patrones-de-diseo-repository/)
+    - La idea es que un objeto “Repository” actúe como una colección en memoria del modelo de dominio. A esta colección de objetos podremos añadirle o quitarle elementos y además realizar búsquedas filtradas
+    - una capa dentro de nuestra aplicación cuya misión sea mover la información entre los objetos de c# y la base de datos. Además esta capa va a aislar el comportamiento de la base de datos, del de nuestros objetos, haciendo que nuestra aplicación no esté acoplada con nuestra fuente de almacenamiento 
+
+
 
   
 
