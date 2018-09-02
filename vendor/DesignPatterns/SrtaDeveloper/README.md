@@ -84,6 +84,10 @@
 - Modificar el perfil de una cuenta de usurario
 - Borrar una cuenta de usuario
 - [~ Resetear la contraseña ~](https://youtu.be/mttFVrUBh3w?t=643)
+- Despues de tener definidos los casos de uso con Behat voy registrando los casos y los voy probando
+
+### [App agnóstica del contexto](https://youtu.be/mttFVrUBh3w?t=856)
+- <img src="https://trello-attachments.s3.amazonaws.com/5b014dcaf4507eacfc1b4540/5b8bf24a217c8e0d0c69973e/9316c354e33eda57fcd6181178a45df4/image.png" width="300" height="250"/>
 
 
 
