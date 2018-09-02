@@ -9,6 +9,18 @@
 - Los cambios en un area de app deberian tener el menor número posible de efectos colaterales.
 - Agregar nuevas funcionalidades o formas de interactuar con la app no deberia requerir grandes cambios de código.
 - Los procesos de depuración y testeo deberian requerir el menor número de soluciones temporales como sea posible y ser relativamente fáciles.
- 
+
+### Que es?
+- Patrón de arquitectura de software.
+- Versión ampliada de la arq en 3 capas.
+
+### [Puertos y adaptadores](https://youtu.be/mttFVrUBh3w?t=315)
+- Identificamos puertos de E/S
+- Usamos **adaptadores** para transformar inputs y outputs
+- Organizamos y diseñamos clase para desacoplar (**interfaces**)
+
+
+
+
 
 
