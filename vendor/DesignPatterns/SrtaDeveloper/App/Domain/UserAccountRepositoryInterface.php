@@ -11,7 +11,7 @@
  */
 namespace DesignPatterns\SrtaDeveloper\App\Domain;
 
-interface UserAccountRepositoryInterfaceRepositoryInterface
+interface UserAccountRepositoryInterface
 {
     public function findById($id);
     public function findByEmail($id);

@@ -140,7 +140,12 @@
 - La clase [UserAccountRegisteredEvent](https://github.com/eacevedof/prj_phptests/blob/master/vendor/DesignPatterns/SrtaDeveloper/App/Domain/Event/UserAccountRegisteredEvent.php)
 - La clase [DoctrineORMUserAccount](https://github.com/eacevedof/prj_phptests/blob/master/vendor/DesignPatterns/SrtaDeveloper/App/Infrastructure/Doctrine/ORM/DoctrineORMUserAccount.php)
 - [Dos clases muy importantes:](https://youtu.be/mttFVrUBh3w?t=1814)
-    - 
+    - [UserAccountFactoryInterface](https://github.com/eacevedof/prj_phptests/blob/master/vendor/DesignPatterns/SrtaDeveloper/App/Domain/UserAccountFactoryInterface.php)
+        - `public function createUserAccount($email,$password,$firstname,$lastname);`
+    - [UserAccountRepositoryInterface](https://github.com/eacevedof/prj_phptests/blob/master/vendor/DesignPatterns/SrtaDeveloper/App/Domain/UserAccountRepositoryInterface.php)
+        - `findById($id);`
+        - `findByEmail($id);`
+        - `add(UserAccount $userAccount);` 
 
 
 
