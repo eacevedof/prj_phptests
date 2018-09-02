@@ -60,7 +60,31 @@
     - Enrutador de comandos
 
 ### [Antes de descubir la arq hex](https://youtu.be/mttFVrUBh3w?t=528)
-- 
+- Nuevo proyecto
+- definir el `composer.json`
+- requerir:
+    - Symfony
+    - Doctrine
+    - [PHPUnit - (TDD metodologia de programación orientada al testing)](https://youtu.be/TGUcOe5rL7c?t=65)
+- UserAccountBundle (primer paso)
+    - [Que es un bundle?](https://symfony.com/doc/current/bundles.html#bundle-directory-structure)
+        - Estructura de codificación sugerida por Symfony. A partir de la version 4 ha quedado obsoleta.
+        - Solo se deben usar bundles para compartir código y funcionalidad entre multiple apps.
+
+### [Casos de uso](https://youtu.be/mttFVrUBh3w?t=574)
+- En arq hex la forma de atacar un problema es discernir los casos de uso
+- Que tiene que ser capaz de hacer mi app?
+- Definición de los casos pensando en el hexágono de la app
+- Constituyen una API
+
+#### Ejemplo
+- Registrar una cuenta de usuario
+- Habilitar una cuenta de usuario
+- Deshabilitar una cuenta de usuario
+- Modificar el perfil de una cuenta de usurario
+- Borrar una cuenta de usuario
+- [~ Resetear la contraseña ~](https://youtu.be/mttFVrUBh3w?t=643)
+
 
 
 
