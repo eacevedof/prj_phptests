@@ -96,7 +96,18 @@
     - [**Symfony Console Command**](https://youtu.be/mttFVrUBh3w?t=991)
     - <img src="https://trello-attachments.s3.amazonaws.com/5b8bf24a217c8e0d0c69973e/600x441/02883d7737a85328c44a3c28be5d0952/image.png" width="300" height="250"/>
 
-- <img src="https://trello-attachments.s3.amazonaws.com/5b8bf24a217c8e0d0c69973e/600x424/4b98f2f9e3ba227218e7c9640dbbe111/image.png" width="300" height="250"/>    
+### El commandbus
+- <img src="https://trello-attachments.s3.amazonaws.com/5b8bf24a217c8e0d0c69973e/600x424/4b98f2f9e3ba227218e7c9640dbbe111/image.png" width="200" height="150"/>  
+- No es indispensable
+- Se podria hacer lo mismo con comandos autoejecutables.  Que es?...
+- Se usa commandbus para que los comandos sigan siendo simples mensajes, como "data transfer object" y que la responsabilidad de como se gestiona y lo que son sean responsabilidades distintas.
+- Pq el decimos que el commandbus es una entrada a la app? Pq la implementación interna del bus lo que va a contener internamente es un mapa de correspondencia entre los comandos y el servicio de app que sabe gestionar el comando
+- Los **servicio de aplicación** que saben manejar los comandos son los **Handler**
+    - Se puede optar por n comandos => n handlers
+    - o una çunica clas Handler que tenga n metodos y en algun sitio tener definido que metodo se encarga de gestionar que comando.
+
+
+  
 
 
 
