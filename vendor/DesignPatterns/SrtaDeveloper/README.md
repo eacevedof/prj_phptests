@@ -228,11 +228,11 @@
 │   │           MailerFactory.php               "clase simple" metodo sendRegistrationEmail(email) usa adapter->send
 │   │
 │   ├───Handlers
-│   │       RegisterUserAccountCommandHandler.php "clase" que implementa CommandHandler metodo handle($command)
+│   │       RegisterUserAccountCommandHandler.php "clase" que implementa CommandHandlerInterface.handle($command)
 │   │
 │   └───Infrastructure
 │       ├───CommandBus
-│       │       CommandBus.php  "clase" que implementa CommandBusInterface metodo execute($command)
+│       │       CommandBus.php  "clase" que implementa CommandBusInterface.execute($command)
 │       │
 │       ├───Doctrine
 │       │   └───ORM
@@ -242,7 +242,7 @@
 │       │           InMemoryUserAccountManager.php  "clase" implementa UserAccountRepositoryInterface, UserAccountFactoryInterface
 │       │
 │       └───Mailer
-│               SwiftMailerAdapter.php  "clase" implementa MailerAdapterInterface
+│               SwiftMailerAdapter.php  "clase" implementa MailerAdapterInterface.send(email,subject,body)
 │
 ```
 
