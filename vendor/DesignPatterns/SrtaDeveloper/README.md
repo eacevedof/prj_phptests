@@ -207,7 +207,44 @@
 - <img src="https://trello-attachments.s3.amazonaws.com/5b014dcaf4507eacfc1b4540/5b8bf24a217c8e0d0c69973e/05c59c4c62955f65ffb6550ba6ca2d16/image.png" width="200" height="50">
 
 
-
+```php
+───App
+│   ├───Command
+│   │   │   RegisterUserAccountCommand.php  "modelo" que implementa CommandInterface
+│   │   │
+│   │   └───CommandInterface
+│   │           CommandBusInterface.php     "interfaz" con metodo execute($command)
+│   │
+│   ├───Domain
+│   │   │   UserAccount.php                     "modelo simple"
+│   │   │   UserAccountFactoryInterface.php     "interfaz" con metodo createUserAccount(email,pass...)
+│   │   │   UserAccountRepositoryInterface.php  "interfaz" metodos: findbyid,findbyemail,add($useraccount)
+│   │   │
+│   │   ├───Event
+│   │   │       UserAccountRegisteredEvent.php  "clase simple"
+│   │   │
+│   │   └───Service
+│   │           MailerAdapterInterface.php      "interfaz" metodo send(email,subject,body)
+│   │           MailerFactory.php               "clase simple" metodo sendRegistrationEmail(email) usa adapter->send
+│   │
+│   ├───Handlers
+│   │       RegisterUserAccountCommandHandler.php "clase" que implementa CommandHandler metodo handle($command)
+│   │
+│   └───Infrastructure
+│       ├───CommandBus
+│       │       CommandBus.php  "clase" que implementa CommandBusInterface metodo execute($command)
+│       │
+│       ├───Doctrine
+│       │   └───ORM
+│       │           DoctrineORMUserAccount.php  "clase" extiende "UserAccount"
+│       │           DoctrineORMUserAccount.yaml configuración de campos
+│       │           DoctrineORMUserAccountManager.php   "clase" implementa UserAccountRepositoryInterface, UserAccountFactoryInterface
+│       │           InMemoryUserAccountManager.php  "clase" implementa UserAccountRepositoryInterface, UserAccountFactoryInterface
+│       │
+│       └───Mailer
+│               SwiftMailerAdapter.php  "clase" implementa MailerAdapterInterface
+│
+```
 
 
 
