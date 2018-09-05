@@ -3,6 +3,7 @@
 - [Twitter: @srtaDeveloper](https://twitter.com/srtaDeveloper)
 - [Github - Este repo](https://github.com/eacevedof/prj_phptests/tree/master/vendor/DesignPatterns/SrtaDeveloper)
 - [Behat - PHP Framework for testing](http://behat.org/en/latest/index.html)
+- [Youtube - Arquitectura Hex y Laravel](https://www.youtube.com/playlist?list=PLHseQfu4Nn9fHNcLfF_ZP6noF24xtMtAf)
 
 ## Charla del 23 de septiembre de 2015. Grupo desarrolladores PHP - PHPMad
 ### Que ofrece la Arq Hex?
