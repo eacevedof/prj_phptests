@@ -3,6 +3,6 @@
 ## Domain-Driven Design: Code Structure and Application Services 
 
 ### Links
-- [https://leanpub.com/ddd-in-php](https://leanpub.com/ddd-in-php)
 - [Github - Repo DDD in PHP](https://github.com/dddinphp/last-wishes)
+- [Libro - DDD in PHP](https://leanpub.com/ddd-in-php)
 - [Github - Carlosvinos](https://github.com/carlosbuenosvinos)
