@@ -8,7 +8,7 @@ include("vendor/theframework/components/autoload.php");
 use TheFramework\Components\Db\ComponentMssql;
 
 $arConn = ["server"=>"localhost\MSSQLSERVER2014","database"=>"theframework","user"=>"sa","password"=>"abc"];
-
+$arConn = ["server"=>"192.168.5.2\sql20xx","database"=>"crm3_xxx","user"=>"sa","password"=>"*****"];
 $oMs = new ComponentMssql($arConn);
 $arRows = $oMs->query("SELECT * FROM accounts");
 
