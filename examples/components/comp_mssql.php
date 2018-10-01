@@ -8,10 +8,11 @@ include("vendor/theframework/components/autoload.php");
 use TheFramework\Components\Db\ComponentMssql;
 
 $arConn = ["server"=>"localhost\MSSQLSERVER2014","database"=>"theframework","user"=>"sa","password"=>"abc"];
-$oMs = new ComponentMssql($arConn);
-$arRows = $oMs->query("SELECT * FROM app_customer");
 
-echo "<br>{$oMs->get_affected()}<br/>";
+$oMs = new ComponentMssql($arConn);
+$arRows = $oMs->query("SELECT * FROM accounts");
+
+echo "<br> rows: {$oMs->get_affected()}<br/>";
 if($oMs->is_error())
 {
     $oMs->show_errors();
