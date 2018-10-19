@@ -124,7 +124,7 @@ if(!(isset($_GET["f"]) || isset($_GET["c"])))
 //hay parámetro f
 elseif(isset($_GET["f"]) || isset($_GET["c"]))
 {
-    echo "<a href=\"/\">home</a><hr/>\n\n";
+    if(!isset($_GET["nohome"])) echo "<a href=\"/\">home</a><hr/>\n\n";
     //die("dos");
     $isContent = FALSE;
     if(isset($_GET["f"])) $sF = strtolower(trim($_GET["f"]));       
