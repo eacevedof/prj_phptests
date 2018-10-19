@@ -1,6 +1,6 @@
 <?php
 /*
- * @file: help_gmasv3 1.0.0
+ * @file: help_gmapsv3 1.0.0
  * @info: Prueba Helper gmapsv3
  * Se puede pasar el parámetro nohome para evitar que cree el link HOME
  * 
