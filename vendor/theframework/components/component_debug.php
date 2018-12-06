@@ -2,10 +2,10 @@
 /**
 * @author Eduardo Acevedo Farje.
 * @link www.eduardoaf.com
-* @version 1.2.6
+* @version 1.3.0
 * @name ComponentDebug 
 * @file component_debug.php
-* @date 03-11-2018 11:23 (SPAIN)
+* @date 25-11-2018 16:14 (SPAIN)
 * @observations: Para poder escribir en archivos se debe tener permisos de escritura y/o
 * lectura para IUSR_<SERVERNAME>
 *  load:24
@@ -23,7 +23,6 @@ class ComponentDebug
     private static $arMessages = array();
     private static $arSqls = array();
     private static $arIncluded = array();
-   
    
     public static function config($isSqlsOn=false, $isMessagesOn=false, $isPhpInfoOn=false, $isIncludedOn=false)
     {
@@ -53,7 +52,16 @@ class ComponentDebug
    
     public static function get_sqls_in_array(){if(self::$_isSqlsOn) return self::$arSqls;}
 
-    public static function get_sqls_in_html_table(){ if(self::$_isSqlsOn && !self::is_ajax_request()) echo self::build_html_table(self::$arSqls);}
+    public static function get_sqls_in_html_table()
+    { 
+        if(self::$_isSqlsOn) 
+        {
+            $sLog = self::build_string(self::$arSqls);
+            self::log($sLog);            
+            if(!self::is_ajax_request())
+                echo self::build_html_table(self::$arSqls);
+        }
+    }//get_sqls_in_html_table
     
     public static function set_messages_on($isMessagesOn){self::$_isMessagesOn = $isMessagesOn;}
     public static function set_sqls_on($isSqlsOn){self::$_isSqlsOn = $isSqlsOn;}
@@ -74,7 +82,7 @@ class ComponentDebug
         $sHtmlTrHd = "";
         if(!empty($arArray))
         {    
-            $sHtmlTrHd .="<tr><th>Nº</th>\n";
+            $sHtmlTrHd .="<tr><th>NÂº</th>\n";
 
             $arRow = $arArray[0];
             foreach($arRow as $sTitle=>$sValue)
@@ -241,5 +249,55 @@ class ComponentDebug
             $sHtmlTable .= "</table>\n";
         }
         return $sHtmlTable;
-    }
+    }//build_html_table
+    
+    private static function build_string($arArray=array())
+    {
+        if(isset($_SESSION["componentdebug"]) && is_array($_SESSION["componentdebug"]))
+        {
+            //bug($_SESSION["componentdebug"]);
+            $arArray = array_merge($_SESSION["componentdebug"],$arArray);
+            $_SESSION["componentdebug"] = NULL;
+        }
+        if(isset($_POST["componentdebug"]) && is_array($_POST["componentdebug"]))
+        {
+            $arArray = array_merge($_POST["componentdebug"],$arArray);
+            $_POST["componentdebug"] = NULL;
+        }        
+        
+        $sLog = "";
+        if(!empty($arArray))
+        {
+            foreach($arArray as $iRow=>$arRow)
+            {
+                foreach($arRow as $sFieldValue)
+                {
+                    $sFieldValue = str_replace("\n\t\t\t","\n",$sFieldValue);
+                    $sFieldValue = str_replace("\n\t\t","\n",$sFieldValue);
+                    $sFieldValue = str_replace("\n\t","\n",$sFieldValue);
+                    $sFieldValue = str_replace("\n     ","\n",$sFieldValue);
+                    $sFieldValue = str_replace("\n    ","\n",$sFieldValue);
+                    $sFieldValue = str_replace("\n   ","\n",$sFieldValue);
+                    $sFieldValue = str_replace("\n  ","\n",$sFieldValue);
+                    $sFieldValue = str_replace("\n ","\n",$sFieldValue);
+                    //$sFieldValue = str_replace("\t"," ",$sFieldValue);
+                    $sLog .= "\n\n-- $iRow =>\n".trim($sFieldValue);
+                }//foreach arRow
+            }//foreach arArray
+        }
+        return $sLog;
+    }//build_string
+    
+    public static function log($mxVar,$sTitle="")
+    {
+        $sPathFolder = realpath($_SERVER["DOCUMENT_ROOT"]).DIRECTORY_SEPARATOR;
+        $sFileName = "componentdebug_".date("Ymd").".log";
+        $sPathFile = $sPathFolder.$sFileName;
+        //pr($sPathFile);die;
+        $sValue = $mxVar;
+        if(!is_string($sValue)) $sValue = var_export($mxVar,1);
+        if($sTitle) $sValue = "- [$sTitle] -\n$sValue";
+        file_put_contents($sPathFile,$sValue);
+    }//log
+    
 }//ComponentDebug
