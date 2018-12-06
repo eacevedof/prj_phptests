@@ -1,7 +1,14 @@
-﻿<?php
+<?php
+/**
+ * @author Eduardo Acevedo Farje.
+ * @link www.eduardoaf.com
+ * @name TheFramework\Components\Db\ComponentCrud 
+ * @file component_crud.php 2.4.0
+ * @date 01-12-2018 13:04 SPAIN
+ * @observations
+ */
 namespace TheFramework\Components\Db;
 
-//ComponentCrud 2.0.0 - 28/11/2018
 class ComponentCrud
 {
     private $sSQL;
@@ -9,26 +16,75 @@ class ComponentCrud
     private $sTable; //Tabla sobre la que se realizará el crud
     private $arInsertFV;
     
+    private $arNumeric; //si esta en este array no se escapa con '
+    private $arOrderBy;
+    private $arAnds;
+    private $arJoins;
+    
+    private $isDistinct;
     private $arUpdateFV;
     private $arPksFV;
     private $arGetFields;
+    private $arResult;
+    private $arEnd;
     
     private $oDB;
     
+    protected $arErrors = [];
+    protected $isError = FALSE;
+    
+    /**
+     * 
+     * @param TheFramework\Components\Db\ComponentMysql $oDB
+     */
     public function __construct($oDB=NULL)
     { 
+        $this->arEnd = array();
+        $this->arResult = array();
         $this->arInsertFV = array();
         $this->arUpdateFV = array();
         $this->arPksFV = array();
         $this->arGetFields = array();
+        $this->arOrderBy = array();
+        $this->arNumeric = array();
+        $this->arAnds = array();
         $this->oDB = $oDB;
     }
     
+    private function get_orderby()
+    {
+        $sOrderBy = "";
+        $arSQL = [];
+        if($this->arOrderBy)
+        {
+            $sOrderBy = " ORDER BY ";
+            foreach($this->arOrderBy as $sField=>$sAD)
+                $arSQL[] = "$sField $sAD";
+            $sOrderBy = $sOrderBy.implode(",",$arSQL);
+        }
+        return $sOrderBy;
+    }
+    
+    private function get_joins()
+    {
+        $sJoin = " ".implode("\n",$this->arJoins);
+        return $sJoin;        
+    }
+    
+    private function get_end()
+    {
+        $sEnd = " ".implode("\n",$this->arEnd);
+        return $sEnd;        
+    }    
+    
+    private function is_numeric($sFieldName){return in_array($sFieldName,$this->arNumeric);}
+        
     public function autoinsert($sTable=NULL,$arFieldVal=array())
     {
         //Limpio la consulta 
         $this->sSQL = "-- autoinsert";
         
+        $sSQLComment = "";
         if($this->sSQLComment)
             $sSQLComment = "/*$this->sSQLComment*/";
         
@@ -63,8 +119,8 @@ class ComponentCrud
                 $sSQL .= ")";
                 
                 $this->sSQL = $sSQL;
-                if(is_object($this->oDB))
-                    $this->oDB->exec($this->sSQL);
+                //si hay bd intenta ejecutar la consulta
+                $this->query("w");
             }//si se han proporcionado correctamente los datos campo=>valor
         }//se ha proporcionado una tabla
     }//autoinsert
@@ -98,7 +154,9 @@ class ComponentCrud
                 {    
                     if($sValue===NULL)
                         $arAux[] = "$sField=NULL";
-                    else
+                    elseif($this->is_numeric($sField))
+                        $arAux[] = "$sField=$sValue";
+                    else    
                         $arAux[] = "$sField='$sValue'";
                 }
 
@@ -110,18 +168,63 @@ class ComponentCrud
                 {    
                     if($sValue===NULL)
                         $arAux[] = "$sField IS NULL";
-                    else
+                    elseif($this->is_numeric($sField))
+                        $arAux[] = "$sField=$sValue";
+                    else    
                         $arAux[] = "$sField='$sValue'";
                 }
-                
+                $arAux = array_merge($arAux,$this->arAnds);
                 $sSQL .= " WHERE ".implode(" AND ",$arAux);
                 
+                $sSQL .= $this->get_end();
                 $this->sSQL = $sSQL;
-                if(is_object($this->oDB))
-                    $this->oDB->exec($this->sSQL);
+                //si hay bd intenta ejecutar la consulta
+                $this->query("w");
             }//si se han proporcionado correctamente los datos campo=>valor y las claves
         }//se ha proporcionado una tabla
     }//autoupdate
+    
+    public function autodelete($sTable=NULL,$arPksFV=array())
+    {
+        //Limpio la consulta 
+        $this->sSQL = "-- autodelete";
+        
+        if($this->sSQLComment)
+            $sSQLComment = "/*$this->sSQLComment*/";
+        
+        if(!$sTable)
+            $sTable = $this->sTable;
+        
+        if($sTable)
+        {
+            if(!$arPksFV)
+                $arPksFV = $this->arPksFV;
+            
+            if($arPksFV)
+            {    
+                $sSQL = "$sSQLComment DELETE FROM $sTable ";
+                //condiciones con las claves
+                $arAnd = array();
+                
+                foreach($arPksFV as $sField=>$sValue)
+                {    
+                    if($sValue===NULL)
+                        $arAnd[] = "$sField IS NULL";
+                    elseif($this->is_numeric($sField))
+                        $arAux[] = "$sField=$sValue";
+                    else    
+                        $arAux[] = "$sField='$sValue'";
+                }                
+                
+                $sSQL .= " WHERE ".implode(" AND ",$arAnd);
+                
+                $this->sSQL = $sSQL;
+                //si hay bd intenta ejecutar la consulta
+                $this->query("w");
+                
+            }//si se han proporcionado correctamente las claves
+        }//se ha proporcionado una tabla
+    }//autodelete     
     
     public function autodelete_logic($sTable=NULL,$arPksFV=array())
     {
@@ -151,15 +254,17 @@ class ComponentCrud
                 {    
                     if($sValue===NULL)
                         $arAnd[] = "$sField IS NULL";
-                    else
-                        $arAnd[] = "$sField='$sValue'";
+                    elseif($this->is_numeric($sField))
+                        $arAux[] = "$sField=$sValue";
+                    else    
+                        $arAux[] = "$sField='$sValue'";
                 }
                 
                 $sSQL .= " WHERE ".implode(" AND ",$arAnd);
                 
                 $this->sSQL = $sSQL;
-                if(is_object($this->oDB))
-                    $this->oDB->exec($this->sSQL);
+                //si hay bd intenta ejecutar la consulta
+                $this->query("w");
             }//si se han proporcionado correctamente las claves
         }//se ha proporcionado una tabla
     }//autodelete_logic    
@@ -197,8 +302,10 @@ class ComponentCrud
                 {    
                     if($sValue===NULL)
                         $arAnd[] = "$sField IS NULL";
-                    else
-                        $arAnd[] = "$sField='$sValue'";
+                    elseif($this->is_numeric($sField))
+                        $arAux[] = "$sField=$sValue";
+                    else    
+                        $arAux[] = "$sField='$sValue'";
                 }
                 
                 $sSQL .= " WHERE ".implode(" AND ",$arAnd);
@@ -210,50 +317,12 @@ class ComponentCrud
         }//se ha proporcionado una tabla
     }//autoundelete_logic  
     
-    public function autodelete($sTable=NULL,$arPksFV=array())
-    {
-        //Limpio la consulta 
-        $this->sSQL = "-- autodelete";
-        
-        if($this->sSQLComment)
-            $sSQLComment = "/*$this->sSQLComment*/";
-        
-        if(!$sTable)
-            $sTable = $this->sTable;
-        
-        if($sTable)
-        {
-            if(!$arPksFV)
-                $arPksFV = $this->arPksFV;
-            
-            if($arPksFV)
-            {    
-                $sSQL = "$sSQLComment DELETE FROM $sTable ";
-                //condiciones con las claves
-                $arAnd = array();
-                
-                foreach($arPksFV as $sField=>$sValue)
-                {    
-                    if($sValue===NULL)
-                        $arAnd[] = "$sField IS NULL";
-                    else
-                        $arAnd[] = "$sField='$sValue'";
-                }                
-                
-                $sSQL .= " WHERE ".implode(" AND ",$arAnd);
-                
-                $this->sSQL = $sSQL;
-                if(is_object($this->oDB))
-                    $this->oDB->exec($this->sSQL);
-            }//si se han proporcionado correctamente las claves
-        }//se ha proporcionado una tabla
-    }//autodelete 
-    
     public function get_selectfrom($sTable=NULL,$arFields=array(),$arPksFV=array())
     {
         //Limpio la consulta 
-        $this->sSQL = "-- get_values";
+        $this->sSQL = "-- get_selectfrom";
         
+        $sSQLComment = "";
         if($this->sSQLComment)
             $sSQLComment = "/*$this->sSQLComment*/";
         
@@ -267,27 +336,36 @@ class ComponentCrud
             if(!$arPksFV)
                 $arPksFV = $this->arPksFV;
             
-            if($arFields && $arPksFV)
+            if($arFields)
             {    
                 $sSQL = "$sSQLComment SELECT ";
+                if($this->isDistinct) $sSQL.= "DISTINCT ";
                 $sSQL .= implode(",",$arFields)." ";
                 $sSQL .= "FROM $sTable";
                 
+                $sSQL .= $this->get_joins();
                 //condiciones con las claves
                 $arAux = array();
                 foreach($arPksFV as $sField=>$sValue)
                 {    
                     if($sValue===NULL)
                         $arAux[] = "$sField IS NULL";
-                    else
+                    elseif($this->is_numeric($sField))
+                        $arAux[] = "$sField=$sValue";
+                    else    
                         $arAux[] = "$sField='$sValue'";
                 }
                 
-                $sSQL .= " WHERE ".implode(" AND ",$arAux);
+                $arAux = array_merge($arAux,$this->arAnds);
+                if($arAux)
+                    $sSQL .= " WHERE ".implode(" AND ",$arAux);
                 
+                $sSQL .= $this->get_orderby();
+                $sSQL .= $this->get_end();
                 $this->sSQL = $sSQL;
-                if(is_object($this->oDB))
-                    return $this->oDB->query($this->sSQL);
+                //bug($sSQL);die;
+                $this->query();
+                return $this->arResult;
             }//si se han proporcionado correctamente los datos campo=>valor y las claves
             return NULL;
         }//se ha proporcionado una tabla
@@ -428,17 +506,21 @@ class ComponentCrud
     public function set_comment($sComment){$this->sSQLComment = $sComment;}
     
     public function set_insert_fv($arFieldVal=array()){$this->arInsertFV = array(); if(is_array($arFieldVal)) $this->arInsertFV=$arFieldVal;}
-    public function add_insert_fv($sFieldName,$sValue){$this->arInsertFV[$sFieldName]=$sValue;}
+    public function add_insert_fv($sFieldName,$sValue,$isSanit=1){$this->arInsertFV[$sFieldName]=($isSanit)?$this->get_sanitized($sValue):$sValue;}
 
     public function set_pks_fv($arFieldVal=array()){$this->arPksFV = array(); if(is_array($arFieldVal)) $this->arPksFV=$arFieldVal;}
-    public function add_pk_fv($sFieldName,$sValue){$this->arPksFV[$sFieldName]=$sValue;}
+    public function add_pk_fv($sFieldName,$sValue,$isSanit=1){$this->arPksFV[$sFieldName]=($isSanit)?$this->get_sanitized($sValue):$sValue;}
     
     public function set_update_fv($arFieldVal=array()){$this->arUpdateFV = array(); if(is_array($arFieldVal)) $this->arUpdateFV=$arFieldVal;}
-    public function add_update_fv($sFieldName,$sValue){$this->arUpdateFV[$sFieldName]=$sValue;}
+    public function add_update_fv($sFieldName,$sValue,$isSanit=1){$this->arUpdateFV[$sFieldName]=($isSanit)?$this->get_sanitized($sValue):$sValue;}
     
     public function set_getfields($arFields=array()){$this->arGetFields = array(); if(is_array($arFields)) $this->arGetFields=$arFields;}
     public function add_getfield($sFieldName){$this->arGetFields[]=$sFieldName;}
 
+    public function set_joins($arJoins=array()){$this->arJoins = array(); if(is_array($arJoins)) $this->arJoins=$arJoins;}
+    public function set_orderby($arOrderBy=array()){$this->arOrderBy = array(); if(is_array($arOrderBy)) $this->arOrderBy=$arOrderBy;}
+    public function set_end($arEnd=array()){$this->arEnd = array(); if(is_array($arEnd)) $this->arEnd=$arEnd;}
+    
     public function get_sql(){return $this->sSQL;}
     
     /**
@@ -495,7 +577,9 @@ class ComponentCrud
             {    
                 if($sValue===NULL)
                     $arAux[] = "$sField IS NULL";
-                else
+                elseif($this->is_numeric($sField))
+                    $arAux[] = "$sField=$sValue";
+                else    
                     $arAux[] = "$sField='$sValue'";
             }
             
@@ -513,4 +597,52 @@ class ComponentCrud
         return NULL;
     }//get_nextcode()
     
-}//Crud 2.0.0
+    public function get_sanitized($sValue)
+    {
+        $sFixed = str_replace("'","\'",$sValue);
+        $sFixed = str_replace("%","\%",$sFixed);
+        $sFixed = str_replace("_","\_",$sFixed);
+        return $sFixed;
+    }//get_sanitized
+
+    /**
+     * 
+     * @param char $sType r:read para selects, w:write. escrituras
+     * @return Solo se sale
+     */
+    private function query($sType="r")
+    {
+        if(is_object($this->oDB))
+        {
+            //insert,update,delete
+            if(method_exists($this->oDB,"exec") && $sType=="w")
+                $this->arResult = $this->oDB->exec($this->sSQL);
+            //selects
+            elseif(method_exists($this->oDB,"query") && $sType=="r")
+                $this->arResult = $this->oDB->query($this->sSQL);
+            else 
+                return $this->add_error("No match method/type operation");
+            
+            //propagamos el error
+            if($this->oDB->is_error())
+                $this->add_error($this->oDB->get_error());
+        }
+    }//query
+    
+    public function get_result(){$this->arResult;}
+    public function is_distinct($isOn=TRUE){$this->isDistinct=$isOn;}
+    public function add_orderby($sFieldName,$sOrder="ASC"){$this->arOrderBy[$sFieldName]=$sOrder;}
+    public function add_numeric($sFieldName){$this->arNumeric[]=$sFieldName;}
+    public function add_and($sAnd){$this->arAnds[]=$sAnd;}
+    public function add_and1($sFieldName,$sValue,$sOper="="){$this->arAnds[]="$sFieldName $sOper $sValue";}
+    public function add_join($sJoin,$sKey=NULL){if($sKey)$this->arJoins[$sKey]=$sJoin;else$this->arJoins[]=$sJoin;}
+    public function add_end($sEnd,$sKey=NULL){if($sKey)$this->arEnd[$sKey]=$sEnd;else$this->arEnd[]=$sEnd;}
+    
+    protected function add_error($sMessage){$this->isError = TRUE;$this->arErrors[]=$sMessage;}
+    public function is_error(){return $this->isError;}
+    public function get_errors($inJson=0){if($inJson) return json_encode($this->arErrors); return $this->arErrors;}
+    public function get_error($i=0){isset($this->arErrors[$i])?$this->arErrors[$i]:NULL;}
+    public function show_errors(){echo "<pre>".var_export($this->arErrors,1);}
+    public function set_dbobj($oDb=NULL){$this->oDB=$oDb;}
+    
+}//Crud 2.4.0

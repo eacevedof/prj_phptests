@@ -3,8 +3,8 @@
  * @author Eduardo Acevedo Farje.
  * @link www.eduardoaf.com
  * @name TheFramework\Components\Db\ComponentMysql 
- * @file component_mysql.php v1.0.0
- * @date 19-09-2017 04:56 SPAIN
+ * @file component_mysql.php v2.0.0
+ * @date 02-12-2018 13:20 SPAIN
  * @observations
  */
 namespace TheFramework\Components\Db;
@@ -36,7 +36,24 @@ class ComponentMysql
         return $sString;
     }//get_conn_string
 
-    public function query($sSQL)
+    private function get_rowcol($arResult,$iCol=NULL,$iRow=NULL)
+    {
+        if(is_int($iCol) || is_int($iRow))
+        {
+            $arColnames = $arResult[0];
+            $arColnames = array_keys($arColnames);
+//bug($arColnames);
+            $sColname = (isset($arColnames[$iCol])?$arColnames[$iCol]:"");
+            if($sColname)
+                $arResult = array_column($arResult,$sColname);
+        
+            if(isset($arResult[$iRow]))
+                $arResult = $arResult[$iRow];
+        }
+        return $arResult;
+    }
+    
+    public function query($sSQL,$iCol=NULL,$iRow=NULL)
     {
         try 
         {
@@ -56,7 +73,11 @@ class ComponentMysql
                 $arResult = [];
                 while($arRow = $oCursor->fetch(\PDO::FETCH_ASSOC))
                     $arResult[] = $arRow;
+                
                 $this->iAffected = count($arResult);
+                
+                if($arResult)
+                    $arResult = $this->get_rowcol($arResult,$iCol,$iRow);
             }
         }
         catch(PDOException $oE)
@@ -82,6 +103,7 @@ class ComponentMysql
             {
                 $this->add_error("exec-error: $sSQL");
             }
+            return $mxR;
         }
         catch(PDOException $oE)
         {
@@ -93,6 +115,7 @@ class ComponentMysql
     private function add_error($sMessage){$this->isError = TRUE;$this->iAffected=-1; $this->arErrors[]=$sMessage;}    
     public function is_error(){return $this->isError;}
     public function get_errors(){return $this->arErrors;}
+    public function get_error($i=0){return isset($this->arErrors[$i])?$this->arErrors[$i]:NULL;}
     public function show_errors(){echo "<pre>".var_export($this->arErrors,1);}
     
     public function add_conn($k,$v){$this->arConn[$k]=$v;}

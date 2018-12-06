@@ -1,6 +1,6 @@
 <?php
 //components autoload
-//autoload.php 3.0.0
+//autoload.php 2.0.0
 $sPathRoot = dirname(__FILE__).DIRECTORY_SEPARATOR;
 //die("sPathRoot: $sPathRoot");//...tests\vendor\theframework\components
 $arSubFolders[] = get_include_path();
@@ -9,7 +9,7 @@ $arSubFolders[] = $sPathRoot;//ruta de components
 $arSubFolders[] = $sPathRoot."console";
 $arSubFolders[] = $sPathRoot."db";
 $arSubFolders[] = $sPathRoot."db".DIRECTORY_SEPARATOR."integration";
-$arSubFolders[] = $sPathRoot."apple";
+$arSubFolders[] = $sPathRoot."motosceni";
 
 $sPathInclude = implode(PATH_SEPARATOR,$arSubFolders);
 set_include_path($sPathInclude);
@@ -54,3 +54,4 @@ spl_autoload_register(function($sNSClassName)
         }
     }
 });//spl_autoload_register
+
