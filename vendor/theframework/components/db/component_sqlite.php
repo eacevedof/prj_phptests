@@ -4,7 +4,7 @@
  * @link www.eduardoaf.com
  * @name TheFramework\Components\Db\ComponentDbSqlite 
  * @file component_db_sqlite.php v2.0.0
- * @date 19-09-2017 04:56 SPAIN
+ * @date 06-12-2018 07:08 SPAIN
  * @observations
  */
 namespace TheFramework\Components\Db;
@@ -97,29 +97,58 @@ class ComponentDbSqlite
         return $isAffected;
     }//execute
     
-    public function query($sSQL)
+    private function get_rowcol($arResult,$iCol=NULL,$iRow=NULL)
     {
-        if(trim($sSQL))
+        if(is_int($iCol) || is_int($iRow))
         {
-            if($this->is_noterror())
+            $arColnames = $arResult[0];
+            $arColnames = array_keys($arColnames);
+            //bug($arColnames);
+            $sColname = (isset($arColnames[$iCol])?$arColnames[$iCol]:"");
+            if($sColname)
+                $arResult = array_column($arResult,$sColname);
+        
+            if(isset($arResult[$iRow]))
+                $arResult = $arResult[$iRow];
+        }
+        return $arResult;
+    }
+    
+    public function query($sSQL,$iCol=NULL,$iRow=NULL)
+    {
+        try
+        {
+            if(trim($sSQL))
             {
-                $this->conn_open();
                 if($this->is_noterror())
                 {
-                    if(self::$oPDO)
+                    $this->conn_open();
+                    if($this->is_noterror())
                     {
-                        $arRows = self::$oPDO->query($sSQL);
-                        $this->conn_close();                        
-                        return $arRows;
-                    }
+                        if(self::$oPDO)
+                        {
+                            $arRows = self::$oPDO->query($sSQL);
+                            $this->conn_close();                      
+                            
+                            if($arRows)
+                                $arRows = $this->get_affected_rows($arRows,$iCol,$iRow);
+                            return $arRows;
+                        }
+                    }//if not error
                 }//if not error
-            }//if not error
+            }
+            else 
+            {
+                $sMessage = "query.sql empty";
+                $this->add_message($sMessage);
+            }   
         }
-        else 
+        catch(\PDOException $oE)
         {
-            $sMessage = "query.sql empty";
-            $this->add_message($sMessage);
+            $sMessage = "exception:{$oE->getMessage()}";
+            $this->add_error($sMessage);            
         }
+        
         return [];
     }//query
     
