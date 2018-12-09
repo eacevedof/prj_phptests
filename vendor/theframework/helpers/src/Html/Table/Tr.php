@@ -3,14 +3,14 @@
  * @author Eduardo Acevedo Farje.
  * @link www.eduardoaf.com
  * @version 1.1.2
- * @name TheFramework\Helpers\Html\Table\TableTr
+ * @name TheFramework\Helpers\Html\Table\Tr
  * @date 25-06-2014 09:25 ESP
- * @file TableTr.php
+ * @file Tr.php
  * @requires
  */
 namespace TheFramework\Helpers\Html\Table;
 use TheFramework\Helpers\TheFrameworkHelper;
-class TableTr extends TheFrameworkHelper
+class Tr extends TheFrameworkHelper
 {
     protected $isRowHead = false;
     protected $isRowFoot = false;
@@ -41,7 +41,7 @@ class TableTr extends TheFrameworkHelper
 
     public function get_html()
     {
-        $sHtmlToReturn = $this->get_opentag();
+        $arHtml[] = $this->get_opentag();
         //$this->_inner_html .= $this->get_tds_as_string();
         $this->load_inner_objects();
         if($this->_inner_html) $arHtml[] = $this->_inner_html;
@@ -52,7 +52,7 @@ class TableTr extends TheFrameworkHelper
     public function get_opentag() 
     {
          //tr
-        $sHtmlToReturn = "<$this->_type";
+        $arHtml[] = "<$this->_type";
         if($this->_id) $arHtml[] = " id=\"$this->_idprefix$this->_id\"";
         if($this->iRowSpan) $arHtml[] = " rowspan=\"$this->iRowSpan\"";
         //eventos
@@ -74,9 +74,9 @@ class TableTr extends TheFrameworkHelper
         if($this->_isPrimaryKey) $arHtml[] = " pk=\"pk\"";
         if($this->_attr_dbtype) $arHtml[] = " dbtype=\"$this->_attr_dbtype\"";  
         if($this->sAttrRownumber!=="") $arHtml[] = " rownumber=\"$this->sAttrRownumber\"";  
-        $sHtmlToReturn .=">\n";
+        $arHtml[] = ">\n";
         return implode("",$arHtml);
-    }
+    }//get_opentag
     
     public function get_closetag(){ return parent::get_closetag();}
         
@@ -89,7 +89,7 @@ class TableTr extends TheFrameworkHelper
     public function set_as_rowfoot($isOn=TRUE){$this->isRowFoot = $isOn;}
     public function set_attr_rownumber($value){$this->sAttrRownumber = $value;}
     public function add_inner_object($mxValue){$this->arInnerObjects[] = $mxValue; $this->iNumCols = count($this->arInnerObjects);}
-    public function add_td(HelperTr $oTd){$this->arInnerObjects[] = $oTd; $this->iNumCols = count($this->arInnerObjects);}
+    public function add_td(Td $oTd){$this->arInnerObjects[] = $oTd; $this->iNumCols = count($this->arInnerObjects);}
 
     //==================================
     //             GETS
@@ -100,4 +100,4 @@ class TableTr extends TheFrameworkHelper
     public function is_rowfoot(){return $this->isRowFoot;}
     public function get_num_columns(){return $this->iNumCols;}
     
-}//TableTr
+}//Tr
