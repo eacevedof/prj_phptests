@@ -12,7 +12,8 @@
  */
 namespace TheFramework\Helpers\Html\Table;
 use TheFramework\Helpers\TheFrameworkHelper;
-//import_helper("table_td,table_tr");
+use TheFramework\Helpers\Html\Table\Tr;
+
 class Table extends TheFrameworkHelper
 {
     protected $arObjTrs = null;
@@ -45,14 +46,18 @@ class Table extends TheFrameworkHelper
         $this->iNumCols = 0;
         if(isset($this->arObjTrs[0]))
         {
-            if(is_object($this->arObjTrs[0]))
-                $this->iNumCols = count($this->arObjTrs[0]->get_num_columns());
-            elseif(is_array($this->arObjTrs[0]))
-                $this->iNumCols = count($this->arObjTrs[0]);
+            $oTr0 = $this->arObjTrs[0];
+            //pr($oTr0);
+            if(is_object($oTr0) && ($oTr0 instanceof \TheFramework\Helpers\Html\Table\Tr))
+                $this->iNumCols = $oTr0->get_num_columns();
+            elseif(is_array($oTr0))
+                $this->iNumCols = count($oTr0);
+            elseif(is_string($oTr0))
+                $this->iNumCols = substr_count($oTr0,"</td>");  
             else
-                $this->iNumCols = substr_count($this->arObjTrs[0],"</td>");  
+                $this->iNumCols = -1;
         }
-    }
+    }//load_numcols
     
     //table
     public function get_html()
@@ -71,11 +76,11 @@ class Table extends TheFrameworkHelper
         $arHtml[] = $this->_inner_html;
         $arHtml[] = $this->get_closetag();
         return implode("",$arHtml);
-    }
+    }//get_html
         
     public function get_opentag()
     {
-        $sHtmlToReturn = "<$this->_type";
+        $arHtml[] = "<$this->_type";
         if($this->_id) $arHtml[] = " id=\"$this->_idprefix$this->_id\"";
         //eventos
         if($this->_js_onblur) $arHtml[] = " onblur=\"$this->_js_onblur\"";
@@ -95,9 +100,9 @@ class Table extends TheFrameworkHelper
         if($this->arExtras) $arHtml[] = " ".$this->get_extras();
         //if($this->_isPrimaryKey) $arHtml[] = " pk=\"pk\"";
         //if($this->_attr_dbtype) $arHtml[] = " dbtype=\"$this->_attr_dbtype\"";  
-        $sHtmlToReturn .=">\n";
+        $arHtml[] = ">\n";
         return implode("",$arHtml);
-    }    
+    }//get_opentag
     
     protected function get_html_rows()
     {
@@ -111,7 +116,7 @@ class Table extends TheFrameworkHelper
         $sHtmlRows .= $this->build_tbody($arPosBody);
         
         return $sHtmlRows;
-    }
+    }//get_html_rows
     
     /**
      * En el array de filas (arObjTrs) se puede añadir distintos tipos de datos. 
@@ -132,7 +137,7 @@ class Table extends TheFrameworkHelper
         else//string tipo <tr>...</tr>
             $sTr .= "\t".$mxTr;
         return $sTr;
-    }
+    }//get_mxtr_as_string
     
     protected function build_thead($arPosHead=array())
     {
@@ -146,7 +151,7 @@ class Table extends TheFrameworkHelper
         if($sTr!="") $sThead = "<thead id=\"tblh\">\n$sTr</thead>\n";
         
         return $sThead;
-    }
+    }//build_thead
     
     protected function build_tbody($arPosBody=array())
     {
@@ -157,10 +162,10 @@ class Table extends TheFrameworkHelper
             $sTr .= $this->get_mxtr_as_string($mxTr);
         }
         $sTbody = "";
-        if($sTr!="") $sTbody = "<tbody id=\"tblb\">\n$sTr</tbody>\n";
+        if($sTr!="") $sTbody = "<tbody id=\"{$this->_id}_tbody\">\n$sTr</tbody>\n";
         
         return $sTbody;
-    }
+    }//build_tbody
 
     protected function build_tfoot($arPosFoot=array())
     {
@@ -171,7 +176,7 @@ class Table extends TheFrameworkHelper
             $sTr .= $this->get_mxtr_as_string($mxTr);
         }
         $sTfoot = "";
-        if($sTr!="") $sTfoot = "<tfoot id=\"tblf\">\n$sTr</tfoot>\n";
+        if($sTr!="") $sTfoot = "<tfoot id=\"{$this->_id}_tfoot\">\n$sTr</tfoot>\n";
         
         return $sTfoot;
     }
@@ -253,7 +258,7 @@ class Table extends TheFrameworkHelper
      */
     public function add_objrow($mxValue){$this->arObjTrs[] = $mxValue; $this->iNumRows = count($this->arObjTrs); $this->load_numcols();}
     
-    public function add_tr(TableTr $oTr){$this->arObjTrs[] = $oTr; $this->iNumRows = count($this->arObjTrs); $this->load_numcols();}
+    public function add_tr(Tr $oTr){$this->arObjTrs[] = $oTr; $this->iNumRows = count($this->arObjTrs); $this->load_numcols();}
     
     //**********************************
     //             GETS

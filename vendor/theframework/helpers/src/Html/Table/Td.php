@@ -3,7 +3,7 @@
  * @author Eduardo Acevedo Farje.
  * @link www.eduardoaf.com
  * @version 1.0.3
- * @name Td
+ * @name TheFramework\Helpers\Html\Table\Td
  * @date 11-04-2013 14:12
  * @file Td.php
  * @requires
@@ -76,7 +76,7 @@ class Td extends TheFrameworkHelper
     //**********************************
     public function get_opentag() 
     {
-        $sHtmlToReturn = "<$this->_type";
+        $arHtml[] = "<$this->_type";
         if($this->_id) $arHtml[] = " id=\"$this->_idprefix$this->_id\"";
         if($this->_colspan) $arHtml[] = " colspan=\"$this->_colspan\"";
         //eventos
@@ -97,15 +97,17 @@ class Td extends TheFrameworkHelper
         if($this->_attr_dbfield) $arHtml[] = " dbfield=\"$this->_attr_dbfield\"";
         if($this->_attr_dbtype) $arHtml[] = " dbtype=\"$this->_attr_dbtype\"";        
         if($this->_isPrimaryKey) $arHtml[] = " pk=\"pk\"";
+        if($this->_attr_rownumber!=="") $arHtml[] = " rownumber=\"$this->_attr_rownumber\"";        
         if($this->_attr_colnumber!=="") $arHtml[] = " colnumber=\"$this->_attr_colnumber\"";
-        if($this->_attr_rownumber!=="") $arHtml[] = " rownumber=\"$this->_attr_rownumber\"";
         if($this->_attr_position) $arHtml[] = " cellpos=\"$this->_attr_position\"";        
         if($this->arExtras) $arHtml[] = " ".$this->get_extras();
 
-        $sHtmlToReturn .=">";
+        $arHtml[] = ">";
         return implode("",$arHtml);
-    }
+    }//get_opentag
+    
     public function get_closetag(){return parent::get_closetag();}
     public function get_colspan(){return $this->_colspan;}
     public function is_header(){return $this->_isHeader;}
-}
+    
+}//Td

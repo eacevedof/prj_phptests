@@ -3,14 +3,15 @@
  * @author Eduardo Acevedo Farje.
  * @link www.eduardoaf.com
  * @version 2.0.0
- * @name TheFramework\Helpers\Html\Table\TableRaw
+ * @name TheFramework\Helpers\Html\Table\Raw
  * @date 14-05-2017 07:19 (SPAIN)
- * @file TableRaw.php
+ * @file Raw.php
  * @requires 
  */
 namespace TheFramework\Helpers\Html\Table;
 use TheFramework\Helpers\TheFrameworkHelper;
-class TableRaw extends TheFrameworkHelper
+
+class Raw extends TheFrameworkHelper
 {
     protected $arLabels;
     protected $arRows;
@@ -51,10 +52,10 @@ class TableRaw extends TheFrameworkHelper
     
     public function get_html() 
     {
-        $sHtmlToReturn = $this->get_opentag()."\n";
+        $arHtml[] = $this->get_opentag()."\n";
         //si no se hay pasado etiquetas se intentan recuperar desde la primera fila
         if(!$this->arLabels)
-            if(is_array($this->arRows[0]))
+            if(isset($this->arRows[0]) && is_array($this->arRows[0]))
                 $this->arLabels = array_keys($this->arRows[0]);
         
         //LABELS EN COLUMNAS
