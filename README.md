@@ -26,6 +26,7 @@
             - Configuración del contenedor del inyector de dependencias con repositorios
     - [SrtaDeveloper](https://github.com/eacevedof/prj_phptests/tree/master/vendor/DesignPatterns/SrtaDeveloper)
         - [Youtube - Arquitectura hexagonal](https://youtu.be/mttFVrUBh3w)
+        - [Diapositivas](https://speakerd.s3.amazonaws.com/presentations/16c77c47111a4b7b8ba68d1a0bf9bd4d/DIAPOSITIVAS_Hexagonal_Architecture.pdf)
 - [solid](https://github.com/eacevedof/prj_phptests/tree/master/vendor/solid)
     - Explicación de SOLID en Java que traduzco a PHP
     - [Youtube - SOLID - Principios de diseño de software y patrones de diseño by 
