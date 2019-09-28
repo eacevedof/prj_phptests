@@ -6,6 +6,8 @@
 - [Youtube - Arquitectura Hex y Laravel](https://www.youtube.com/playlist?list=PLHseQfu4Nn9fHNcLfF_ZP6noF24xtMtAf)
 
 ## Charla del 23 de septiembre de 2015. Grupo desarrolladores PHP - PHPMad
+- [Diapositivas de la charla (speakerdeck)](https://speakerdeck.com/gtoboso/arquitectura-hexagonal-phpmad)
+
 ### Que ofrece la Arq Hex?
 - Los cambios en un area de app deberian tener el menor número posible de efectos colaterales.
 - Agregar nuevas funcionalidades o formas de interactuar con la app no deberia requerir grandes cambios de código.

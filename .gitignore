@@ -1,4 +1,9 @@
 node_modules
 tfwlog.log
 vendor/theframework/components/apple/*.pem
-\vendor\theframework\components\apple\*.pem
+
+# excluye todo vendor menos theframework
+/vendor/*
+!/vendor/theframework/
+!/vendor/solid/
+!/vendor/DesignPatterns/
