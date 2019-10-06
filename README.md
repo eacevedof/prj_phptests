@@ -71,3 +71,6 @@ examples
 
 ## Ejecución en vivo
 - [live test.theframework.es](http://test.theframework.es)
+
+## Notas
+- Aqui he dejado a medias el refactor de los Helpers ^^ 2.0
