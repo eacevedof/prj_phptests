@@ -74,3 +74,9 @@ examples
 
 ## Notas
 - Aqui he dejado a medias el refactor de los Helpers ^^ 2.0
+- Hay que aplicar esto en **autoload_real.php**
+```php
+    //@eaf
+    if(stream_resolve_include_path($file))    
+        if (empty($GLOBALS['__composer_autoload_files'][$fileIdentifier])) {
+```
