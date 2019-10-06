@@ -6,6 +6,7 @@
  *        llama a su método es más pequeño y supuestamente es para ahorrar memoria en la definición
  *          ^^ 
  *        Para usar Lazy y proxy se necesita: composer require ocramius/proxy-manager
+ *        Cuando usar lazy loading: http://php-di.org/doc/lazy-injection.html#when-to-use
  */
 include "vendor/autoload.php";
 
