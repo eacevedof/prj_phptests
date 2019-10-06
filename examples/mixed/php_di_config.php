@@ -49,19 +49,20 @@ class StoreService
     }
 }
 
-$builder = new \DI\ContainerBuilder();
-$builder->enableCompilation(__DIR__ . "/tmp/compiled");
-$builder->writeProxiesToFile(true, __DIR__ . "/tmp/proxies");
-
-$container = $builder->build();
-//se le indica que si hay que inyectar una instancia de IfGeolocationService, sea GoogleMaps y no OpenStreetMap
-$container->set("IfGeolocationService", DI\create("GoogleMaps"));
+$contnbuilder = new \DI\ContainerBuilder();
+$contnbuilder->addDefinitions([
+    IfGeolocationService::class => DI\create("GoogleMaps")
+]);
+$contnbuilder->enableCompilation(__DIR__ . "/tmp/compiled");
+$contnbuilder->writeProxiesToFile(true, __DIR__ . "/tmp/proxies");
+$container = $contnbuilder->build();
 
 $storeservice2 = $container->get("StoreService");
 $storeservice2->getStoreCoordinates(new IdentityStore());
 
 /*
-Fatal error: 
+Fatal error a causa de: 
+    $container->set("IfGeolocationService", DI\create("GoogleMaps"));
 Uncaught LogicException: You cannot set a definition at runtime on a compiled container. 
 You can either put your definitions in a file, disable compilation 
 or ->set() a raw value directly (PHP object, string, int, ...) instead of a PHP-DI definition. 
