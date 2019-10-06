@@ -1,6 +1,6 @@
 <?php
 /**
- * @file: php_di_gmpas.php
+ * @file: php_di_gmaps.php
  * @info: di googlemaps http://php-di.org/doc/understanding-di.html
  */
 include "vendor/autoload.php";
