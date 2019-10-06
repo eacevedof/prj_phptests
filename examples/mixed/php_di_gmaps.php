@@ -10,6 +10,7 @@ class GoogleMaps_Old
         // calls Google Maps webservice
     }
 }
+
 class OpenStreetMap_Old
 {
     public function getCoordinatesFromAddress($address) {
@@ -27,7 +28,7 @@ class StoreService_Old
 }
 
 //hay que desacoplar el código anterior
-//Paso 1: interfaz
+//Paso 1: interfaz, se extrae un mismo comportamiento (método esperado en el cliente) en una interfaz
 interface InterfaceGeolocationService 
 {
     public function getCoordinatesFromAddress($address);
@@ -57,6 +58,7 @@ class OpenStreetMap implements InterfaceGeolocationService
     }    
 }
 
+//El cliente, ahora esta acoplado al comportamiento y no al tipo
 class StoreService
 {
     private $oIGeoService;
@@ -75,3 +77,20 @@ class StoreService
 $oGmaps = new GoogleMaps();
 $storeservice = new StoreService($oGmaps);
 $storeservice->getStoreCoordinates(new IdentityStore());
+
+use DI\Container;
+
+$container = new Container();
+//se le indica que si hay que inyectar una instancia de I, sea GoogleMaps y no OpenStreetMap
+$container->set("InterfaceGeolocationService", DI\create("GoogleMaps"));
+
+$storeservice2 = $container->get("StoreService");
+$storeservice2->getStoreCoordinates(new IdentityStore());
+
+/*
+error:
+( ! ) Fatal error: Uncaught DI\Definition\Exception\InvalidDefinition: Entry "StoreService" cannot be resolved: Entry "InterfaceGeolocationService" cannot be resolved: the class is not instantiable Full definition: Object ( class = #NOT INSTANTIABLE# InterfaceGeolocationService lazy = false ) Full definition: Object ( class = StoreService lazy = false __construct( $oIGeoService = get(InterfaceGeolocationService) ) ) in /home/vagrant/code/prj_phptests/vendor/php-di/php-di/src/Definition/Exception/InvalidDefinition.php on line 18
+( ! ) DI\Definition\Exception\InvalidDefinition: Entry "StoreService" cannot be resolved: Entry "InterfaceGeolocationService" cannot be resolved: the class is not instantiable Full definition: Object ( class = #NOT INSTANTIABLE# InterfaceGeolocationService lazy = false ) Full definition: Object ( class = StoreService lazy = false __construct( $oIGeoService = get(InterfaceGeolocationService) ) ) in /home/vagrant/code/prj_phptests/vendor/php-di/php-di/src/Definition/Exception/InvalidDefinition.php on line 18
+
+el ejemplo en la página está mal. Hay que configurar el container antes de llamar a StoreService
+*/
