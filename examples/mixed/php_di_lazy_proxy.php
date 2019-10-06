@@ -1,6 +1,6 @@
 <?php
 /**
- * @file: php_di_config_monolog.php
+ * @file: php_di_lazy_proxy.php
  * @info: definitions http://php-di.org/doc/php-definitions.html
  *        Esto sigo sin entenderlo, proxy cuando se define es un objeto muy grande y cuando se 
  *        llama a su método es más pequeño y supuestamente es para ahorrar memoria en la definición
@@ -19,16 +19,28 @@ class Foo
 
 $builder = new \DI\ContainerBuilder();
 $builder->addDefinitions([
-    "Foo" => \DI\create()->lazy()
+    "Foo" => \DI\create()->lazy() //devuelve un Helper
 ]);
+
+//print_r(\DI\create()->lazy());
+/*
+DI\Definition\Helper\CreateDefinitionHelper Object
+(
+    [className:DI\Definition\Helper\CreateDefinitionHelper:private] => 
+    [lazy:DI\Definition\Helper\CreateDefinitionHelper:private] => 1
+    [constructor:protected] => Array()
+    [properties:DI\Definition\Helper\CreateDefinitionHelper:private] => Array()
+    [methods:protected] => Array()
+)
+*/
 $builder->enableCompilation(__DIR__ . "/tmp/compiled");
 $builder->writeProxiesToFile(true, __DIR__ . "/tmp/proxies");
 $container = $builder->build();
 
 // $proxy is a Proxy object, it is not initialized
 // It is very lightweight in memory
-$proxy = $container->get('Foo');
-print_r($proxy);
+$proxy = $container->get('Foo');//devuelve Foo con todas sus dependencias
+//print_r($proxy);
 /*
 ProxyManagerGeneratedProxy\__PM__\Foo\Generated4fabc338a08ffb0990168fa3109bf950 Object
 (
