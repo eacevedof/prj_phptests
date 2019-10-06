@@ -82,6 +82,7 @@ use DI\Container;
 
 $container = new Container();
 //se le indica que si hay que inyectar una instancia de I, sea GoogleMaps y no OpenStreetMap
+//create: es una fn helper que devuelve una instancia de CreateDefinitionHelper
 $container->set("InterfaceGeolocationService", DI\create("GoogleMaps"));
 
 $storeservice2 = $container->get("StoreService");
