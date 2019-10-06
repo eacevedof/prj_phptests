@@ -49,15 +49,21 @@ class StoreService
     }
 }
 
-$oGmaps = new GoogleMaps();
-$storeservice = new StoreService($oGmaps);
-$storeservice->getStoreCoordinates(new IdentityStore());
+$builder = new \DI\ContainerBuilder();
+$builder->enableCompilation(__DIR__ . "/tmp/compiled");
+$builder->writeProxiesToFile(true, __DIR__ . "/tmp/proxies");
 
-use DI\Container;
-
-$container = new Container();
-//se le indica que si hay que inyectar una instancia de I, sea GoogleMaps y no OpenStreetMap
+$container = $builder->build();
+//se le indica que si hay que inyectar una instancia de IfGeolocationService, sea GoogleMaps y no OpenStreetMap
 $container->set("IfGeolocationService", DI\create("GoogleMaps"));
 
 $storeservice2 = $container->get("StoreService");
 $storeservice2->getStoreCoordinates(new IdentityStore());
+
+/*
+Fatal error: 
+Uncaught LogicException: You cannot set a definition at runtime on a compiled container. 
+You can either put your definitions in a file, disable compilation 
+or ->set() a raw value directly (PHP object, string, int, ...) instead of a PHP-DI definition. 
+in /home/vagrant/code/prj_phptests/vendor/php-di/php-di/src/CompiledContainer.php on line 91
+*/
