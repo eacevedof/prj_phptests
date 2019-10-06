@@ -1,6 +1,7 @@
 {
     "require": {
-        "theframework/helpers": "^0.1.0"
+        "theframework/helpers": "^0.1.0",
+        "php-di/php-di": "^6.0"
     },
     "autoload":{
         "psr-4":{
