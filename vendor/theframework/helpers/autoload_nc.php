@@ -25,8 +25,9 @@ spl_autoload_register(function($sNameSpacePath)
         $sNsPath = str_replace("\\",TFW_DS,$sNsPath);
 
         $sPathClass = $sPathSrc.TFW_DS.$sNsPath.".php";
-        //pr($sPathClass,"TO INCLUDE");
-        include_once($sPathClass);
+        if(stream_resolve_include_path($sPathClass))
+            //pr($sPathClass,"TO INCLUDE");
+            include_once($sPathClass);
     }
 });//spl_autoload_register
 
