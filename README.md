@@ -27,6 +27,8 @@
     - [SrtaDeveloper](https://github.com/eacevedof/prj_phptests/tree/master/vendor/DesignPatterns/SrtaDeveloper)
         - [Youtube - Arquitectura hexagonal](https://youtu.be/mttFVrUBh3w)
         - [Diapositivas](https://speakerd.s3.amazonaws.com/presentations/16c77c47111a4b7b8ba68d1a0bf9bd4d/DIAPOSITIVAS_Hexagonal_Architecture.pdf)
+    - [Youtube - UPM - Master Patrones de Diseño](https://www.youtube.com/playlist?list=PLj2IVmcP-_QOQcDplVNiLbBQ6OLCXX7fv) **To-do**
+        - [Repo original - Github](https://github.com/miw-upm/apaw)
 - [solid](https://github.com/eacevedof/prj_phptests/tree/master/vendor/solid)
     - Explicación de SOLID en Java que traduzco a PHP
     - [Youtube - SOLID - Principios de diseño de software y patrones de diseño by 
