@@ -7,3 +7,4 @@ vendor/theframework/components/apple/*.pem
 !/vendor/theframework/
 !/vendor/solid/
 !/vendor/DesignPatterns/
+/examples/mixed/tmp/

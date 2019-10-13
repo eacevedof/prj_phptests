@@ -62,6 +62,7 @@ class ComposerAutoloaderIniteb8af4c17bda3ba9f5f77a559a198a5f
 
 function composerRequireeb8af4c17bda3ba9f5f77a559a198a5f($fileIdentifier, $file)
 {
+    if(stream_resolve_include_path($file))    
     if (empty($GLOBALS['__composer_autoload_files'][$fileIdentifier])) {
         require $file;
 
