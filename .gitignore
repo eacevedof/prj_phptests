@@ -8,3 +8,4 @@ vendor/theframework/components/apple/*.pem
 !/vendor/solid/
 !/vendor/DesignPatterns/
 /examples/mixed/tmp/
+.idea

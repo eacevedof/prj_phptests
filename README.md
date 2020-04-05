@@ -1,4 +1,4 @@
-# prj_phptests (28/09/2019)
+# prj_phptests (05/04/2020)
 - Es un "miniframework" tipo sandbox donde tengo varias pruebas
 - **arrancar la app** 
 ```js
