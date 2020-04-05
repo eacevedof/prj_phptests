@@ -1,5 +1,46 @@
 # prj_phptests (28/09/2019)
-- Es un "miniframework" tipo sandbox donde tengo varias pruebas 
+- Es un "miniframework" tipo sandbox donde tengo varias pruebas
+- **arrancar la app** 
+```js
+php -S localhost:3000 -t .
+```
+- **configuracion**
+- Crear paquete en vendor
+- Dar de alta este paquete en composer.json [opcional]
+    ```json
+    //<this-project>/composer.json
+    {
+        "require": {
+            "theframework/helpers": "^0.1.0",
+            "php-di/php-di": "^6.0",
+            "monolog/monolog": "^2.0",
+            "ocramius/proxy-manager": "^2.2"
+        },
+        "autoload":{
+            "psr-4":{
+                "DesignPatterns\\":"vendor/DesignPatterns"  <-- AQUI
+            }
+        },
+        "require-dev": {
+            "phpunit/phpunit": "^7"
+        }
+    }
+    ```
+    - Recargar el autoload de composer
+        - `composer dump-autoload`
+- Crear el fichero que utilizará este paquete en **`examples/<carpeta-correspondiente>`** debe llevar @file e @info.
+```php
+//examples/designpatterns/gof_factory.php
+/**
+ * @file: gof_factory.php
+ * @info: https://github.com/eacevedof/prj_phptests/tree/master/vendor/DesignPatterns/Gof
+ *        [Curso de Patrones de diseño - 2 factory by MitoCode](https://www.youtube.com/watch?v=gocJeOHtj9w&list=PLvimn1Ins-41Uiugt1WbpyFo1XT1WOquL&index=2)
+ */
+include_once("vendor/autoload.php");
+
+use DesignPatterns\Gof\factory\Main;
+Main::main();
+```
 
 ## Indice de paquetes con pruebas
 - DesignPatterns:
