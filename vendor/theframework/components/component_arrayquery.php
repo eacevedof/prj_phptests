@@ -14,7 +14,7 @@ class ComponentArrayquery
 {
     private $array;
     private const GLUE = "|*|";
-    private const HASHKEY = "*hashkey*";
+    private const HASHCOL = "*hashkey*";
     
     public function __construct(array $array)
     {
@@ -252,10 +252,19 @@ class ComponentArrayquery
                 
                 $hashkey = implode(self::GLUE, $colvals);
                 $arhased[$i] = $row;
-                $arhased[$i][self::HASHKEY] = $hashkey;
+                $arhased[$i][self::HASHCOL] = $hashkey;
             }
         }
         return $arhased;
+    }
+
+    private function _get_byhash(array $array, $hash)
+    {
+        $r = [];
+        foreach ($array as $i => $row)
+            if($row[self::HASHCOL] === $hash)
+                $r[] = $row;
+        return $r;
     }
 
     //aron [ar1_f1 => ar2_f1, ar1_f2 => ar2_f2]
@@ -268,6 +277,12 @@ class ComponentArrayquery
         
         $ar1 = $this->_get_hashed($this->array, $keys1);
         $ar2 = $this->_get_hashed($array, $keys2);
+        
+        foreach ($ar1 as $i => $row1)
+        {
+            $hash = $row1[self::HASHCOL];
+            
+        }
         
     }
 
