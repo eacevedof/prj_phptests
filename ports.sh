@@ -1,4 +1,11 @@
 #!/bin/sh
+
+trap ctrl_c INT
+
+function ctrl_c() {
+  echo "** Trapped CTRL-C"
+}
+
 for i in {1025..65536}
 do
   # echo "port $i"
