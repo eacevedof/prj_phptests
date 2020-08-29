@@ -26,7 +26,8 @@ $oComp = new ComponentArrayquery($result);
 //$r = $oComp->distinct()->where("description","%z%","like");
 //$r = $oComp->distinct()->where("price",6,">")->where("price",11,"<");
 //$r = $oComp->is_null("description");
-$r = $oComp->is_empty("description");
+//$r = $oComp->is_empty("description");
+$r = $oComp->in("date", ["20221001","20221105"])->not_in("description", ["some description 2 y"]);
 pr($r->get_result(),"result");
 
 
