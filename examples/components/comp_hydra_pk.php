@@ -6,6 +6,6 @@
  * esto sirve para añadir las claves despues de volcar todos los datos.
  * El archivo constraints.sql se saca desde el admin de hydra.
 */
-include("vendor/theframework/components/autoload.php");
+include(TFW_DOCROOTDS."vendor/theframework/components/autoload.php");
 $oComp = new \TheFramework\Components\ComponentHydrapk();
 $oComp->run();

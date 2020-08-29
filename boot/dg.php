@@ -19,10 +19,10 @@ class dg
         if(!$sFileName) $sFileName = "log_".date("Ymd");
         $sFileName .= ".log";
         //dir:
-        $sPath = __DIR__."/logs/";
+        $sPath = __DIR__ . "/logs/";
         if(!is_dir($sPath)) $sPath = $_SERVER["DOCUMENT_ROOT"]."/logs/";
         if(!is_dir($sPath)) mkdir($sPath,0777);
-        if(!is_dir($sPath)) $sPath = __DIR__."/";
+        if(!is_dir($sPath)) $sPath = __DIR__ . "dg.php/";
         
         //fullpath:
         $sPathlog = $sPath.$sFileName;
