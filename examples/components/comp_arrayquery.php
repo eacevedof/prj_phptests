@@ -33,8 +33,6 @@ $ar2 = [
     ["id"=>11,"description"=>"","price"=>13.99,"date"=>"19900228"],
 ];
 
-
-
 $oComp = new ComponentArrayquery($ar1);
 //$r = $oComp->remove_column(["id"])->distinct()->where("price",20.22);
 //$r = $oComp->distinct()->where("price","20.2%","like")->where("date","%05","like" );
@@ -44,7 +42,7 @@ $oComp = new ComponentArrayquery($ar1);
 //$r = $oComp->is_empty("description");
 //$r = $oComp->in("date", ["20221001","20221105"])->not_in("description", ["some description 2 y"]);
 
-$r = $oComp->innerjoin($ar2,["id"=>"id","description"=>"description"])->orderby("id", "desc");
+$r = $oComp->innerjoin($ar2,["id"=>"id","description"=>"description"])->orderby("date", "desc");
 pr($r->get_result(),"result");
 
 
