@@ -17,7 +17,8 @@ $result = [
 ];
 
 $oComp = new ComponentArrayquery($result);
-
+$r = $oComp->remove_column(["id"])->distinct();
+pr($r,"result");
 
 
 
