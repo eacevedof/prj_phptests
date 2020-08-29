@@ -4,7 +4,7 @@
  * @info: proyecto general
  * Ejemplos: ComponentMssqlExport->get_insert_bulk(...) y ComponentMssqlExport->get_schema()
 */
-include(TFW_DOCROOTDS."vendor/theframework/components/autoload.php");
+include(TFW_PATHROOTDS."vendor/theframework/components/autoload.php");
 ini_set("max_execution_time",3000);
 ini_set("memory_limit","-1");
 use TheFramework\Components\Db\Integration\ComponentMssqlExport;

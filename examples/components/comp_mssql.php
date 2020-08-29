@@ -4,7 +4,7 @@
  * @info: proyecto general
  * Ejemplos: ComponentMssql->query(Select * from...) y ComponentMssql->exec(insert into...)
 */
-include(TFW_DOCROOTDS."vendor/theframework/components/autoload.php");
+include(TFW_PATHROOTDS."vendor/theframework/components/autoload.php");
 use TheFramework\Components\Db\ComponentMssql;
 
 $arConn = ["server"=>"localhost\MSSQLSERVER2014","database"=>"theframework","user"=>"sa","password"=>"abc"];

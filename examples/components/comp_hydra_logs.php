@@ -5,7 +5,7 @@
  * Recupera y muestra por pantalla todos los logs que cumplen ciertas condiciones.
  * Son logs de trabajo de determinados usuarios
 */
-include(TFW_DOCROOTDS."vendor/theframework/components/autoload.php");
+include(TFW_PATHROOTDS."vendor/theframework/components/autoload.php");
 use TheFramework\Components\ComponentHydralogs;
 $oWLogs = new ComponentHydralogs();
 $oWLogs->run();

@@ -3,7 +3,7 @@
  * @file: gof_factorysm.php
  * @info: SourceMaking.com https://sourcemaking.com/design_patterns/factory_method/php/1
  */
-include(TFW_DOCROOTDS."vendor/autoload.php");
+include(TFW_PATHROOTDS."vendor/autoload.php");
 
 use DesignPatterns\Gof\factorySM\OReillyFactoryMethod;
 use DesignPatterns\Gof\factorySM\SamsFactoryMethod;

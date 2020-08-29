@@ -6,7 +6,7 @@
  * recupera su contenido y remplaza (STATUS='T',0,9)) en un nuevo archivo
  * 
 */
-include(TFW_DOCROOTDS."vendor/theframework/components/autoload.php");
+include(TFW_PATHROOTDS."vendor/theframework/components/autoload.php");
 use TheFramework\Components\ComponentDtsAuxrepl;
 $oComp = new ComponentDtsAuxrepl();
 
