@@ -9,5 +9,3 @@ do
   # Kill it
   kill $PID
 done
-
-
