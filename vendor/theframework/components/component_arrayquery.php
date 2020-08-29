@@ -295,9 +295,15 @@ class ComponentArrayquery
         return $this;
     }
 
-    private function orderby(array $columns)
+    public function orderby($column, $type="asc")
     {
-        //to-do
+        usort($this->array, function ($a, $b) use ($column, $type) {
+            if($type=="asc")
+                return $a[$column] > $b[$column];
+            else
+                return $a[$column] < $b[$column];
+        });
+        return $this;
     }
 
     private function groupby(array $dims, array $metrics)
