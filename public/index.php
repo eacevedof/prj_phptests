@@ -46,16 +46,16 @@ function get_info($sPathFile)
 }//get_info
 
 define("DS",DIRECTORY_SEPARATOR);
-define("TFW_DOCROOT",realpath($_SERVER["DOCUMENT_ROOT"]."/.."));
-define("TFW_DOCROOTDS",TFW_DOCROOT.DS);
-//die(TFW_DOCROOT);
+define("TFW_PATHROOT",realpath($_SERVER["DOCUMENT_ROOT"]."/.."));
+define("TFW_PATHROOTDS",TFW_PATHROOT.DS);
+//die(TFW_PATHROOT);
 
-$arPaths["root"] = TFW_DOCROOTDS;
-$arPaths["examples"] = TFW_DOCROOTDS."examples".DS;
-$arPaths["designpatterns"] = TFW_DOCROOTDS."examples".DS."designpatterns";
-$arPaths["components"] = TFW_DOCROOTDS."examples".DS."components";
-$arPaths["helpers"] = TFW_DOCROOTDS."examples".DS."helpers";
-$arPaths["mixed"] = TFW_DOCROOTDS."examples".DS."mixed";
+$arPaths["root"] = TFW_PATHROOTDS;
+$arPaths["examples"] = TFW_PATHROOTDS."examples".DS;
+$arPaths["designpatterns"] = TFW_PATHROOTDS."examples".DS."designpatterns";
+$arPaths["components"] = TFW_PATHROOTDS."examples".DS."components";
+$arPaths["helpers"] = TFW_PATHROOTDS."examples".DS."helpers";
+$arPaths["mixed"] = TFW_PATHROOTDS."examples".DS."mixed";
 
 $arPaths = array_map(function($sPath){
     return realpath($sPath);

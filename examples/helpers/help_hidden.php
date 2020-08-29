@@ -1,6 +1,6 @@
 <?php
 //\helpers\help_hidden.php
-include(TFW_DOCROOTDS."vendor/autoload.php");
+include(TFW_PATHROOTDS."vendor/autoload.php");
 
 use TheFramework\Helpers\Form\Input\Hidden;
 use TheFramework\Helpers\Html\ButtonBasic;

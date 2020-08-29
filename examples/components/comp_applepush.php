@@ -5,7 +5,7 @@
  * Envia notificacion push a APN
  */
 
-include(TFW_DOCROOTDS."vendor/theframework/components/autoload.php");
+include(TFW_PATHROOTDS."vendor/theframework/components/autoload.php");
 use TheFramework\Components\Apple\ComponentPushapple;
 $oComp = new ComponentPushapple();
 //carga configuración de desarrollo ckdev.pem
