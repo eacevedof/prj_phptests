@@ -1,1 +1,4 @@
-[Sat Aug 29 19:51:12 2020] PHP 7.4.1 Development Server (http://localhost:1025) started
+Invalid address: localhost:0
+kill: usage: kill [-s sigspec | -n signum | -sigspec] pid | jobspec ... or kill -l [sigspec]
+osascript: option requires an argument -- e
+usage: osascript [-l language] [-e script] [-i] [-s {ehso}] [programfile] [argument ...]
