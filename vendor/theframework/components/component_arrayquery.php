@@ -141,19 +141,19 @@ class ComponentArrayquery
             foreach ($row as $colname => $colval)
                 if($colname == $colum) {
                     if($oper == "<") {
-                        if ($value < $colval)
+                        if ($colval < $value)
                             $r[] = $row;
                     }
                     elseif($oper == ">") {
-                        if ($value > $colval)
+                        if ($colval > $value)
                             $r[] = $row;
                     }
                     elseif($oper == "<=") {
-                        if ($value <= $colval)
+                        if ($colval  <= $value)
                             $r[] = $row;
                     }
                     elseif($oper == ">=") {
-                        if ($value >= $colval)
+                        if ($colval >= $value)
                             $r[] = $row;
                     }
                 }
