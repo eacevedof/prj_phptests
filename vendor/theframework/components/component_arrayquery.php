@@ -31,10 +31,22 @@ class ComponentArrayquery
         return $this;
     }
 
+    public function columns($colnames)
+    {
+        if($this->array && is_array($colnames))
+        {
+            foreach ($this->array as $i => $row)
+                foreach ($row as $colname => $value)
+                    if(!in_array($colname,$colnames))
+                        unset($this->array[$i][$colname]);
+        }
+        return $this;
+    }
+
     public function distinct()
     {
         $lines = [];
-        $glue = "||";
+        $glue = "|*|";
         $repeated = [];
         if($this->array) {
             foreach ($this->array as $i => $row)
@@ -49,6 +61,13 @@ class ComponentArrayquery
             foreach ($repeated as $idx)
                 unset($this->array[$idx]);
         }
+        unset($lines);
+        return $this;
+    }
+
+    public function where($column, $value, $oper="=")
+    {
+        
         return $this;
     }
 
