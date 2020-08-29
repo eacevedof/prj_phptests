@@ -270,7 +270,7 @@ class ComponentArrayquery
     //aron [ar1_f1 => ar2_f1, ar1_f2 => ar2_f2]
     public function innerjoin(array $array, array $aron)
     {
-        $i = [];
+        $f = [];
         
         $keys1 = array_keys($arcon);
         $keys2 = array_values($arcon);
@@ -281,9 +281,16 @@ class ComponentArrayquery
         foreach ($ar1 as $i => $row1)
         {
             $hash = $row1[self::HASHCOL];
-            
+            $arfound = $this->_get_byhash($ar2, $hash);
+            if($arfound)
+                $f[] = $i;
         }
-        
+
+        foreach($this->array as $i => $r)
+            if(!in_array($i, $f))
+                unset($this->array[$i]);
+
+        return $this;
     }
 
     private function orderby(array $columns)
