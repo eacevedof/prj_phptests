@@ -18,6 +18,39 @@ class ComponentArrayquery
     {
         $this->array = $array;
     }
-    
-    
+
+    public function remove_col($colnames)
+    {
+        if($this->array && is_array($colnames))
+        {
+            foreach ($this->array as $i => $row)
+                foreach ($row as $colname => $value)
+                    if(in_array($colname,$colnames))
+                        unset($this->array[$i][$colname]);
+        }
+        return $this;
+    }
+
+    public function distinct()
+    {
+        $lines = [];
+        $glue = "||";
+        $repeated = [];
+        if($this->array) {
+            foreach ($this->array as $i => $row)
+            {
+                $imploed = implode($glue,$row);
+                if(in_array($imploed,$lines))
+                    $repeated[] = $i;
+                else
+                    $lines[] = $imploed;
+            }
+
+            foreach ($repeated as $idx)
+                unset($this->array[$idx]);
+        }
+        return $this;
+    }
+
+    public function get_result(){return $this->array;}
 }
