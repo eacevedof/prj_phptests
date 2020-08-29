@@ -19,7 +19,7 @@ class ComponentArrayquery
         $this->array = $array;
     }
 
-    public function remove_col($colnames)
+    public function remove_column($colnames)
     {
         if($this->array && is_array($colnames))
         {
