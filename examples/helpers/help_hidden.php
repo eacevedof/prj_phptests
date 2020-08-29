@@ -1,26 +1,26 @@
 <?php
 //\helpers\help_hidden.php
-include_once("vendor/autoload.php");
+include(TFW_DOCROOTDS."vendor/autoload.php");
 
-use TheFramework\Helpers\HelperInputHidden;
-use TheFramework\Helpers\HelperButtonBasic;
+use TheFramework\Helpers\Form\Input\Hidden;
+use TheFramework\Helpers\Html\ButtonBasic;
 use TheFramework\Helpers\HelperForm;
 
 if(isset($_POST["hidOne"]))//required
     //pr(): is an echo function
     pr("{_POST[hidOne]:{$_POST["hidOne"]}, _POST[hidTwo]:{$_POST["hidTwo"]}}","\$_POST");
 
-$oHidden1 = new HelperInputHidden();
+$oHidden1 = new Hidden();
 $oHidden1->set_id("hidOne");
 $oHidden1->set_name("hidOne");
 $oHidden1->set_value((isset($_POST["hidOne"])?$_POST["hidOne"]:"some value for one"));
 
-$oHidden2 = new HelperInputHidden();
+$oHidden2 = new Hidden();
 $oHidden2->set_id("hidTwo");
 $oHidden2->set_name("hidTwo");
 $oHidden2->set_value((isset($_POST["hidTwo"])?$_POST["hidTwo"]:"some value for two"));
 
-$oButton = new HelperButtonBasic();
+$oButton = new ButtonBasic();
 $oButton->set_type("submit");
 $oButton->add_class("btn btn-primary");
 $oButton->set_innerhtml("Test");

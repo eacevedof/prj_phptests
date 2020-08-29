@@ -1,0 +1,25 @@
+<IfModule mod_rewrite.c>
+#http://perishablepress.com/stupid-htaccess-tricks/ (644 permiso idoneo)
+    RewriteEngine On
+    RewriteCond %{HTTPS} off
+    # First rewrite to HTTPS:
+    # Don't put www. here. If it is already there it will be included, if not
+    # the subsequent rule will catch it.
+    RewriteRule .* https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+    #Rewritebase: Indica la url para las rescrituras indicadas en las reglas. /:redirecciona al dominio raiz
+    RewriteBase /
+    #si el archivo es exactamente index.php no se redirecciona
+    #- Indica no aplicar redireccion
+    #L: last rule le indica a apache no aplicar ninguna regla más
+    RewriteRule ^index\.php$ - [L]
+    #-f: comprueba que el string defina un archivo existente
+    #si la variable de entorno REQUEST_FILENAME indica un archivo que no existe aplica la redireccion
+    RewriteCond %{REQUEST_FILENAME} !-f
+    #-d: comprueba que el string defina un directorio
+    #si la variable de entorno REQUEST_FILENAME indica una carpeta que no existe aplica la redireccion
+    RewriteCond %{REQUEST_FILENAME} !-d
+    #. cualquier caracter
+    #todo lo que venga en la peticion con algo{espacio}/index.php se redirecciona
+    RewriteRule . /index.php [L]
+</IfModule>

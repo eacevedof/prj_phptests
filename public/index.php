@@ -3,7 +3,7 @@
  * index.php 6.2.1
  */
 //clase para trazas
-require_once "dg.php";
+require_once "../boot/dg.php";
 
 function pr($var,$asHtml=0){
     $sContent= var_export($var,1);
@@ -46,8 +46,9 @@ function get_info($sPathFile)
 }//get_info
 
 define("DS",DIRECTORY_SEPARATOR);
-define("TFW_DOCROOT",$_SERVER["DOCUMENT_ROOT"]);
+define("TFW_DOCROOT",realpath($_SERVER["DOCUMENT_ROOT"]."/.."));
 define("TFW_DOCROOTDS",TFW_DOCROOT.DS);
+//die(TFW_DOCROOT);
 
 $arPaths["root"] = TFW_DOCROOTDS;
 $arPaths["examples"] = TFW_DOCROOTDS."examples".DS;
@@ -94,7 +95,7 @@ if(!(isset($_GET["f"]) || isset($_GET["c"])))
 {
     $sLast = "";
     $arHtml = [];
-    $arHtml[] = "<h1><a href=\"/\">home</a></h1>";    
+    $arHtml[] = ">home</a></h1>";
     $arHtml[] = "<h2>"
             . "<a href=\"https://github.com/eacevedof/prj_phptests\" target=\"_blank\">"
             . "github repo: prj_phptests</a><br/>"

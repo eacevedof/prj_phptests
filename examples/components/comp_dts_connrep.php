@@ -5,7 +5,7 @@
  * extrae todos los nombres de los archivos configurados en las dts y recupera de 
  * ERP_IMP_Taules todos estos de modo que se pueda comprobar los que faltan
 */
-include("vendor/theframework/components/autoload.php");
+include(TFW_DOCROOTDS."vendor/theframework/components/autoload.php");
 
 use TheFramework\Components\ComponentDtsConnrep;
 $oComp = new ComponentDtsConnrep();

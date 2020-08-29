@@ -36,7 +36,7 @@ php -S localhost:3000 -t .
  * @info: https://github.com/eacevedof/prj_phptests/tree/master/vendor/DesignPatterns/Gof
  *        [Curso de Patrones de diseño - 2 factory by MitoCode](https://www.youtube.com/watch?v=gocJeOHtj9w&list=PLvimn1Ins-41Uiugt1WbpyFo1XT1WOquL&index=2)
  */
-include_once("vendor/autoload.php");
+include(TFW_DOCROOTDS."vendor/autoload.php");
 
 use DesignPatterns\Gof\factory\Main;
 Main::main();
@@ -119,7 +119,13 @@ examples
 - Aqui he dejado a medias el refactor de los Helpers ^^ 2.0
 - Hay que aplicar esto en **autoload_real.php**
 ```php
-    //@eaf
-    if(stream_resolve_include_path($file))    
-        if (empty($GLOBALS['__composer_autoload_files'][$fileIdentifier])) {
+//@eaf
+if(stream_resolve_include_path($file))    
+    if (empty($GLOBALS['__composer_autoload_files'][$fileIdentifier])) {
 ```
+
+## To-Do
+- Revisado: 29/08/2020
+- Está dando muchos errores por cambios de ruta y refactor
+- Errores de ejemplos con MSSQL
+- He dejado un prototipo de helpers.theframework.es 

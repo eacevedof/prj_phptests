@@ -5,7 +5,7 @@
  * Se puede pasar el parámetro nohome para evitar que cree el link HOME
  * 
 */
-include_once("vendor/autoload.php");
+include(TFW_DOCROOTDS."vendor/autoload.php");
 ?>
 <!DOCTYPE html>
 <html>

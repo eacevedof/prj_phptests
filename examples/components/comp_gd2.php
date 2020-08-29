@@ -7,7 +7,7 @@
  * contiene errores tipo: 
  * Notice: Undefined index: config_app_dir in E:\xampp\htdocs\tests\vendor\theframework\components\component_gd2.php on line 35
 */
-include("vendor/theframework/components/autoload.php");
+include(TFW_DOCROOTDS."vendor/theframework/components/autoload.php");
 use TheFramework\Components\ComponentGd2;
 $oGd2 = new ComponentGd2();
 $oGd2->add_from("pathfolder","C:\\Users\\eduardo alexei\\Desktop\\upload");

@@ -11,7 +11,7 @@
     "C:/xampp/htdocs/proy_hydra_flamagas/dts/Datos/IN/BackUP"
  * 
 */
-include("vendor/theframework/components/autoload.php");
+include(TFW_DOCROOTDS."vendor/theframework/components/autoload.php");
 //archivos .XNT que nos han proporcionado
 $oComp = new \TheFramework\Components\ComponentDtsExtract();
 

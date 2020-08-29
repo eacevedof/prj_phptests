@@ -4,7 +4,7 @@
  * @info: proyecto general
  * Ejemplos: ComponentMysql->query(Select * from...) y ComponentMysql->exec(insert into...)
 */
-include("vendor/theframework/components/autoload.php");
+include(TFW_DOCROOTDS."vendor/theframework/components/autoload.php");
 use TheFramework\Components\Db\ComponentMysql;
 $oMs = new ComponentMysql();
 $oMs->add_conn("server","localhost");

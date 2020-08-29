@@ -10,7 +10,7 @@
 /**
  * HELPERS
  **/
-include_once("vendor/autoload.php");
+include(TFW_DOCROOTDS."vendor/autoload.php");
 use TheFramework\Helpers\HelperLabel;
 use TheFramework\Helpers\HelperInputText;
 use TheFramework\Helpers\HelperDiv;

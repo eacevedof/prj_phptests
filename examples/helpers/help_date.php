@@ -10,7 +10,7 @@
 /**
  * HELPERS
  **/
-include_once("vendor/autoload.php");
+include(TFW_DOCROOTDS."vendor/autoload.php");
 
 //<input type="date" id="datBirthdate" name="datBirthdate" as="date" data-options='{"useClearButton":true}'>
 
