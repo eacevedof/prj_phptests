@@ -15,12 +15,14 @@ $result = [
     ["id"=>5,"description"=>"some description 2 y","price"=>20.22,"date"=>"20221001"],
     ["id"=>6,"description"=>"some description 3 z","price"=>20.22,"date"=>"20221001"],
     ["id"=>7,"description"=>"some description 6 z","price"=>20.25,"date"=>"20221105"],
+    ["id"=>8,"description"=>"some description 8 v","price"=>5.99,"date"=>"20170228"],
 ];
 
 $oComp = new ComponentArrayquery($result);
 //$r = $oComp->remove_column(["id"])->distinct()->where("price",20.22);
 //$r = $oComp->distinct()->where("price","20.2%","like")->where("date","%05","like" );
-$r = $oComp->distinct()->where("description","%z%","like");
+//$r = $oComp->distinct()->where("description","%z%","like");
+$r = $oComp->distinct()->where("price",6,">")->where("price",11,"<");
 pr($r->get_result(),"result");
 
 
