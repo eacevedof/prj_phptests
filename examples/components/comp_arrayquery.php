@@ -44,7 +44,7 @@ $oComp = new ComponentArrayquery($ar1);
 //$r = $oComp->is_empty("description");
 //$r = $oComp->in("date", ["20221001","20221105"])->not_in("description", ["some description 2 y"]);
 
-$r = $oComp->innerjoin($ar2,["id"=>"id","description"=>"description"]);
+$r = $oComp->innerjoin($ar2,["id"=>"id","description"=>"description"])->orderby("id", "desc");
 pr($r->get_result(),"result");
 
 
