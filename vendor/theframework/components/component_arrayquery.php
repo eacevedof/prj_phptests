@@ -19,6 +19,8 @@ class ComponentArrayquery
         $this->array = $array;
     }
 
+    private function _loopcond(){}
+
     public function remove_column($colnames)
     {
         if($this->array && is_array($colnames))
@@ -132,6 +134,32 @@ class ComponentArrayquery
         return "general";
     }
 
+    private function aritmetic($colum, $value, $oper)
+    {
+        $r = [];
+        foreach ($this->array as $i => $row)
+            foreach ($row as $colname => $colval)
+                if($colname == $colum) {
+                    if($oper == "<") {
+                        if ($value < $colval)
+                            $r[] = $row;
+                    }
+                    elseif($oper == ">") {
+                        if ($value > $colval)
+                            $r[] = $row;
+                    }
+                    elseif($oper == "<=") {
+                        if ($value <= $colval)
+                            $r[] = $row;
+                    }
+                    elseif($oper == ">=") {
+                        if ($value >= $colval)
+                            $r[] = $row;
+                    }
+                }
+        $this->array = $r;
+    }
+
     public function where($column, $value, $oper="=")
     {
         switch ($oper){
@@ -148,6 +176,12 @@ class ComponentArrayquery
                 elseif($type=="left") $this->_like_left($column, $value);
                 else
                     $this->_like_right($column, $value);
+            break;
+            case ">":
+            case "<":
+            case "<=":
+            case ">=":
+                $this->aritmetic($column, $value, $oper);
             break;
             default: ; break;
         }
