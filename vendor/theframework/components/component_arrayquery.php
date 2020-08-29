@@ -209,6 +209,56 @@ class ComponentArrayquery
         $this->array = $r;
         return $this;
     }
-    
+
+    public function in($column, array $values)
+    {
+        $r = [];
+        if($this->array && $column && $values)
+        {
+            foreach ($this->array as $i => $row)
+                foreach ($row as $colname => $colval)
+                    if($column==$colname && in_array($colval, $values))
+                        $r[] = $row;
+        }
+        $this->array = $r;
+        return $this;
+    }
+
+    public function not_in($column, array $values)
+    {
+        $r = [];
+        if($this->array && $column && $values)
+        {
+            foreach ($this->array as $i => $row)
+                foreach ($row as $colname => $colval)
+                    if($column==$colname && !in_array($colval, $values))
+                        $r[] = $row;
+        }
+        $this->array = $r;
+        return $this;
+    }
+
+    public function innerjoin(array $array, $aron)
+    {
+
+    }
+
+    private function orderby(array $columns)
+    {
+        //to-do
+    }
+
+    private function groupby(array $dims, array $metrics)
+    {
+        //to-do
+    }
+
+    private function having(array $coditions)
+    {
+        //to-do
+    }
+
     public function get_result(){return $this->array;}
+
+    public function get_count(){return count($this->array);}
 }
