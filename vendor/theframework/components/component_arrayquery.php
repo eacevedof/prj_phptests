@@ -118,9 +118,10 @@ class ComponentArrayquery
     private function _get_like($value)
     {
         $value = trim($value);
+        //pr($value);
         if(!$value || strlen($value)===1) return "general";
         if($value[0] === "%") return "left";
-        if(substr("testers", -1)==="%") return "right";
+        if(substr($value, -1)==="%") return "right";
         return "general";
     }
 
