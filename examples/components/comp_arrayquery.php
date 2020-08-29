@@ -17,7 +17,7 @@ $result = [
 ];
 
 $oComp = new ComponentArrayquery($result);
-$r = $oComp->remove_column(["id"])->distinct();
+$r = $oComp->remove_column(["id"])->distinct()->where("price",20.22);
 pr($r,"result");
 
 
