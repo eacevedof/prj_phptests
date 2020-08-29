@@ -65,9 +65,36 @@ class ComponentArrayquery
         return $this;
     }
 
+    private function _equal($column, $value)
+    {
+        $r = [];
+        foreach ($this->array as $i => $row)
+            foreach ($row as $colname => $colval)
+                if($colname == $column && strtolower($value) == strtolower($colval))
+                    $r[] = $row;
+        $this->array = $r;
+    }
+
+    private function _equal_strict($column, $value)
+    {
+        $r = [];
+        foreach ($this->array as $i => $row)
+            foreach ($row as $colname => $colval)
+                if($colname == $column && $value === $colval)
+                    $r[] = $row;
+        $this->array = $r;
+    }
+
     public function where($column, $value, $oper="=")
     {
-        
+        switch ($oper){
+            case "=":
+                $this->_equal($column,$value);
+            break;
+            case "==":
+                $this->_equal_strict($column,$value);
+            break;
+        }
         return $this;
     }
 
