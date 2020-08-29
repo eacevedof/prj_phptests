@@ -9,3 +9,5 @@ do
   # Kill it
   kill $PID
 done
+
+# sh ports.sh 2>&1 | tee ports.log
