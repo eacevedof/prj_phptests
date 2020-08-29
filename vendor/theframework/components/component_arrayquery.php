@@ -13,6 +13,8 @@ namespace TheFramework\Components;
 class ComponentArrayquery
 {
     private $array;
+    private const GLUE = "|*|";
+    private const HASHKEY = "*hashkey*";
     
     public function __construct(array $array)
     {
@@ -48,12 +50,11 @@ class ComponentArrayquery
     public function distinct()
     {
         $lines = [];
-        $glue = "|*|";
         $repeated = [];
         if($this->array) {
             foreach ($this->array as $i => $row)
             {
-                $imploed = implode($glue,$row);
+                $imploed = implode(self::GLUE,$row);
                 if(in_array($imploed,$lines))
                     $repeated[] = $i;
                 else
@@ -238,9 +239,36 @@ class ComponentArrayquery
         return $this;
     }
 
-    public function innerjoin(array $array, $aron)
+    private function _get_hashed(array $array, $columns)
     {
+        $arhased = [];
+        if($array && $columns)
+        {
+            foreach ($array as $i => $row)
+            {
+                $colvals = [];
+                foreach ($row as $colname => $colval)
+                    if(in_array($colname, $columns)) $colvals[] = (string) $colval;
+                
+                $hashkey = implode(self::GLUE, $colvals);
+                $arhased[$i] = $row;
+                $arhased[$i][self::HASHKEY] = $hashkey;
+            }
+        }
+        return $arhased;
+    }
 
+    //aron [ar1_f1 => ar2_f1, ar1_f2 => ar2_f2]
+    public function innerjoin(array $array, array $aron)
+    {
+        $i = [];
+        
+        $keys1 = array_keys($arcon);
+        $keys2 = array_values($arcon);
+        
+        $ar1 = $this->_get_hashed($this->array, $keys1);
+        $ar2 = $this->_get_hashed($array, $keys2);
+        
     }
 
     private function orderby(array $columns)
