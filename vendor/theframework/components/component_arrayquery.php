@@ -70,7 +70,7 @@ class ComponentArrayquery
         $r = [];
         foreach ($this->array as $i => $row)
             foreach ($row as $colname => $colval)
-                if($colname == $column && strtolower($value) == strtolower($colval))
+                if($colname == $column && strtolower((string) $value) == strtolower((string) $colval))
                     $r[] = $row;
         $this->array = $r;
     }
@@ -85,6 +85,45 @@ class ComponentArrayquery
         $this->array = $r;
     }
 
+    private function _like($column, $value)
+    {
+        $r = [];
+        foreach ($this->array as $i => $row)
+            foreach ($row as $colname => $colval)
+                if($colname == $column && strstr((string) $colval, (string) $value))
+                    $r[] = $row;
+        $this->array = $r;
+    }
+
+    private function _like_left($column, $value)
+    {
+        $r = [];
+        foreach ($this->array as $i => $row)
+            foreach ($row as $colname => $colval)
+                if($colname == $column && strpos((string) $colval, (string) $value)>0)
+                    $r[] = $row;
+        $this->array = $r;
+    }
+
+    private function _like_right($column, $value)
+    {
+        $r = [];
+        foreach ($this->array as $i => $row)
+            foreach ($row as $colname => $colval)
+                if($colname == $column && strpos((string) $colval, (string) $value)===0)
+                    $r[] = $row;
+        $this->array = $r;
+    }
+
+    private function _get_like($value)
+    {
+        $value = trim($value);
+        if(!$value) return "general";
+        if($value[0] === "%") return "left";
+        if(substr("testers", -1)==="%") return "right";
+        return "general";
+    }
+
     public function where($column, $value, $oper="=")
     {
         switch ($oper){
@@ -94,6 +133,14 @@ class ComponentArrayquery
             case "==":
                 $this->_equal_strict($column,$value);
             break;
+            case "like":
+                $type = $this->_get_like($value);
+                if($type=="general") $this->_like($column,$value);
+                elseif($type=="left") $this->_like_left($column, $value);
+                else
+                    $this->_like_left($column, $value);
+            break;
+            default: ; break;
         }
         return $this;
     }
