@@ -134,7 +134,7 @@ class ComponentArrayquery
         return "general";
     }
 
-    private function aritmetic($colum, $value, $oper)
+    private function _aritmetic($colum, $value, $oper)
     {
         $r = [];
         foreach ($this->array as $i => $row)
@@ -181,12 +181,34 @@ class ComponentArrayquery
             case "<":
             case "<=":
             case ">=":
-                $this->aritmetic($column, $value, $oper);
+                $this->_aritmetic($column, $value, $oper);
             break;
             default: ; break;
         }
         return $this;
     }
 
+    public function is_null($column)
+    {
+        $r = [];
+        foreach ($this->array as $i => $row)
+            foreach ($row as $colname => $colval)
+                if($colname == $column && $colval === null)
+                    $r[] = $row;
+        $this->array = $r;
+        return $this;
+    }
+
+    public function is_empty($column)
+    {
+        $r = [];
+        foreach ($this->array as $i => $row)
+            foreach ($row as $colname => $colval)
+                if($colname == $column && empty($colval))
+                    $r[] = $row;
+        $this->array = $r;
+        return $this;
+    }
+    
     public function get_result(){return $this->array;}
 }

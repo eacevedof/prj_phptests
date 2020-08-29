@@ -24,7 +24,9 @@ $oComp = new ComponentArrayquery($result);
 //$r = $oComp->remove_column(["id"])->distinct()->where("price",20.22);
 //$r = $oComp->distinct()->where("price","20.2%","like")->where("date","%05","like" );
 //$r = $oComp->distinct()->where("description","%z%","like");
-$r = $oComp->distinct()->where("price",6,">")->where("price",11,"<");
+//$r = $oComp->distinct()->where("price",6,">")->where("price",11,"<");
+//$r = $oComp->is_null("description");
+$r = $oComp->is_empty("description");
 pr($r->get_result(),"result");
 
 
