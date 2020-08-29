@@ -110,8 +110,15 @@ class ComponentArrayquery
         $r = [];
         foreach ($this->array as $i => $row)
             foreach ($row as $colname => $colval)
-                if($colname == $column && strpos((string) $colval, (string) $value)===0)
-                    $r[] = $row;
+            {
+                if ($colname == $column) {
+                    $colval = (string) $colval;
+                    $value = (string) $value;
+                    //pr("colval:$colval, s:$value",strpos($colval, $value));
+                    if (strpos($colval, $value) === 0)
+                        $r[] = $row;
+                }
+            }
         $this->array = $r;
     }
 
@@ -136,10 +143,11 @@ class ComponentArrayquery
             break;
             case "like":
                 $type = $this->_get_like($value);
+                $value = str_replace("%","",$value);
                 if($type=="general") $this->_like($column,$value);
                 elseif($type=="left") $this->_like_left($column, $value);
                 else
-                    $this->_like_left($column, $value);
+                    $this->_like_right($column, $value);
             break;
             default: ; break;
         }
