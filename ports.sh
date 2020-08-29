@@ -9,7 +9,7 @@ function ctrl_c() {
 for i in {1025..65536}
 do
   # echo "port $i"
-  php -S localhost:$i -t ./public
+  php -S localhost:$i -t ./public &
   PID=$!
   # echo $PID
 
