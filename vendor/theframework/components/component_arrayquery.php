@@ -272,12 +272,14 @@ class ComponentArrayquery
     {
         $f = [];
         
-        $keys1 = array_keys($arcon);
-        $keys2 = array_values($arcon);
+        $keys1 = array_keys($aron);
+        $keys2 = array_values($aron);
         
         $ar1 = $this->_get_hashed($this->array, $keys1);
         $ar2 = $this->_get_hashed($array, $keys2);
-        
+
+        //pr($ar1,"ar1");pr($ar2,"ar2");
+
         foreach ($ar1 as $i => $row1)
         {
             $hash = $row1[self::HASHCOL];
