@@ -16,6 +16,8 @@ $result = [
     ["id"=>6,"description"=>"some description 3 z","price"=>20.22,"date"=>"20221001"],
     ["id"=>7,"description"=>"some description 6 z","price"=>20.25,"date"=>"20221105"],
     ["id"=>8,"description"=>"some description 8 v","price"=>5.99,"date"=>"20170228"],
+    ["id"=>9,"description"=>null,"price"=>7.65,"date"=>"20100228"],
+    ["id"=>9,"description"=>"","price"=>13.99,"date"=>"19900228"],
 ];
 
 $oComp = new ComponentArrayquery($result);
