@@ -1,8 +1,8 @@
-# prj_phptests (05/04/2020)
+# prj_phptests - (30/08/2020)
 - Es un "miniframework" tipo sandbox donde tengo varias pruebas
 - **arrancar la app** 
 ```js
-php -S localhost:3000 -t .
+php -S localhost:1024 -t ./public
 ```
 - **configuracion**
 - Crear paquete en vendor
@@ -125,7 +125,6 @@ if(stream_resolve_include_path($file))
 ```
 
 ## To-Do
-- Revisado: 29/08/2020
 - Está dando muchos errores por cambios de ruta y refactor
 - Errores de ejemplos con MSSQL
 - He dejado un prototipo de helpers.theframework.es 
