@@ -15,6 +15,7 @@ class ComponentArrayquery
     private $array;
     private const GLUE = "|*|";
     private const HASHCOL = "*hashkey*";
+    private const LEFTCOL = "*leftjoin*";
     
     public function __construct(array $array)
     {
@@ -291,6 +292,33 @@ class ComponentArrayquery
         foreach($this->array as $i => $r)
             if(!in_array($i, $f))
                 unset($this->array[$i]);
+
+        return $this;
+    }
+
+    public function leftjoin(array $array, array $aron)
+    {
+        $f = [];
+
+        $keys1 = array_keys($aron);
+        $keys2 = array_values($aron);
+
+        $ar1 = $this->_get_hashed($this->array, $keys1);
+        $ar2 = $this->_get_hashed($array, $keys2);
+
+        foreach ($ar1 as $i => $row1)
+        {
+            $hash = $row1[self::HASHCOL];
+            $arfound = $this->_get_byhash($ar2, $hash);
+            if($arfound)
+                $f[] = $i;
+        }
+
+        foreach($this->array as $i => $r){
+            $this->array[$i][self::LEFTCOL] = 0;
+            if (!in_array($i, $f))
+                $this->array[$i][self::LEFTCOL] = 1;
+        }
 
         return $this;
     }
