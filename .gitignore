@@ -1,5 +1,6 @@
 node_modules
 tfwlog.log
+ports.log
 vendor/theframework/components/apple/*.pem
 
 # excluye todo vendor menos theframework
