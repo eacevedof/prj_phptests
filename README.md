@@ -123,6 +123,15 @@ examples
 if(stream_resolve_include_path($file))    
     if (empty($GLOBALS['__composer_autoload_files'][$fileIdentifier])) {
 ```
+- install imagegick
+```
+php72-imagick is now deprecated as imagick is part of php binary itself. Use pecl to install imagick e.g.:
+
+brew install php
+brew install imagemagick
+brew install pkg-config
+pecl install imagick
+```
 
 ## To-Do
 - Está dando muchos errores por cambios de ruta y refactor

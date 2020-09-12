@@ -67,7 +67,7 @@ foreach($arPaths as $sPath)
     addto_incpath($sPath);
 
 //excluyo los que no quiero mostrar
-$arForbidden = ["phpinfo"];
+$arForbidden = ["phpinfox"];
 //$arForbidden = [];
 
 $arExamples["components"] = array_filter(scandir($arPaths["components"]),function($sFileName){
