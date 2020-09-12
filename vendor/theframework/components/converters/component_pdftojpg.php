@@ -120,3 +120,5 @@ class ComponentPdftojpg
     public function show_errors(){echo "<pre>".var_export($this->arErrors,1);}
 }//class ComponentPdftojpg
 
+//ghost
+//usr/local/bin/gs

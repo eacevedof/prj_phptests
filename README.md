@@ -138,6 +138,14 @@ pecl install imagick
     - Aqui debe estar gslib
     - Delegates (built-in): bzlib freetype gslib heic jng jp2 jpeg lcms lqr ltdl lzma openexr png ps tiff webp xml zlib
 - convert example.pdf show:
+- He probado retocar la ruta de gs y no ha funcionado
+- /usr/local/Cellar/imagemagick/7.0.10-29/etc/ImageMagick-7/delegates.xml
+
+!!!!!!!!
+- Al final estaba tratando de convertir un .pdf mal folrmado por eso lanzaba la excepción
+- Ya funciona ^^ ¬¬
+
+convert -quality 60 -density 200 example.pdf foo.jpg
 ```
 
 ## To-Do
