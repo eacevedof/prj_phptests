@@ -131,6 +131,13 @@ brew install php
 brew install imagemagick
 brew install pkg-config
 pecl install imagick
+
+- Me esta dando un error al convertir de pdf a jpg:
+- imagick se apoya en gs (ghostscript library 9.52 - brew install gs)
+- (magick --version) Version: ImageMagick 7.0.10-2
+    - Aqui debe estar gslib
+    - Delegates (built-in): bzlib freetype gslib heic jng jp2 jpeg lcms lqr ltdl lzma openexr png ps tiff webp xml zlib
+- convert example.pdf show:
 ```
 
 ## To-Do

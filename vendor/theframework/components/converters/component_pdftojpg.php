@@ -38,6 +38,27 @@ class ComponentPdftojpg
 
     public function get()
     {
+        //https://stackoverflow.com/questions/9227014/convert-pdf-to-jpeg-with-php-and-imagemagick
+        $pathpdf = TFW_PATHTEMP."/example.pdf";
+        $pathimg = TFW_PATHTEMP."/example.jpg";
+
+        //esta linea lanza la excepción: PDFDelegateFailed `[ghostscript library 9.52] -sstdout=%stderr
+        //no va con el constructor
+        $imagickpdf = new Imagick($pathpdf);
+        $ipages = $imagickpdf->getNumberImages();
+        if($ipages) {
+            for($i=0; $i<$ipages; $i++){
+                $pathpage = $pathpdf."[$i]";
+                $image = new Imagick($pathpage);
+                $image->setImageFormat("jpg");
+                $image->writeImage(TFW_PATHTEMP."/img-$i.jpg");
+            }
+        }
+    }
+
+    //no va ^^ no da error pero el archivo generado no se visualiza
+    public function get1()
+    {
         $pathpdf = TFW_PATHTEMP."/example.pdf";
         $pathimg = TFW_PATHTEMP."/example.jpg";
         $fp_pdf = fopen($pathpdf, 'rb');
