@@ -25,14 +25,29 @@ class ComponentPdftojpg
         //$this->arTo = array("pathfolder"=>PATH_RESDIR.DS."products_picture".DS,"filename"=>"");
     }
 
+    private function _save($file, $blob)
+    {
+        fwrite($file, base64_decode($image));
+        fclose($file);
+    }
+
     public function get()
     {
-        $pathpdf =
-        $pdf_file = escapeshellarg( "mysafepdf.pdf" );
-        $jpg_file = escapeshellarg( "output.jpg" );
+        $pathpdf = TFW_PATHTEMP."/example.pdf";
+        $pathimg = TFW_PATHTEMP."/example.jpg";
+        $fp_pdf = fopen($pathpdf, 'rb');
 
-        $result = 0;
-        exec( "convert -density 300 {$pdf_file} {$jpg_file}", null, $result );
+        $img = new imagick();
+        $img->setResolution(300,300);
+        $img->readImageFile($fp_pdf);
+        $img->setImageFormat( "jpg" );
+        $img->setImageCompression(imagick::COMPRESSION_JPEG);
+        $img->setImageCompressionQuality(90);
+
+        $img->setImageUnits(imagick::RESOLUTION_PIXELSPERINCH);
+        $data = $img->getImageBlob();
+
+        $this->_save($pathimg,$blob);
     }
 
     public function add_from($sKey,$sValue){$this->arFrom[$sKey] = $sValue;}
