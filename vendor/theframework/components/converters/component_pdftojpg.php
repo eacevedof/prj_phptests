@@ -38,14 +38,47 @@ class ComponentPdftojpg
 
     public function get()
     {
+        $pathpdf = TFW_PATHTEMP."/example.pdf";
+        $pathimg = TFW_PATHTEMP."/example.jpg";
+        $imagick = new Imagick();
+        
+        //esta linea lanza la excepción: Fatal error: Uncaught ImagickException: PDFDelegateFailed `[ghostscript library 9.52] 
+        // Read image from PDF
+        $imagick->readImage($pathpdf);
+        // Writes an image
+        $imagick->writeImages($pathimg,false);
+    }
+
+    public function get3()
+    {
+        //error:  Fatal error: Uncaught ImagickException: no decode delegate for this image format `'
+        $pdf = TFW_PATHTEMP."/example.pdf";
+        $fp_pdf = fopen($pdf, 'rb');
+
+        //imageick(0) me tira el servidor de desarrollo
+        $img = new Imagick(); // [0] can be used to set page number
+        $img->setResolution(300,300);
+        $img->readImageFile($fp_pdf);
+        $img->setImageFormat( "jpg" );
+        $img->setImageCompression(Imagick::COMPRESSION_JPEG);
+        $img->setImageCompressionQuality(90);
+
+        $img->setImageUnits(Imagick::RESOLUTION_PIXELSPERINCH);
+        //$img->writeImage(TFW_PATHTEMP."/img-1.jpg");
+        $data = $img->getImageBlob();
+        print_r($data);
+    }
+
+    public function get2()
+    {
         //https://stackoverflow.com/questions/9227014/convert-pdf-to-jpeg-with-php-and-imagemagick
         $pathpdf = TFW_PATHTEMP."/example.pdf";
         $pathimg = TFW_PATHTEMP."/example.jpg";
 
         //esta linea lanza la excepción: PDFDelegateFailed `[ghostscript library 9.52] -sstdout=%stderr
         //no va con el constructor
-        $imagickpdf = new Imagick($pathpdf);
-        $ipages = $imagickpdf->getNumberImages();
+        $Imagickpdf = new Imagick($pathpdf);
+        $ipages = $Imagickpdf->getNumberImages();
         if($ipages) {
             for($i=0; $i<$ipages; $i++){
                 $pathpage = $pathpdf."[$i]";
@@ -75,7 +108,7 @@ class ComponentPdftojpg
 
         //$this->_save($pathimg, $data);
         header("Content-Type: image/jpg");
-        echo $imagick->getImageBlob();
+        echo $Imagick->getImageBlob();
     }
 
     public function add_from($sKey,$sValue){$this->arFrom[$sKey] = $sValue;}
