@@ -10,6 +10,7 @@ $arSubFolders[] = $sPathRoot."console";
 $arSubFolders[] = $sPathRoot."db";
 $arSubFolders[] = $sPathRoot."db".DIRECTORY_SEPARATOR."integration";
 $arSubFolders[] = $sPathRoot."motosceni";
+$arSubFolders[] = $sPathRoot."converters";
 
 $sPathInclude = implode(PATH_SEPARATOR,$arSubFolders);
 set_include_path($sPathInclude);
