@@ -29,8 +29,11 @@ class ComponentPdftojpg
 
     private function _save($file, $blob)
     {
-        fwrite($file, base64_decode($image));
-        fclose($file);
+        //die("path:$file");
+        //fwrite($file, base64_decode($blob));
+        //fclose($file);
+        $dec = base64_decode($blob);
+        file_put_contents($file,$dec);
     }
 
     public function get()
@@ -43,13 +46,15 @@ class ComponentPdftojpg
         $img->setResolution(300,300);
         $img->readImageFile($fp_pdf);
         $img->setImageFormat( "jpg" );
-        $img->setImageCompression(imagick::COMPRESSION_JPEG);
+        $img->setImageCompression(Imagick::COMPRESSION_JPEG);
         $img->setImageCompressionQuality(90);
 
         $img->setImageUnits(Imagick::RESOLUTION_PIXELSPERINCH);
         $data = $img->getImageBlob();
 
-        $this->_save($pathimg,$blob);
+        //$this->_save($pathimg, $data);
+        header("Content-Type: image/jpg");
+        echo $imagick->getImageBlob();
     }
 
     public function add_from($sKey,$sValue){$this->arFrom[$sKey] = $sValue;}
