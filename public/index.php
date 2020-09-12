@@ -48,6 +48,8 @@ function get_info($sPathFile)
 define("DS",DIRECTORY_SEPARATOR);
 define("TFW_PATHROOT",realpath($_SERVER["DOCUMENT_ROOT"]."/.."));
 define("TFW_PATHROOTDS",TFW_PATHROOT.DS);
+define("TFW_PATHTEMP",TFW_PATHROOTDS."temp");
+define("TFW_PATHPUBLIC",TFW_PATHROOTDS."public");
 //die(TFW_PATHROOT);
 
 $arPaths["root"] = TFW_PATHROOTDS;

@@ -21,10 +21,20 @@ class ComponentPdftojpg
     {
         $this->isError = FALSE;
         $this->arErrors = array();
-        $this->arFrom = array("pathfolder"=>PATH_RESDIR.DS."products_picture".DS,"filename"=>"");
-        $this->arTo = array("pathfolder"=>PATH_RESDIR.DS."products_picture".DS,"filename"=>"");
+        //$this->arFrom = array("pathfolder"=>PATH_RESDIR.DS."products_picture".DS,"filename"=>"");
+        //$this->arTo = array("pathfolder"=>PATH_RESDIR.DS."products_picture".DS,"filename"=>"");
     }
 
+    public function get()
+    {
+        die(__DIR__);
+        //$pathpdf =
+        $pdf_file = escapeshellarg( "mysafepdf.pdf" );
+        $jpg_file = escapeshellarg( "output.jpg" );
+
+        $result = 0;
+        exec( "convert -density 300 {$pdf_file} {$jpg_file}", null, $result );
+    }
 
     public function add_from($sKey,$sValue){$this->arFrom[$sKey] = $sValue;}
     public function add_to($sKey,$sValue){$this->arTo[$sKey] = $sValue;}
