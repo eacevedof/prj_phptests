@@ -27,8 +27,7 @@ class ComponentPdftojpg
 
     public function get()
     {
-        die(__DIR__);
-        //$pathpdf =
+        $pathpdf =
         $pdf_file = escapeshellarg( "mysafepdf.pdf" );
         $jpg_file = escapeshellarg( "output.jpg" );
 
