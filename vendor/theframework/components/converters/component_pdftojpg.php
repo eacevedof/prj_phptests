@@ -21,6 +21,7 @@ class ComponentPdftojpg
 
     public function __construct() 
     {
+        if(!extension_loaded("imagick")) throw new \Exception("imagick extension not found!");
         $this->isError = FALSE;
         $this->arErrors = array();
         //$this->arFrom = array("pathfolder"=>PATH_RESDIR.DS."products_picture".DS,"filename"=>"");
