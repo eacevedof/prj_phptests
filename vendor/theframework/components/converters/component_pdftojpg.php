@@ -10,6 +10,8 @@
  */
 namespace TheFramework\Components\Converters;
 
+use \Imagick;
+
 class ComponentPdftojpg 
 {
     private $arFrom;
@@ -37,14 +39,14 @@ class ComponentPdftojpg
         $pathimg = TFW_PATHTEMP."/example.jpg";
         $fp_pdf = fopen($pathpdf, 'rb');
 
-        $img = new imagick();
+        $img = new Imagick();
         $img->setResolution(300,300);
         $img->readImageFile($fp_pdf);
         $img->setImageFormat( "jpg" );
         $img->setImageCompression(imagick::COMPRESSION_JPEG);
         $img->setImageCompressionQuality(90);
 
-        $img->setImageUnits(imagick::RESOLUTION_PIXELSPERINCH);
+        $img->setImageUnits(Imagick::RESOLUTION_PIXELSPERINCH);
         $data = $img->getImageBlob();
 
         $this->_save($pathimg,$blob);

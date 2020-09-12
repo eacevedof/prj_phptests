@@ -68,7 +68,7 @@ foreach($arPaths as $sPath)
 
 //excluyo los que no quiero mostrar
 $arForbidden = ["phpinfox"];
-//$arForbidden = [];
+$arForbidden = [];
 
 $arExamples["components"] = array_filter(scandir($arPaths["components"]),function($sFileName){
     return !in_array($sFileName,[".",".."]) && strstr($sFileName,".php");
