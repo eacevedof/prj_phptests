@@ -61,6 +61,7 @@ class TheFrameworkHelper
     protected $oBD = NULL;
     //Label
     protected $oLabel = NULL;
+
     //HelperStyle
     protected $oStyle = NULL;
     
@@ -278,4 +279,4 @@ class TheFrameworkHelper
     protected function is_enterupdate(){return $this->_isEnterUpdate;}
     protected function is_entersubmit(){return $this->_isEnterSubmit;}
     protected function get_value($asEntity=0){if($asEntity) return htmlentities($this->_value); else return $this->_value;}    
-}
+}//theframeworkhelper.php
