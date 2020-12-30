@@ -5,7 +5,7 @@
  * @version 1.0.0
  * @name ComponentArrayquery
  * @file component_arrayquery.php
- * @date 29-08-2020 16:14 (SPAIN)
+ * @date 30-12-2020 22:00 (SPAIN)
  * @observations:
  */
 namespace TheFramework\Components;

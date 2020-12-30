@@ -38,7 +38,7 @@ $ar2 = [
 $oComp = new ComponentArrayquery($ar1);
 
 //probando map, filter reduce
-/*
+
 $r = $oComp->map(function($item){
         return [
             //transformo el array original, cambio date por day y price por p
@@ -54,123 +54,16 @@ $r = $oComp->map(function($item){
         return $ac + $item["p"];
     },0)
 ;
-*/
-
 //$r = $oComp->remove_column(["id"])->distinct()->where("price",20.22);
-/**
-array (
-    0 =>
-    array (
-        'description' => 'some description 2 y',
-        'price' => 20.22,
-        'date' => '20221001',
-    ),
-    1 =>
-    array (
-        'description' => 'some description 3 z',
-        'price' => 20.22,
-        'date' => '20221001',
-    ),
-)
- */
 //$r = $oComp->distinct()->where("price","20.2%","like")->where("date","%05","like" );
-/*
-array (
-  0 =>
-  array (
-    'id' => 7,
-    'description' => 'some description 6 z',
-    'price' => 20.25,
-    'date' => '20221105',
-  ),
-)
- */
 $r = $oComp->distinct()->where("description","%z%","like");
-/*
-array (
-  0 =>
-  array (
-    'id' => 3,
-    'description' => 'some description 3 z',
-    'price' => 20.22,
-    'date' => '20221001',
-  ),
-  1 =>
-  array (
-    'id' => 6,
-    'description' => 'some description 3 z',
-    'price' => 20.22,
-    'date' => '20221001',
-  ),
-  2 =>
-  array (
-    'id' => 7,
-    'description' => 'some description 6 z',
-    'price' => 20.25,
-    'date' => '20221105',
-  ),
-)
-*/
 //$r = $oComp->distinct()->where("price",6,">")->where("price",11,"<");
 //$r = $oComp->is_null("description");
 //$r = $oComp->is_empty("description");
 //$r = $oComp->in("date", ["20221001","20221105"])->not_in("description", ["some description 2 y"]);
 
 //$r = $oComp->innerjoin($ar2,["id"=>"id","description"=>"description"])->orderby("date", "desc");
-/*
- array (
-  0 =>
-  array (
-    'id' => 7,
-    'description' => 'some description 6 z',
-    'price' => 20.25,
-    'date' => '20221105',
-  ),
-  1 =>
-  array (
-    'id' => 3,
-    'description' => 'some description 3 z',
-    'price' => 20.22,
-    'date' => '20221001',
-  ),
-  2 =>
-  array (
-    'id' => 6,
-    'description' => 'some description 3 z',
-    'price' => 20.22,
-    'date' => '20221001',
-  ),
-)
-*/
 $r = $oComp->leftjoin($ar2,["id"=>"id","description"=>"description"])->orderby("date", "desc");
-/*
-array (
-  0 =>
-  array (
-    'id' => 7,
-    'description' => 'some description 6 z',
-    'price' => 20.25,
-    'date' => '20221105',
-    '*leftjoin*' => 0,
-  ),
-  1 =>
-  array (
-    'id' => 3,
-    'description' => 'some description 3 z',
-    'price' => 20.22,
-    'date' => '20221001',
-    '*leftjoin*' => 0,
-  ),
-  2 =>
-  array (
-    'id' => 6,
-    'description' => 'some description 3 z',
-    'price' => 20.22,
-    'date' => '20221001',
-    '*leftjoin*' => 0,
-  ),
-)
-*/
 pr($r->get_result(),"result");
 
 
