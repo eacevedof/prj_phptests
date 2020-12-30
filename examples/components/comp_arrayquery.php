@@ -32,8 +32,21 @@ $ar2 = [
     ["id"=>9,"description"=>null,"price"=>7.65,"date"=>"20100228"],
     ["id"=>11,"description"=>"","price"=>13.99,"date"=>"19900228"],
 ];
-
+//array_reduce()
 $oComp = new ComponentArrayquery($ar1);
+$r = $oComp->map(function($item){
+        return [
+          "id" => $item["id"], "name"=> $item["description"], "day"=>$item["date"], "p"=>$item["price"]
+        ];
+    })
+    ->filter(function ($item){
+        return $item["p"] > 10;
+    })
+    ->reduce(function($ac, $item){
+        return $ac + $item["p"];
+    },0)
+;
+
 //$r = $oComp->remove_column(["id"])->distinct()->where("price",20.22);
 //$r = $oComp->distinct()->where("price","20.2%","like")->where("date","%05","like" );
 //$r = $oComp->distinct()->where("description","%z%","like");
@@ -43,7 +56,7 @@ $oComp = new ComponentArrayquery($ar1);
 //$r = $oComp->in("date", ["20221001","20221105"])->not_in("description", ["some description 2 y"]);
 
 //$r = $oComp->innerjoin($ar2,["id"=>"id","description"=>"description"])->orderby("date", "desc");
-$r = $oComp->leftjoin($ar2,["id"=>"id","description"=>"description"])->orderby("date", "desc");
+//$r = $oComp->leftjoin($ar2,["id"=>"id","description"=>"description"])->orderby("date", "desc");
 pr($r->get_result(),"result");
 
 
