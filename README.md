@@ -147,6 +147,7 @@ pecl install imagick
 
 convert -quality 60 -density 200 example.pdf foo.jpg
 convert -normalize ./example.pdf ./xxx.jpg
+gs -sDEVICE=png16m -dTextAlphaBits=4 -r300 -o x.jpg cv.pdf
 ```
 
 ## To-Do
