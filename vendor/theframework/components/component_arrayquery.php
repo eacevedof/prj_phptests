@@ -17,7 +17,7 @@ class ComponentArrayquery
     private const HASHCOL = "*hashkey*";
     private const LEFTCOL = "*leftjoin*";
     
-    public function __construct(array $array)
+    public function __construct(array $array=[])
     {
         $this->array = $array;
     }
@@ -334,12 +334,33 @@ class ComponentArrayquery
         return $this;
     }
 
-    private function groupby(array $dims, array $metrics)
+    public function filter($function, $array=[])
+    {
+        if($array) $this->array = $array;
+        $this->array = array_filter($this->array, $function);
+        return $this;
+    }
+
+    public function map($function, $array=[])
+    {
+        if($array) $this->array = $array;
+        $this->array = array_map($function, $this->array);
+        return $this;
+    }
+
+    public function reduce($function, $initial=null, $array=[])
+    {
+        if($array) $this->array = $array;
+        $this->array = array_reduce($this->array, $function, $initial);
+        return $this;
+    }
+
+    private function _groupby(array $dims, array $metrics)
     {
         //to-do
     }
 
-    private function having(array $coditions)
+    private function _having(array $coditions)
     {
         //to-do
     }
