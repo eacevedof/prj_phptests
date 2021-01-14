@@ -369,3 +369,4 @@ class ComponentArrayquery
 
     public function get_count(){return count($this->array);}
 }
+// pasar parametros para array asociativo
