@@ -9,6 +9,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Crop before</title>
+    <script src="/js/cropper-js/cropper.js"></script>
+    <script src="/js/cropper-js/cropper.css"></script>
 </head>
 <body>
 </body>
