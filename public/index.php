@@ -53,11 +53,13 @@ define("TFW_PATHPUBLIC",TFW_PATHROOTDS."public");
 //die(TFW_PATHROOT);
 
 $arPaths["root"] = TFW_PATHROOTDS;
+$arPaths["js"] = TFW_PATHROOTDS."examples".DS."js";
 $arPaths["examples"] = TFW_PATHROOTDS."examples".DS;
 $arPaths["designpatterns"] = TFW_PATHROOTDS."examples".DS."designpatterns";
 $arPaths["components"] = TFW_PATHROOTDS."examples".DS."components";
 $arPaths["helpers"] = TFW_PATHROOTDS."examples".DS."helpers";
 $arPaths["mixed"] = TFW_PATHROOTDS."examples".DS."mixed";
+
 
 $arPaths = array_map(function($sPath){
     return realpath($sPath);
@@ -70,6 +72,10 @@ foreach($arPaths as $sPath)
 $arForbidden = ["phpinfox"];
 $arForbidden = [];
 
+$arExamples["js"] = array_filter(scandir($arPaths["js"]),function($sFileName){
+    return !in_array($sFileName,[".",".."]) && strstr($sFileName,".php");
+});
+$arExamples["js"]["path"] = $arPaths["js"];
 $arExamples["components"] = array_filter(scandir($arPaths["components"]),function($sFileName){
     return !in_array($sFileName,[".",".."]) && strstr($sFileName,".php");
 });
@@ -142,6 +148,7 @@ elseif(isset($_GET["f"]) || isset($_GET["c"]))
     $sKey = ($sKey || array_search($sFile,$arExamples["helpers"]));
     $sKey = ($sKey || array_search($sFile,$arExamples["mixed"]));
     $sKey = ($sKey || array_search($sFile,$arExamples["designpatterns"]));
+    $sKey = ($sKey || array_search($sFile,$arExamples["js"]));
     if(!$sKey)
     {
         echo "<pre> file not found<b>: $sFile </b> in examples <br/>";
