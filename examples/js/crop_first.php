@@ -63,6 +63,19 @@ if($_POST) {
         </div>
     </div>
 </div>
+<style type="text/css">
+img {
+    display: block;
+    max-width: 100%;
+}
+.preview {
+    overflow: hidden;
+    width: 160px;
+    height: 160px;
+    margin: 10px;
+    border: 1px solid red;
+}
+</style>
 <script
         src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
         integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
@@ -87,7 +100,8 @@ const $image = document.getElementById("image")
 const $modal = document.getElementById("modal")
 const $btncrop = document.getElementById("crop")
 
-let cropper, reader, file;
+let cropper, reader, file, canvas
+
 const bootModal = new bootstrap.Modal($modal, {
     keyboard: false
 })
@@ -105,7 +119,7 @@ $modal.addEventListener("hidden.bs.modal", function (){
 })
 
 $btncrop.addEventListener("click", function (){
-    const canvas = cropper.getCroppedCanvas({
+    canvas = cropper.getCroppedCanvas({
         width: 160,
         height: 160,
     })
@@ -118,14 +132,13 @@ $btncrop.addEventListener("click", function (){
             const base64data = reader.result
             const url = "/index.php?f=crop_first"
             fetch(url, {
-                method: "POST",
+                method: 'POST',
                 headers: {
-                    "Accept": "application/json",
-                    "Content-Type": "application/json"
-                },
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json' },
                 body: JSON.stringify({
                     action: "upload",
-                    image: window.btoa(base64data)
+                    //image: window.btoa(base64data)
                 })
             })
             .then(function (response){
@@ -153,7 +166,7 @@ $file.addEventListener("change", function (e) {
     }
 
     if(files && files.length>0){
-        const file = files[0]
+        file = files[0]
         if (URL){
             on_done(URL.createObjectURL(file))
         }
