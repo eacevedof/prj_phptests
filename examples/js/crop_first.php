@@ -74,11 +74,18 @@ if($_POST["image"] ?? null) {
 ></script>
 <script src="/js/cropper-js/cropper.js"></script>
 <script>
+const $modal = new bootstrap.Modal(
+    document.getElementById("modal"), {
+        backdrop: true
+    })
+$modal.show()
+
+
 var bs_modal = $('#modal');
 var image = document.getElementById('image');
 var cropper,reader,file;
 
-
+//file on change
 $("body").on("change", ".image", function(e) {
     var files = e.target.files;
     var done = function(url) {
