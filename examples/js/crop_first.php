@@ -131,7 +131,10 @@ $file.addEventListener("change", function (e) {
 
     const on_done = function (url){
         $image.src = url
-        $modal.show()
+        const myModal = new bootstrap.Modal($modal, {
+            keyboard: false
+        })
+        myModal.show()
     }
 
     if(files && files.length>0){
