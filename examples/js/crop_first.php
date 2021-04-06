@@ -126,6 +126,7 @@ $btncrop.addEventListener("click", function (){
 
     canvas.toBlob(function (blob){
         const url = URL.createObjectURL(blob)
+
         const reader = new FileReader()
         reader.readAsDataURL(blob)
         reader.onloadend = function (){
@@ -139,6 +140,7 @@ $btncrop.addEventListener("click", function (){
                 body: JSON.stringify({
                     action: "upload",
                     //image: window.btoa(base64data)
+                    $image: base64data,
                 })
             })
             .then(function (response){
