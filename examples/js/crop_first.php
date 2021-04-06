@@ -74,78 +74,84 @@ if($_POST["image"] ?? null) {
 ></script>
 <script src="/js/cropper-js/cropper.js"></script>
 <script>
+/*
 const $modal = new bootstrap.Modal(
     document.getElementById("modal"), {
         backdrop: true
     })
-$modal.show()
+//$modal.show()
+*/
+const $file = document.getElementById("fileImage")
+const $image = document.getElementById("image")
+const $modal = document.getElementById("modal")
+$btncrop = document.getElementById("crop")
 
+let cropper, reader, file;
 
-var bs_modal = $('#modal');
-var image = document.getElementById('image');
-var cropper,reader,file;
-
-//file on change
-$("body").on("change", ".image", function(e) {
-    var files = e.target.files;
-    var done = function(url) {
-        image.src = url;
-        bs_modal.modal('show');
-    };
-
-
-    if (files && files.length > 0) {
-        file = files[0];
-
-        if (URL) {
-            done(URL.createObjectURL(file));
-        } else if (FileReader) {
-            reader = new FileReader();
-            reader.onload = function(e) {
-                done(reader.result);
-            };
-            reader.readAsDataURL(file);
-        }
-    }
-});
-
-bs_modal.on('shown.bs.modal', function() {
-    cropper = new Cropper(image, {
+$modal.addEventListener("shown.bs.modal", function (){
+    cropper = new Cropper($image, {
         aspectRatio: 1,
         viewMode: 3,
-        preview: '.preview'
-    });
-}).on('hidden.bs.modal', function() {
-    cropper.destroy();
-    cropper = null;
-});
+        preview: ".preview"
+    })
+})
+$modal.addEventListener("hidden.bs.modal", function (){
+    cropper.destroy()
+    cropper = null
+})
 
-$("#crop").click(function() {
-    canvas = cropper.getCroppedCanvas({
+$btncrop.addEventListener("click", function (){
+    const canvas = cropper.getCroppedCanvas({
         width: 160,
         height: 160,
-    });
+    })
 
-    canvas.toBlob(function(blob) {
-        url = URL.createObjectURL(blob);
-        var reader = new FileReader();
-        reader.readAsDataURL(blob);
-        reader.onloadend = function() {
-            var base64data = reader.result;
+    canvas.toBlob(function (blob){
+        const url = URL.createObjectURL(blob)
+        const reader = new FileReader()
+        reader.readAsDataURL(blob)
+        reader.onloadend = function (){
+            const base64data = reader.result
+            const url = "/index.php?f=crop_first"
+            fetch(url, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({image: base64data})
+            })
+        }
+    })
 
-            $.ajax({
-                type: "POST",
-                dataType: "json",
-                url: "upload.php",
-                data: {image: base64data},
-                success: function(data) {
-                    bs_modal.modal('hide');
-                    alert("success upload image");
-                }
-            });
-        };
-    });
-});
+})//btncrop.click
+
+
+$file.addEventListener("change", function (e) {
+    const files = e.target.files
+
+    const on_done = function (url){
+        $image.src = url
+        $modal.show()
+    }
+
+    if(files && files.length>0){
+        const file = files[0]
+        if (URL){
+            on_done(URL.createObjectURL(file))
+        }
+        else if (FileReader) {
+            const reader = new FileReader()
+            reader.onload = function (e) {
+                on_done(reader.result)
+            }
+            reader.readAsDataURL(file)
+        }
+    }
+})
+
+
+
+
 </script>
 </body>
 </html>
