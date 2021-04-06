@@ -152,7 +152,6 @@ $btncrop.addEventListener("click", function (){
                 //bootModal.hide()
                 console.log("result:",result)
             })
-
         }
     })
 
@@ -160,14 +159,14 @@ $btncrop.addEventListener("click", function (){
 
 
 $file.addEventListener("change", function (e) {
-    const files = e.target.files
-
     const on_done = function (url){
         $image.src = url
         bootModal.show()
     }
 
-    if(files && files.length>0){
+    const files = e.target.files
+
+    if(files && files.length>0) {
         file = files[0]
         if (URL){
             on_done(URL.createObjectURL(file))
@@ -181,10 +180,6 @@ $file.addEventListener("change", function (e) {
         }
     }
 })
-
-
-
-
 </script>
 </body>
 </html>
