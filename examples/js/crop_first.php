@@ -4,7 +4,8 @@
  * @info: Crop antes de subir una imagen
  */
 
-if($_POST["image"] ?? null) {
+if($_POST) {
+    print_r($_REQUEST);die;
     $folderPath = 'upload/';
     $image_parts = explode(";base64,", $_POST['image']);
     $image_type_aux = explode("image/", $image_parts[0]);
@@ -84,9 +85,12 @@ const $modal = new bootstrap.Modal(
 const $file = document.getElementById("fileImage")
 const $image = document.getElementById("image")
 const $modal = document.getElementById("modal")
-$btncrop = document.getElementById("crop")
+const $btncrop = document.getElementById("crop")
 
 let cropper, reader, file;
+const bootModal = new bootstrap.Modal($modal, {
+    keyboard: false
+})
 
 $modal.addEventListener("shown.bs.modal", function (){
     cropper = new Cropper($image, {
@@ -116,10 +120,24 @@ $btncrop.addEventListener("click", function (){
             fetch(url, {
                 method: "POST",
                 headers: {
+                    "Accept": "application/json",
                     "Content-Type": "application/json"
                 },
-                body: JSON.stringify({image: base64data})
+                body: JSON.stringify({
+                    action: "upload",
+                    image: window.btoa(base64data)
+                })
             })
+            .then(function (response){
+                console.log("response",response.json())
+                return response.json()
+            })
+            .then(function (result){
+                //alert("uploaded")
+                //bootModal.hide()
+                console.log("result:",result)
+            })
+
         }
     })
 
@@ -131,10 +149,7 @@ $file.addEventListener("change", function (e) {
 
     const on_done = function (url){
         $image.src = url
-        const myModal = new bootstrap.Modal($modal, {
-            keyboard: false
-        })
-        myModal.show()
+        bootModal.show()
     }
 
     if(files && files.length>0){
