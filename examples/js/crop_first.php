@@ -39,7 +39,8 @@ if($_POST){
             <input type="file" name="image" id="file-img" class="image">
         </div>
     </form>
-    <img src="#" id="img-uploaded" style="visibility: hidden" />
+    <img src="#" id="img-uploaded" style="visibility: hidden;" class="img-fluid" />
+    <span id="span-uploaded"></span>
 </div>
 <div class="modal fade" id="div-modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
@@ -169,7 +170,11 @@ $btncrop.addEventListener("click", function (){
                 //result es algo como: ["image uploaded successfully."]
                 console.log("result:",result)
                 alert(result.message)
-                document.getElementById("img-uploaded").src = result.file
+                const $img = document.getElementById("img-uploaded")
+                $img.src = "/"+result.file
+                $img.style.visibility = "visible"
+                const $span = document.getElementById("span-uploaded")
+                $span.innerText=$img.src
             })
         }//reader.on-loaded
     })//canvas.toblob
