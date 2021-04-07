@@ -4,10 +4,9 @@
  * @info: Crop antes de subir una imagen
  */
 
-$json = file_get_contents("php://input");
-$array = json_decode($json, true);
-$_POST = $array;
-if($_POST){
+if($json = file_get_contents("php://input"))
+{
+    $_POST = json_decode($json, true);
     $folderPath = 'upload/';
     //image => data:image/png;base64,iVBORw0KGgoAAAA....
     $image_parts = explode(";base64,", $_POST['image']);
