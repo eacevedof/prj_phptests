@@ -180,12 +180,12 @@ $btncrop.addEventListener("click", function (){
     })//canvas.toblob
 })//btncrop.on-click
 
-let cropper = null
 const $modal = document.getElementById("div-modal")
 const objmodal = new bootstrap.Modal($modal, {
     keyboard: false
 })
 
+let cropper = null
 $modal.addEventListener("shown.bs.modal", function (){
     cropper = new Cropper($image, {
         aspectRatio: 1,
