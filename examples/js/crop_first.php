@@ -129,8 +129,8 @@ $file.addEventListener("change", function (e) {
 const $btncrop = document.getElementById("btn-crop")
 $btncrop.addEventListener("click", function (){
     const canvas = cropper.getCroppedCanvas({
-        width: 160,
-        height: 160,
+        width: 250,
+        height: 250,
     })
 
     canvas.toBlob(function (blob){
