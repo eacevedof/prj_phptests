@@ -32,12 +32,12 @@ if($_POST){
 <div class="container">
     <form class="" method="post">
         <div class="mb-3">
-            <label for="fileImage" class="form-label">Upload Images</label>
-            <input type="file" name="image" id="fileImage" class="image">
+            <label for="file-img" class="form-label">Upload Images</label>
+            <input type="file" name="image" id="file-img" class="image">
         </div>
     </form>
 </div>
-<div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+<div class="modal fade" id="div-modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -48,7 +48,7 @@ if($_POST){
                 <div class="img-container">
                     <div class="row">
                         <div class="col-md-8">
-                            <img id="image">
+                            <img id="img-original">
                         </div>
                         <div class="col-md-4">
                             <div class="preview"></div>
@@ -58,7 +58,7 @@ if($_POST){
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-primary" id="crop">Crop</button>
+                <button type="button" class="btn btn-primary" id="btn-crop">Crop</button>
             </div>
         </div>
     </div>
@@ -89,10 +89,10 @@ img {
 <script src="/js/cropper-js/cropper.js"></script>
 <script>
 
-const $file = document.getElementById("fileImage")
-const $image = document.getElementById("image")
-const $modal = document.getElementById("modal")
-const $btncrop = document.getElementById("crop")
+const $file = document.getElementById("file-img")
+const $image = document.getElementById("img-original")
+const $modal = document.getElementById("div-modal")
+const $btncrop = document.getElementById("btn-crop")
 
 let cropper, reader, file, canvas
 
