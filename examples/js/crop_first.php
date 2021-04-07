@@ -42,9 +42,7 @@ if($_POST){
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="modalLabel">Crop image</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                </button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <div class="img-container">
@@ -148,13 +146,9 @@ $btncrop.addEventListener("click", function (){
                 })
                 //body: new FormData()
             })
-            .then(function (response){
-                console.log("response",response.json())
-                return response.json()
-            })
+            .then(response => response.json())
             .then(function (result){
-                //alert("uploaded")
-                //bootModal.hide()
+                alert(result[0])
                 console.log("result:",result)
             })
         }
