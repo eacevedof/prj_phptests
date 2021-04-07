@@ -9,15 +9,16 @@ $array = json_decode($json, true);
 $_POST = $array;
 if($_POST){
     $folderPath = 'upload/';
+    //image => data:image/png;base64,iVBORw0KGgoAAAA....
     $image_parts = explode(";base64,", $_POST['image']);
-    $image_type_aux = explode("image/", $image_parts[0]);
-    $image_type = $image_type_aux[1];
+    //$image_type_aux = explode("image/", $image_parts[0]);
+    //$image_type = $image_type_aux[1];
     $image_base64 = base64_decode($image_parts[1]);
     $file = $folderPath . uniqid() . '.png';
     file_put_contents($file, $image_base64);
     echo json_encode([
-        "message"=>"image uploaded successfully.",
-        "file"=>$file
+        "message" =>"image uploaded successfully.",
+        "file" =>$file
     ]);
     exit;
 }
