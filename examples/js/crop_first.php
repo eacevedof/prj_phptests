@@ -128,7 +128,7 @@ $btncrop.addEventListener("click", function (){
         reader.onloadend = function (){
             const base64data = reader.result
             console.log("base64data", base64data)
-            const url = "/index.php?f=crop_first"
+            const url = "/index.php?f=crop_first&nohome=1"
             const data = new FormData()
             data.append("image", base64data)
 
