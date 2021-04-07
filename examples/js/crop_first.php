@@ -91,15 +91,14 @@ img {
 
 const $file = document.getElementById("file-img")
 const $image = document.getElementById("img-original")
-const $modal = document.getElementById("div-modal")
 const $btncrop = document.getElementById("btn-crop")
 
-let cropper, reader, file, canvas
-
-const bootModal = new bootstrap.Modal($modal, {
+const $modal = document.getElementById("div-modal")
+const objmodal = new bootstrap.Modal($modal, {
     keyboard: false
 })
 
+let cropper = null
 $modal.addEventListener("shown.bs.modal", function (){
     cropper = new Cropper($image, {
         aspectRatio: 1,
@@ -114,7 +113,7 @@ $modal.addEventListener("hidden.bs.modal", function (){
 })//modal.on-hidden
 
 $btncrop.addEventListener("click", function (){
-    canvas = cropper.getCroppedCanvas({
+    const canvas = cropper.getCroppedCanvas({
         width: 160,
         height: 160,
     })
@@ -148,8 +147,10 @@ $btncrop.addEventListener("click", function (){
             })
             .then(response => response.json())
             .then(function (result){
-                bootModal.hide()
+                $file.value = ""
+                objmodal.hide()
                 console.log("result:",result)
+                alert(result[0])
             })
         }
     })
@@ -159,18 +160,25 @@ $btncrop.addEventListener("click", function (){
 
 $file.addEventListener("change", function (e) {
     const on_done = function (url){
-        $image.src = url
-        bootModal.show()
-    }
 
+        $image.src = url
+        objmodal.show()
+    }
     const files = e.target.files
 
     if(files && files.length>0) {
-        file = files[0]
+        const file = files[0]
+        //el objeto file trae name, size, type, lastmodified, lastmodifiedate
+        console.log("file.on-change",file)
         if (URL){
-            on_done(URL.createObjectURL(file))
+            console.log("on-change URL")
+            //crea una url del estilo: blob:http://localhost:1024/129e832d-2545-471f-8e70-20355d8e33eb
+            const url = URL.createObjectURL(file)
+            console.log("createobjecturl",url)
+            on_done(url)
         }
         else if (FileReader) {
+            console.log("on-change FileReader")
             const reader = new FileReader()
             reader.onload = function (e) {
                 on_done(reader.result)
