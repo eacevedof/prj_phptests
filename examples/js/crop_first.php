@@ -4,7 +4,10 @@
  * @info: Crop antes de subir una imagen
  */
 
-if($_POST) {
+$json = file_get_contents("php://input");
+$array = json_decode($json, true);
+$_POST = $array;
+if($_POST){
     $folderPath = 'upload/';
     $image_parts = explode(";base64,", $_POST['image']);
     $image_type_aux = explode("image/", $image_parts[0]);
@@ -129,14 +132,20 @@ $btncrop.addEventListener("click", function (){
             const base64data = reader.result
             console.log("base64data", base64data)
             const url = "/index.php?f=crop_first&nohome=1"
-            const data = new FormData()
-            data.append("image", base64data)
+            //const data = new FormData()
+            //data.append("image", base64data)
 
             fetch(url, {
                 method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
 
-
-                body: data
+                //body: data
+                body: JSON.stringify({
+                    image: base64data
+                })
                 //body: new FormData()
             })
             .then(function (response){
