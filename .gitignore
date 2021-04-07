@@ -4,6 +4,7 @@ ports.log
 vendor/theframework/components/apple/*.pem
 
 # excluye todo vendor menos theframework
+/public/upload
 /temp
 /vendor/*
 !/vendor/theframework/
