@@ -5,7 +5,6 @@
  */
 
 if($_POST) {
-    print_r($_REQUEST);die;
     $folderPath = 'upload/';
     $image_parts = explode(";base64,", $_POST['image']);
     $image_type_aux = explode("image/", $image_parts[0]);
@@ -88,13 +87,7 @@ img {
 ></script>
 <script src="/js/cropper-js/cropper.js"></script>
 <script>
-/*
-const $modal = new bootstrap.Modal(
-    document.getElementById("modal"), {
-        backdrop: true
-    })
-//$modal.show()
-*/
+
 const $file = document.getElementById("fileImage")
 const $image = document.getElementById("image")
 const $modal = document.getElementById("modal")
@@ -112,11 +105,12 @@ $modal.addEventListener("shown.bs.modal", function (){
         viewMode: 3,
         preview: ".preview"
     })
-})
+})//modal.on-shown
+
 $modal.addEventListener("hidden.bs.modal", function (){
     cropper.destroy()
     cropper = null
-})
+})//modal.on-hidden
 
 $btncrop.addEventListener("click", function (){
     canvas = cropper.getCroppedCanvas({
@@ -125,23 +119,25 @@ $btncrop.addEventListener("click", function (){
     })
 
     canvas.toBlob(function (blob){
-        const url = URL.createObjectURL(blob)
-
+        console.log("blob",blob)
+        //const url = URL.createObjectURL(blob)
+        //console.log("url",url)
         const reader = new FileReader()
         reader.readAsDataURL(blob)
+
         reader.onloadend = function (){
             const base64data = reader.result
+            console.log("base64data", base64data)
             const url = "/index.php?f=crop_first"
+            const data = new FormData()
+            data.append("image", base64data)
+
             fetch(url, {
                 method: 'POST',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    action: "upload",
-                    //image: window.btoa(base64data)
-                    $image: base64data,
-                })
+
+
+                body: data
+                //body: new FormData()
             })
             .then(function (response){
                 console.log("response",response.json())
