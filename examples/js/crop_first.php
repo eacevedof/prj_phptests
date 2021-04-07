@@ -15,7 +15,10 @@ if($_POST){
     $image_base64 = base64_decode($image_parts[1]);
     $file = $folderPath . uniqid() . '.png';
     file_put_contents($file, $image_base64);
-    echo json_encode(["image uploaded successfully."]);
+    echo json_encode([
+        "message"=>"image uploaded successfully.",
+        "file"=>$file
+    ]);
     exit;
 }
 ?>
@@ -30,12 +33,13 @@ if($_POST){
 </head>
 <body>
 <div class="container">
-    <form class="" method="post">
+    <form class="form">
         <div class="mb-3">
-            <label for="file-img" class="form-label">Upload Images</label>
+            <label for="file-img" class="form-label">Upload Images</label><br/>
             <input type="file" name="image" id="file-img" class="image">
         </div>
     </form>
+    <img src="#" id="img-uploaded" style="visibility: hidden" />
 </div>
 <div class="modal fade" id="div-modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
@@ -87,18 +91,96 @@ img {
         crossorigin="anonymous"
 ></script>
 <script src="/js/cropper-js/cropper.js"></script>
-<script>
-
+<script type="module">
 const $file = document.getElementById("file-img")
 const $image = document.getElementById("img-original")
-const $btncrop = document.getElementById("btn-crop")
 
+$file.addEventListener("change", function (e) {
+    const load_image = function (url){
+        $image.src = url
+        objmodal.show()
+    }
+    
+    const files = e.target.files
+
+    if(files && files.length>0) {
+        const file = files[0]
+        //el objeto file trae name, size, type, lastmodified, lastmodifiedate
+        console.log("file.on-change",file)
+        if (URL){
+            console.log("on-change URL")
+            //crea una url del estilo: blob:http://localhost:1024/129e832d-2545-471f-8e70-20355d8e33eb
+            const url = URL.createObjectURL(file)
+            console.log("createobjecturl",url)
+            load_image(url)
+        }
+        else if (FileReader) {
+            console.log("on-change FileReader")
+            const reader = new FileReader()
+            reader.onload = function (e) {
+                load_image(reader.result)
+            }
+            reader.readAsDataURL(file)
+        }
+    }
+})//file.on-change
+
+const $btncrop = document.getElementById("btn-crop")
+$btncrop.addEventListener("click", function (){
+    const canvas = cropper.getCroppedCanvas({
+        width: 160,
+        height: 160,
+    })
+
+    canvas.toBlob(function (blob){
+        //el objeto blob tiene: size y type
+        console.log("blob",blob)
+        //const url = URL.createObjectURL(blob)
+        //console.log("url",url)
+        const reader = new FileReader()
+        reader.readAsDataURL(blob)
+
+        reader.onloadend = function (){
+            const base64data = reader.result
+            //base64data es un string del tipo: data:image/png;base64,iVBORw0KGgoAAAA....
+            console.log("base64data", base64data)
+            const url = "/index.php?f=crop_first&nohome=1"
+            //const data = new FormData()
+            //data.append("image", base64data)
+
+            fetch(url, {
+                method: 'POST',
+                headers: {
+                    //si la respuesta del servidor no es un json satará una excepción
+                    'Accept': 'application/json',
+                    //le indica al servidor que se le enviará un json
+                    'Content-Type': 'application/json'
+                },
+
+                //body: data
+                body: JSON.stringify({
+                    image: base64data
+                })
+            })
+            .then(response => response.json())
+            .then(function (result){
+                $file.value = "" //resetea el elemento file
+                objmodal.hide()
+                //result es algo como: ["image uploaded successfully."]
+                console.log("result:",result)
+                alert(result.message)
+                document.getElementById("img-uploaded").src = result.file
+            })
+        }//reader.on-loaded
+    })//canvas.toblob
+})//btncrop.on-click
+
+let cropper = null
 const $modal = document.getElementById("div-modal")
 const objmodal = new bootstrap.Modal($modal, {
     keyboard: false
 })
 
-let cropper = null
 $modal.addEventListener("shown.bs.modal", function (){
     cropper = new Cropper($image, {
         aspectRatio: 1,
@@ -111,82 +193,6 @@ $modal.addEventListener("hidden.bs.modal", function (){
     cropper.destroy()
     cropper = null
 })//modal.on-hidden
-
-$btncrop.addEventListener("click", function (){
-    const canvas = cropper.getCroppedCanvas({
-        width: 160,
-        height: 160,
-    })
-
-    canvas.toBlob(function (blob){
-        console.log("blob",blob)
-        //const url = URL.createObjectURL(blob)
-        //console.log("url",url)
-        const reader = new FileReader()
-        reader.readAsDataURL(blob)
-
-        reader.onloadend = function (){
-            const base64data = reader.result
-            console.log("base64data", base64data)
-            const url = "/index.php?f=crop_first&nohome=1"
-            //const data = new FormData()
-            //data.append("image", base64data)
-
-            fetch(url, {
-                method: 'POST',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-
-                //body: data
-                body: JSON.stringify({
-                    image: base64data
-                })
-                //body: new FormData()
-            })
-            .then(response => response.json())
-            .then(function (result){
-                $file.value = ""
-                objmodal.hide()
-                console.log("result:",result)
-                alert(result[0])
-            })
-        }
-    })
-
-})//btncrop.click
-
-
-$file.addEventListener("change", function (e) {
-    const on_done = function (url){
-
-        $image.src = url
-        objmodal.show()
-    }
-    const files = e.target.files
-
-    if(files && files.length>0) {
-        const file = files[0]
-        //el objeto file trae name, size, type, lastmodified, lastmodifiedate
-        console.log("file.on-change",file)
-        if (URL){
-            console.log("on-change URL")
-            //crea una url del estilo: blob:http://localhost:1024/129e832d-2545-471f-8e70-20355d8e33eb
-            const url = URL.createObjectURL(file)
-            console.log("createobjecturl",url)
-            on_done(url)
-        }
-        else if (FileReader) {
-            console.log("on-change FileReader")
-            const reader = new FileReader()
-            reader.onload = function (e) {
-                on_done(reader.result)
-            }
-            reader.readAsDataURL(file)
-        }
-    }
-})
 </script>
 </body>
 </html>
