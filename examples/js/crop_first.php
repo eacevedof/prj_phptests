@@ -148,7 +148,7 @@ $btncrop.addEventListener("click", function (){
             })
             .then(response => response.json())
             .then(function (result){
-                alert(result[0])
+                bootModal.hide()
                 console.log("result:",result)
             })
         }
