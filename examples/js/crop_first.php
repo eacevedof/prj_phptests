@@ -142,12 +142,12 @@ $btncrop.addEventListener("click", function (){
             //data.append("image", base64data)
 
             fetch(url, {
-                method: 'POST',
+                method: "POST",
                 headers: {
                     //si la respuesta del servidor no es un json satará una excepción
-                    'Accept': 'application/json',
+                    "Accept": "application/json",
                     //le indica al servidor que se le enviará un json
-                    'Content-Type': 'application/json'
+                    "Content-Type": "application/json"
                 },
 
                 //body: data
@@ -184,21 +184,10 @@ $modal.addEventListener("shown.bs.modal", function (){
     cropper = new Cropper($image, {
         //donde se mostrará lo parte seleccionada
         preview: document.getElementById("div-preview"),
-        //indica que no se podrá seleccionar fuera de los límites
+        //3: indica que no se podrá seleccionar fuera de los límites
         viewMode: 3,
-
         //NaN libre elección, 1 cuadrado, proporción del lado horizontal con respecto al vertical
-        aspectRatio: NaN,
-
-        crop(event) {
-            console.log(event.detail.x);
-            console.log(event.detail.y);
-            console.log(event.detail.width);
-            console.log(event.detail.height);
-            console.log(event.detail.rotate);
-            console.log(event.detail.scaleX);
-            console.log(event.detail.scaleY);
-        },
+        aspectRatio: 1.5,
     })
 })//modal.on-shown
 
