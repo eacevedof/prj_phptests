@@ -64,7 +64,7 @@ if($json = file_get_contents("php://input"))
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 <button type="button" class="btn btn-primary" id="btn-crop">Crop</button>
             </div>
         </div>
@@ -179,14 +179,32 @@ const objmodal = new bootstrap.Modal($modal, {
 
 let cropper = null
 $modal.addEventListener("shown.bs.modal", function (){
+    console.log("modal.on-show")
+    //crea el marco de selección sobre el objeto $image
     cropper = new Cropper($image, {
-        aspectRatio: 1,
+        //donde se mostrará lo parte seleccionada
+        preview: document.getElementById("div-preview"),
+        //indica que no se podrá seleccionar fuera de los límites
         viewMode: 3,
-        preview: document.getElementById("div-preview")
+
+        //1 cuadrado, 2: rectangulo horizontal 3:
+
+        aspectRatio: 10,
+
+        crop(event) {
+            console.log(event.detail.x);
+            console.log(event.detail.y);
+            console.log(event.detail.width);
+            console.log(event.detail.height);
+            console.log(event.detail.rotate);
+            console.log(event.detail.scaleX);
+            console.log(event.detail.scaleY);
+        },
     })
 })//modal.on-shown
 
 $modal.addEventListener("hidden.bs.modal", function (){
+    console.log("modal.on-hide")
     cropper.destroy()
     cropper = null
 })//modal.on-hidden
