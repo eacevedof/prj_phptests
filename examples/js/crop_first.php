@@ -6,18 +6,18 @@
 
 if($json = file_get_contents("php://input"))
 {
-    $_POST = json_decode($json, true);
+    $post = json_decode($json, true);
     $folderPath = 'upload/';
     //image => data:image/png;base64,iVBORw0KGgoAAAA....
-    $image_parts = explode(";base64,", $_POST['image']);
+    $image_parts = explode(";base64,", $post["image"]);
     //$image_type_aux = explode("image/", $image_parts[0]);
     //$image_type = $image_type_aux[1];
     $image_base64 = base64_decode($image_parts[1]);
     $file = $folderPath . uniqid() . '.png';
     file_put_contents($file, $image_base64);
     echo json_encode([
-        "message" =>"image uploaded successfully.",
-        "file" =>$file
+        "message" => "image uploaded successfully.",
+        "file"    => $file
     ]);
     exit;
 }
@@ -29,6 +29,8 @@ if($json = file_get_contents("php://input"))
     <meta charset="UTF-8">
     <title>Cropper.js</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js" integrity="sha384-SR1sx49pcuLnqZUnnPwx6FCym0wLsk5JZuNx2bPPENzswTNFaQU1RDvt3wT4gWFG" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.min.js" integrity="sha384-j0CNLUeiqtyaRmlzUHCPZ+Gy5fQu0dQ6eZ/xAww941Ai1SxSY+0EQqNXNE6DZiVc" crossorigin="anonymous"></script>
     <link href="/js/cropper-js/cropper.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -81,16 +83,6 @@ img {
     border: 1px solid red;
 }
 </style>
-<script
-        src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-        crossorigin="anonymous"
-></script>
-<script
-        src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js"
-        integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/"
-        crossorigin="anonymous"
-></script>
 <script src="/js/cropper-js/cropper.js"></script>
 <script type="module">
 const $file = document.getElementById("file-img")
@@ -101,7 +93,7 @@ $file.addEventListener("change", function (e) {
         $image.src = url
         objmodal.show()
     }
-    
+
     const files = e.target.files
 
     if(files && files.length>0) {
