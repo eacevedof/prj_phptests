@@ -55,10 +55,10 @@ if($json = file_get_contents("php://input"))
                 <div class="img-container">
                     <div class="row">
                         <div class="col-md-8">
-                            <img id="img-original">
+                            <img id="img-original" class="img-fluid">
                         </div>
                         <div class="col-md-4">
-                            <div class="preview"></div>
+                            <div id="div-preview" class="preview img-fluid"></div>
                         </div>
                     </div>
                 </div>
@@ -80,7 +80,7 @@ img {
     width: 160px;
     height: 160px;
     margin: 10px;
-    border: 1px solid red;
+    border: 1px solid #0B5ED7;
 }
 </style>
 <script src="/js/cropper-js/cropper.js"></script>
@@ -182,7 +182,7 @@ $modal.addEventListener("shown.bs.modal", function (){
     cropper = new Cropper($image, {
         aspectRatio: 1,
         viewMode: 3,
-        preview: ".preview"
+        preview: document.getElementById("div-preview")
     })
 })//modal.on-shown
 
