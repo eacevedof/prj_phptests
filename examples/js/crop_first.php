@@ -187,9 +187,8 @@ $modal.addEventListener("shown.bs.modal", function (){
         //indica que no se podrá seleccionar fuera de los límites
         viewMode: 3,
 
-        //1 cuadrado, 2: rectangulo horizontal 3:
-
-        aspectRatio: 10,
+        //NaN libre elección, 1 cuadrado, proporción del lado horizontal con respecto al vertical
+        aspectRatio: NaN,
 
         crop(event) {
             console.log(event.detail.x);
