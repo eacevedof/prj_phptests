@@ -103,14 +103,14 @@ $file.addEventListener("change", function (e) {
     const files = e.target.files
 
     if(files && files.length>0) {
-        const file = files[0]
-        //el objeto file trae name, size, type, lastmodified, lastmodifiedate
-        console.log("file.on-change",file)
+        const objfile = files[0]
+        //el objeto file tiene las propiedades: name, size, type, lastmodified, lastmodifiedate
+        console.log("file.on-change", file)
         if (URL){
             console.log("on-change URL")
             //crea una url del estilo: blob:http://localhost:1024/129e832d-2545-471f-8e70-20355d8e33eb
-            const url = URL.createObjectURL(file)
-            console.log("createobjecturl",url)
+            const url = URL.createObjectURL(objfile)
+            console.log("createobjecturl", url)
             load_image(url)
         }
         else if (FileReader) {
@@ -119,7 +119,7 @@ $file.addEventListener("change", function (e) {
             reader.onload = function (e) {
                 load_image(reader.result)
             }
-            reader.readAsDataURL(file)
+            reader.readAsDataURL(objfile)
         }
     }
 })//file.on-change
