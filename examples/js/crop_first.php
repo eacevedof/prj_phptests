@@ -43,8 +43,8 @@ if($json = file_get_contents("php://input"))
 <div class="container">
     <form class="form">
         <div class="mb-3">
-            <label for="file-img" class="form-label">Upload Images</label><br/>
-            <input type="file" name="image" id="file-img" class="image">
+            <label for="file-upload" class="form-label">Upload Images</label><br/>
+            <input type="file" id="file-upload" class="image">
         </div>
     </form>
     <img src="#" id="img-uploaded" style="visibility: hidden;" class="img-fluid" />
@@ -91,7 +91,7 @@ img {
 </style>
 <script src="/js/cropper-js/cropper.js"></script>
 <script type="module">
-const $file = document.getElementById("file-img")
+const $file = document.getElementById("file-upload")
 const $image = document.getElementById("img-original")
 
 $file.addEventListener("change", function (e) {
@@ -105,7 +105,7 @@ $file.addEventListener("change", function (e) {
     if(files && files.length>0) {
         const objfile = files[0]
         //el objeto file tiene las propiedades: name, size, type, lastmodified, lastmodifiedate
-        console.log("file.on-change", file)
+        console.log("file.on-change", objfile)
         if (URL){
             console.log("on-change URL")
             //crea una url del estilo: blob:http://localhost:1024/129e832d-2545-471f-8e70-20355d8e33eb
