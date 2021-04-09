@@ -126,13 +126,10 @@ $file.addEventListener("change", function (e) {
 
 const $btncrop = document.getElementById("btn-crop")
 $btncrop.addEventListener("click", function (){
-    const canvas = cropper.getCroppedCanvas({
-        width: 250,
-        height: 250,
-    })
+    const canvas = cropper.getCroppedCanvas()
 
-    canvas.toBlob(function (blob){
-        //el objeto blob tiene: size y type
+    canvas.toBlob(function (blob) {
+        //el objeto blob tiene propiedades: size y type
         console.log("blob",blob)
         //const url = URL.createObjectURL(blob)
         //console.log("url",url)
