@@ -7,17 +7,22 @@
 if($json = file_get_contents("php://input"))
 {
     $post = json_decode($json, true);
-    $folderPath = 'upload/';
+
     //image => data:image/png;base64,iVBORw0KGgoAAAA....
     $image_parts = explode(";base64,", $post["image"]);
     //$image_type_aux = explode("image/", $image_parts[0]);
     //$image_type = $image_type_aux[1];
-    $image_base64 = base64_decode($image_parts[1]);
-    $file = $folderPath . uniqid() . '.png';
-    file_put_contents($file, $image_base64);
+
+    //image_base64: �PNG  IHDR��󠒱 IDATx^���gv�U�˹_�42�@�Yaf�I�,{m�Ɩ���8h����H�h5Z�v5��+k�Y�$+L�H+�f
+    $strbase64 = base64_decode($image_parts[1]);
+
+    $uuid = uniqid();
+    $pathfile = "upload/$uuid.png";
+    file_put_contents($pathfile, $strbase64);
+
     echo json_encode([
         "message" => "image uploaded successfully.",
-        "file"    => $file
+        "file"    => $pathfile
     ]);
     exit;
 }
