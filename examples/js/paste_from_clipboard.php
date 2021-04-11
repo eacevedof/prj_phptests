@@ -65,9 +65,8 @@ const show = elements => elements.forEach( element => element.classList.remove('
 const hide = elements => elements.forEach( element => element.classList.add('invisible') )
 
 const load_image = url => {
-    hide([$image,$p])
+    hide([$image])
     $image.src = url
-    $p.innerText = url
     if(url) {
         show([$image,$p])
     }
@@ -80,13 +79,14 @@ window.addEventListener("paste", e => {
 
     $file.files = files
     const objfile = files[0]
-    //el objeto file tiene las propiedades: name, size, type, lastmodified, lastmodifiedate
+    $p.innerText = objfile
+    show([$p])
     console.log("window.on-paste.objfile", objfile)
     const reader = new FileReader()
     reader.onload = function (e) {
-        const url = reader.result
-        console.log("window.on-paste.reader.onload.url", url)
-        load_image(url)
+        const blob = reader.result
+        console.log("window.on-paste.reader.onload.url", blob)
+        load_image(blob)
     }
     reader.readAsDataURL(objfile)
 });//window.on-paste
