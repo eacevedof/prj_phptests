@@ -55,7 +55,7 @@ document.getElementById("btn-toast").addEventListener("click", () => {
     const $txtmessage = document.getElementById("txt-message")
     const msg = $txtmessage.value
     toast(msg)
-})
+})// btn-toast.on-click
 </script>
 <script
     src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.min.js"
