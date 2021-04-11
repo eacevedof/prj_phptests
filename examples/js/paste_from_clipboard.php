@@ -57,6 +57,12 @@ if($json = file_get_contents("php://input"))
         </div>
     </div>
 </div>
+<div class="toast align-items-center text-white bg-primary border-0" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="d-flex">
+        <div class="toast-body">-</div>
+        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+</div>
 <script type="module">
 const POST_URL = "/index.php?f=paste_from_clipboard&nohome=1"
 
@@ -67,6 +73,9 @@ const $file = document.getElementById("file-upload")
 const $image = document.getElementById("img-pasted")
 const $p = document.getElementById("p-pasted")
 
+const $toast = document.querySelectorAll(".toast")[0]
+const bootToast = new bootstrap.Toast($toast)
+
 const show = elements => elements.forEach( element => element.classList.remove('invisible') )
 const hide = elements => elements.forEach( element => element.classList.add('invisible') )
 
@@ -75,6 +84,14 @@ const load_image = url => {
     $image.src = url
     if(url) {
         show([$image,$p])
+    }
+}
+
+const toast = msg => {
+    const $toastbody = $toast.getElementsByClassName("toast-body")[0]
+    if($toastbody) {
+        $toastbody.innerText = msg
+        bootToast.show()
     }
 }
 
@@ -91,17 +108,16 @@ window.addEventListener("paste", e => {
     $txtname.focus()
 });//window.on-paste
 
-$btnreset.addEventListener("click", e => {
+$btnreset.addEventListener("click", () => {
     $file.value = ""
     $txtname.value = ""
     hide([$btnupload, $btnreset, $p, $image, $txtname])
 })
 
-$btnupload.addEventListener("click", e => {
+$btnupload.addEventListener("click", () => {
     const objfile = $file.files[0]
     if(!objfile) {
-        alert("No image pasted")
-        return
+        return toast("No image pasted")
     }
 
     const reader = new FileReader()
@@ -127,7 +143,7 @@ $btnupload.addEventListener("click", e => {
             $image.src = "/" + result.file
             $p.innerText = $image.src
             hide([$txtname, $btnreset, $btnupload])
-            alert(result.message)
+            toast(result.message)
         })
     }
 })//btn-upload.on-click
