@@ -91,7 +91,7 @@ const load_image = url => {
     if(url) {
         show([$image,$p])
     }
-}
+}// load_image()
 
 const toast = msg => {
     const $toastbody = $toast.getElementsByClassName("toast-body")[0]
@@ -99,15 +99,15 @@ const toast = msg => {
         $toastbody.innerText = msg
         bootToast.show()
     }
-}
+}// toast()
 
 const post = ( data ) => fetch(POST_URL, {
-        method: "POST",
-        headers: {
-            "Accept": "application/json",
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
+    method: "POST",
+    headers: {
+        "Accept": "application/json",
+        "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
             image: data,
             name: $txtname.value
         })
@@ -120,7 +120,7 @@ const post = ( data ) => fetch(POST_URL, {
         $p.innerText = $image.src
         hide([$txtname, $btnreset, $btnupload])
         toast(result.message)
-    })
+    })//post()
 
 window.addEventListener("paste", e => {
     const files = e.clipboardData.files
@@ -139,7 +139,7 @@ $btnreset.addEventListener("click", () => {
     $file.value = ""
     $txtname.value = ""
     hide([$btnupload, $btnreset, $p, $image, $txtname])
-})
+})//btn-reset.on-click
 
 $btnupload.addEventListener("click", () => {
     const objfile = $file.files[0]
@@ -150,7 +150,6 @@ $btnupload.addEventListener("click", () => {
     const reader = new FileReader()
     reader.readAsDataURL(objfile)
     reader.onloadend = () => post(reader.result)
-
 })//btn-upload.on-click
 
 </script>
