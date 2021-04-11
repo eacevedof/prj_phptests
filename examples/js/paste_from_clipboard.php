@@ -50,7 +50,7 @@ if($json = file_get_contents("php://input"))
         </div>
     </div>
     <div class="row">
-        <span id="span-uploaded" class="badge bg-info text-dark"></span><br>
+        <span id="span-pasted" class="badge bg-info text-dark"></span><br>
         <img src="#" id="img-pasted" style="visibility: hidden;" class="img-fluid" />
     </div>
 </div>
@@ -60,7 +60,7 @@ const $btnreset = document.getElementById("btn-reset")
 const $btnupload = document.getElementById("btn-upload")
 const $file = document.getElementById("file-upload")
 const $image = document.getElementById("img-pasted")
-const $span = document.getElementById("span-uploaded")
+const $span = document.getElementById("span-pasted")
 
 $btnreset.addEventListener("click", e => {
     $file.value = ""
@@ -69,13 +69,40 @@ $btnreset.addEventListener("click", e => {
 })
 
 $btnupload.addEventListener("click", e => {
+    const objfile = $file.files[0]
+    if(!objfile) {
+        alert("No image pasted")
+        return
+    }
 
+    const reader = new FileReader()
+    reader.readAsDataURL(objfile)
+    reader.onloadend = function () {
+        const url = "/index.php?f=paste_from_clipboard&nohome=1"
+        const base64data = reader.result
 
-
-    $file.value = ""
-    $image.style.visibility="hidden"
-    $span.style.visibility="hidden"
-})
+        fetch(url, {
+            method: "POST",
+            headers: {
+                "Accept": "application/json",
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                image: base64data
+            })
+        })
+        .then(response => response.json())
+        .then(function (result) {
+            $file.value = ""
+            console.log("result:", result)
+            alert(result.message)
+            const $img = document.getElementById("img-pasted")
+            $img.src = "/" + result.file
+            const $span = document.getElementById("span-pasted")
+            $span.innerText = $img.src
+        })
+    }
+})//btn-upload.on-click
 
 
 $file.addEventListener("change", function (e) {
