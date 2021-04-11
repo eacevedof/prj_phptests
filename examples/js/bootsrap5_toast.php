@@ -1,7 +1,7 @@
 <?php
 /*
  * @file: bootstrap5_toast
- * @info: Ejecuta bootstrap 5 sin jquery
+ * @info: Ejecuta Bootstrap 5 sin jquery
  */
 ?>
 <!DOCTYPE html>
