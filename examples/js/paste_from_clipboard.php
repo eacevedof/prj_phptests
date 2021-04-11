@@ -57,12 +57,18 @@ if($json = file_get_contents("php://input"))
         </div>
     </div>
 </div>
-<div class="toast align-items-center text-white bg-primary border-0" role="alert" aria-live="assertive" aria-atomic="true">
+
+<!-- toast -->
+<div class="toast align-items-center text-white bg-primary border-0 position-absolute top-0 end-0"
+     style="background-color:#B7EA2A"
+     role="alert" aria-live="assertive" aria-atomic="true"
+>
     <div class="d-flex">
         <div class="toast-body">-</div>
         <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
     </div>
 </div>
+
 <script type="module">
 const POST_URL = "/index.php?f=paste_from_clipboard&nohome=1"
 
