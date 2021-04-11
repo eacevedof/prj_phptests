@@ -49,8 +49,8 @@ if($json = file_get_contents("php://input"))
             <button type="button" class="btn btn-primary" id="btn-reset">Clear</button>
         </div>
     </div>
-    <div class="row">
-        <span id="span-pasted" class="badge bg-info text-dark"></span><br>
+    <div class="row p-2">
+        <p id="span-pasted" class="badge bg-info text-dark p-1 font-monospace fs-4"></p>
         <img src="#" id="img-pasted" style="visibility: hidden;" class="img-fluid" />
     </div>
 </div>
