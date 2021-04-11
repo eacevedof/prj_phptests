@@ -101,7 +101,7 @@ const toast = msg => {
     }
 }// toast()
 
-const post = ( data ) => fetch(POST_URL, {
+const post = data => fetch(POST_URL, {
     method: "POST",
     headers: {
         "Accept": "application/json",
