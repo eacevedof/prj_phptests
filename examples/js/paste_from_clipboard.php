@@ -59,8 +59,8 @@ if($json = file_get_contents("php://input"))
 </div>
 
 <!-- toast -->
-<div class="toast align-items-center text-white bg-primary border-0 position-absolute top-0 end-0"
-     style="background-color:#B7EA2A"
+<div class="toast align-items-center text-white bg-primary border-0 mt-3 me-3 position-absolute top-0 end-0"
+     style="background-color:#A9C948 !important;"
      role="alert" aria-live="assertive" aria-atomic="true"
 >
     <div class="d-flex">
@@ -101,6 +101,27 @@ const toast = msg => {
     }
 }
 
+const post = ( data ) => fetch(POST_URL, {
+        method: "POST",
+        headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            image: data,
+            name: $txtname.value
+        })
+    })
+    .then(response => response.json())
+    .then(result => {
+        console.log("result:", result)
+        $file.value = ""
+        $image.src = "/" + result.file
+        $p.innerText = $image.src
+        hide([$txtname, $btnreset, $btnupload])
+        toast(result.message)
+    })
+
 window.addEventListener("paste", e => {
     const files = e.clipboardData.files
     console.log("window.on-paste", files)
@@ -128,30 +149,8 @@ $btnupload.addEventListener("click", () => {
 
     const reader = new FileReader()
     reader.readAsDataURL(objfile)
-    reader.onloadend = function () {
-        const base64data = reader.result
+    reader.onloadend = () => post(reader.result)
 
-        fetch(POST_URL, {
-            method: "POST",
-            headers: {
-                "Accept": "application/json",
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                image: base64data,
-                name: $txtname.value
-            })
-        })
-        .then(response => response.json())
-        .then(result => {
-            console.log("result:", result)
-            $file.value = ""
-            $image.src = "/" + result.file
-            $p.innerText = $image.src
-            hide([$txtname, $btnreset, $btnupload])
-            toast(result.message)
-        })
-    }
 })//btn-upload.on-click
 
 </script>
