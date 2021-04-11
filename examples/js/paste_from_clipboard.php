@@ -16,6 +16,7 @@ if($json = file_get_contents("php://input"))
     $strbase64 = base64_decode($parts[1]);
 
     $uuid = uniqid();
+    if($name = trim($post["name"])) $uuid = $name;
     $pathfile = "upload/$uuid.png";
     file_put_contents($pathfile, $strbase64);
 
@@ -39,7 +40,9 @@ if($json = file_get_contents("php://input"))
     <h4>Paste anywhere</h4>
     <div class="row">
         <div class="col-sm-4">
-            <input type="file" id="file-upload" class="invisible">
+            <input type="text" id="txt-name" class="form-control invisible" placeholder="Image name" />
+        </div>
+        <div class="col-sm-4">
             <button type="button" id="btn-upload" class="btn btn-success invisible">Upload</button>
         </div>
         <div class="col-sm-4">
@@ -48,6 +51,7 @@ if($json = file_get_contents("php://input"))
     </div>
     <div class="row">
         <div class="col-sm-12">
+            <input type="file" id="file-upload" class="invisible" />
             <p id="p-pasted" class="badge overflow-wrap p-1 font-monospace text-dark bg-info invisible" style="width: 75%"></p>
             <img id="img-pasted" src="#" class="img-fluid border border-info border-3 invisible" />
         </div>
@@ -55,6 +59,8 @@ if($json = file_get_contents("php://input"))
 </div>
 <script type="module">
 const POST_URL = "/index.php?f=paste_from_clipboard&nohome=1"
+
+const $txtname = document.getElementById("txt-name")
 const $btnreset = document.getElementById("btn-reset")
 const $btnupload = document.getElementById("btn-upload")
 const $file = document.getElementById("file-upload")
@@ -80,13 +86,15 @@ window.addEventListener("paste", e => {
     $file.files = files
     const url = URL.createObjectURL(files[0])
     $p.innerText = url
-    show([$p])
+    show([$p, $btnupload, $btnreset, $txtname])
     load_image(url)
+    $txtname.focus()
 });//window.on-paste
 
 $btnreset.addEventListener("click", e => {
     $file.value = ""
-    hide([$btnupload, $btnreset, $p, $image])
+    $txtname.value = ""
+    hide([$btnupload, $btnreset, $p, $image, $txtname])
 })
 
 $btnupload.addEventListener("click", e => {
@@ -108,7 +116,8 @@ $btnupload.addEventListener("click", e => {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                image: base64data
+                image: base64data,
+                name: $txtname.value
             })
         })
         .then(response => response.json())
@@ -117,6 +126,7 @@ $btnupload.addEventListener("click", e => {
             $file.value = ""
             $image.src = "/" + result.file
             $p.innerText = $image.src
+            hide([$txtname, $btnreset, $btnupload])
             alert(result.message)
         })
     }
