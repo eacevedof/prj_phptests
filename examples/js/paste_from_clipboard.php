@@ -46,9 +46,11 @@ if($json = file_get_contents("php://input"))
             <button type="button" id="btn-reset" class="btn btn-primary invisible">Clear</button>
         </div>
     </div>
-    <div class="row p-2">
-        <p id="p-pasted" class="badge text-dark p-1 font-monospace fs-4 bg-info invisible"></p>
-        <img id="img-pasted" src="#" class="img-fluid invisible" />
+    <div class="row">
+        <div class="col-sm-12">
+            <p id="p-pasted" class="badge overflow-wrap p-1 font-monospace bg-info invisible" style="width: 75%"></p>
+            <img id="img-pasted" src="#" class="img-fluid border border-info border-3 invisible" />
+        </div>
     </div>
 </div>
 <script type="module">
