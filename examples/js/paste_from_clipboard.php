@@ -48,7 +48,7 @@ if($json = file_get_contents("php://input"))
     </div>
     <div class="row">
         <div class="col-sm-12">
-            <p id="p-pasted" class="badge overflow-wrap p-1 font-monospace bg-info invisible" style="width: 75%"></p>
+            <p id="p-pasted" class="badge overflow-wrap p-1 font-monospace text-dark bg-info invisible" style="width: 75%"></p>
             <img id="img-pasted" src="#" class="img-fluid border border-info border-3 invisible" />
         </div>
     </div>
@@ -78,17 +78,10 @@ window.addEventListener("paste", e => {
     if (!files) return
 
     $file.files = files
-    const objfile = files[0]
-    $p.innerText = objfile
+    const url = URL.createObjectURL(files[0])
+    $p.innerText = url
     show([$p])
-    console.log("window.on-paste.objfile", objfile)
-    const reader = new FileReader()
-    reader.onload = function (e) {
-        const blob = reader.result
-        console.log("window.on-paste.reader.onload.url", blob)
-        load_image(blob)
-    }
-    reader.readAsDataURL(objfile)
+    load_image(url)
 });//window.on-paste
 
 $btnreset.addEventListener("click", e => {
