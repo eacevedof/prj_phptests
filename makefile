@@ -1,9 +1,16 @@
 remlogs: ## remove logs
-	rm -fr ./logs/custom/*
-	rm -fr ./logs/debug/*
+	rm -fr ./logs/custom/*.log
+	rm -fr ./logs/debug/*.log
+	rm -fr ./logs/emails/*.log
+	rm -fr ./logs/errors/*.log
+	rm -fr ./logs/queries/*.log
+	rm -fr ./logs/queries/delete/*.log
+	rm -fr ./logs/queries/insert/*.log
+	rm -fr ./logs/queries/select/*.log
+	rm -fr ./logs/queries/update/*.log
+	rm -fr ./logs/session/*.log
+	rm -fr ./logs/shellscripts/*.log
 
-compile: ## npm run dev
-	npm run dev
 
-dumpdb: ## dumpdb
-	py.sh dump eduardoaf
+server: ## dumpdb
+	php -S localhost:1024 -t ./public
