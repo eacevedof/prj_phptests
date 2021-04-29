@@ -10,5 +10,6 @@ vendor/theframework/components/apple/*.pem
 !/vendor/theframework/
 !/vendor/solid/
 !/vendor/DesignPatterns/
+!/vendor/Rulez
 /examples/mixed/tmp/
 .idea
