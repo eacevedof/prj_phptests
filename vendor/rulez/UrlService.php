@@ -7,8 +7,8 @@ use Ipblocker\Components\ArrayComponent;
 
 class UrlService implements IRulez
 {
-    private string $requrl;
-    private array $arrulez;
+    private $requrl;
+    private $arrulez;
 
     public function __construct(string $requrl, array $arrulez)
     {
