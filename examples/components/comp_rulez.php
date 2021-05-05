@@ -10,7 +10,9 @@ include(TFW_PATHROOTDS."vendor/rulez/bootstrap.php");
 use Ipblocker\Services\Rulez\UrlService;
 $service = new UrlService(
     $_SERVER["REQUEST_URI"],
-    $_GET,
-    $_POST,
+    [
+        "like_left" => [],
+        "like_right"
+    ]
 );
 $service->get();
