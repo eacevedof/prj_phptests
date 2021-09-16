@@ -13,14 +13,16 @@
 </head>
 <body>
 <!-- toast -->
-<div class="notification toast-raw top-right" style="background-color: rgb(92, 184, 92);">
-    <button>X</button>
-    <div class="notification-image">
-        <img src="/images/toast_raw/check.d639b7bb.svg" alt="">
-    </div>
-    <div>
-        <p class="notification-title">Success</p>
-        <p class="notification-message">This is a success toast component</p>
+<div class="notification-container top-right">
+    <div class="notification toast-raw top-right" style="background-color: rgb(92, 184, 92);">
+        <button>X</button>
+        <div class="notification-image">
+            <img src="/images/toast_raw/check.svg" alt="">
+        </div>
+        <div>
+            <p class="notification-title">Success</p>
+            <p class="notification-message">This is a success toast component</p>
+        </div>
     </div>
 </div>
 
@@ -28,8 +30,11 @@
 
 </script>
 <style>
-.debug {
-    /*border: 1px solid red;*/
+@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+
+body {
+    margin: 0;
+    font-family: 'Roboto', 'sans-serif';
 }
 
 .notification-container {
