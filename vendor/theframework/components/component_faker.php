@@ -24,7 +24,10 @@ class ComponentFaker
 
         $all = [];
         for($i=0; $i<$minl; $i++)
-            $all[] = rand(0,9);
+            if($i!==0)
+                $all[] = rand(0,9);
+            else
+                $all[] = rand(1,9);
 
         if(rand(0,1))
             (int) implode("", $all);
