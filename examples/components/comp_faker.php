@@ -12,7 +12,7 @@ $component = new ComponentFaker();
 $data["fake_int"] = $component->get_int();
 $data["fake_int_max_4"] = $component->get_int(4);
 $data["fake_int_max_15"] = $component->get_int(15);
-$data["fake_int_min_3_max_5"] = $component->get_int(4,3);
+$data["fake_int_min_3_max_5"] = $component->get_int(5,3);
 
 $data["fake_float"] = $component->get_float();
 $data["fake_date"] = $component->get_date();
