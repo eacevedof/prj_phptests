@@ -86,6 +86,20 @@ class ComponentFaker
         return array_rand($chars,1);
     }
     
-    
+    public function get_time(): string
+    {
+        $all = [];
+        $int = $this->get_rndint(0,23);
+        $all["hh"] = sprintf("%'.02d\n", $int);
+
+        $int = $this->get_rndint(0,60);
+        $all["mm"] = sprintf("%'.02d\n", $int);
+
+        $int = $this->get_rndint(0,60);
+        $all["ss"] = sprintf("%'.02d\n", $int);
+        
+        return implode(":", $all);
+    }
+
 
 }//ComponentFaker
