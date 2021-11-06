@@ -20,7 +20,7 @@ $data["fake_time"] = $component->get_time();
 $data["fake_date_time"] = $component->get_datetime();
 $data["hash"] = $component->get_hash();
 $data["word"] = $component->get_word();
-//$data["paragraph"] = $component->get_paragraph();
+$data["paragraph"] = $component->get_paragraph();
 
 pr($data,"faker result");
 
