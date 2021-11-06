@@ -136,7 +136,7 @@ class ComponentFaker
         return implode(" ", $all);
     }
 
-    public function get_hash(int $len=10): string
+    public function get_hash(int $len=16): string
     {
         $timestamp = time();
         $hash = md5($timestamp);
