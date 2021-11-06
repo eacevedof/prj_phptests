@@ -55,6 +55,37 @@ class ComponentFaker
         
         return (float) implode("",$float);
     }
+
+    public function get_vouwel(): string
+    {
+        $chars = [
+            "a","e","i","o","u","A","E","I","O","U"
+        ];
+
+        return array_rand($chars,1);        
+    }
+    
+    public function get_consonant(): string
+    {
+        $chars = [
+            "b","c","d","f","g","h","j","k","l","m","n","p","q","r","s","t","v","w","x","y","z",
+            "B","C","D","F","G","H","J","K","L","M","N","P","Q","R","S","T","V","W","X","Y","Z",
+        ];
+
+        return array_rand($chars,1);        
+    }
+    
+    public function get_letter(): string
+    {
+        $chars = [
+            "b","c","d","f","g","h","j","k","l","m","n","p","q","r","s","t","v","w","x","y","z",
+            "B","C","D","F","G","H","J","K","L","M","N","P","Q","R","S","T","V","W","X","Y","Z",
+            "a","e","i","o","u","A","E","I","O","U"
+        ];
+
+        return array_rand($chars,1);
+    }
+    
     
 
 }//ComponentFaker
