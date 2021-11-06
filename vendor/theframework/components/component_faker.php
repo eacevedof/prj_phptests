@@ -161,5 +161,13 @@ class ComponentFaker
         return implode("",$word);
     }
 
-    
+    public function get_paragraph(int $words=20, int $maxwlen=10): string
+    {
+        $words=[];
+        for ($i=0; $i<$words; $i++) {
+            $ilen = $this->get_rndint(1, $maxwlen);
+            $words[] = $this->get_word($ilen);
+        }
+        return implode(" ",$words);
+    }
 }//ComponentFaker
