@@ -101,5 +101,24 @@ class ComponentFaker
         return implode(":", $all);
     }
 
+    public function get_date(string $mindate="1900-01-01", string $maxdate="2021-01-01"): string
+    {
+        $mindate = explode("-",$mindate);
+        if(!trim($mindate)) $mindate = "1900-01-01";
+        if(!trim($maxdate)) $maxdate = date("Y-m-d");
+        
+        $all = [];
+        $int = $this->get_rndint(0,23);
+        $all["hh"] = sprintf("%'.02d\n", $int);
+
+        $int = $this->get_rndint(0,60);
+        $all["mm"] = sprintf("%'.02d\n", $int);
+
+        $int = $this->get_rndint(0,60);
+        $all["ss"] = sprintf("%'.02d\n", $int);
+
+        return implode(":", $all);
+    }
+
 
 }//ComponentFaker
