@@ -43,7 +43,7 @@ class ComponentFaker
         return rand($min, $max);
     }
     
-    public function get_float(int $intl=2, int $decl=3): float
+    public function get_float(int $intl=3, int $decl=2): float
     {
         $float = [];
         for($i=0; $i<$intl; $i++)
@@ -134,6 +134,13 @@ class ComponentFaker
         $all["date"] = $this->get_date();
         $all["time"] = $this->get_time();
         return implode(" ", $all);
+    }
+
+    public function get_hash(int $len=10): string
+    {
+        $timestamp = time();
+        $hash = md5($timestamp);
+        return substr($hash,0, $len);
     }
 
 }//ComponentFaker
