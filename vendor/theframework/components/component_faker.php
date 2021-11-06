@@ -171,4 +171,14 @@ class ComponentFaker
         }
         return implode(" ",$paragraph);
     }
+    
+    public function get_email(): string
+    {
+        $email["user"] = strtolower($this->get_word(5));
+        $email["at"] = "@";
+        $email["domain"] = strtolower($this->get_word(5));
+        $email["dot"] = ".";
+        $email["extension"] = strtolower($this->get_word(3));
+        return implode("", $email);
+    }
 }//ComponentFaker

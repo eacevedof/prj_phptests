@@ -21,6 +21,7 @@ $data["fake_date_time"] = $component->get_datetime();
 $data["hash"] = $component->get_hash();
 $data["word"] = $component->get_word();
 $data["paragraph"] = $component->get_paragraph();
+$data["email"] = $component->get_email();
 
 pr($data,"faker result");
 
