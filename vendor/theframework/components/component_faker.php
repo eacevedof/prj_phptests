@@ -143,4 +143,23 @@ class ComponentFaker
         return substr($hash,0, $len);
     }
 
+    public function get_word(int $len=10): string
+    {
+        $options = ["c","v"];
+        $start = $this->_rand_value($options);
+        $word = [];
+        for($i=0; $i<$len; $i++) {
+            if($start==="c") {
+                $word[] = $this->get_consonant();
+                $start = "v";
+            }
+            else {
+                $word[] = $this->get_vouwel();
+                $start = "c";
+            }
+        }
+        return implode("",$word);
+    }
+
+    
 }//ComponentFaker

@@ -19,6 +19,7 @@ $data["fake_date"] = $component->get_date();
 $data["fake_time"] = $component->get_time();
 $data["fake_date_time"] = $component->get_datetime();
 $data["hash"] = $component->get_hash();
+$data["word"] = $component->get_word();
 
 pr($data,"faker result");
 
