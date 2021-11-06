@@ -15,22 +15,32 @@ class ComponentFaker
     /*
      * types: int, date, float, string
      * */
-    public function get_int(?int $max=null, ?int $min=null): int
+    public function get_int(?int $maxl=null, ?int $minl=null): int
     {
-        if(!$min) $min = 1;
-        if(!$max) $max = 10;
+        if(!$minl) $minl = 1;
+        if(!$maxl) $maxl = 10;
 
-        if($max>$min) return 1;
+        if($maxl<$minl) return 1;
 
         $all = [];
-        for($i=0; $i<$min; $i++)
+        for($i=0; $i<$minl; $i++)
             $all[] = rand(0,9);
 
-        $missing = $max-count($all);
+        $missing = $maxl-count($all);
         for($i=0; $i<$missing; $i++)
             $all[] = rand(0,9);
 
-        return implode("", $all);
+        return (int) implode("", $all);
+    }
+
+    public function get_rndint(int $min, int $max): int
+    {
+        if($max<$min) {
+            $min = 0;
+            $max = 9;
+        }
+
+        return rand($min, $max);
     }
 
 }//ComponentFaker
