@@ -56,13 +56,19 @@ class ComponentFaker
         return (float) implode("",$float);
     }
 
+    private function _rand_value(array $array)
+    {
+        $i = array_rand($array,1);
+        return $array[$i];
+    }
+    
     public function get_vouwel(): string
     {
         $chars = [
             "a","e","i","o","u","A","E","I","O","U"
         ];
 
-        return array_rand($chars,1);        
+        return $this->_rand_value($chars);
     }
     
     public function get_consonant(): string
@@ -72,7 +78,7 @@ class ComponentFaker
             "B","C","D","F","G","H","J","K","L","M","N","P","Q","R","S","T","V","W","X","Y","Z",
         ];
 
-        return array_rand($chars,1);        
+        return $this->_rand_value($chars);
     }
     
     public function get_letter(): string
@@ -83,7 +89,7 @@ class ComponentFaker
             "a","e","i","o","u","A","E","I","O","U"
         ];
 
-        return array_rand($chars,1);
+        return $this->_rand_value($chars);
     }
     
     public function get_time(): string
@@ -119,8 +125,8 @@ class ComponentFaker
             $mindate = date("Y-m-d", strtotime("$mindate 00:00:00") + 86400);
             $dates[] = $mindate;
         }
-
-        return array_rand($dates,1);
+        
+        return $this->_rand_value($dates);
     }
 
     public function get_datetime(string $mindate="1900-01-01", string $maxdate="2021-01-01"): string
