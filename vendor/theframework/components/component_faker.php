@@ -12,9 +12,6 @@ namespace TheFramework\Components;
 
 class ComponentFaker 
 {
-    /*
-     * types: int, date, float, string
-     * */
     public function get_int(?int $maxl=null, ?int $minl=null): int
     {
         if(!$minl) $minl = 1;
