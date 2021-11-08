@@ -16,9 +16,14 @@
 <div>
     <button onclick="open_modal()">Open modal</button>
     <div id="modal" class="modal">
-        <div id="modal-dialog" class="modal-dialog">
-            <h1>Modal title</h1>
-            <button onclick="close_modal()">x</button>
+        <div id="modal-dialog" class="modal-dialog modal-grid">
+            <header class="area-header">
+                <h1>Modal title</h1>
+                <button onclick="close_modal()">x</button>
+            </header>
+            <div class="area-body">
+
+            </div>
         </div>
     </div>
 </div>
@@ -107,6 +112,20 @@ function close_modal()
   height: 400px;
   border-radius: 1%;
 }
+
+.modal-grid {
+  display: grid;
+  grid-template-areas:
+    'area-header'
+    'area-body'
+}
+.modal-header {
+  grid-area: area-header;
+}
+.modal-body {
+  grid-area: area-body;
+}
+
 </style>
 </body>
 </html>
