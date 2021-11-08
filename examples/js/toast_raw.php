@@ -168,7 +168,7 @@ body {
     to {
         transform: translateX(0);
     }
-    }
+}
 </style>
 </body>
 </html>
