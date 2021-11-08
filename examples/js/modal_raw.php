@@ -45,7 +45,8 @@ function open_modal()
 function close_modal()
 {
   $modal.classList.add("modal-close")
-  $modal.classList.remove("modal-open")
+  //$modal.classList.add("modal")
+  //$modal.classList.remove("modal-open")
 }
 </script>
 <style>
@@ -71,6 +72,7 @@ function close_modal()
   display: grid;
   animation: anim-show .2s;
 }
+
 @keyframes anim-show {
   from {
     transform: scale(0);
@@ -83,7 +85,6 @@ function close_modal()
 }
 
 .modal-close {
-  display: none;
   animation: anim-hide .25s;
 }
 
