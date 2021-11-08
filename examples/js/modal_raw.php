@@ -68,12 +68,26 @@ function close_modal()
 
 .modal-open {
   display: grid;
+  animation: anim-show .2s;
 }
+@keyframes anim-show {
+  from {
+    transform: scale(0);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+
 .modal-dialog {
   background: #ddd;
   padding: 10px;
-  width: 300px;
+  width: 350px;
   height: 400px;
+  border-radius: 5%;
 }
 
 
