@@ -81,6 +81,16 @@ function close_modal()
   }
 }
 
+@keyframes anim-hide {
+  from {
+    transform: scale(1);
+    opacity: 1;
+  }
+  to {
+    transform: scale(0);
+    opacity: 0;
+  }
+}
 
 .modal-dialog {
   background: #ddd;
