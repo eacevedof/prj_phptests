@@ -14,20 +14,31 @@
 <body>
 <!-- modal -->
 <div>
-    <button onclick="open_modal()"></button>
-    <div class="modal">
+    <button onclick="open_modal()">Open modal</button>
+    <div id="modal" class="modal">
+        :)
     </div>
 </div>
 
 
-<script type="module">
+<script>
+const $modal = document.getElementById("modal")
 function open_modal()
 {
-  alert("open modal")
+  //$modal.classList.remove("modal")
+  $modal.classList.add("modal-open")
 }
 </script>
 <style>
 @import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+.modal {
+  background-color: tomato;
+  display: none;
+}
+
+.modal-open {
+  display: flex;
+}
 
 </style>
 </body>
