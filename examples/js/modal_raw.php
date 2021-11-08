@@ -28,7 +28,6 @@
     </div>
 </div>
 
-
 <script>
 const $modal = document.getElementById("modal")
 const $modalDialog = document.getElementById("modal-dialog")
