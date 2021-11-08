@@ -16,7 +16,10 @@
 <div>
     <button onclick="open_modal()">Open modal</button>
     <div id="modal" class="modal">
-        :)
+        <div class="modal-dialog">
+            <h1>Modal title</h1>
+            <button onclick="close_modal()">x</button>
+        </div>
     </div>
 </div>
 
@@ -37,13 +40,28 @@ function close_modal()
 <style>
 @import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
 .modal {
-  background-color: tomato;
+  background-color: rgb(0,0,0, .75);
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
   display: none;
+  justify-content: center;
+  align-items: center;
 }
 
 .modal-open {
   display: flex;
 }
+.modal-dialog {
+  background: #ddd;
+  padding: 10px;
+  width: 300px;
+  height: 400px;
+}
+
 
 </style>
 </body>
