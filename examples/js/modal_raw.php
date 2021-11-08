@@ -107,8 +107,6 @@ function close_modal()
   height: 400px;
   border-radius: 1%;
 }
-
-
 </style>
 </body>
 </html>
