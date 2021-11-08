@@ -16,7 +16,7 @@
 <div>
     <button onclick="open_modal()">Open modal</button>
     <div id="modal" class="modal">
-        <div class="modal-dialog">
+        <div id="modal-dialog" class="modal-dialog">
             <h1>Modal title</h1>
             <button onclick="close_modal()">x</button>
         </div>
@@ -26,6 +26,16 @@
 
 <script>
 const $modal = document.getElementById("modal")
+const $modalDialog = document.getElementById("modal-dialog")
+
+$modal.addEventListener("click", function (){
+  $modal.classList.remove("modal-open")
+})
+
+$modalDialog.addEventListener("click", function (e){
+  e.stopPropagation()
+})
+
 function open_modal()
 {
   //$modal.classList.remove("modal")
@@ -48,12 +58,16 @@ function close_modal()
   left: 0;
   z-index: 9999;
   display: none;
+  /*
+  si bien con estos estilos se centra verticalmente usando flex, al hacer mas pequeña (en altura) la ventana
+  del navegador se mantiene centrado pero se pierde la parte superior e inferior por eso mejor se usa grid
+    */
   justify-content: center;
   align-items: center;
 }
 
 .modal-open {
-  display: flex;
+  display: grid;
 }
 .modal-dialog {
   background: #ddd;
