@@ -91,6 +91,7 @@ function close_modal()
 }
 
 .modal-close {
+  z-index: -1;
   opacity: 0; /*esto permite que despues de la animacion se quede oculto*/
   animation: anim-hide .25s;
 }
@@ -126,7 +127,11 @@ function close_modal()
   justify-content: space-between;
 }
 .area-header button {
-
+  background: #0d6efd;
+  color: white;
+  width: 2em;
+  height: 2em;
+  border-radius: 1%;
 }
 
 .area-body {
