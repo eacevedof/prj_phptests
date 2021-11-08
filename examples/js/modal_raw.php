@@ -38,12 +38,13 @@ $modalDialog.addEventListener("click", function (e){
 
 function open_modal()
 {
-  //$modal.classList.remove("modal")
+  $modal.classList.remove("modal-close")
   $modal.classList.add("modal-open")
 }
 
 function close_modal()
 {
+  $modal.classList.add("modal-close")
   $modal.classList.remove("modal-open")
 }
 </script>
@@ -81,6 +82,11 @@ function close_modal()
   }
 }
 
+.modal-close {
+  display: none;
+  animation: anim-hide .25s;
+}
+
 @keyframes anim-hide {
   from {
     transform: scale(1);
@@ -97,7 +103,7 @@ function close_modal()
   padding: 10px;
   width: 350px;
   height: 400px;
-  border-radius: 5%;
+  border-radius: 1%;
 }
 
 
