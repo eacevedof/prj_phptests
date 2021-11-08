@@ -28,6 +28,11 @@ function open_modal()
   //$modal.classList.remove("modal")
   $modal.classList.add("modal-open")
 }
+
+function close_modal()
+{
+  $modal.classList.remove("modal-open")
+}
 </script>
 <style>
 @import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
