@@ -57,6 +57,7 @@ function close_modal()
 <style>
 @import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
 .modal {
+  font-family: 'Roboto', 'sans-serif';
   background-color: rgb(0,0,0, .75);
   width: 100vw;
   height: 100vh;
@@ -119,10 +120,16 @@ function close_modal()
     'area-header'
     'area-body'
 }
-.modal-header {
+.area-header {
   grid-area: area-header;
+  display: flex;
+  justify-content: space-between;
 }
-.modal-body {
+.area-header button {
+
+}
+
+.area-body {
   grid-area: area-body;
 }
 
