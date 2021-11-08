@@ -13,12 +13,22 @@
 </head>
 <body>
 <!-- modal -->
+<div>
+    <button onclick="open_modal()"></button>
+    <div class="modal">
+    </div>
+</div>
 
 
 <script type="module">
+function open_modal()
+{
+  alert("open modal")
+}
 </script>
 <style>
 @import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+
 </style>
 </body>
 </html>
