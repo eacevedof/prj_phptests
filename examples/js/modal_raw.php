@@ -234,18 +234,21 @@ function MyModal(idModal, idOpener=null) {
   }
 
   this.show = function (fnBefore, fnAfter) {
-    let r = true
-    if(fnBefore) r = fnBefore()
-    if(!r) return this;
+    if (fnBefore) {
+      const abort = fnBefore()
+      if (abort) return this
+    }
+
     show()
     if(fnAfter) fnAfter()
     return this
   }
 
   this.hide = function (fnBefore, fnAfter) {
-    let r = true
-    if(fnBefore) r = fnBefore()
-    if(!r) return this;
+    if (fnBefore) {
+      const abort = fnBefore()
+      if (abort) return this
+    }
     hide()
     if(fnAfter) fnAfter()
     return this
