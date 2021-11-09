@@ -19,7 +19,7 @@
     <div id="modal" class="modal-wrapper">
         <div class="modal-dialog modal-dialog-grid" role="modal-dialog">
             <header class="area-header">
-                <h2>Modal title</h2>
+                <h2 role="title">Modal title</h2>
                 <button type="button" role="btn-close">x</button>
             </header>
             <div class="area-body" role="body">
@@ -37,7 +37,7 @@
         <div class="modal-dialog modal-dialog-grid" role="modal-dialog">
             <header class="area-header">
                 <h2>Modal Object</h2>
-                <button type="button" role="btn-close-object">x</button>
+                <button type="button" role="btn-close">x</button>
             </header>
             <div class="area-body" role="body">
                 <p>
@@ -73,6 +73,11 @@
 
     if(!$modalWrapper) return console.log("no modal found!")
 
+    const $dialog = $modalWrapper.querySelector(":scope > [role='modal-dialog']")
+    const $title = $dialog.querySelector(":scope > header > [role='title']")
+    const $body = $dialog.querySelector(":scope > [role='body']")
+
+
     const $opener = idOpener ? document.getElementById(idOpener) : null
     if ($opener)
       $opener.addEventListener("click", () => {
@@ -80,14 +85,15 @@
         $modalWrapper.classList.add("modal-show")
       })
 
-
-    const $btnClose = $modalWrapper.querySelector(":scope > [role='btn-close']")
+    const $btnClose = $dialog.querySelector(":scope > header > [role='btn-close']")
     if ($btnClose) {
       $btnClose.addEventListener("click", () => $modalWrapper.classList.add("modal-hide"))
     }
 
     this.show = function (fnBefore, fnAfter) {
-      if(fnBefore) fnBefore()
+      let r = true
+      if(fnBefore) r = fnBefore()
+      if(!r) return this;
       $modalWrapper.classList.remove("modal-hide")
       $modalWrapper.classList.add("modal-show")
       if(fnAfter) fnAfter()
@@ -95,7 +101,9 @@
     }
 
     this.hide = function (fnBefore, fnAfter) {
-      if(fnBefore) fnBefore()
+      let r = true
+      if(fnBefore) r = fnBefore()
+      if(!r) return this;
       $modalWrapper.classList.add("modal-hide")
       if(fnAfter) fnAfter()
       return this
@@ -103,21 +111,32 @@
 
     this.set_body = function (html) {
       if(!html) return this
-      const $body = $modalWrapper.querySelector(":scope > [role='body']")
       $body.innerHTML = html
+      return this
+    }
+
+    this.set_title = function (html) {
+      if(!html) return this
+      $title.innerHTML = html
       return this
     }
 
     this.destroy = function () {
       if($btnOpen) $btnOpen.removeEventListener("click")
       if($btnClose) $btnClose.removeEventListener("click")
-      if($modalWrapper) $modalWrapper.querySelector(":scope > [role='body']")?.innerHTML = ""
+      if($title) $title.innerHTML = ""
+      if($body) $body.innerHTML = ""
     }
 
   }//MyModal
 
   const mymodal = new MyModal("modal-object", "btn-open-object")
-  mymodal.set_body("<p>Hola mundo</p>").show()
+  mymodal
+    .set_title("<span style='border:1px solid red'>Some Title</span>")
+    .set_body("<p>Hola mundo</p>")
+    .show()
+    .destroy()
+
 })()
 </script>
 <style>
