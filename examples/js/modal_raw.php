@@ -134,7 +134,7 @@
   mymodal
     .set_title("<span>Some Title</span>")
     .set_body("<p>Un ejemplo en el cuerpo</p>")
-    //.show()
+    .show()
     //.destroy()
 
 })()
