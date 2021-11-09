@@ -93,7 +93,6 @@
     $modalWrapper.addEventListener("click", hide)
     $dialog.addEventListener("click", e => e.stopPropagation())
 
-
     this.show = function (fnBefore, fnAfter) {
       let r = true
       if(fnBefore) r = fnBefore()
