@@ -16,13 +16,18 @@
 <div>
     <button onclick="open_modal()">Open modal</button>
     <div id="modal" class="modal">
-        <div id="modal-dialog" class="modal-dialog modal-grid">
+        <div id="modal-dialog" class="modal-dialog modal-dialog-grid">
             <header class="area-header">
                 <h2>Modal title</h2>
                 <button onclick="close_modal()">x</button>
             </header>
             <div class="area-body">
-
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris vulputate iaculis sagittis. Aliquam erat volutpat. Nunc mattis velit fringilla consectetur porta. Fusce pulvinar nisi vitae nisl vestibulum ornare. Fusce libero dolor, elementum vel dictum ac, rutrum et ipsum. In egestas vitae dolor et elementum. Vivamus mollis nulla at justo hendrerit, at mattis urna laoreet. In volutpat dui in scelerisque feugiat. Sed nisi odio, vestibulum quis purus sed, pretium molestie nisi. Praesent euismod massa mauris, sit amet vehicula erat lacinia sit amet. Donec eget ultrices felis. Maecenas eget augue tortor.
+                </p>
+                <p>
+                    Aenean laoreet tempor mauris non vulputate. Sed ut erat erat. Vestibulum dignissim enim sem, vel pharetra enim dignissim ut. Praesent ornare, ex vel aliquam facilisis, velit diam sagittis nulla, sed gravida velit erat sit amet dolor. Maecenas accumsan mauris felis. Praesent et dolor arcu. Aenean et ex vel mauris egestas imperdiet. Integer suscipit libero eget erat congue facilisis. Nam feugiat condimentum sem, at aliquam elit placerat at. Donec auctor nulla eget neque tempor pellentesque. Donec hendrerit rutrum ultricies. Curabitur laoreet leo eros, vitae rhoncus nisi hendrerit at. Sed blandit arcu eu tortor scelerisque aliquet.
+                </p>
             </div>
         </div>
     </div>
@@ -58,7 +63,13 @@ function close_modal()
   --bg-dialog: #fff;
 }
 
+.debug: {
+  border:1px dashed red;
+}
+
 .modal {
+  margin: 0;
+  padding: 0;
   font-family: "Roboto", "sans-serif";
   background-color: rgb(0,0,0, .75);
   width: 100vw;
@@ -113,11 +124,11 @@ function close_modal()
   background: #fff;
   padding: 10px;
   width: 350px;
-  height: 400px;
+  min-height: 400px;
   border-radius: 1%;
 }
 
-.modal-grid {
+.modal-dialog-grid {
   display: grid;
   grid-template-areas:
     "area-header"
@@ -140,7 +151,11 @@ function close_modal()
 }
 
 .area-body {
+  border: 1px solid red;
   grid-area: area-body;
+  margin: 0;
+  padding: 0;
+  overflow-y: scroll;
 }
 </style>
 </body>
