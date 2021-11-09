@@ -245,6 +245,7 @@ modal-dialog es la caja blanca donde va el contenido. El modal en sí.
   border-radius: 1%;
   border: 1px solid #86b7fe;
 }
+
 .area-header h2 {
   margin: 0;
   padding: 0;
