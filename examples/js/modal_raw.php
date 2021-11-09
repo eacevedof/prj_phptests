@@ -62,7 +62,7 @@ $btnClose.addEventListener("click", () => $modalWrapper.classList.add("modal-hid
 </script>
 
 <script type="module">
-  //MY MODAL
+//MY MODAL
 function MyModal(idModal, idOpener=null) {
 
   const $modal = document.getElementById(idModal)
@@ -277,15 +277,15 @@ dejo de ejemplo solo este pero habria que tratarlo para los otros bp
 }
 
 @media (max-width:767.98px){
-
+ /*to-do*/
 }
 
 @media (max-width:991.98px){
-
+  /*to-do*/
 }
 
 @media (max-width:1399.98px){
-
+  /*to-do*/
 }
 </style>
 </body>
