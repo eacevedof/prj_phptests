@@ -74,12 +74,12 @@
     if(!$modalWrapper) return console.log("no modal found!")
 
     const $opener = idOpener ? document.getElementById(idOpener) : null
-    if ($opener) {
+    if ($opener)
       $opener.addEventListener("click", () => {
         $modalWrapper.classList.remove("modal-hide")
         $modalWrapper.classList.add("modal-show")
       })
-    }
+
 
     const $btnClose = $modalWrapper.querySelector(":scope > [role='btn-close']")
     if ($btnClose) {
