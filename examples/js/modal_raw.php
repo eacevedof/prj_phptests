@@ -268,7 +268,7 @@ function MyModal(idModal, idOpener=null) {
   }
 
   (() => {
-    //configurlo los listeners
+    //configuro los listeners
     $modal.addEventListener("click", hide)
     if ($dialog) $dialog.addEventListener("click", e => e.stopPropagation())
     if ($opener) $opener.addEventListener("click", show)
