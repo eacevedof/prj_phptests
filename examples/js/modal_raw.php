@@ -176,7 +176,7 @@ es el div de fondo negro
   /*
   si bien con estos estilos se centra verticalmente usando flex, al hacer mas pequeña (en altura) la ventana
   del navegador se mantiene centrado pero se pierde la parte superior e inferior por eso mejor se usa grid
-    */
+   */
   justify-content: center;
   align-items: center;
 }
