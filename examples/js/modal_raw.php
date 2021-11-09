@@ -263,7 +263,7 @@ function MyModal(idModal, idOpener=null) {
     return this
   }
 
-  this.destroy = function () {
+  this.destroy = () => {
     if($modal) $modal.removeEventListener("click", hide)
     if($btnOpen) $btnOpen.removeEventListener("click", show)
     if($btnClose) $btnClose.removeEventListener("click", hide)
