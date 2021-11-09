@@ -77,18 +77,23 @@
     const $title = $dialog.querySelector(":scope > header > [role='title']")
     const $body = $dialog.querySelector(":scope > [role='body']")
 
+    const show = () => {
+      $modalWrapper.classList.remove("modal-hide")
+      $modalWrapper.classList.add("modal-show")
+    }
+
+    const hide = () => $modalWrapper.classList.remove("modal-show")
 
     const $opener = idOpener ? document.getElementById(idOpener) : null
-    if ($opener)
-      $opener.addEventListener("click", () => {
-        $modalWrapper.classList.remove("modal-hide")
-        $modalWrapper.classList.add("modal-show")
-      })
+    if ($opener) $opener.addEventListener("click", show)
 
     const $btnClose = $dialog.querySelector(":scope > header > [role='btn-close']")
     if ($btnClose) {
       $btnClose.addEventListener("click", () => $modalWrapper.classList.add("modal-hide"))
     }
+
+    $modalWrapper.addEventListener("click", () => $modalWrapper.classList.add("modal-hide"))
+    $dialog.addEventListener("click", e => e.stopPropagation())
 
     this.show = function (fnBefore, fnAfter) {
       let r = true
@@ -110,13 +115,13 @@
     }
 
     this.set_body = function (html) {
-      if(!html) return this
+      if(!html || !$body) return this
       $body.innerHTML = html
       return this
     }
 
     this.set_title = function (html) {
-      if(!html) return this
+      if(!html || !$title) return this
       $title.innerHTML = html
       return this
     }
