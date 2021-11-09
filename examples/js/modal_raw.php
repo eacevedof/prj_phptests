@@ -15,7 +15,7 @@
 <!-- modal -->
 <main>
     <button type="button" id="btn-open" onclick="open_modal()">Open modal</button>
-    <div id="modal" class="modal">
+    <div id="modal" class="modal-wrapper">
         <div id="modal-dialog" class="modal-dialog modal-dialog-grid">
             <header class="area-header">
                 <h2>Modal title</h2>
@@ -55,17 +55,22 @@ $btnClose.addEventListener("click", () => $modal.classList.add("modal-hide"))
 }
 
 body {
+  font-family: "Roboto", "sans-serif";
   /*para tener una referencia sobre rem*/
   font-size: 16px;
 }
 
-.debug: {
+.debug {
+  /*
+  usando la consola para agregar un borde a los elementos y ver sus limites
+  */
   border:1px dashed red;
 }
 
-.modal {
-
-  font-family: "Roboto", "sans-serif";
+/*
+es el div de fondo negro
+*/
+.modal-wrapper {
   background-color: rgb(0,0,0, .75);
   width: 100vw;
   height: 100vh;
@@ -99,7 +104,7 @@ body {
 }
 
 .modal-hide {
-  z-index: -1;
+  z-index: -1; /*hace que no se quede una capa sobre el boton de apertura que no permite hacer click*/
   opacity: 0; /*esto permite que despues de la animacion se quede oculto*/
   animation: anim-hide .25s;
 }
@@ -115,6 +120,9 @@ body {
   }
 }
 
+/*
+modal-dialog es la caja blanca donde va el contenido. El modal en sí.
+*/
 .modal-dialog {
   background: #fff;
   padding: 10px;
@@ -151,7 +159,6 @@ body {
 }
 
 .area-body {
-  /*border: 1px solid red;*/
   grid-area: area-body;
   margin: 0;
   padding: 0;
@@ -166,6 +173,7 @@ body {
 
 /*
 breakpoints de referencia que usa bootstrap
+dejo de ejemplo solo este pero habria que tratarlo para los otros bp
 */
 @media (max-width:575.98px){
   body {
