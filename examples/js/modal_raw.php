@@ -190,19 +190,19 @@
 </main>
 <script type="module">
 const $btnOpen = document.getElementById("btn-open")
-const $modalWrapper = document.getElementById("modal")
-const $modalDialog = $modalWrapper.querySelector(":scope > [role='modal-dialog']")
+const $modal = document.getElementById("modal")
+const $modalDialog = $modal.querySelector(":scope > [role='modal-dialog']")
 const $btnClose = $modalDialog.querySelector(":scope > header > [role='btn-close']")
 
 $btnOpen.addEventListener("click", () => {
-  $modalWrapper.classList.remove("modal-hide")
-  $modalWrapper.classList.add("modal-show")
+  $modal.classList.remove("modal-hide")
+  $modal.classList.add("modal-show")
 })
 
-$modalWrapper.addEventListener("click", () => $modalWrapper.classList.add("modal-hide"))
+$modal.addEventListener("click", () => $modal.classList.add("modal-hide"))
 //si hacemos click en la zona blanca evitamos que llegue el evento al modalWrapper y se cierre el modal
 $modalDialog.addEventListener("click", e => e.stopPropagation())
-$btnClose.addEventListener("click", () => $modalWrapper.classList.add("modal-hide"))
+$btnClose.addEventListener("click", () => $modal.classList.add("modal-hide"))
 </script>
 
 <script type="module">
