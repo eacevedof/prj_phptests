@@ -126,6 +126,7 @@
       if($body) $body.innerHTML = ""
     }
 
+    return add_listeners()
   }//MyModal
 
   const mymodal = new MyModal("modal-object", "btn-open-object")
