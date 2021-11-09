@@ -95,8 +95,8 @@
     display: grid;
     grid-template-rows: 3.44em calc(90vh - 3.44em);
     grid-template-areas:
-"area-header"
-"area-body"
+    "area-header"
+    "area-body"
   }
   .area-header {
     grid-area: area-header;
