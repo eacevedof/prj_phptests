@@ -46,22 +46,22 @@
     </div>
 </main>
 <script type="module">
-(function() {
-  const $btnOpen = document.getElementById("btn-open")
-  $btnOpen.addEventListener("click", () => {
-    $modalWrapper.classList.remove("modal-hide")
-    $modalWrapper.classList.add("modal-show")
-  })
-  const $modalWrapper = document.getElementById("modal")
-  const $modalDialog = document.querySelector("[role='modal-dialog']")
+const $btnOpen = document.getElementById("btn-open")
+const $modalWrapper = document.getElementById("modal")
+const $modalDialog = document.querySelector("[role='modal-dialog']")
+const $btnClose = document.querySelector("[role='btn-close']")
 
-  $modalWrapper.addEventListener("click", () => $modalWrapper.classList.add("modal-hide"))
-  //si hacemos click en la zona blanca evitamos que llegue el evento al modalWrapper y se cierre el modal
-  $modalDialog.addEventListener("click", e => e.stopPropagation())
+$btnOpen.addEventListener("click", () => {
+  $modalWrapper.classList.remove("modal-hide")
+  $modalWrapper.classList.add("modal-show")
+})
+$modalWrapper.addEventListener("click", () => $modalWrapper.classList.add("modal-hide"))
+//si hacemos click en la zona blanca evitamos que llegue el evento al modalWrapper y se cierre el modal
+$modalDialog.addEventListener("click", e => e.stopPropagation())
+$btnClose.addEventListener("click", () => $modalWrapper.classList.add("modal-hide"))
+</script>
 
-  const $btnClose = document.querySelector("[role='btn-close']")
-  $btnClose.addEventListener("click", () => $modalWrapper.classList.add("modal-hide"))
-
+<script type="module">
   //MY MODAL
   function MyModal(idModal, idOpener=null) {
     const $modal = document.getElementById(idModal)
@@ -136,8 +136,7 @@
     .set_body("<p>Un ejemplo en el cuerpo</p>")
     .show()
     //.destroy()
-
-})()
+}
 </script>
 <style>
 @import url("https://fonts.googleapis.com/css?family=Roboto&display=swap");
