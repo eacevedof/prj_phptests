@@ -11,20 +11,20 @@
     <meta charset="UTF-8">
     <title>modal raw</title>
 <style>
-  @import url("https://fonts.googleapis.com/css?family=Roboto&display=swap");
+  @import url("https://fonts.googleapis.com/css?family=Roboto");
+  .debug {
+    /*
+    usando la consola para agregar un borde a los elementos y ver sus limites
+    */
+    border:1px dashed red;
+  }
+
   body {
     font-family: "Roboto", "sans-serif";
     /*
     para tener una referencia y poder trabajar con em y rem (ver el breakpoint)
     */
     font-size: 16px;
-  }
-
-  .debug {
-    /*
-    usando la consola para agregar un borde a los elementos y ver sus limites
-    */
-    border:1px dashed red;
   }
 
   /*
