@@ -36,16 +36,11 @@
     <div id="modal-object" class="modal-wrapper">
         <div class="modal-dialog modal-dialog-grid" role="modal-dialog">
             <header class="area-header">
-                <h2>Modal Object</h2>
+                <h2 role="title"></h2>
                 <button type="button" role="btn-close">x</button>
             </header>
             <div class="area-body" role="body">
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris vulputate iaculis sagittis. Aliquam erat volutpat. Nunc mattis velit fringilla consectetur porta. Fusce pulvinar nisi vitae nisl vestibulum ornare. Fusce libero dolor, elementum vel dictum ac, rutrum et ipsum. In egestas vitae dolor et elementum. Vivamus mollis nulla at justo hendrerit, at mattis urna laoreet. In volutpat dui in scelerisque feugiat. Sed nisi odio, vestibulum quis purus sed, pretium molestie nisi. Praesent euismod massa mauris, sit amet vehicula erat lacinia sit amet. Donec eget ultrices felis. Maecenas eget augue tortor.
-                </p>
-                <p>
-                    Aenean laoreet tempor mauris non vulputate. Sed ut erat erat. Vestibulum dignissim enim sem, vel pharetra enim dignissim ut. Praesent ornare, ex vel aliquam facilisis, velit diam sagittis nulla, sed gravida velit erat sit amet dolor. Maecenas accumsan mauris felis. Praesent et dolor arcu. Aenean et ex vel mauris egestas imperdiet. Integer suscipit libero eget erat congue facilisis. Nam feugiat condimentum sem, at aliquam elit placerat at. Donec auctor nulla eget neque tempor pellentesque. Donec hendrerit rutrum ultricies. Curabitur laoreet leo eros, vitae rhoncus nisi hendrerit at. Sed blandit arcu eu tortor scelerisque aliquet.
-                </p>
+                example body
             </div>
         </div>
     </div>
@@ -123,6 +118,7 @@
     }
 
     this.destroy = function () {
+      if($modal) $modal.removeEventListener("click", hide)
       if($btnOpen) $btnOpen.removeEventListener("click", show)
       if($btnClose) $btnClose.removeEventListener("click", hide)
       if($title) $title.innerHTML = ""
@@ -136,7 +132,7 @@
     .set_title("<span style='border:1px solid red'>Some Title</span>")
     .set_body("<p>Hola mundo</p>")
     .show()
-    .destroy()
+    //.destroy()
 
 })()
 </script>
