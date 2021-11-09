@@ -68,10 +68,10 @@
     if(!$modal) return console.log("no modal found!")
 
     const $dialog = $modal.querySelector(":scope > [role='modal-dialog']")
-    $dialog.addEventListener("click", e => e.stopPropagation())
-
     const $title = $dialog.querySelector(":scope > header > [role='title']")
+    const $btnClose = $dialog.querySelector(":scope > header > [role='btn-close']")
     const $body = $dialog.querySelector(":scope > [role='body']")
+    const $opener = idOpener ? document.getElementById(idOpener) : null
 
     const show = () => {
       $modal.classList.remove("modal-hide")
@@ -79,13 +79,14 @@
     }
 
     const hide = () => $modal.classList.add("modal-hide")
-    $modal.addEventListener("click", hide)
 
-    const $opener = idOpener ? document.getElementById(idOpener) : null
-    if ($opener) $opener.addEventListener("click", show)
-
-    const $btnClose = $dialog.querySelector(":scope > header > [role='btn-close']")
-    if ($btnClose) $btnClose.addEventListener("click", hide)
+    function add_listeners() {
+      $modal.addEventListener("click", hide)
+      if ($dialog) $dialog.addEventListener("click", e => e.stopPropagation())
+      if ($opener) $opener.addEventListener("click", show)
+      if ($btnClose) $btnClose.addEventListener("click", hide)
+      return this
+    }
 
     this.show = function (fnBefore, fnAfter) {
       let r = true
