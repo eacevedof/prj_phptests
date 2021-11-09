@@ -69,20 +69,22 @@
 
   //MY MODAL
   function MyModal(idModal, idOpener=null) {
-    const $modalWrapper = document.getElementById(idModal)
+    const $modal = document.getElementById(idModal)
+    if(!$modal) return console.log("no modal found!")
 
-    if(!$modalWrapper) return console.log("no modal found!")
+    const $dialog = $modal.querySelector(":scope > [role='modal-dialog']")
+    $dialog.addEventListener("click", e => e.stopPropagation())
 
-    const $dialog = $modalWrapper.querySelector(":scope > [role='modal-dialog']")
     const $title = $dialog.querySelector(":scope > header > [role='title']")
     const $body = $dialog.querySelector(":scope > [role='body']")
 
     const show = () => {
-      $modalWrapper.classList.remove("modal-hide")
-      $modalWrapper.classList.add("modal-show")
+      $modal.classList.remove("modal-hide")
+      $modal.classList.add("modal-show")
     }
 
-    const hide = () => $modalWrapper.classList.add("modal-hide")
+    const hide = () => $modal.classList.add("modal-hide")
+    $modal.addEventListener("click", hide)
 
     const $opener = idOpener ? document.getElementById(idOpener) : null
     if ($opener) $opener.addEventListener("click", show)
@@ -90,15 +92,11 @@
     const $btnClose = $dialog.querySelector(":scope > header > [role='btn-close']")
     if ($btnClose) $btnClose.addEventListener("click", hide)
 
-    $modalWrapper.addEventListener("click", hide)
-    $dialog.addEventListener("click", e => e.stopPropagation())
-
     this.show = function (fnBefore, fnAfter) {
       let r = true
       if(fnBefore) r = fnBefore()
       if(!r) return this;
-      $modalWrapper.classList.remove("modal-hide")
-      $modalWrapper.classList.add("modal-show")
+      show()
       if(fnAfter) fnAfter()
       return this
     }
@@ -107,7 +105,7 @@
       let r = true
       if(fnBefore) r = fnBefore()
       if(!r) return this;
-      $modalWrapper.classList.add("modal-hide")
+      hide()
       if(fnAfter) fnAfter()
       return this
     }
@@ -125,8 +123,8 @@
     }
 
     this.destroy = function () {
-      if($btnOpen) $btnOpen.removeEventListener("click")
-      if($btnClose) $btnClose.removeEventListener("click")
+      if($btnOpen) $btnOpen.removeEventListener("click", show)
+      if($btnClose) $btnClose.removeEventListener("click", hide)
       if($title) $title.innerHTML = ""
       if($body) $body.innerHTML = ""
     }
