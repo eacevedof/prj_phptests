@@ -41,16 +41,11 @@ $btnOpen.addEventListener("click", () => {
 const $modal = document.getElementById("modal")
 const $modalDialog = document.getElementById("modal-dialog")
 
-$modal.addEventListener("click", function (){
-  $modal.classList.remove("modal-show")
-})
-
-$modalDialog.addEventListener("click", function (e){
-  e.stopPropagation()
-})
+$modal.addEventListener("click", () => $modal.classList.remove("modal-show"))
+$modalDialog.addEventListener("click", e => e.stopPropagation())
 
 $btnClose = document.querySelector("[role='btn-close']")
-$btnClose.addEventListener("click", ()=> $modal.classList.add("modal-hide"))
+$btnClose.addEventListener("click", () => $modal.classList.add("modal-hide"))
 </script>
 <style>
 @import url("https://fonts.googleapis.com/css?family=Roboto&display=swap");
