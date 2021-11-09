@@ -13,13 +13,13 @@
 </head>
 <body>
 <!-- modal -->
-<div>
-    <button onclick="open_modal()">Open modal</button>
+<main>
+    <button type="button" onclick="open_modal()">Open modal</button>
     <div id="modal" class="modal">
         <div id="modal-dialog" class="modal-dialog modal-dialog-grid">
-            <header class="area-header debug">
+            <header class="area-header">
                 <h2>Modal title</h2>
-                <button onclick="close_modal()">x</button>
+                <button type="button" role="btn-close">x</button>
             </header>
             <div class="area-body">
                 <p>
@@ -31,8 +31,7 @@
             </div>
         </div>
     </div>
-</div>
-
+</main>
 <script>
 const $modal = document.getElementById("modal")
 const $modalDialog = document.getElementById("modal-dialog")
