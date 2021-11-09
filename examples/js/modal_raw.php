@@ -136,7 +136,6 @@ $btnClose.addEventListener("click", () => $modalWrapper.classList.add("modal-hid
     .set_body("<p>Un ejemplo en el cuerpo</p>")
     .show()
     //.destroy()
-}
 </script>
 <style>
 @import url("https://fonts.googleapis.com/css?family=Roboto&display=swap");
