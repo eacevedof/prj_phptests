@@ -63,6 +63,11 @@ function close_modal()
   --bg-dialog: #fff;
 }
 
+body {
+  /*para tener una referencia sobre rem*/
+  font-size: 16px;
+}
+
 .debug: {
   border:1px dashed red;
 }
@@ -156,10 +161,35 @@ function close_modal()
   padding: 0;
 }
 
-@media (max-width: 500px) {
+@media (max-height: 500px) {
   .modal-dialog {
-    width: 31.25rem;
+    position: fixed;
+    top: 0.13rem;
   }
+}
+
+/*
+breakpoints de referencia que usa bootstrap
+*/
+@media (max-width:575.98px){
+  body {
+    font-size: 14px;
+  }
+  .modal-dialog {
+    width: 30.63em;
+  }
+}
+
+@media (max-width:767.98px){
+
+}
+
+@media (max-width:991.98px){
+
+}
+
+@media (max-width:1399.98px){
+
 }
 </style>
 </body>
