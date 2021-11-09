@@ -265,7 +265,7 @@ function MyModal(idModal, idOpener=null) {
 
   this.destroy = () => {
     if($modal) $modal.removeEventListener("click", hide)
-    if($btnOpen) $btnOpen.removeEventListener("click", show)
+    if($opener) $opener.removeEventListener("click", show)
     if($btnClose) $btnClose.removeEventListener("click", hide)
     if($title) $title.innerHTML = ""
     if($body) $body.innerHTML = ""
@@ -281,7 +281,7 @@ function MyModal(idModal, idOpener=null) {
     .set_title("<span>Some Title</span>")
     .set_body("<p>Un ejemplo en el cuerpo</p>")
     .show()
-    //.destroy()
+    .destroy()
 </script>
 </body>
 </html>
