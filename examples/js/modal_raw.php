@@ -142,6 +142,7 @@ body {
   grid-area: area-header;
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
 .area-header button {
@@ -151,11 +152,15 @@ body {
   height: 2em;
   border-radius: 1%;
   border: 1px solid #86b7fe;
-  align-items: center;
+}
+.area-header h2 {
+  margin: 0;
+  padding: 0;
+  padding-top: 0.15em;
 }
 
 .area-body {
-  border: 1px solid red;
+  /*border: 1px solid red;*/
   grid-area: area-body;
   margin: 0;
   padding: 0;
