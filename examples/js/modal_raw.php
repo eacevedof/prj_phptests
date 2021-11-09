@@ -206,7 +206,7 @@ $btnClose.addEventListener("click", () => $modalWrapper.classList.add("modal-hid
 </script>
 
 <script type="module">
-//MY MODAL
+//funcion tipo clase
 function MyModal(idModal, idOpener=null) {
 
   const $modal = document.getElementById(idModal)
