@@ -124,6 +124,7 @@
       if($btnClose) $btnClose.removeEventListener("click", hide)
       if($title) $title.innerHTML = ""
       if($body) $body.innerHTML = ""
+      return null
     }
 
     return add_listeners()
@@ -250,6 +251,8 @@ modal-dialog es la caja blanca donde va el contenido. El modal en sí.
   margin: 0;
   padding: 0;
   padding-top: 0.15em;
+  position: sticky;
+  top:0;
 }
 
 .area-body {
