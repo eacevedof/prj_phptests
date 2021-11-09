@@ -15,13 +15,14 @@
 <main>
     <button type="button" id="btn-open">Open modal</button>
     <button type="button" id="btn-open-object">Open modal object</button>
+
     <div id="modal" class="modal-wrapper">
-        <div id="modal-dialog" class="modal-dialog modal-dialog-grid">
+        <div class="modal-dialog modal-dialog-grid" role="modal-dialog">
             <header class="area-header">
                 <h2>Modal title</h2>
                 <button type="button" role="btn-close">x</button>
             </header>
-            <div class="area-body">
+            <div class="area-body" role="body">
                 <p>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris vulputate iaculis sagittis. Aliquam erat volutpat. Nunc mattis velit fringilla consectetur porta. Fusce pulvinar nisi vitae nisl vestibulum ornare. Fusce libero dolor, elementum vel dictum ac, rutrum et ipsum. In egestas vitae dolor et elementum. Vivamus mollis nulla at justo hendrerit, at mattis urna laoreet. In volutpat dui in scelerisque feugiat. Sed nisi odio, vestibulum quis purus sed, pretium molestie nisi. Praesent euismod massa mauris, sit amet vehicula erat lacinia sit amet. Donec eget ultrices felis. Maecenas eget augue tortor.
                 </p>
@@ -38,7 +39,7 @@
                 <h2>Modal Object</h2>
                 <button type="button" role="btn-close-object">x</button>
             </header>
-            <div class="area-body">
+            <div class="area-body" role="body">
                 <p>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris vulputate iaculis sagittis. Aliquam erat volutpat. Nunc mattis velit fringilla consectetur porta. Fusce pulvinar nisi vitae nisl vestibulum ornare. Fusce libero dolor, elementum vel dictum ac, rutrum et ipsum. In egestas vitae dolor et elementum. Vivamus mollis nulla at justo hendrerit, at mattis urna laoreet. In volutpat dui in scelerisque feugiat. Sed nisi odio, vestibulum quis purus sed, pretium molestie nisi. Praesent euismod massa mauris, sit amet vehicula erat lacinia sit amet. Donec eget ultrices felis. Maecenas eget augue tortor.
                 </p>
@@ -72,7 +73,6 @@
     if(!$modalWrapper) return console.log("no modal found!")
 
     const $opener = idOpener ? document.getElementById(idOpener) : null
-
     if ($opener) {
       $opener.addEventListener("click", () => {
         $modalWrapper.classList.remove("modal-hide")
@@ -80,11 +80,32 @@
       })
     }
 
+    this.show = function (fnBefore, fnAfter) {
+      if(fnBefore) fnBefore()
+      $modalWrapper.classList.remove("modal-hide")
+      $modalWrapper.classList.add("modal-show")
+      if(fnAfter) fnAfter()
+      return this
+    }
 
+    this.hide = function (fnBefore, fnAfter) {
+      if(fnBefore) fnBefore()
+      $modalWrapper.classList.add("modal-hide")
+      if(fnAfter) fnAfter()
+      return this
+    }
 
-  }
+    this.set_body = function (html) {
+      if(!html) return this
+      const $body = $modalWrapper.querySelector(":scope > [role='body']")
+      $body.innerHTML = html
+      return this
+    }
 
-  const mymodal = new MyModal()
+  }//MyModal
+
+  const mymodal = new MyModal("modal-object", "btn-open-object")
+
 })()
 </script>
 <style>
