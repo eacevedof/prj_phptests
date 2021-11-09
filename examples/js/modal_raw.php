@@ -12,7 +12,6 @@
     <title>modal raw</title>
 </head>
 <body>
-<!-- modal -->
 <main>
     <button type="button" id="btn-open" onclick="open_modal()">Open modal</button>
     <div id="modal" class="modal-wrapper">
@@ -32,7 +31,7 @@
         </div>
     </div>
 </main>
-<script>
+<script type="module">
 const $btnOpen = document.getElementById("btn-open")
 $btnOpen.addEventListener("click", () => {
   $modalWrapper.classList.remove("modal-hide")
@@ -42,6 +41,7 @@ const $modalWrapper = document.getElementById("modal")
 const $modalDialog = document.getElementById("modal-dialog")
 
 $modalWrapper.addEventListener("click", () => $modalWrapper.classList.remove("modal-show"))
+//si hacemos click en la zona blanca evitamos que llegue el evento al modalWrapper y se cierre el modal
 $modalDialog.addEventListener("click", e => e.stopPropagation())
 
 $btnClose = document.querySelector("[role='btn-close']")
