@@ -149,7 +149,7 @@ function MyModal(idModal, idOpener=null) {
 body {
   font-family: "Roboto", "sans-serif";
   /*
-  para tener una referencia y para poder trabajar con em y rem (ver el breakpoint)
+  para tener una referencia y poder trabajar con em y rem (ver el breakpoint)
   */
   font-size: 16px;
 }
