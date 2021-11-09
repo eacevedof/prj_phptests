@@ -82,18 +82,17 @@
       $modalWrapper.classList.add("modal-show")
     }
 
-    const hide = () => $modalWrapper.classList.remove("modal-show")
+    const hide = () => $modalWrapper.classList.add("modal-hide")
 
     const $opener = idOpener ? document.getElementById(idOpener) : null
     if ($opener) $opener.addEventListener("click", show)
 
     const $btnClose = $dialog.querySelector(":scope > header > [role='btn-close']")
-    if ($btnClose) {
-      $btnClose.addEventListener("click", () => $modalWrapper.classList.add("modal-hide"))
-    }
+    if ($btnClose) $btnClose.addEventListener("click", hide)
 
-    $modalWrapper.addEventListener("click", () => $modalWrapper.classList.add("modal-hide"))
+    $modalWrapper.addEventListener("click", hide)
     $dialog.addEventListener("click", e => e.stopPropagation())
+
 
     this.show = function (fnBefore, fnAfter) {
       let r = true
