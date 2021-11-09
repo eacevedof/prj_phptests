@@ -17,7 +17,7 @@
     <button onclick="open_modal()">Open modal</button>
     <div id="modal" class="modal">
         <div id="modal-dialog" class="modal-dialog modal-dialog-grid">
-            <header class="area-header">
+            <header class="area-header debug">
                 <h2>Modal title</h2>
                 <button onclick="close_modal()">x</button>
             </header>
@@ -68,8 +68,7 @@ function close_modal()
 }
 
 .modal {
-  margin: 0;
-  padding: 0;
+
   font-family: "Roboto", "sans-serif";
   background-color: rgb(0,0,0, .75);
   width: 100vw;
@@ -123,8 +122,8 @@ function close_modal()
 .modal-dialog {
   background: #fff;
   padding: 10px;
-  width: 350px;
-  min-height: 400px;
+  width: 37.5em;
+  min-height: 25em;
   border-radius: 1%;
 }
 
@@ -155,7 +154,12 @@ function close_modal()
   grid-area: area-body;
   margin: 0;
   padding: 0;
-  overflow-y: scroll;
+}
+
+@media (max-width: 500px) {
+  .modal-dialog {
+    width: 31.25rem;
+  }
 }
 </style>
 </body>
