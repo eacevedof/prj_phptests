@@ -18,7 +18,7 @@
     <div id="modal" class="modal">
         <div id="modal-dialog" class="modal-dialog modal-grid">
             <header class="area-header">
-                <h1>Modal title</h1>
+                <h2>Modal title</h2>
                 <button onclick="close_modal()">x</button>
             </header>
             <div class="area-body">
@@ -49,8 +49,6 @@ function open_modal()
 function close_modal()
 {
   $modal.classList.add("modal-hide")
-  //$modal.classList.add("modal")
-  //$modal.classList.remove("modal-show")
 }
 </script>
 <style>
