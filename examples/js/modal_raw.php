@@ -14,11 +14,29 @@
 <body>
 <main>
     <button type="button" id="btn-open">Open modal</button>
+    <button type="button" id="btn-open-object">Open modal object</button>
     <div id="modal" class="modal-wrapper">
         <div id="modal-dialog" class="modal-dialog modal-dialog-grid">
             <header class="area-header">
                 <h2>Modal title</h2>
                 <button type="button" role="btn-close">x</button>
+            </header>
+            <div class="area-body">
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris vulputate iaculis sagittis. Aliquam erat volutpat. Nunc mattis velit fringilla consectetur porta. Fusce pulvinar nisi vitae nisl vestibulum ornare. Fusce libero dolor, elementum vel dictum ac, rutrum et ipsum. In egestas vitae dolor et elementum. Vivamus mollis nulla at justo hendrerit, at mattis urna laoreet. In volutpat dui in scelerisque feugiat. Sed nisi odio, vestibulum quis purus sed, pretium molestie nisi. Praesent euismod massa mauris, sit amet vehicula erat lacinia sit amet. Donec eget ultrices felis. Maecenas eget augue tortor.
+                </p>
+                <p>
+                    Aenean laoreet tempor mauris non vulputate. Sed ut erat erat. Vestibulum dignissim enim sem, vel pharetra enim dignissim ut. Praesent ornare, ex vel aliquam facilisis, velit diam sagittis nulla, sed gravida velit erat sit amet dolor. Maecenas accumsan mauris felis. Praesent et dolor arcu. Aenean et ex vel mauris egestas imperdiet. Integer suscipit libero eget erat congue facilisis. Nam feugiat condimentum sem, at aliquam elit placerat at. Donec auctor nulla eget neque tempor pellentesque. Donec hendrerit rutrum ultricies. Curabitur laoreet leo eros, vitae rhoncus nisi hendrerit at. Sed blandit arcu eu tortor scelerisque aliquet.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-object" class="modal-wrapper">
+        <div class="modal-dialog modal-dialog-grid" role="modal-dialog">
+            <header class="area-header">
+                <h2>Modal Object</h2>
+                <button type="button" role="btn-close-object">x</button>
             </header>
             <div class="area-body">
                 <p>
@@ -39,7 +57,7 @@
     $modalWrapper.classList.add("modal-show")
   })
   const $modalWrapper = document.getElementById("modal")
-  const $modalDialog = document.getElementById("modal-dialog")
+  const $modalDialog = document.querySelector("[role='modal-dialog']")
 
   $modalWrapper.addEventListener("click", () => $modalWrapper.classList.remove("modal-show"))
   //si hacemos click en la zona blanca evitamos que llegue el evento al modalWrapper y se cierre el modal
@@ -48,9 +66,25 @@
   const $btnClose = document.querySelector("[role='btn-close']")
   $btnClose.addEventListener("click", () => $modalWrapper.classList.add("modal-hide"))
 
-  function MyModal(id) {
+  function MyModal(idModal, idOpener=null) {
+    const $modalWrapper = document.getElementById(idModal)
+
+    if(!$modalWrapper) return console.log("no modal found!")
+
+    const $opener = idOpener ? document.getElementById(idOpener) : null
+
+    if ($opener) {
+      $opener.addEventListener("click", () => {
+        $modalWrapper.classList.remove("modal-hide")
+        $modalWrapper.classList.add("modal-show")
+      })
+    }
+
+
 
   }
+
+  const mymodal = new MyModal()
 })()
 </script>
 <style>
