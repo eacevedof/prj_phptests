@@ -10,6 +10,154 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="UTF-8">
     <title>modal raw</title>
+<style>
+  @import url("https://fonts.googleapis.com/css?family=Roboto&display=swap");
+  : root {
+    --bg-modal: rgb(0,0,0, .75);
+    --bg-dialog: #fff;
+  }
+
+  body {
+    font-family: "Roboto", "sans-serif";
+    /*
+    para tener una referencia y poder trabajar con em y rem (ver el breakpoint)
+    */
+    font-size: 16px;
+  }
+
+  .debug {
+    /*
+    usando la consola para agregar un borde a los elementos y ver sus limites
+    */
+    border:1px dashed red;
+  }
+
+  /*
+  es el div de fondo negro
+  */
+  .modal-wrapper {
+    background-color: rgb(0,0,0, .75);
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    display: none;
+    /*
+    si bien con estos estilos se centra verticalmente usando flex, al hacer mas pequeña (en altura) la ventana
+    del navegador se mantiene centrado pero se pierde la parte superior e inferior por eso mejor se usa grid
+     */
+    justify-content: center;
+    align-items: center;
+  }
+
+  .modal-show {
+    display: grid;
+    animation: anim-show .2s;
+  }
+
+  @keyframes anim-show {
+    from {
+      transform: scale(0);
+      opacity: 0;
+    }
+    to {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+
+  .modal-hide {
+    z-index: -1; /*hace que no se quede una capa sobre el boton de apertura que no permite hacer click*/
+    opacity: 0; /*esto permite que despues de la animacion se quede oculto*/
+    animation: anim-hide .25s;
+  }
+
+  @keyframes anim-hide {
+    from {
+      transform: scale(1);
+      opacity: 1;
+    }
+    to {
+      transform: scale(0);
+      opacity: 0;
+    }
+  }
+
+  /*
+  modal-dialog es la caja blanca donde va el contenido. El modal en sí.
+  */
+  .modal-dialog {
+    background: #fff;
+    padding: 10px;
+    width: 37.5em;
+    min-height: 25em;
+    border-radius: 1%;
+  }
+
+  .modal-dialog-grid {
+    display: grid;
+    grid-template-rows: 3.44em calc(90vh - 3.44em);
+    grid-template-areas:
+"area-header"
+"area-body"
+  }
+  .area-header {
+    grid-area: area-header;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .area-header button {
+    background: #0d6efd;
+    color: white;
+    width: 2em;
+    height: 2em;
+    border-radius: 1%;
+    border: 1px solid #86b7fe;
+  }
+
+  .area-header h2 {
+    margin: 0;
+    padding: 0;
+    padding-top: 0.15em;
+    position: sticky;
+    top:0;
+  }
+
+  .area-body {
+    grid-area: area-body;
+    margin: 0;
+    padding: 0;
+  }
+
+  /*
+  breakpoints de referencia que usa bootstrap
+  dejo de ejemplo solo este pero habria que tratarlo para los otros bp
+  */
+  @media (max-width:575.98px){
+    body {
+      font-size: 14px;
+    }
+    .modal-dialog {
+      width: 30.63em;
+    }
+  }
+
+  @media (max-width:767.98px){
+    /*to-do*/
+  }
+
+  @media (max-width:991.98px){
+    /*to-do*/
+  }
+
+  @media (max-width:1399.98px){
+    /*to-do*/
+  }
+</style>
 </head>
 <body>
 <main>
@@ -139,153 +287,5 @@ function MyModal(idModal, idOpener=null) {
     .show()
     //.destroy()
 </script>
-<style>
-@import url("https://fonts.googleapis.com/css?family=Roboto&display=swap");
-: root {
-  --bg-modal: rgb(0,0,0, .75);
-  --bg-dialog: #fff;
-}
-
-body {
-  font-family: "Roboto", "sans-serif";
-  /*
-  para tener una referencia y poder trabajar con em y rem (ver el breakpoint)
-  */
-  font-size: 16px;
-}
-
-.debug {
-  /*
-  usando la consola para agregar un borde a los elementos y ver sus limites
-  */
-  border:1px dashed red;
-}
-
-/*
-es el div de fondo negro
-*/
-.modal-wrapper {
-  background-color: rgb(0,0,0, .75);
-  width: 100vw;
-  height: 100vh;
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 10;
-  display: none;
-  /*
-  si bien con estos estilos se centra verticalmente usando flex, al hacer mas pequeña (en altura) la ventana
-  del navegador se mantiene centrado pero se pierde la parte superior e inferior por eso mejor se usa grid
-   */
-  justify-content: center;
-  align-items: center;
-}
-
-.modal-show {
-  display: grid;
-  animation: anim-show .2s;
-}
-
-@keyframes anim-show {
-  from {
-    transform: scale(0);
-    opacity: 0;
-  }
-  to {
-    transform: scale(1);
-    opacity: 1;
-  }
-}
-
-.modal-hide {
-  z-index: -1; /*hace que no se quede una capa sobre el boton de apertura que no permite hacer click*/
-  opacity: 0; /*esto permite que despues de la animacion se quede oculto*/
-  animation: anim-hide .25s;
-}
-
-@keyframes anim-hide {
-  from {
-    transform: scale(1);
-    opacity: 1;
-  }
-  to {
-    transform: scale(0);
-    opacity: 0;
-  }
-}
-
-/*
-modal-dialog es la caja blanca donde va el contenido. El modal en sí.
-*/
-.modal-dialog {
-  background: #fff;
-  padding: 10px;
-  width: 37.5em;
-  min-height: 25em;
-  border-radius: 1%;
-}
-
-.modal-dialog-grid {
-  display: grid;
-  grid-template-rows: 3.44em calc(90vh - 3.44em);
-  grid-template-areas:
-    "area-header"
-    "area-body"
-}
-.area-header {
-  grid-area: area-header;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.area-header button {
-  background: #0d6efd;
-  color: white;
-  width: 2em;
-  height: 2em;
-  border-radius: 1%;
-  border: 1px solid #86b7fe;
-}
-
-.area-header h2 {
-  margin: 0;
-  padding: 0;
-  padding-top: 0.15em;
-  position: sticky;
-  top:0;
-}
-
-.area-body {
-  grid-area: area-body;
-  margin: 0;
-  padding: 0;
-}
-
-/*
-breakpoints de referencia que usa bootstrap
-dejo de ejemplo solo este pero habria que tratarlo para los otros bp
-*/
-@media (max-width:575.98px){
-  body {
-    font-size: 14px;
-  }
-  .modal-dialog {
-    width: 30.63em;
-  }
-}
-
-@media (max-width:767.98px){
- /*to-do*/
-}
-
-@media (max-width:991.98px){
-  /*to-do*/
-}
-
-@media (max-width:1399.98px){
-  /*to-do*/
-}
-</style>
 </body>
 </html>
