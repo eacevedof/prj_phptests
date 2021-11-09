@@ -33,7 +33,7 @@ const $modal = document.getElementById("modal")
 const $modalDialog = document.getElementById("modal-dialog")
 
 $modal.addEventListener("click", function (){
-  $modal.classList.remove("modal-open")
+  $modal.classList.remove("modal-show")
 })
 
 $modalDialog.addEventListener("click", function (e){
@@ -42,28 +42,33 @@ $modalDialog.addEventListener("click", function (e){
 
 function open_modal()
 {
-  $modal.classList.remove("modal-close")
-  $modal.classList.add("modal-open")
+  $modal.classList.remove("modal-hide")
+  $modal.classList.add("modal-show")
 }
 
 function close_modal()
 {
-  $modal.classList.add("modal-close")
+  $modal.classList.add("modal-hide")
   //$modal.classList.add("modal")
-  //$modal.classList.remove("modal-open")
+  //$modal.classList.remove("modal-show")
 }
 </script>
 <style>
-@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+@import url("https://fonts.googleapis.com/css?family=Roboto&display=swap");
+: root {
+  --bg-modal: rgb(0,0,0, .75);
+  --bg-dialog: #fff;
+}
+
 .modal {
-  font-family: 'Roboto', 'sans-serif';
+  font-family: "Roboto", "sans-serif";
   background-color: rgb(0,0,0, .75);
   width: 100vw;
   height: 100vh;
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 9999;
+  z-index: 10;
   display: none;
   /*
   si bien con estos estilos se centra verticalmente usando flex, al hacer mas pequeña (en altura) la ventana
@@ -73,7 +78,7 @@ function close_modal()
   align-items: center;
 }
 
-.modal-open {
+.modal-show {
   display: grid;
   animation: anim-show .2s;
 }
@@ -89,7 +94,7 @@ function close_modal()
   }
 }
 
-.modal-close {
+.modal-hide {
   z-index: -1;
   opacity: 0; /*esto permite que despues de la animacion se quede oculto*/
   animation: anim-hide .25s;
@@ -107,7 +112,7 @@ function close_modal()
 }
 
 .modal-dialog {
-  background: #ddd;
+  background: #fff;
   padding: 10px;
   width: 350px;
   height: 400px;
@@ -117,26 +122,28 @@ function close_modal()
 .modal-grid {
   display: grid;
   grid-template-areas:
-    'area-header'
-    'area-body'
+    "area-header"
+    "area-body"
 }
 .area-header {
   grid-area: area-header;
   display: flex;
   justify-content: space-between;
 }
+
 .area-header button {
   background: #0d6efd;
   color: white;
   width: 2em;
   height: 2em;
   border-radius: 1%;
+  border: 1px solid #86b7fe;
+  align-items: center;
 }
 
 .area-body {
   grid-area: area-body;
 }
-
 </style>
 </body>
 </html>
