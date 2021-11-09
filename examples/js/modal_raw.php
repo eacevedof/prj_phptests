@@ -14,7 +14,7 @@
 <body>
 <!-- modal -->
 <main>
-    <button type="button" onclick="open_modal()">Open modal</button>
+    <button type="button" id="btn-open" onclick="open_modal()">Open modal</button>
     <div id="modal" class="modal">
         <div id="modal-dialog" class="modal-dialog modal-dialog-grid">
             <header class="area-header">
@@ -33,6 +33,11 @@
     </div>
 </main>
 <script>
+const $btnOpen = document.getElementById("btn-open")
+$btnOpen.addEventListener("click", () => {
+  $modal.classList.remove("modal-hide")
+  $modal.classList.add("modal-show")
+})
 const $modal = document.getElementById("modal")
 const $modalDialog = document.getElementById("modal-dialog")
 
@@ -44,16 +49,8 @@ $modalDialog.addEventListener("click", function (e){
   e.stopPropagation()
 })
 
-function open_modal()
-{
-  $modal.classList.remove("modal-hide")
-  $modal.classList.add("modal-show")
-}
-
-function close_modal()
-{
-  $modal.classList.add("modal-hide")
-}
+$btnClose = document.querySelector("[role='btn-close']")
+$btnClose.addEventListener("click", ()=> $modal.classList.add("modal-hide"))
 </script>
 <style>
 @import url("https://fonts.googleapis.com/css?family=Roboto&display=swap");
