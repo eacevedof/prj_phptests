@@ -63,72 +63,74 @@ $btnClose.addEventListener("click", () => $modalWrapper.classList.add("modal-hid
 
 <script type="module">
   //MY MODAL
-  function MyModal(idModal, idOpener=null) {
-    const $modal = document.getElementById(idModal)
-    if(!$modal) return console.log("no modal found!")
+function MyModal(idModal, idOpener=null) {
 
-    const $dialog = $modal.querySelector(":scope > [role='modal-dialog']")
-    const $title = $dialog.querySelector(":scope > header > [role='title']")
-    const $btnClose = $dialog.querySelector(":scope > header > [role='btn-close']")
-    const $body = $dialog.querySelector(":scope > [role='body']")
-    const $opener = idOpener ? document.getElementById(idOpener) : null
+  const $modal = document.getElementById(idModal)
+  if(!$modal) return console.log("no modal found!")
 
-    const show = () => {
-      $modal.classList.remove("modal-hide")
-      $modal.classList.add("modal-show")
-    }
+  const $dialog = $modal.querySelector(":scope > [role='modal-dialog']")
+  const $title = $dialog.querySelector(":scope > header > [role='title']")
+  const $btnClose = $dialog.querySelector(":scope > header > [role='btn-close']")
+  const $body = $dialog.querySelector(":scope > [role='body']")
+  const $opener = idOpener ? document.getElementById(idOpener) : null
 
-    const hide = () => $modal.classList.add("modal-hide")
+  const show = () => {
+    $modal.classList.remove("modal-hide")
+    $modal.classList.add("modal-show")
+  }
 
-    const add_listeners = () => {
-      $modal.addEventListener("click", hide)
-      if ($dialog) $dialog.addEventListener("click", e => e.stopPropagation())
-      if ($opener) $opener.addEventListener("click", show)
-      if ($btnClose) $btnClose.addEventListener("click", hide)
-      return this
-    }
+  const hide = () => $modal.classList.add("modal-hide")
 
-    this.show = function (fnBefore, fnAfter) {
-      let r = true
-      if(fnBefore) r = fnBefore()
-      if(!r) return this;
-      show()
-      if(fnAfter) fnAfter()
-      return this
-    }
+  const add_listeners = () => {
+    $modal.addEventListener("click", hide)
+    if ($dialog) $dialog.addEventListener("click", e => e.stopPropagation())
+    if ($opener) $opener.addEventListener("click", show)
+    if ($btnClose) $btnClose.addEventListener("click", hide)
+    return this
+  }
 
-    this.hide = function (fnBefore, fnAfter) {
-      let r = true
-      if(fnBefore) r = fnBefore()
-      if(!r) return this;
-      hide()
-      if(fnAfter) fnAfter()
-      return this
-    }
+  this.show = function (fnBefore, fnAfter) {
+    let r = true
+    if(fnBefore) r = fnBefore()
+    if(!r) return this;
+    show()
+    if(fnAfter) fnAfter()
+    return this
+  }
 
-    this.set_body = function (html) {
-      if(!html || !$body) return this
-      $body.innerHTML = html
-      return this
-    }
+  this.hide = function (fnBefore, fnAfter) {
+    let r = true
+    if(fnBefore) r = fnBefore()
+    if(!r) return this;
+    hide()
+    if(fnAfter) fnAfter()
+    return this
+  }
 
-    this.set_title = function (html) {
-      if(!html || !$title) return this
-      $title.innerHTML = html
-      return this
-    }
+  this.set_body = function (html) {
+    if(!html || !$body) return this
+    $body.innerHTML = html
+    return this
+  }
 
-    this.destroy = function () {
-      if($modal) $modal.removeEventListener("click", hide)
-      if($btnOpen) $btnOpen.removeEventListener("click", show)
-      if($btnClose) $btnClose.removeEventListener("click", hide)
-      if($title) $title.innerHTML = ""
-      if($body) $body.innerHTML = ""
-      return null
-    }
+  this.set_title = function (html) {
+    if(!html || !$title) return this
+    $title.innerHTML = html
+    return this
+  }
 
-    return add_listeners()
-  }//MyModal
+  this.destroy = function () {
+    if($modal) $modal.removeEventListener("click", hide)
+    if($btnOpen) $btnOpen.removeEventListener("click", show)
+    if($btnClose) $btnClose.removeEventListener("click", hide)
+    if($title) $title.innerHTML = ""
+    if($body) $body.innerHTML = ""
+    return null
+  }
+
+  return add_listeners()
+
+}//MyModal
 
   const mymodal = new MyModal("modal-2", "btn-open-2")
   mymodal
