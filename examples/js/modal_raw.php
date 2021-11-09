@@ -133,7 +133,7 @@
   mymodal
     .set_title("<span style='border:1px solid red'>Some Title</span>")
     .set_body("<p>Hola mundo</p>")
-    .show()
+    //.show()
     //.destroy()
 
 })()
