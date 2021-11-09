@@ -225,14 +225,6 @@ function MyModal(idModal, idOpener=null) {
 
   const hide = () => $modal.classList.add("modal-hide")
 
-  const add_listeners = () => {
-    $modal.addEventListener("click", hide)
-    if ($dialog) $dialog.addEventListener("click", e => e.stopPropagation())
-    if ($opener) $opener.addEventListener("click", show)
-    if ($btnClose) $btnClose.addEventListener("click", hide)
-    return this
-  }
-
   this.show = function (fnBefore, fnAfter) {
     if (fnBefore) {
       const abort = fnBefore()
@@ -275,11 +267,18 @@ function MyModal(idModal, idOpener=null) {
     return null
   }
 
-  return add_listeners()
+  (() => {
+    //configurlo los listeners
+    $modal.addEventListener("click", hide)
+    if ($dialog) $dialog.addEventListener("click", e => e.stopPropagation())
+    if ($opener) $opener.addEventListener("click", show)
+    if ($btnClose) $btnClose.addEventListener("click", hide)
+  })()
 
 }//MyModal
 
 const mymodal = new MyModal("modal-2", "btn-open-2")
+console.log(mymodal)
 mymodal
   .set_title("<span>Some Title</span>")
   .set_body("<p>Un ejemplo en el cuerpo</p>")
