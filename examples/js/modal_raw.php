@@ -13,7 +13,7 @@
 </head>
 <body>
 <main>
-    <button type="button" id="btn-open" onclick="open_modal()">Open modal</button>
+    <button type="button" id="btn-open">Open modal</button>
     <div id="modal" class="modal-wrapper">
         <div id="modal-dialog" class="modal-dialog modal-dialog-grid">
             <header class="area-header">
@@ -46,6 +46,10 @@ $modalDialog.addEventListener("click", e => e.stopPropagation())
 
 $btnClose = document.querySelector("[role='btn-close']")
 $btnClose.addEventListener("click", () => $modalWrapper.classList.add("modal-hide"))
+
+function MyModal(id) {
+
+}
 </script>
 <style>
 @import url("https://fonts.googleapis.com/css?family=Roboto&display=swap");
