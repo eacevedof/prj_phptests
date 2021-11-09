@@ -227,6 +227,7 @@ modal-dialog es la caja blanca donde va el contenido. El modal en sí.
 
 .modal-dialog-grid {
   display: grid;
+  grid-template-rows: 3.44em calc(90vh - 3.44em);
   grid-template-areas:
     "area-header"
     "area-body"
@@ -261,12 +262,6 @@ modal-dialog es la caja blanca donde va el contenido. El modal en sí.
   padding: 0;
 }
 
-@media (max-height: 500px) {
-  .modal-dialog {
-    position: fixed;
-    top: 0.13em;
-  }
-}
 
 /*
 breakpoints de referencia que usa bootstrap
