@@ -262,7 +262,6 @@ modal-dialog es la caja blanca donde va el contenido. El modal en sí.
   padding: 0;
 }
 
-
 /*
 breakpoints de referencia que usa bootstrap
 dejo de ejemplo solo este pero habria que tratarlo para los otros bp
