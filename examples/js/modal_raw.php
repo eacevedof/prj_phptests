@@ -277,11 +277,12 @@ function MyModal(idModal, idOpener=null) {
 
 }//MyModal
 
+//definición
+//function MyModal(idModal, idOpener=null)
 const mymodal = new MyModal("modal-2", "btn-open-2")
-console.log(mymodal)
 mymodal
-  .set_title("<span>Some Title</span>")
-  .set_body("<p>Un ejemplo en el cuerpo</p>")
+  .set_title("<span>Titulo random</span>")
+  .set_body("<p>Ejemplo de cuerpo random</p>")
   .show()
   //.hide()
   //.destroy()
