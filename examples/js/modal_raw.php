@@ -55,7 +55,7 @@
   const $modalWrapper = document.getElementById("modal")
   const $modalDialog = document.querySelector("[role='modal-dialog']")
 
-  $modalWrapper.addEventListener("click", () => $modalWrapper.classList.remove("modal-show"))
+  $modalWrapper.addEventListener("click", () => $modalWrapper.classList.add("modal-hide"))
   //si hacemos click en la zona blanca evitamos que llegue el evento al modalWrapper y se cierre el modal
   $modalDialog.addEventListener("click", e => e.stopPropagation())
 
@@ -132,8 +132,8 @@
 
   const mymodal = new MyModal("modal-object", "btn-open-object")
   mymodal
-    .set_title("<span style='border:1px solid red'>Some Title</span>")
-    .set_body("<p>Hola mundo</p>")
+    .set_title("<span>Some Title</span>")
+    .set_body("<p>Un ejemplo en el cuerpo</p>")
     //.show()
     //.destroy()
 
