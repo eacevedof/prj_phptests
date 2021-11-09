@@ -14,7 +14,7 @@
 <body>
 <main>
     <button type="button" id="btn-open">Open modal</button>
-    <button type="button" id="btn-open-object">Open modal object</button>
+    <button type="button" id="btn-open-2">Open modal object</button>
 
     <div id="modal" class="modal-wrapper">
         <div class="modal-dialog modal-dialog-grid" role="modal-dialog">
@@ -33,7 +33,7 @@
         </div>
     </div>
 
-    <div id="modal-object" class="modal-wrapper">
+    <div id="modal-2" class="modal-wrapper">
         <div class="modal-dialog modal-dialog-grid" role="modal-dialog">
             <header class="area-header">
                 <h2 role="title"></h2>
@@ -80,7 +80,7 @@
 
     const hide = () => $modal.classList.add("modal-hide")
 
-    function add_listeners() {
+    const add_listeners = () => {
       $modal.addEventListener("click", hide)
       if ($dialog) $dialog.addEventListener("click", e => e.stopPropagation())
       if ($opener) $opener.addEventListener("click", show)
@@ -130,7 +130,7 @@
     return add_listeners()
   }//MyModal
 
-  const mymodal = new MyModal("modal-object", "btn-open-object")
+  const mymodal = new MyModal("modal-2", "btn-open-2")
   mymodal
     .set_title("<span>Some Title</span>")
     .set_body("<p>Un ejemplo en el cuerpo</p>")
