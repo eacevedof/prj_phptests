@@ -67,6 +67,7 @@
   const $btnClose = document.querySelector("[role='btn-close']")
   $btnClose.addEventListener("click", () => $modalWrapper.classList.add("modal-hide"))
 
+  //MY MODAL
   function MyModal(idModal, idOpener=null) {
     const $modalWrapper = document.getElementById(idModal)
 
@@ -78,6 +79,11 @@
         $modalWrapper.classList.remove("modal-hide")
         $modalWrapper.classList.add("modal-show")
       })
+    }
+
+    const $btnClose = $modalWrapper.querySelector(":scope > [role='btn-close']")
+    if ($btnClose) {
+      $btnClose.addEventListener("click", () => $modalWrapper.classList.add("modal-hide"))
     }
 
     this.show = function (fnBefore, fnAfter) {
@@ -102,10 +108,16 @@
       return this
     }
 
+    this.destroy = function () {
+      if($btnOpen) $btnOpen.removeEventListener("click")
+      if($btnClose) $btnClose.removeEventListener("click")
+      if($modalWrapper) $modalWrapper.querySelector(":scope > [role='body']")?.innerHTML = ""
+    }
+
   }//MyModal
 
   const mymodal = new MyModal("modal-object", "btn-open-object")
-
+  mymodal.set_body("<p>Hola mundo</p>").show()
 })()
 </script>
 <style>
