@@ -35,17 +35,17 @@
 <script>
 const $btnOpen = document.getElementById("btn-open")
 $btnOpen.addEventListener("click", () => {
-  $modal.classList.remove("modal-hide")
-  $modal.classList.add("modal-show")
+  $modalWrapper.classList.remove("modal-hide")
+  $modalWrapper.classList.add("modal-show")
 })
-const $modal = document.getElementById("modal")
+const $modalWrapper = document.getElementById("modal")
 const $modalDialog = document.getElementById("modal-dialog")
 
-$modal.addEventListener("click", () => $modal.classList.remove("modal-show"))
+$modalWrapper.addEventListener("click", () => $modalWrapper.classList.remove("modal-show"))
 $modalDialog.addEventListener("click", e => e.stopPropagation())
 
 $btnClose = document.querySelector("[role='btn-close']")
-$btnClose.addEventListener("click", () => $modal.classList.add("modal-hide"))
+$btnClose.addEventListener("click", () => $modalWrapper.classList.add("modal-hide"))
 </script>
 <style>
 @import url("https://fonts.googleapis.com/css?family=Roboto&display=swap");
@@ -56,7 +56,9 @@ $btnClose.addEventListener("click", () => $modal.classList.add("modal-hide"))
 
 body {
   font-family: "Roboto", "sans-serif";
-  /*para tener una referencia sobre rem*/
+  /*
+  para tener una referencia y para poder trabajar con em y rem (ver el breakpoint)
+  */
   font-size: 16px;
 }
 
@@ -167,7 +169,7 @@ modal-dialog es la caja blanca donde va el contenido. El modal en sí.
 @media (max-height: 500px) {
   .modal-dialog {
     position: fixed;
-    top: 0.13rem;
+    top: 0.13em;
   }
 }
 
