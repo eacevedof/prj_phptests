@@ -12,11 +12,6 @@
     <title>modal raw</title>
 <style>
   @import url("https://fonts.googleapis.com/css?family=Roboto&display=swap");
-  : root {
-    --bg-modal: rgb(0,0,0, .75);
-    --bg-dialog: #fff;
-  }
-
   body {
     font-family: "Roboto", "sans-serif";
     /*
