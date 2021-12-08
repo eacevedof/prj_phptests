@@ -12,9 +12,7 @@ $ar = [
     ["id"=>5,"id_parent"=>3],
     ["id"=>6,"id_parent"=>5],
     ["id"=>8,"id_parent"=>7],
-
 ];
-pr($ar);
 
 function get_parent($id, $ar)
 {
@@ -38,5 +36,30 @@ function get_parent($id, $ar)
     return get_parent($idparent, $ar);
 }
 
+$ch = [];
+function get_childs($id, $ar)
+{
+    global $ch;
+
+    $childs = array_filter($ar, function ($item) use ($id){
+       return $item["id_parent"] === $id;
+    });
+
+    if(!$childs) return [];
+
+    $ids = array_map(function ($item){
+       return $item["id"];
+    }, $childs);
+
+    $ch = array_merge($ch, $ids);
+    $ch = array_unique($ch);
+
+    foreach ($ids as $id)
+        get_childs($id, $ar);
+}
+
+pr($ar);
 $parent = get_parent(8,$ar);
-bug($parent, "parent of 8");
+bug($parent, "parent of id=8");
+$childs = get_childs(2, $ar);
+bug($ch, "all childs of id=2");
