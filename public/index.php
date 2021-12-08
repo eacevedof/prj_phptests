@@ -12,7 +12,15 @@ function pr($var,$asHtml=0){
     
     echo "<pre style=\"background:yellow;border:1px solid;\">"
         .$sContent
-        ."<pre>";
+        ."</pre>";
+}
+
+function bug($var,$title=""){
+    $sContent= var_export($var,1);
+    if($title) echo "<b style=\"font-size: small; font-family: 'Roboto', 'sans-serif'\">$title</b>";
+    echo "<pre style=\"background:greenyellow;border:1px solid;\">"
+        .$sContent
+        ."</pre>";
 }
 
 function addto_incpath($sPathDir)

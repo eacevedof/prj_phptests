@@ -8,7 +8,7 @@
  * @observations
  *  https://github.com/eacevedof/prj_phptests/blob/master/dg.php
  */
-class dg
+final class dg
 {
     private static function wlog($mxContent,$sTitle="",$sFileName="")
     {
@@ -83,7 +83,7 @@ class dg
         self::wlog($var,$varname);
     }//l
     
-    public static function ln($var,$varname="",$filename)
+    public static function ln($var,$varname="",$filename="")
     {
         self::wlog($var,$varname,$filename);
     }//ln
