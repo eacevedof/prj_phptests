@@ -12,6 +12,8 @@ $ar = [
     ["id"=>5,"id_parent"=>3],
     ["id"=>6,"id_parent"=>5],
     ["id"=>8,"id_parent"=>7],
+    ["id"=>9,"id_parent"=>5],
+    ["id"=>10,"id_parent"=>5],
 ];
 
 function get_parent($id, $ar)
@@ -37,7 +39,7 @@ function get_parent($id, $ar)
 }
 
 $ch = [];
-function get_childs($id, $ar)
+function load_childs($id, $ar)
 {
     global $ch;
 
@@ -45,7 +47,7 @@ function get_childs($id, $ar)
        return $item["id_parent"] === $id;
     });
 
-    if(!$childs) return [];
+    if(!$childs) return;
 
     $ids = array_map(function ($item){
        return $item["id"];
@@ -55,11 +57,30 @@ function get_childs($id, $ar)
     $ch = array_unique($ch);
 
     foreach ($ids as $id)
-        get_childs($id, $ar);
+        load_childs($id, $ar);
 }
 
-pr($ar);
-$parent = get_parent(8,$ar);
-bug($parent, "parent of id=8");
-$childs = get_childs(2, $ar);
-bug($ch, "all childs of id=2");
+pr(json_encode($ar, JSON_PRETTY_PRINT));
+$parent = get_parent(8, $ar);
+bug($parent, "parent of id = 8");
+$parent = get_parent(10, $ar);
+bug($parent, "parent of id = 10");
+
+load_childs(2, $ar);
+bug($ch, "all childs of id = 2");
+
+$ch = [];
+load_childs(5, $ar);
+bug($ch, "all childs of id = 5");
+
+$ch = [];
+load_childs(3, $ar);
+bug($ch, "all childs of id = 3");
+
+$ch = [];
+load_childs(1, $ar);
+bug($ch, "all childs of id = 1");
+
+$ch = [];
+load_childs(10, $ar);
+bug($ch, "all childs of id = 10");
