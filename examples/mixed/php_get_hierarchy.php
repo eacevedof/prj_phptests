@@ -61,22 +61,22 @@ bug($parent, "parent of id = 8");
 $parent = get_parent(10, $ar);
 bug($parent, "parent of id = 10");
 
-$ch = [];
-load_childs(2, $ar, $ch);
-bug($ch, "all childs of id = 2");
+$childs = [];
+load_childs(2, $ar, $childs);
+bug($childs, "all childs of id = 2");
 
-$ch = [];
-load_childs(5, $ar, $ch);
-bug($ch, "all childs of id = 5");
+$childs = [];
+load_childs(5, $ar, $childs);
+bug($childs, "all childs of id = 5");
 
-$ch = [];
-load_childs(3, $ar, $ch);
-bug($ch, "all childs of id = 3");
+$childs = [];
+load_childs(3, $ar, $childs);
+bug($childs, "all childs of id = 3");
 
-$ch = [];
-load_childs(1, $ar, $ch);
-bug($ch, "all childs of id = 1");
+$childs = [];
+load_childs(1, $ar, $childs);
+bug($childs, "all childs of id = 1");
 
-$ch = [];
-load_childs(10, $ar, $ch);
-bug($ch, "all childs of id = 10");
+$childs = [];
+load_childs(10, $ar, $childs);
+bug($childs, "all childs of id = 10");
