@@ -50,7 +50,7 @@ $html[] = "<a href=\"https://github.com/USantaTecla-0-general/3-publicaciones/tr
            </a>";
 $html[] = "<br/><br/>";
 $html[] = "<a href=\"https://github.com/USantaTecla-ed-mpds/0-iteraciones\" target=\"_blank\">
-            Master en Programación y Diseño Software (mpds)
+            Repositorio Master en Programación y Diseño Software (mpds)
            </a>";
 
 $html[] = "<ol>";
