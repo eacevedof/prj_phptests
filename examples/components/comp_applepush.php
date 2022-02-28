@@ -16,6 +16,3 @@ $oComp->load_dev();
 //cambia las tablas erp_archivo por erp_archivo_aux
 //guarda el archivo remplazado con ok_<nombre-archivo>
 $oComp->send_push();
-
-
-
