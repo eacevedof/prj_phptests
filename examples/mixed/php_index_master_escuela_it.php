@@ -56,9 +56,8 @@ foreach($allpaths as $path) {
 }
 $html[] = "</ol>";
 
-$html[] = "<a href=\"https://github.com/eacevedof/prj_phptests/blob/master/examples/mixed/php_index_master_escuela_it.php\" target=\"_blank\">indexador en php</a>";
-
-$html[] = "<a href=\"https://usantateclams-s1j8471.slack.com/join/shared_invite/zt-12mp698rq-WJ~BXNOzcB5kfzFCgv0IzQ#/shared-invite/email\" target=\"_blank\">Slack</a>";
-$html[] = "<a href=\"https://app.slack.com/client/T02S3KYD464/C02QZ9SPM9D\" target=\"_blank\">Slack Canal</a>";
+$html[] = "<a href=\"https://usantateclams-s1j8471.slack.com/join/shared_invite/zt-12mp698rq-WJ~BXNOzcB5kfzFCgv0IzQ#/shared-invite/email\" target=\"_blank\">Slack</a><br/>";
+$html[] = "<a href=\"https://app.slack.com/client/T02S3KYD464/C02QZ9SPM9D\" target=\"_blank\">Slack Canal</a><br/>";
+$html[] = "<a href=\"https://github.com/eacevedof/prj_phptests/blob/master/examples/mixed/php_index_master_escuela_it.php\" target=\"_blank\">indexador en php</a><br/>";
 
 echo implode("\n", $html);
