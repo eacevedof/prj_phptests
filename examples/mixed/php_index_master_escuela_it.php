@@ -39,9 +39,11 @@ function add_dir($path){
 add_dir($thisdir);
 
 $html = [];
-$html[] = "<a href=\"https://github.com/USantaTecla-0-general/3-publicaciones/tree/master/USantaTecla\" target=\"_blank\">Repositorio USantaTecla-0-general/3-publicaciones</a>";
-$html[] = "<ol>";
+$html[] = "<a href=\"https://github.com/USantaTecla-0-general/3-publicaciones/tree/master/USantaTecla\" target=\"_blank\">
+            Repositorio USantaTecla-0-general/3-publicaciones
+           </a>";
 
+$html[] = "<ol>";
 foreach($allpaths as $path) {
     $pathweb = str_replace($thisdir, "", $path);
     $text = str_replace(["/","index.html"], [" ", ""], $pathweb);
@@ -50,4 +52,5 @@ foreach($allpaths as $path) {
 }
 $html[] = "</ol>";
 
+$html[] = "<a href=\"https://github.com/eacevedof/prj_phptests/blob/master/examples/mixed/php_index_master_escuela_it.php\" target=\"_blank\">indexador en php</a>";
 echo implode("\n", $html);
