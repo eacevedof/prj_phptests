@@ -39,6 +39,10 @@ function add_dir($path){
 add_dir($thisdir);
 
 $html = [];
+
+$html[] = "<a href=\"https://escuela.it/cursos/curso-fundamentos-del-software/estudiar\" target=\"_blank\">Cusso Fundamentos de Software Escuela It</a>";
+$html[] = "<hr/>";
+
 $html[] = "<a href=\"https://github.com/USantaTecla-0-general/3-publicaciones/tree/master/USantaTecla\" target=\"_blank\">
             Repositorio USantaTecla-0-general/3-publicaciones
            </a>";
@@ -53,4 +57,6 @@ foreach($allpaths as $path) {
 $html[] = "</ol>";
 
 $html[] = "<a href=\"https://github.com/eacevedof/prj_phptests/blob/master/examples/mixed/php_index_master_escuela_it.php\" target=\"_blank\">indexador en php</a>";
+
+$html[] = "<a href=\"https://usantateclams-s1j8471.slack.com/join/shared_invite/zt-12mp698rq-WJ~BXNOzcB5kfzFCgv0IzQ#/shared-invite/email\" target=\"_blank\">Slack</a>";
 echo implode("\n", $html);
