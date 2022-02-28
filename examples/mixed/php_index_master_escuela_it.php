@@ -39,7 +39,7 @@ function add_dir($path){
 add_dir($thisdir);
 
 $html = [];
-
+$html[] = "<center><a href=\"https://escuela-it-master.eduardoaf.com/\"><b>escuela-it-master.eduardoaf.com</b></a></center>";
 $html[] = "<a href=\"https://escuela.it/cursos/curso-fundamentos-del-software/estudiar\" target=\"_blank\">Cusso Fundamentos de Software Escuela It</a>";
 $html[] = "<br/><br/>";
 $html[] = "<a href=\"https://app.slack.com/client/T02S3KYD464/C02QZ9SPM9D\" target=\"_blank\">Slack Canal</a><br/>";
