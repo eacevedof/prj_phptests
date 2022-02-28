@@ -38,13 +38,16 @@ function add_dir($path){
 
 add_dir($thisdir);
 
-echo "<a href=\"https://github.com/USantaTecla-0-general/3-publicaciones/tree/master/USantaTecla\" target=\"_blank\">Repositorio USantaTecla-0-general/3-publicaciones</a>";
-echo "<ol>";
-//dd($thisdir);
+$html = [];
+$html[] = "<a href=\"https://github.com/USantaTecla-0-general/3-publicaciones/tree/master/USantaTecla\" target=\"_blank\">Repositorio USantaTecla-0-general/3-publicaciones</a>";
+$html[] = "<ol>";
+
 foreach($allpaths as $path) {
     $pathweb = str_replace($thisdir, "", $path);
     $text = str_replace(["/","index.html"], [" ", ""], $pathweb);
     $text = trim($text);
-    echo "<li><a href=\"$pathweb\" target=\"_blank\">$text</a></li>";
+    $html[] = "<li><a href=\"$pathweb\" target=\"_blank\">$text</a></li>";
 }
-echo "</ol>";
+$html[] = "</ol>";
+
+echo implode("\n", $html);
