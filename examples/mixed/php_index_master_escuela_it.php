@@ -48,6 +48,10 @@ $html[] = "<hr/>";
 $html[] = "<a href=\"https://github.com/USantaTecla-0-general/3-publicaciones/tree/master/USantaTecla\" target=\"_blank\">
             Repositorio USantaTecla-0-general/3-publicaciones
            </a>";
+$html[] = "<br/><br/>";
+$html[] = "<a href=\"https://github.com/USantaTecla-ed-mpds/0-iteraciones\" target=\"_blank\">
+            Master en Programación y Diseño Software
+           </a>";
 
 $html[] = "<ol>";
 foreach($allpaths as $path) {
