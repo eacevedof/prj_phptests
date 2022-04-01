@@ -10,12 +10,12 @@ final class PublishCommandHandler
     public function __construct(
         PostRepostiory $postRepository, 
         UserRepository $userRepository, 
-        DomainEventPublisher $eventDispacher
+        DomainEventPublisher $eventPublisher
     )
     {
         $this->postRepository = $postRepository;
         $this->userRepository = $userRepository;
-        $this->eventPublisher = $eventDispacher;
+        $this->eventPublisher = $eventPublisher;
     }
 
     public function handle(PostWasPublishedCommand $command)
