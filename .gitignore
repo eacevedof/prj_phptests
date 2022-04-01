@@ -10,6 +10,7 @@ vendor/theframework/components/apple/*.pem
 !/vendor/theframework/
 !/vendor/solid/
 !/vendor/DesignPatterns/
+!/vendor/EventSourcing/
 !/vendor/Rulez
 /examples/mixed/tmp/
 .idea
