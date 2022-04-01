@@ -3,19 +3,18 @@ namespace EventSourcing;
 
 final class DomainEventPublisher
 {
-    //array del tipo DomainEventSubscriber
-    private DomainEventSubscriber $subscribers;
+    private array $subscribers;
 
-    private static $instance = null;
+    private static ?DomainEventPublisher $instance = null;
 
     private $id = 0;
 
-    public static function instance()
+    public static function instance(): self
     {
-        if (null === static::instance) {
-            static::$instance = new self();
+        if (null === self::instance) {
+            self::$instance = new self();
         }
-        return static::$instance;
+        return self::$instance;
     }
 
     private function __construct()
@@ -28,25 +27,26 @@ final class DomainEventPublisher
         throw new \BadMethodCallException("Clone is not supported");
     }
 
-    public function subscribe(DomainEventSubscriber $subbscriber)
+    public function subscribe(DomainEventSubscriber $subbscriber): int
     {
         $id = $this->id;
         $this->subscribers[$id] = $subbscriber;
         $this->id++;
-        return $id;
+        return $this->id;
     }
 
-    public function ofId($id)
+    public function ofId(int $id): ?DomainEventSubscriber
     {
         return $this->subscribers[$id] ?? null;
     }
 
-    public function unsubscrib($id)
+    public function unsubscribe(int $id): self
     {
-        unset($this->subscribers[$id])
+        unset($this->subscribers[$id]);
+        return $this;
     }
 
-    public function publish(DomainEvent $domainEvent)
+    public function publish(IDomainEvent $domainEvent): self
     {
         foreach($this->subscribers as $subscriber)
         {
@@ -54,5 +54,6 @@ final class DomainEventPublisher
                 $subscriber->handle($domainEvent);
             }
         }
+        return $this;
     }
 }
