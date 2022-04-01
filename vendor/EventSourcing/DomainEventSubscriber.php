@@ -10,6 +10,6 @@ final class DomainEventSubscriber
 
     public function handle(): self
     {
-
+        return $this;
     }
 }
