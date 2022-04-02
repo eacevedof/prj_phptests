@@ -5,8 +5,8 @@ use App\Publishing\Domain\Event\PostWasPublishedCommand;
 use App\Publishing\Domain\ICommandHandler;
 use App\Publishing\Domain\PostEntity;
 use App\Publishing\Domain\PostRepository;
-use App\Publishing\Domain\PublishPostCommand;
 use App\Publishing\Domain\UserRepository;
+use App\Publishing\Domain\PublishPostCommand;
 use EventSourcing\IDomainEvent;
 
 /**
