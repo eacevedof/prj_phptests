@@ -14,12 +14,9 @@ final class PostController implements IDomainEventSubscriber
 {
     public function publish(): void
     {
+        DomainEventPublisher::instance()->subscribe($this);
+
         $postWasPublished = new PostWasPublishedCommand(1, 1);
-        $dispacher = DomainEventPublisher::instance();
-
-        //$dispacher->addListener();
-        $dispacher->subscribe($this);
-
         //ejecuto el servicio
         (new PublishCommandHandler(
             new PostRepository(),
