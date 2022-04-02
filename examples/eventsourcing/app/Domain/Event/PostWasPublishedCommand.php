@@ -8,18 +8,18 @@ final class PostWasPublishedCommand implements IDomainEvent
 {
     private int $postId;
     private int $authorId;
-    private int $occuredOn;
+    private int $occurredOn;
 
     public function __construct(int $postId, int $authorId)
     {
         $this->postId = $postId;
         $this->authorId = $authorId;
-        $this->occuredOn = (new DateTimeInmutable())->getTimestamp();
+        $this->occurredOn = (new DateTimeInmutable())->getTimestamp();
     }
 
     public function occurredOn(): int
     {
-        return $this->occuredOn;
+        return $this->occurredOn;
     }
 
     public function postId():int
