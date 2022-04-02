@@ -1,7 +1,7 @@
 <?php
 namespace App\Publishing\Application;
 
-use DesignPatterns\Repositories\UserRepository;
+use App\Publishing\Domain\UserRepository;
 use EventSourcing\IDomainEvent;
 use EventSourcing\IDomainEventSubscriber;
 use App\Publishing\Domain\Event\PostWasPublishedEvent;
@@ -23,7 +23,7 @@ final class NotifyService implements IDomainEventSubscriber
 
     public function handle(IDomainEvent $domainEvent): IDomainEventSubscriber
     {
-        $this->emailOnPostPublished();
+        $this->emailOnPostPublished($domainEvent);
         return $this;
     }
 }

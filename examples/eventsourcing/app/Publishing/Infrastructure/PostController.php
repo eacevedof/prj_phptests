@@ -4,7 +4,7 @@ namespace App\Publishing\Infrastructure;
 use EventSourcing\IDomainEventSubscriber;
 use EventSourcing\IDomainEvent;
 use EventSourcing\DomainEventPublisher;
-
+use \App\Publishing\Application\NotifyService;
 use \App\Publishing\Application\PublishCommandHandler;
 use \App\Publishing\Domain\Event\PostWasPublishedEvent;
 use \App\Publishing\Domain\PostRepository;
@@ -20,6 +20,7 @@ final class PostController implements IDomainEventSubscriber
         $userId = $this->getPost("userId", 1);
 
         $id = DomainEventPublisher::instance()->subscribe($this);
+        $idNotify = DomainEventPublisher::instance()->subscribe(new NotifyService());
         $postWasPublished = new PostWasPublishedEvent($postId, $userId);
 
         (new PublishCommandHandler(
@@ -28,6 +29,7 @@ final class PostController implements IDomainEventSubscriber
         ))->execute($postWasPublished);
 
         DomainEventPublisher::instance()->unsubscribe($id);
+        DomainEventPublisher::instance()->unsubscribe($idNotify);
     }
 
     public function handle(IDomainEvent $domainEvent): IDomainEventSubscriber

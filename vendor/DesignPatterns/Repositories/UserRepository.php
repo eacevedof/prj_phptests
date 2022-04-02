@@ -14,7 +14,7 @@ namespace DesignPatterns\Repositories;
 use DesignPatterns\Repositories\IfUserRepository;
 use DesignPatterns\Repositories\UserModel;
 
-class UserRepository implements IfUserRepository
+class UserRepositoryX implements IfUserRepository
 {
     private $oModel;
     
