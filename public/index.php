@@ -183,8 +183,9 @@ elseif(isset($_GET["f"]) || isset($_GET["c"]))
             $sPathFile = $arExamples["mixed"]["path"].DS.$sFile;
             if(is_file($sPathFile) && !$sFileContent) $sFileContent= $sPathFile;            
             $sPathFile = $arExamples["designpatterns"]["path"].DS.$sFile;
-            if(is_file($sPathFile) && !$sFileContent) $sFileContent= $sPathFile;                        
-            
+            if(is_file($sPathFile) && !$sFileContent) $sFileContent= $sPathFile;
+            $sPathFile = $arExamples["eventsourcing"]["path"].DS.$sFile;
+            if(is_file($sPathFile) && !$sFileContent) $sFileContent= $sPathFile;
             $sContent = file_get_contents($sFileContent);
             echo "<pre>";
             echo htmlentities($sContent);
