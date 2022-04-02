@@ -3,8 +3,10 @@
  * @file: post_controller.php
  * @info: [Rigor Talks - Playlist](https://www.youtube.com/watch?v=aKcmbOZV9mA&list=PLfgj7DYkKH3Cd8bdu5SIHGYXh_bPV2idP&index=1)
  */
+include_once(TFW_PATHROOTDS."vendor/autoload.php");
 include_once("app/bootstrap.php");
 
+use App\Publishing\Infrastructure\RequestTrait;
 use App\Publishing\Application\PublishCommandHandler;
 use App\Publishing\Domain\Event\PostWasPublishedCommand;
 use App\Publishing\Domain\PostRepository;
@@ -15,14 +17,19 @@ use EventSourcing\IDomainEvent;
 
 final class PostController implements IDomainEventSubscriber
 {
+    use RequestTrait;
+
     public function publish(): void
     {
+        $postId = $this->getPost("postId", 1);
+        $userId = $this->getPost("userId", 1);
+
         $id = DomainEventPublisher::instance()->subscribe($this);
-        $postWasPublished = new PostWasPublishedCommand(1, 1);
+        $postWasPublished = new PostWasPublishedCommand($postId, $userId);
         //ejecuto el servicio
         (new PublishCommandHandler(
-            new PostRepository(),
-            new UserRepository()
+            new PostRepository,
+            new UserRepository
         ))->execute($postWasPublished);
         DomainEventPublisher::instance()->unsubscribe($id);
     }

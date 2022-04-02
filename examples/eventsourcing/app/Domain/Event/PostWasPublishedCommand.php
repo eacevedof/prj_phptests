@@ -14,7 +14,7 @@ final class PostWasPublishedCommand implements IDomainEvent
     {
         $this->postId = $postId;
         $this->authorId = $authorId;
-        $this->occurredOn = (new DateTimeInmutable())->getTimestamp();
+        $this->occurredOn = (new DateTimeImmutable())->getTimestamp();
     }
 
     public function occurredOn(): int
