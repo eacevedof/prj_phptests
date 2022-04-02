@@ -9,6 +9,5 @@ use EventSourcing\DomainEventPublisher;
 $publisher = DomainEventPublisher::instance();
 (new PublishCommandHandler(
     new PostRepository(),
-    new UserRepository(),
-    $publisher,
+    new UserRepository()
 ))->handle();

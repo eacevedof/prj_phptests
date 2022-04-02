@@ -2,7 +2,7 @@
 namespace App\Publishing\Application;
 
 use App\Publishing\Domain\PostEntity;
-use App\Publishing\Domain\PostWasPublishedCommand;
+use App\Publishing\Domain\Event\PostWasPublishedCommand;
 use App\Publishing\Domain\PostRepository;
 use App\Publishing\Domain\UserRepository;
 
