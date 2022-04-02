@@ -24,10 +24,10 @@ final class PostEntity implements IEntity
     {
         $this->status = 1;
         DomainEventPublisher::instance()->publish(
-          new PostWasPublishedEvent(
-              $this->id(),
-              $user->id()
-          )
+            new PostWasPublishedEvent(
+                $this->id(),
+                $user->id()
+            )
         );
         return $this;
     }
