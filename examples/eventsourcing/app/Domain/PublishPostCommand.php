@@ -6,7 +6,7 @@ namespace App\Publishing\Domain;
  * https://youtu.be/6dwrRVt2wVg
  * esta clase es un DTO que se podria serializar y logar
  */
-final class PublishPostCommand
+final class PublishPostCommand implements IDto
 {
     private int $postId;
     private int $authorId;
