@@ -7,7 +7,7 @@ final class DomainEventPublisher
 
     private static ?DomainEventPublisher $instance = null;
 
-    private $id = 0;
+    private int $id = 0;
 
     public static function instance(): self
     {
@@ -27,15 +27,15 @@ final class DomainEventPublisher
         throw new \BadMethodCallException("Clone is not supported");
     }
 
-    public function subscribe(DomainEventSubscriber $subbscriber): int
+    public function subscribe(IDomainEventSubscriber $subscriber): int
     {
         $id = $this->id;
-        $this->subscribers[$id] = $subbscriber;
+        $this->subscribers[$id] = $subscriber;
         $this->id++;
-        return $this->id;
+        return $id;
     }
 
-    public function ofId(int $id): ?DomainEventSubscriber
+    public function ofId(int $id): ?IDomainEventSubscriber
     {
         return $this->subscribers[$id] ?? null;
     }

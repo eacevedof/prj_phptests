@@ -2,23 +2,24 @@
 namespace App\Publishing;
 
 use EventSourcing\IDomainEvent;
+use \DateTimeImmutable;
 
 final class PostWasPublishedCommand implements IDomainEvent
 {
     private int $postId;
     private int $authorId;
-    private DateTimeImmutable $occuredOn;
+    private int $occuredOn;
 
     public function __construct(int $postId, int $authorId)
     {
         $this->postId = $postId;
         $this->authorId = $authorId;
-        $this->occuredOn = (new \DateTimeInmutable())->getTimestamp();
+        $this->occuredOn = (new DateTimeInmutable())->getTimestamp();
     }
 
-    public function occurredOn(): DateTimeImmutable
+    public function occurredOn(): int
     {
-        return $this->occurredOn;
+        return $this->occuredOn;
     }
 
     public function postId():int
