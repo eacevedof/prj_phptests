@@ -2,10 +2,9 @@
 namespace App\Publishing\Domain;
 
 /**
+ * Rigor Talks - PHP - #20 - Application Services & Command Handlers (Spanish)
  * https://youtu.be/6dwrRVt2wVg
  * esta clase es un DTO que se podria serializar y logar
- * Class PublishPostCommand
- * @package App\Publishing\Domain
  */
 final class PublishPostCommand
 {
