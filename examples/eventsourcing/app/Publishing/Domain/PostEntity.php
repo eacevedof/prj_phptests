@@ -2,7 +2,7 @@
 namespace App\Publishing\Domain;
 
 use EventSourcing\DomainEventPublisher;
-use App\Publishing\Domain\Event\PostWasPublishedCommand;
+use \App\Publishing\Domain\Event\PostWasPublishedCommand;
 
 final class PostEntity implements IEntity
 {

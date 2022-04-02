@@ -1,12 +1,12 @@
 <?php
 namespace App\Publishing\Application;
 
-use App\Publishing\Domain\Event\PostWasPublishedCommand;
-use App\Publishing\Domain\ICommandHandler;
-use App\Publishing\Domain\PostEntity;
-use App\Publishing\Domain\PostRepository;
-use App\Publishing\Domain\UserRepository;
-use App\Publishing\Domain\PublishPostCommand;
+use \App\Publishing\Domain\Event\PostWasPublishedCommand;
+use \App\Publishing\Domain\ICommandHandler;
+use \App\Publishing\Domain\PostEntity;
+use \App\Publishing\Domain\PostRepository;
+use \App\Publishing\Domain\UserRepository;
+use \App\Publishing\Domain\PublishPostCommand;
 
 /**
  * La diferencia entre un application service y un command handler
@@ -21,8 +21,8 @@ final class PublishCommandHandler implements ICommandHandler
     private UserRepository $userRepository;
 
     public function __construct(
-        PostRepostiory $postRepository,
-        UserRepository $userRepository
+        \App\Publishing\Domain\PostRepository $postRepository,
+        \App\Publishing\Domain\UserRepository $userRepository
     )
     {
         $this->postRepository = $postRepository;
@@ -32,7 +32,7 @@ final class PublishCommandHandler implements ICommandHandler
     public function execute(PostWasPublishedCommand $command): PostEntity
     {
         $post = $this->postRepository->ofIdOrFail($command->postId());
-        $user = $this->postRepository->ofIdOrFail($command->authorId());
+        $user = $this->userRepository->ofIdOrFail($command->authorId());
         $post->publish($user);
         return $post;
     }

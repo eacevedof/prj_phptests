@@ -8,13 +8,13 @@ include_once("app/bootstrap.php");
 
 use EventSourcing\IDomainEventSubscriber;
 use EventSourcing\IDomainEvent;
-use App\Publishing\Infrastructure\RequestTrait;
-use App\Publishing\Application\PublishCommandHandler;
-use App\Publishing\Domain\Event\PostWasPublishedCommand;
-use App\Publishing\Domain\PostRepository;
-use App\Publishing\Domain\UserRepository;
 use EventSourcing\DomainEventPublisher;
 
+use \App\Publishing\Infrastructure\RequestTrait;
+use \App\Publishing\Application\PublishCommandHandler;
+use \App\Publishing\Domain\Event\PostWasPublishedCommand;
+use \App\Publishing\Domain\PostRepository;
+use \App\Publishing\Domain\UserRepository;
 
 final class PostController implements IDomainEventSubscriber
 {

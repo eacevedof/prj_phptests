@@ -1,11 +1,11 @@
 <?php
 namespace App\Publishing\Application;
 
-use App\Publishing\Domain\Event\PostWasPublishedCommand;
-use App\Publishing\Domain\ICommandHandler;
-use App\Publishing\Domain\IEntity;
-use App\Publishing\Domain\PostRepository;
-use App\Publishing\Domain\UserRepository;
+use \App\Publishing\Domain\Event\PostWasPublishedCommand;
+use \App\Publishing\Domain\ICommandHandler;
+use \App\Publishing\Domain\IEntity;
+use \App\Publishing\Domain\PostRepository;
+use \App\Publishing\Domain\UserRepository;
 use EventSourcing\IDomainEvent;
 
 final class LoggerDecorator
