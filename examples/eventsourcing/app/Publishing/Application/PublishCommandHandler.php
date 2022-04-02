@@ -7,7 +7,6 @@ use App\Publishing\Domain\PostEntity;
 use App\Publishing\Domain\PostRepository;
 use App\Publishing\Domain\UserRepository;
 use App\Publishing\Domain\PublishPostCommand;
-use EventSourcing\IDomainEvent;
 
 /**
  * La diferencia entre un application service y un command handler
@@ -20,9 +19,9 @@ final class PublishCommandHandler implements ICommandHandler
 {
     private PostRepository $postRepository;
     private UserRepository $userRepository;
-    
+
     public function __construct(
-        PostRepostiory $postRepository, 
+        PostRepostiory $postRepository,
         UserRepository $userRepository
     )
     {

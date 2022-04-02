@@ -6,14 +6,15 @@
 include_once(TFW_PATHROOTDS."vendor/autoload.php");
 include_once("app/bootstrap.php");
 
+use EventSourcing\IDomainEventSubscriber;
+use EventSourcing\IDomainEvent;
 use App\Publishing\Infrastructure\RequestTrait;
 use App\Publishing\Application\PublishCommandHandler;
 use App\Publishing\Domain\Event\PostWasPublishedCommand;
 use App\Publishing\Domain\PostRepository;
 use App\Publishing\Domain\UserRepository;
 use EventSourcing\DomainEventPublisher;
-use EventSourcing\IDomainEventSubscriber;
-use EventSourcing\IDomainEvent;
+
 
 final class PostController implements IDomainEventSubscriber
 {
@@ -26,7 +27,7 @@ final class PostController implements IDomainEventSubscriber
 
         $id = DomainEventPublisher::instance()->subscribe($this);
         $postWasPublished = new PostWasPublishedCommand($postId, $userId);
-        //ejecuto el servicio
+
         (new PublishCommandHandler(
             new PostRepository,
             new UserRepository
@@ -37,7 +38,7 @@ final class PostController implements IDomainEventSubscriber
     public function handle(IDomainEvent $domainEvent): IDomainEventSubscriber
     {
         if (get_class($domainEvent) !== PostWasPublishedCommand::class) return $this;
-
+        die("handling ...");
         return $this;
     }
 }
