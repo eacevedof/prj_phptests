@@ -2,10 +2,12 @@
 namespace App\Publishing\Application;
 
 use App\Publishing\Domain\Event\PostWasPublishedCommand;
+use App\Publishing\Domain\ICommandHandler;
 use App\Publishing\Domain\PostEntity;
 use App\Publishing\Domain\PostRepository;
 use App\Publishing\Domain\PublishPostCommand;
 use App\Publishing\Domain\UserRepository;
+use EventSourcing\IDomainEvent;
 
 /**
  * La diferencia entre un application service y un command handler
@@ -14,7 +16,7 @@ use App\Publishing\Domain\UserRepository;
  *
  * Este DTO permite que se pueda hacer un Decorator del
  */
-final class PublishCommandHandler
+final class PublishCommandHandler implements ICommandHandler
 {
     private PostRepository $postRepository;
     private UserRepository $userRepository;
@@ -36,3 +38,10 @@ final class PublishCommandHandler
         return $post;
     }
 }
+
+/*
+ * La ventaja de usar un command (event) es que al ser un DTO podriamos hacer un decorador (wrapper)
+ * que nos permita hacer logica extra antes y despues de execute.
+ *
+ * Ejemplo: LoggerDecorator
+ */

@@ -4,7 +4,7 @@ namespace App\Publishing\Domain;
 use EventSourcing\DomainEventPublisher;
 use App\Publishing\Domain\Event\PostWasPublishedCommand;
 
-final class PostEntity
+final class PostEntity implements IEntity
 {
     private int $id;
     private int $status;

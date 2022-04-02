@@ -1,7 +1,7 @@
 <?php
 namespace App\Publishing\Domain;
 
-final class UserEntity
+final class UserEntity implements IEntity
 {
     private int $id;
 
