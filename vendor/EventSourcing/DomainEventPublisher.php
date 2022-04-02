@@ -4,9 +4,7 @@ namespace EventSourcing;
 final class DomainEventPublisher
 {
     private array $subscribers;
-
     private static ?DomainEventPublisher $instance = null;
-
     private int $id = 0;
 
     public static function instance(): self
