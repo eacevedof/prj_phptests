@@ -5,6 +5,6 @@ final class UserRepository
 {
     public function ofIdOrFail(int $id): UserEntity
     {
-        return new UserEntity();
+        return new UserEntity($id);
     }
 }

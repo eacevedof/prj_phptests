@@ -8,7 +8,7 @@ final class PublishCommandHandler
 {
     private PostRepository $postRepository;
     private UserRepository $userRepository;
-    private IDomainEventSubscriber $eventPublisher;
+    private IDo $eventPublisher;
     
     public function __construct(
         PostRepostiory $postRepository, 
