@@ -13,3 +13,5 @@ include_once("Publishing/Domain/UserRepository.php");
 include_once("Publishing/Domain/Event/PostWasPublishedEvent.php");
 
 include_once("Publishing/Application/PublishCommandHandler.php");
+
+include_once("Publishing/Infrastructure/PostController.php");

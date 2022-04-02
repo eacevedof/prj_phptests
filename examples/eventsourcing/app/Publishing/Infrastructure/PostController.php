@@ -1,16 +1,10 @@
 <?php
-/**
- * @file: post_controller.php
- * @info: [Rigor Talks - Playlist](https://www.youtube.com/watch?v=aKcmbOZV9mA&list=PLfgj7DYkKH3Cd8bdu5SIHGYXh_bPV2idP&index=1)
- */
-include_once(TFW_PATHROOTDS."vendor/autoload.php");
-include_once("app/bootstrap.php");
+namespace App\Publishing\Infrastructure;
 
 use EventSourcing\IDomainEventSubscriber;
 use EventSourcing\IDomainEvent;
 use EventSourcing\DomainEventPublisher;
 
-use \App\Publishing\Infrastructure\RequestTrait;
 use \App\Publishing\Application\PublishCommandHandler;
 use \App\Publishing\Domain\Event\PostWasPublishedEvent;
 use \App\Publishing\Domain\PostRepository;
@@ -43,5 +37,3 @@ final class PostController implements IDomainEventSubscriber
         return $this;
     }
 }
-
-(new PostController())->publish();
