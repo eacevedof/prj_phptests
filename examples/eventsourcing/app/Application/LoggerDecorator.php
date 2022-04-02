@@ -4,6 +4,8 @@ namespace App\Publishing\Application;
 use App\Publishing\Domain\Event\PostWasPublishedCommand;
 use App\Publishing\Domain\ICommandHandler;
 use App\Publishing\Domain\IEntity;
+use App\Publishing\Domain\PostRepository;
+use App\Publishing\Domain\UserRepository;
 use EventSourcing\IDomainEvent;
 
 final class LoggerDecorator
@@ -22,6 +24,7 @@ final class LoggerDecorator
 }
 
 $decorator = new LoggerDecorator(new PublishCommandHandler(
-
+    new PostRepository(),
+    new UserRepository()
 ));
 $decorator->execute(new PostWasPublishedCommand(1, 1));
