@@ -29,8 +29,8 @@ final class PostController implements IDomainEventSubscriber
         $postWasPublished = new PostWasPublishedCommand($postId, $userId);
 
         (new PublishCommandHandler(
-            new PostRepository,
-            new UserRepository
+            new PostRepository(),
+            new UserRepository()
         ))->execute($postWasPublished);
         DomainEventPublisher::instance()->unsubscribe($id);
     }
@@ -38,7 +38,7 @@ final class PostController implements IDomainEventSubscriber
     public function handle(IDomainEvent $domainEvent): IDomainEventSubscriber
     {
         if (get_class($domainEvent) !== PostWasPublishedCommand::class) return $this;
-        die("handling ...");
+        echo "...persisting data";
         return $this;
     }
 }
