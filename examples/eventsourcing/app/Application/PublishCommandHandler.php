@@ -43,5 +43,5 @@ final class PublishCommandHandler implements ICommandHandler
  * La ventaja de usar un command (event) es que al ser un DTO podriamos hacer un decorador (wrapper)
  * que nos permita hacer logica extra antes y despues de execute.
  *
- * Ejemplo: LoggerDecorator
+ * Ejemplo: ver LoggerDecorator
  */
