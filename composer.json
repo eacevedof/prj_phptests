@@ -1,9 +1,6 @@
 {
     "require": {
-        "theframework/helpers": "^0.1.0",
-        "php-di/php-di": "^6.0",
-        "monolog/monolog": "^2.0",
-        "ocramius/proxy-manager": "^2.2"
+        "theframework/helpers": "^0.1.0"
     },
     "autoload":{
         "psr-4":{
@@ -12,6 +9,6 @@
         }
     },
     "require-dev": {
-        "phpunit/phpunit": "^7"
+        "phpunit/phpunit": "^9"
     }
 }

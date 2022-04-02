@@ -67,7 +67,7 @@ $arPaths["designpatterns"] = TFW_PATHROOTDS."examples".DS."designpatterns";
 $arPaths["components"] = TFW_PATHROOTDS."examples".DS."components";
 $arPaths["helpers"] = TFW_PATHROOTDS."examples".DS."helpers";
 $arPaths["mixed"] = TFW_PATHROOTDS."examples".DS."mixed";
-
+$arPaths["eventsourcing"] = TFW_PATHROOTDS."examples".DS."eventsourcing";
 
 $arPaths = array_map(function($sPath){
     return realpath($sPath);
@@ -103,6 +103,11 @@ $arExamples["designpatterns"] = array_filter(scandir($arPaths["designpatterns"])
     return !in_array($sFileName,[".",".."]) && strstr($sFileName,".php");
 });
 $arExamples["designpatterns"]["path"] = $arPaths["designpatterns"];
+
+$arExamples["eventsourcing"] = array_filter(scandir($arPaths["eventsourcing"]),function($sFileName){
+    return !in_array($sFileName,[".",".."]) && strstr($sFileName,".php");
+});
+$arExamples["eventsourcing"]["path"] = $arPaths["eventsourcing"];
 
 //var_dump($arExamples);
 
@@ -156,6 +161,7 @@ elseif(isset($_GET["f"]) || isset($_GET["c"]))
     $sKey = ($sKey || array_search($sFile,$arExamples["helpers"]));
     $sKey = ($sKey || array_search($sFile,$arExamples["mixed"]));
     $sKey = ($sKey || array_search($sFile,$arExamples["designpatterns"]));
+    $sKey = ($sKey || array_search($sFile,$arExamples["eventsourcing"]));
     $sKey = ($sKey || array_search($sFile,$arExamples["js"]));
     if(!$sKey)
     {

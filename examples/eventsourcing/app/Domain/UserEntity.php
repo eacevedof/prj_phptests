@@ -10,11 +10,6 @@ final class UserEntity implements IEntity
         $this->id = $id;
     }
 
-    public function publish()
-    {
-
-    }
-
     public function id(): int
     {
         return $this->id;

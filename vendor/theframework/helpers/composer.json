@@ -1,0 +1,29 @@
+{
+    "version":"0.1.0",
+    "updated":"20180225",
+    "name": "theframework/helpers",
+    "type":"library",
+    "description": "Library that helps you to create html elements using OOP",
+    "minimum-stability": "stable",
+    "keywords": [
+        "helpers","html elements","view helpers"
+    ],
+    "homepage": "https://github.com/eacevedof/prj_theframework_helpers",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Eduardo Acevedo Farje",
+            "email": "eacevedof@gmail.com",
+            "homepage": "http://eduardoaf.com",
+            "role": "Developer",
+            "github":"https://github.com/eacevedof/",
+            "site":"helpers.theframework.es"             
+        }
+    ],
+    "require": {
+        "php": ">=5.3.0"
+    },
+    "autoload": {
+        "files": ["autoload.php"]
+    }    
+}
