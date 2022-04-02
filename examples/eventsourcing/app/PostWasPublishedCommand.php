@@ -1,4 +1,6 @@
 <?php
+namespace App\Publishing;
+
 use EventSourcing\IDomainEvent;
 
 final class PostWasPublishedCommand implements IDomainEvent

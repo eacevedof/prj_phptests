@@ -1,4 +1,5 @@
 <?php
+namespace App\Publishing;
 use EventSourcing\DomainEventPublisher;
 
 final class PublishCommandHandler

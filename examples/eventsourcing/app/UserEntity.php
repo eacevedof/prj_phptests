@@ -1,7 +1,7 @@
 <?php
+namespace App\Publishing;
 
-
-final class PostEntity
+final class UserEntity
 {
     public function publish()
     {
