@@ -28,13 +28,10 @@ final class PostController implements IDomainEventSubscriber
         ))->execute($postWasPublished);
     }
 
-    public function isSubscribedTo(IDomainEvent $domainEvent): bool
-    {
-        return get_class($domainEvent) === PostWasPublishedCommand::class;
-    }
-
     public function handle(IDomainEvent $domainEvent): IDomainEventSubscriber
     {
+        if (get_class($domainEvent) !== PostWasPublishedCommand::class) return $this;
+
 
         return $this;
     }
