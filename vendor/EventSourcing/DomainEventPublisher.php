@@ -54,4 +54,12 @@ final class DomainEventPublisher
         }
         return $this;
     }
+
+    /**
+     * https://youtu.be/kFJljyhOWpg?list=PLfgj7DYkKH3Cd8bdu5SIHGYXh_bPV2idP&t=317
+     * @param $eventName
+     * @param $callback
+     */
+    public function addListener($eventName, $callback)
+    {}
 }

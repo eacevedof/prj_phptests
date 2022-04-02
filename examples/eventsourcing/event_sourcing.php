@@ -7,12 +7,18 @@ use App\Publishing\Domain\UserRepository;
 use EventSourcing\DomainEventPublisher;
 use App\Publishing\Domain\PublishPostCommand;
 
-//este es el payload de entrada
-$command = new PublishPostCommand(1, 1);
-$publisher = DomainEventPublisher::instance();
+final class PostController
+{
+    public function publish(): void
+    {
+        $dispacher = DomainEventPublisher::instance();
+        $dispacher->subscribe();
+        //ejecuto el servicio
+        (new PublishCommandHandler(
+            new PostRepository(),
+            new UserRepository()
+        ))->execute(new PublishPostCommand(1, 1));
+    }
+}
 
-//ejecuto el servicio
-(new PublishCommandHandler(
-    new PostRepository(),
-    new UserRepository()
-))->execute($command);
+(new PostController())->publish();
