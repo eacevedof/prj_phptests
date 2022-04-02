@@ -1,5 +1,7 @@
 <?php
-namespace App\Publishing\Domain;
+namespace App\Publishing\Domain\Event;
+
+use EventSourcing\IDomainEvent;
 
 /**
  * Rigor Talks - PHP - #20 - Application Services & Command Handlers (Spanish)

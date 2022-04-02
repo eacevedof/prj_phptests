@@ -57,6 +57,7 @@ final class DomainEventPublisher
 
     /**
      * https://youtu.be/kFJljyhOWpg?list=PLfgj7DYkKH3Cd8bdu5SIHGYXh_bPV2idP&t=317
+     * el servicio dispara el evento y el controlador escucha, ese evento
      * @param $eventName
      * @param $callback
      */
