@@ -10,4 +10,4 @@ $publisher = DomainEventPublisher::instance();
 (new PublishCommandHandler(
     new PostRepository(),
     new UserRepository()
-))->handle();
+))->execute();
