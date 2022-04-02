@@ -1,7 +1,5 @@
 <?php
-namespace App\Publishing;
-
-use App\Publishing\UserEntity;
+namespace App\Publishing\Domain;
 
 final class UserRepository
 {

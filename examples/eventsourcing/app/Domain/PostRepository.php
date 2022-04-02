@@ -1,5 +1,5 @@
 <?php
-namespace App\Publishing;
+namespace App\Publishing\Domain;
 
 final class PostRepository
 {

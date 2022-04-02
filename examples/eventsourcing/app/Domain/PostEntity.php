@@ -1,5 +1,5 @@
 <?php
-namespace App\Publishing;
+namespace App\Publishing\Domain;
 
 final class PostEntity
 {
@@ -10,13 +10,13 @@ final class PostEntity
         $this->id = $id;
     }
 
-    public function publish()
-    {
-
-    }
-
     public function id(): int
     {
         return $this->id;
+    }
+
+    public function publish()
+    {
+
     }
 }

@@ -1,17 +1,19 @@
 <?php
-namespace App\Publishing;
-use EventSourcing\DomainEventPublisher;
+namespace App\Publishing\Application;
+
+use App\Publishing\Domain\PostWasPublishedCommand;
+use EventSourcing\IDomainEventSubscriber;
 
 final class PublishCommandHandler
 {
     private PostRepository $postRepository;
     private UserRepository $userRepository;
-    private DomainEventPublisher $eventPublisher;
+    private IDomainEventSubscriber $eventPublisher;
     
     public function __construct(
         PostRepostiory $postRepository, 
         UserRepository $userRepository, 
-        DomainEventPublisher $eventPublisher
+        IDomainEventPublisher $eventPublisher
     )
     {
         $this->postRepository = $postRepository;
