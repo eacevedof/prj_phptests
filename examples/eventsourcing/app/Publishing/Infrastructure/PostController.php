@@ -35,7 +35,7 @@ final class PostController implements IDomainEventSubscriber
     public function handle(IDomainEvent $domainEvent): IDomainEventSubscriber
     {
         if (get_class($domainEvent) !== PostWasPublishedEvent::class) return $this;
-        echo "...persisting data";
+        echo "...persisting data <br/>";
         return $this;
     }
 }
