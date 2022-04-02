@@ -2,7 +2,7 @@
 namespace App\Publishing\Domain;
 
 use EventSourcing\DomainEventPublisher;
-use \App\Publishing\Domain\Event\PostWasPublishedCommand;
+use \App\Publishing\Domain\Event\PostWasPublishedEvent;
 
 final class PostEntity implements IEntity
 {
@@ -24,7 +24,7 @@ final class PostEntity implements IEntity
     {
         $this->status = 1;
         DomainEventPublisher::instance()->publish(
-          new PostWasPublishedCommand(
+          new PostWasPublishedEvent(
               $this->id(),
               $user->id()
           )

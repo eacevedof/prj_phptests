@@ -10,6 +10,6 @@ include_once("Publishing/Domain/UserEntity.php");
 include_once("Publishing/Domain/PostRepository.php");
 include_once("Publishing/Domain/UserRepository.php");
 
-include_once("Publishing/Domain/Event/PostWasPublishedCommand.php");
+include_once("Publishing/Domain/Event/PostWasPublishedEvent.php");
 
 include_once("Publishing/Application/PublishCommandHandler.php");

@@ -1,7 +1,7 @@
 <?php
 namespace App\Publishing\Application;
 
-use \App\Publishing\Domain\Event\PostWasPublishedCommand;
+use \App\Publishing\Domain\Event\PostWasPublishedEvent;
 use \App\Publishing\Domain\ICommandHandler;
 use \App\Publishing\Domain\IEntity;
 use \App\Publishing\Domain\PostRepository;
@@ -27,4 +27,4 @@ $decorator = new LoggerDecorator(new PublishCommandHandler(
     new PostRepository(),
     new UserRepository()
 ));
-$decorator->execute(new PostWasPublishedCommand(1, 1));
+$decorator->execute(new PostWasPublishedEvent(1, 1));

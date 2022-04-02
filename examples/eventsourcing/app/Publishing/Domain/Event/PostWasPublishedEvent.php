@@ -4,7 +4,7 @@ namespace App\Publishing\Domain\Event;
 use EventSourcing\IDomainEvent;
 use \DateTimeImmutable;
 
-final class PostWasPublishedCommand implements IDomainEvent
+final class PostWasPublishedEvent implements IDomainEvent
 {
     private int $postId;
     private int $authorId;
