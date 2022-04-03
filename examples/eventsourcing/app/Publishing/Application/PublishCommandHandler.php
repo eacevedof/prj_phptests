@@ -28,6 +28,7 @@ final class PublishCommandHandler implements ICommandHandler
 
     public function execute(PublishCommand $command): PostEntity
     {
+        echo "command handler execute ...<br/>";
         $post = $this->postRepository->ofIdOrFail($command->postId());
         $user = $this->userRepository->ofIdOrFail($command->authorId());
         $post->publish($user);
