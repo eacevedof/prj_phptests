@@ -11,7 +11,7 @@ use \App\Publishing\Domain\Ports\IUserRepository;
  * es que la ejecucion de un servicio se hace teniendo como entrada un input plano
  * mientras que la de un command handler se hace teniendo como entrada un DTO llammado command
  *
- * Este DTO permite que se pueda hacer un Decorator del
+ * Este DTO permite que se pueda hacer un Decorator del Command Handler
  */
 final class PublishCommandHandler implements ICommandHandler
 {

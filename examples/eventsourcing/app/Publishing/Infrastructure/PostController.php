@@ -21,12 +21,12 @@ final class PostController
         DomainEventPublisher::instance()->subscribe(new NotifyService(new UserRepository()));
         $publishCommand = new PublishCommand($postId, $userId);
 
-        (new PublishCommandHandler(
+        $post = (new PublishCommandHandler(
             new PostRepository(),
             new UserRepository()
         ))->execute($publishCommand);
 
-        $this->set("status", "Published")
+        $this->set("post", $post)
             ->render("post-status");
     }
 
