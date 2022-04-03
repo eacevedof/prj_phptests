@@ -22,8 +22,7 @@ final class PublishCommandHandler implements ICommandHandler
     public function __construct(
         IPostRepository $postRepository,
         IUserRepository $userRepository
-    )
-    {
+    ){
         $this->postRepository = $postRepository;
         $this->userRepository = $userRepository;
     }
