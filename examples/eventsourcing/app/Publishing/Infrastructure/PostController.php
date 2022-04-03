@@ -8,8 +8,8 @@ use EventSourcing\DomainEventPublisher;
 use \App\Publishing\Application\NotifyService;
 use \App\Publishing\Application\PublishCommandHandler;
 use \App\Publishing\Domain\Event\PostWasPublishedEvent;
-use \App\Publishing\Domain\PostRepository;
-use \App\Publishing\Domain\UserRepository;
+use \App\Publishing\Infrastructure\PostRepository;
+use \App\Publishing\Infrastructure\UserRepository;
 
 final class PostController implements IDomainEventSubscriber
 {
