@@ -8,7 +8,7 @@ final class PostRepository
         return new PostEntity($id);
     }
 
-    public function save(PostEntity $postEntity): int
+    public function save(PostEntity $postEntity): void
     {
         echo "post saved ...<br/>";
     }

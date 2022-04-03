@@ -13,6 +13,7 @@ use \App\Publishing\Domain\UserRepository;
 final class PostController implements IDomainEventSubscriber
 {
     use RequestTrait;
+    use ViewTrait;
 
     public function publish(): void
     {
@@ -27,13 +28,17 @@ final class PostController implements IDomainEventSubscriber
             new PostRepository(),
             new UserRepository()
         ))->execute($postWasPublished);
-
     }
 
     public function handle(IDomainEvent $domainEvent): IDomainEventSubscriber
     {
         if (get_class($domainEvent) !== PostWasPublishedEvent::class) return $this;
-        echo "...persisting data <br/>";
+
+        $this
+            ->set("status", "Published")
+            ->render("post-status")
+        ;
+
         return $this;
     }
 }

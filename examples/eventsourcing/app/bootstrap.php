@@ -1,5 +1,6 @@
 <?php
 include_once("Publishing/Infrastructure/RequestTrait.php");
+include_once("Publishing/Infrastructure/ViewTrait.php");
 
 include_once("Publishing/Domain/IEntity.php");
 
