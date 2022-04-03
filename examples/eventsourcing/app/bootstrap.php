@@ -1,23 +1,9 @@
 <?php
-include_once("Publishing/Infrastructure/RequestTrait.php");
-include_once("Publishing/Infrastructure/ViewTrait.php");
-
-include_once("Publishing/Domain/IEntity.php");
-
-include_once("Publishing/Domain/PostEntity.php");
-include_once("Publishing/Domain/UserEntity.php");
-
-include_once("Publishing/Domain/Ports/IPostRepository.php");
-include_once("Publishing/Domain/Ports/IUserRepository.php");
-
-include_once("Publishing/Domain/Events/PostWasPublishedEvent.php");
-
-include_once("Publishing/Application/ICommandHandler.php");
-include_once("Publishing/Application/Commands/ICommand.php");
-include_once("Publishing/Application/Commands/PublishCommand.php");
-include_once("Publishing/Application/PublishCommandHandler.php");
-include_once("Publishing/Application/NotifyService.php");
-
-include_once("Publishing/Infrastructure/PostController.php");
-include_once("Publishing/Infrastructure/Repositories/UserRepository.php");
-include_once("Publishing/Infrastructure/Repositories/PostRepository.php");
+$pathappds = dirname(__FILE__).DIRECTORY_SEPARATOR;
+spl_autoload_register(function(string $nsclass) use ($pathappds) {
+    //App\\Publishing\\Infrastructure\\PostController
+    $nsclass = str_replace(["App\\","\\"],["","/"], $nsclass);
+    $nsclass .= ".php";
+    $pathclass = realpath("$pathappds$nsclass");
+    if (is_file($pathclass)) include_once($pathclass);
+});
