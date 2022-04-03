@@ -36,7 +36,7 @@ final class DomainEventPublisher
     public function publish(IDomainEvent $domainEvent): self
     {
         foreach($this->subscribers as $subscriber) {
-            $subscriber->onEvent($domainEvent);
+            $subscriber->onDomainEvent($domainEvent);
         }
         return $this;
     }

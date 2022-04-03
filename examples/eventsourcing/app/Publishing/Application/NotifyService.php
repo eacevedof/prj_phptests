@@ -28,7 +28,7 @@ final class NotifyService implements IDomainEventSubscriber
         );
     }
 
-    public function handle(IDomainEvent $domainEvent): IDomainEventSubscriber
+    public function onDomainEvent(IDomainEvent $domainEvent): IDomainEventSubscriber
     {
         $this->emailOnPostPublished($domainEvent);
         return $this;
