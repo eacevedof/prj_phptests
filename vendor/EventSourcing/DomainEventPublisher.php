@@ -33,6 +33,14 @@ final class DomainEventPublisher
         return $id;
     }
 
+    public function publish(IDomainEvent $domainEvent): self
+    {
+        foreach($this->subscribers as $subscriber) {
+            $subscriber->onEvent($domainEvent);
+        }
+        return $this;
+    }
+
     public function ofId(int $id): ?IDomainEventSubscriber
     {
         return $this->subscribers[$id] ?? null;
@@ -41,14 +49,6 @@ final class DomainEventPublisher
     public function unsubscribe(int $id): self
     {
         unset($this->subscribers[$id]);
-        return $this;
-    }
-
-    public function publish(IDomainEvent $domainEvent): self
-    {
-        foreach($this->subscribers as $subscriber) {
-            $subscriber->handle($domainEvent);
-        }
         return $this;
     }
 }
