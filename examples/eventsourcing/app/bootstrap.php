@@ -10,7 +10,7 @@ include_once("Publishing/Domain/UserEntity.php");
 include_once("Publishing/Domain/Ports/IPostRepository.php");
 include_once("Publishing/Domain/Ports/IUserRepository.php");
 
-include_once("Publishing/Domain/Event/PostWasPublishedEvent.php");
+include_once("Publishing/Domain/Events/PostWasPublishedEvent.php");
 
 include_once("Publishing/Application/ICommandHandler.php");
 include_once("Publishing/Application/Commands/ICommand.php");

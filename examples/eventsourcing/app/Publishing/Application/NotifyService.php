@@ -1,18 +1,25 @@
 <?php
 namespace App\Publishing\Application;
 
-use App\Publishing\Domain\UserRepository;
+use App\Publishing\Domain\Ports\IUserRepository;
 use EventSourcing\IDomainEvent;
 use EventSourcing\IDomainEventSubscriber;
 use App\Publishing\Domain\Events\PostWasPublishedEvent;
 
 final class NotifyService implements IDomainEventSubscriber
 {
+    private IUserRepository $userRepository;
+
+    public function __construct(IUserRepository $userRepository)
+    {
+        $this->userRepository = $userRepository;
+    }
+
     private function emailOnPostPublished(IDomainEvent $domainEvent): void
     {
         if (get_class($domainEvent)!==PostWasPublishedEvent::class) return;
 
-        $emailTo = (new UserRepository)->ofIdOrFail($domainEvent->authorId())->email();
+        $emailTo =  $this->userRepository->ofIdOrFail($domainEvent->authorId())->email();
         echo "...sending email<br/>";
         mb_send_mail(
             $emailTo,
