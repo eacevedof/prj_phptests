@@ -7,12 +7,14 @@ use App\Publishing\Domain\IEntity;
 use App\Publishing\Domain\PostRepository;
 use App\Publishing\Domain\UserRepository;
 use App\Publishing\Domain\Events\PostWasPublishedEvent;
+use App\Publishing\Infrastructure\Monolog;
 
 final class LoggerDecorator
 {
     private ICommandHandler $commandHandler;
+    private Monolog $monolog;
 
-    public function __construct(ICommandHandler $commandHandler, $monolog)
+    public function __construct(ICommandHandler $commandHandler, Monolog $monolog)
     {
         $this->commandHandler = $commandHandler;
         $this->monolog = $monolog;
