@@ -13,6 +13,8 @@ include_once("Publishing/Domain/UserRepository.php");
 include_once("Publishing/Domain/Event/PostWasPublishedEvent.php");
 
 include_once("Publishing/Application/ICommandHandler.php");
+include_once("Publishing/Application/Commands/ICommand.php");
+include_once("Publishing/Application/Commands/PublishCommand.php");
 include_once("Publishing/Application/PublishCommandHandler.php");
 include_once("Publishing/Application/NotifyService.php");
 

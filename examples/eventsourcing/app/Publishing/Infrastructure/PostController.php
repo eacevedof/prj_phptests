@@ -1,6 +1,7 @@
 <?php
 namespace App\Publishing\Infrastructure;
 
+use App\Publishing\Application\Commands\PublishCommand;
 use EventSourcing\IDomainEventSubscriber;
 use EventSourcing\IDomainEvent;
 use EventSourcing\DomainEventPublisher;
@@ -22,12 +23,12 @@ final class PostController implements IDomainEventSubscriber
 
         DomainEventPublisher::instance()->subscribe($this);
         DomainEventPublisher::instance()->subscribe(new NotifyService());
-        $postWasPublished = new PostWasPublishedEvent($postId, $userId);
+        $publishCommand = new PublishCommand($postId, $userId);
 
         (new PublishCommandHandler(
             new PostRepository(),
             new UserRepository()
-        ))->execute($postWasPublished);
+        ))->execute($publishCommand);
     }
 
     public function handle(IDomainEvent $domainEvent): IDomainEventSubscriber

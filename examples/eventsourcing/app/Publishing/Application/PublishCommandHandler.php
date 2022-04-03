@@ -1,7 +1,7 @@
 <?php
 namespace App\Publishing\Application;
 
-use \App\Publishing\Domain\Event\PostWasPublishedEvent;
+use App\Publishing\Application\Commands\PublishCommand;
 use \App\Publishing\Domain\PostEntity;
 use \App\Publishing\Domain\PostRepository;
 use \App\Publishing\Domain\UserRepository;
@@ -28,7 +28,7 @@ final class PublishCommandHandler implements ICommandHandler
         $this->userRepository = $userRepository;
     }
 
-    public function execute(PostWasPublishedEvent $command): PostEntity
+    public function execute(PublishCommand $command): PostEntity
     {
         $post = $this->postRepository->ofIdOrFail($command->postId());
         $user = $this->userRepository->ofIdOrFail($command->authorId());
