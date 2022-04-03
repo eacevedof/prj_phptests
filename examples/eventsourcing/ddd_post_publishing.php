@@ -4,7 +4,7 @@
  * @info: [Rigor Talks - Playlist](https://www.youtube.com/watch?v=aKcmbOZV9mA&list=PLfgj7DYkKH3Cd8bdu5SIHGYXh_bPV2idP&index=1)
  */
 include_once(TFW_PATHROOTDS."vendor/autoload.php");
-include_once("app/bootstrap.php");
+include_once("app/autoload.php");
 
 use App\Publishing\Infrastructure\PostController;
 (new PostController())->publish();
