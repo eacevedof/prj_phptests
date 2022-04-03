@@ -4,7 +4,7 @@ namespace App\Publishing\Application;
 use App\Publishing\Domain\UserRepository;
 use EventSourcing\IDomainEvent;
 use EventSourcing\IDomainEventSubscriber;
-use App\Publishing\Domain\Event\PostWasPublishedEvent;
+use App\Publishing\Domain\Events\PostWasPublishedEvent;
 
 final class NotifyService implements IDomainEventSubscriber
 {

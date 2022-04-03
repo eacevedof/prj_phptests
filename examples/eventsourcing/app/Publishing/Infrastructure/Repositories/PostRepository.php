@@ -1,5 +1,5 @@
 <?php
-namespace App\Publishing\Infrastructure;
+namespace App\Publishing\Infrastructure\Repositories;
 
 use App\Publishing\Domain\Ports\IPostRepository;
 use App\Publishing\Domain\PostEntity;

@@ -1,5 +1,5 @@
 <?php
-namespace App\Publishing\Infrastructure;
+namespace App\Publishing\Infrastructure\Repositories;
 
 use App\Publishing\Domain\Ports\IUserRepository;
 use App\Publishing\Domain\UserEntity;

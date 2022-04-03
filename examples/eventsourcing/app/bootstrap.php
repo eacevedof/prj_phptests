@@ -19,5 +19,5 @@ include_once("Publishing/Application/PublishCommandHandler.php");
 include_once("Publishing/Application/NotifyService.php");
 
 include_once("Publishing/Infrastructure/PostController.php");
-include_once("Publishing/Infrastructure/UserRepository.php");
-include_once("Publishing/Infrastructure/PostRepository.php");
+include_once("Publishing/Infrastructure/Repositories/UserRepository.php");
+include_once("Publishing/Infrastructure/Repositories/PostRepository.php");

@@ -1,7 +1,7 @@
 <?php
 namespace App\Publishing\Application;
 
-use \App\Publishing\Domain\Event\PostWasPublishedEvent;
+use \App\Publishing\Domain\Events\PostWasPublishedEvent;
 use \App\Publishing\Domain\ICommandHandler;
 use \App\Publishing\Domain\IEntity;
 use \App\Publishing\Domain\PostRepository;

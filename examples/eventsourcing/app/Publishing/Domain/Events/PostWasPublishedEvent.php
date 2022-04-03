@@ -1,5 +1,5 @@
 <?php
-namespace App\Publishing\Domain\Event;
+namespace App\Publishing\Domain\Events;
 
 use EventSourcing\IDomainEvent;
 use \DateTimeImmutable;
