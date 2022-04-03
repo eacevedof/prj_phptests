@@ -1,7 +1,10 @@
 <?php
-namespace App\Publishing\Domain;
+namespace App\Publishing\Infrastructure;
 
-final class UserRepository
+use App\Publishing\Domain\Ports\IUserRepository;
+use App\Publishing\Domain\UserEntity;
+
+final class UserRepository implements IUserRepository
 {
     public function ofIdOrFail(int $id): UserEntity
     {

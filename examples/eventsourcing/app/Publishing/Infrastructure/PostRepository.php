@@ -1,7 +1,10 @@
 <?php
-namespace App\Publishing\Domain;
+namespace App\Publishing\Infrastructure;
 
-final class PostRepository
+use App\Publishing\Domain\Ports\IPostRepository;
+use App\Publishing\Domain\PostEntity;
+
+final class PostRepository implements IPostRepository
 {
     public function ofIdOrFail(int $id): PostEntity
     {
