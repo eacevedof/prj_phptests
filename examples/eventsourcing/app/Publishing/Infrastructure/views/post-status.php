@@ -1,4 +1,4 @@
-<h1>Post status: <?=$status ?? "unpublished"?></h1>
+<h1>Post status: <?=$status ?? "Not published"?></h1>
 <p>
   Qué es Lorem Ipsum?<br/>
   Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. <br/>
