@@ -7,6 +7,12 @@ final class Monolog
     public function log(string $content, string $title=""): void
     {
         $path = dirname(__FILE__).DIRECTORY_SEPARATOR."monolog.log";
-        file_put_contents($path, $content);
+        $final = [
+            "",
+            date("Y-m-d H:i:s"),
+            $title,
+            $content
+        ];
+        file_put_contents($path, implode("\n", $final));
     }
 }
