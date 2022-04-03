@@ -19,8 +19,8 @@ final class PostController implements IDomainEventSubscriber
         $postId = $this->getPost("postId", 1);
         $userId = $this->getPost("userId", 1);
 
-        $id = DomainEventPublisher::instance()->subscribe($this);
-        $idNotify = DomainEventPublisher::instance()->subscribe(new NotifyService());
+        DomainEventPublisher::instance()->subscribe($this);
+        DomainEventPublisher::instance()->subscribe(new NotifyService());
         $postWasPublished = new PostWasPublishedEvent($postId, $userId);
 
         (new PublishCommandHandler(
@@ -28,8 +28,6 @@ final class PostController implements IDomainEventSubscriber
             new UserRepository()
         ))->execute($postWasPublished);
 
-        DomainEventPublisher::instance()->unsubscribe($id);
-        DomainEventPublisher::instance()->unsubscribe($idNotify);
     }
 
     public function handle(IDomainEvent $domainEvent): IDomainEventSubscriber

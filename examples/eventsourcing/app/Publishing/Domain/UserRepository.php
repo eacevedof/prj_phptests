@@ -7,4 +7,9 @@ final class UserRepository
     {
         return new UserEntity($id, "some@email.com");
     }
+
+    public function save(UserEntity $userEntity): int
+    {
+        echo "user saved ...<br/>";
+    }
 }

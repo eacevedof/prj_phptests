@@ -33,6 +33,7 @@ final class PublishCommandHandler implements ICommandHandler
         $post = $this->postRepository->ofIdOrFail($command->postId());
         $user = $this->userRepository->ofIdOrFail($command->authorId());
         $post->publish($user);
+        $this->postRepository->save($post);
         return $post;
     }
 }
