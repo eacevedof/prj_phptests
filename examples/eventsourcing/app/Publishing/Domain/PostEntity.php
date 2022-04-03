@@ -23,13 +23,13 @@ final class PostEntity implements IEntity
     public function publish(UserEntity $user): self
     {
         $this->status = 1;
+        echo "post status changed ...<br/>";
         DomainEventPublisher::instance()->publish(
             new PostWasPublishedEvent(
                 $this->id(),
                 $user->id()
             )
         );
-        echo "post status changed ...<br/>";
         return $this;
     }
 }

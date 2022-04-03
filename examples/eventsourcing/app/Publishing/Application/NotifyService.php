@@ -20,7 +20,7 @@ final class NotifyService implements IDomainEventSubscriber
         if (get_class($domainEvent)!==PostWasPublishedEvent::class) return;
 
         $emailTo =  $this->userRepository->ofIdOrFail($domainEvent->authorId())->email();
-        echo "...sending email<br/>";
+        echo "sending email ...<br/>";
         mb_send_mail(
             $emailTo,
             "Your post with id {$domainEvent->postId()} has been published",
