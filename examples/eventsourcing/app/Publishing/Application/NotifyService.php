@@ -1,9 +1,9 @@
 <?php
 namespace App\Publishing\Application;
 
-use App\Publishing\Domain\Ports\IUserRepository;
 use EventSourcing\IDomainEvent;
 use EventSourcing\IDomainEventSubscriber;
+use App\Publishing\Domain\Ports\IUserRepository;
 use App\Publishing\Domain\Events\PostWasPublishedEvent;
 
 final class NotifyService implements IDomainEventSubscriber
