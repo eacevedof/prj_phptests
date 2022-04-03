@@ -3,8 +3,8 @@ namespace App\Publishing\Application;
 
 use App\Publishing\Application\Commands\PublishCommand;
 use \App\Publishing\Domain\PostEntity;
-use \App\Publishing\Domain\PostRepository;
-use \App\Publishing\Domain\UserRepository;
+use \App\Publishing\Domain\Ports\IPostRepository;
+use \App\Publishing\Domain\Ports\IUserRepository;
 use \App\Publishing\Domain\PublishPostCommand;
 
 /**
@@ -16,12 +16,12 @@ use \App\Publishing\Domain\PublishPostCommand;
  */
 final class PublishCommandHandler implements ICommandHandler
 {
-    private PostRepository $postRepository;
-    private UserRepository $userRepository;
+    private IPostRepository $postRepository;
+    private IUserRepository $userRepository;
 
     public function __construct(
-        \App\Publishing\Domain\PostRepository $postRepository,
-        \App\Publishing\Domain\UserRepository $userRepository
+        IPostRepository $postRepository,
+        IUserRepository $userRepository
     )
     {
         $this->postRepository = $postRepository;
