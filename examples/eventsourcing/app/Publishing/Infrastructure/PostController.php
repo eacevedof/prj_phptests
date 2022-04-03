@@ -1,8 +1,8 @@
 <?php
 namespace App\Publishing\Infrastructure;
 
-use App\Publishing\Application\Commands\PublishCommand;
 use EventSourcing\DomainEventPublisher;
+use App\Publishing\Application\Commands\PublishCommand;
 use App\Publishing\Application\NotifyService;
 use App\Publishing\Application\PublishCommandHandler;
 use App\Publishing\Infrastructure\Repositories\PostRepository;

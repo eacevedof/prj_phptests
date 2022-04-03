@@ -5,7 +5,6 @@ use App\Publishing\Application\Commands\PublishCommand;
 use \App\Publishing\Domain\PostEntity;
 use \App\Publishing\Domain\Ports\IPostRepository;
 use \App\Publishing\Domain\Ports\IUserRepository;
-use \App\Publishing\Domain\PublishPostCommand;
 
 /**
  * La diferencia entre un application service y un command handler
