@@ -29,6 +29,7 @@ final class PostEntity implements IEntity
                 $user->id()
             )
         );
+        echo "post status changed ...<br/>";
         return $this;
     }
 }
