@@ -1,10 +1,10 @@
 <?php
-namespace App\Publishing\Application;
+namespace App\Blog\Application;
 
 use EventSourcing\IDomainEvent;
 use EventSourcing\IDomainEventSubscriber;
-use App\Publishing\Domain\Ports\IUserRepository;
-use App\Publishing\Domain\Events\PostWasPublishedEvent;
+use App\Blog\Domain\Ports\IUserRepository;
+use App\Blog\Domain\Events\PostWasPublishedEvent;
 
 final class NotifyService implements IDomainEventSubscriber
 {

@@ -1,8 +1,8 @@
 <?php
-namespace App\Publishing\Domain;
+namespace App\Blog\Domain;
 
 use EventSourcing\DomainEventPublisher;
-use App\Publishing\Domain\Events\PostWasPublishedEvent;
+use App\Blog\Domain\Events\PostWasPublishedEvent;
 
 final class PostEntity implements IEntity
 {

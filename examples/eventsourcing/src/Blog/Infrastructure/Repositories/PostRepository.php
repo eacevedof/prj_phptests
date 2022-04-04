@@ -1,8 +1,8 @@
 <?php
-namespace App\Publishing\Infrastructure\Repositories;
+namespace App\Blog\Infrastructure\Repositories;
 
-use App\Publishing\Domain\Ports\IPostRepository;
-use App\Publishing\Domain\PostEntity;
+use App\Blog\Domain\Ports\IPostRepository;
+use App\Blog\Domain\PostEntity;
 
 final class PostRepository implements IPostRepository
 {

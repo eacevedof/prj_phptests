@@ -1,8 +1,8 @@
 <?php
-namespace App\Publishing\Infrastructure\Repositories;
+namespace App\Blog\Infrastructure\Repositories;
 
-use App\Publishing\Domain\Ports\IUserRepository;
-use App\Publishing\Domain\UserEntity;
+use App\Blog\Domain\Ports\IUserRepository;
+use App\Blog\Domain\UserEntity;
 
 final class UserRepository implements IUserRepository
 {

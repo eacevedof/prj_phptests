@@ -1,5 +1,5 @@
 <?php
-namespace App\Publishing\Application;
+namespace App\Blog\Application;
 
 interface ICommandHandler
 {

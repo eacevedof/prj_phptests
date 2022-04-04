@@ -1,7 +1,7 @@
 <?php
-namespace App\Publishing\Domain\Ports;
+namespace App\Blog\Domain\Ports;
 
-use App\Publishing\Domain\UserEntity;
+use App\Blog\Domain\UserEntity;
 
 interface IUserRepository
 {

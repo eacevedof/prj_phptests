@@ -1,6 +1,6 @@
 <?php
 /**
- * @var App\Publishing\Domain\PostEntity $post;
+ * @var App\Blog\Domain\PostEntity $post;
  */
 ?>
 <h1>Post status: <?=$post->status() ? "Published" : "Not published"?></h1>

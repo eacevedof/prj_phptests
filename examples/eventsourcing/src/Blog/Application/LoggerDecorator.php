@@ -1,13 +1,13 @@
 <?php
-namespace App\Publishing\Application;
+namespace App\Blog\Application;
 
-use App\Publishing\Application\Commands\ICommand;
-use App\Publishing\Domain\ICommandHandler;
-use App\Publishing\Domain\IEntity;
-use App\Publishing\Domain\PostRepository;
-use App\Publishing\Domain\UserRepository;
-use App\Publishing\Domain\Events\PostWasPublishedEvent;
-use App\Publishing\Infrastructure\Monolog;
+use App\Blog\Application\Commands\ICommand;
+use App\Blog\Domain\ICommandHandler;
+use App\Blog\Domain\IEntity;
+use App\Blog\Domain\PostRepository;
+use App\Blog\Domain\UserRepository;
+use App\Blog\Domain\Events\PostWasPublishedEvent;
+use App\Blog\Infrastructure\Monolog;
 
 final class LoggerDecorator
 {

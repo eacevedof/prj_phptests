@@ -1,7 +1,7 @@
 <?php
-namespace App\Publishing\Domain\Ports;
+namespace App\Blog\Domain\Ports;
 
-use App\Publishing\Domain\PostEntity;
+use App\Blog\Domain\PostEntity;
 
 interface IPostRepository
 {

@@ -1,5 +1,5 @@
 <?php
-namespace App\Publishing\Domain;
+namespace App\Blog\Domain;
 
 final class UserEntity implements IEntity
 {

@@ -1,12 +1,12 @@
 <?php
-namespace App\Publishing\Infrastructure;
+namespace App\Blog\Infrastructure;
 
 use EventSourcing\DomainEventPublisher;
-use App\Publishing\Application\Commands\PublishCommand;
-use App\Publishing\Application\NotifyService;
-use App\Publishing\Application\PublishCommandHandler;
-use App\Publishing\Infrastructure\Repositories\PostRepository;
-use App\Publishing\Infrastructure\Repositories\UserRepository;
+use App\Blog\Application\Commands\PublishCommand;
+use App\Blog\Application\NotifyService;
+use App\Blog\Application\PublishCommandHandler;
+use App\Blog\Infrastructure\Repositories\PostRepository;
+use App\Blog\Infrastructure\Repositories\UserRepository;
 
 final class PostController
 {

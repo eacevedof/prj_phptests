@@ -1,10 +1,10 @@
 <?php
-namespace App\Publishing\Application;
+namespace App\Blog\Application;
 
-use App\Publishing\Application\Commands\PublishCommand;
-use App\Publishing\Domain\PostEntity;
-use App\Publishing\Domain\Ports\IPostRepository;
-use App\Publishing\Domain\Ports\IUserRepository;
+use App\Blog\Application\Commands\PublishCommand;
+use App\Blog\Domain\PostEntity;
+use App\Blog\Domain\Ports\IPostRepository;
+use App\Blog\Domain\Ports\IUserRepository;
 
 /**
  * La diferencia entre un application service y un command handler
