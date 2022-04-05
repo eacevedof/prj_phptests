@@ -4,8 +4,9 @@ namespace App\Blog\Infrastructure;
 
 final class Monolog
 {
-    public function log(string $content, string $title=""): void
+    public function log($content, string $title=""): void
     {
+        if(!is_string($content)) $content = var_export($content, 1);
         $path = dirname(__FILE__).DIRECTORY_SEPARATOR."monolog.log";
         $final = [
             "",
