@@ -15,7 +15,7 @@ final class MonologService implements IDomainEventSubscriber
         if (get_class($domainEvent)!==PostWasPublishedEvent::class) return;
 
         $emailTo = (new UserRepository())->ofIdOrFail($domainEvent->authorId())->email();
-        $title = (new PostRepository())->ofIdOrFail($domainEvent->authorId())->title();
+        $title = (new PostRepository())->ofIdOrFail($domainEvent->postId())->title();
         echo "monologging ...";
         (new Monolog())->log("Post with title {$title} published by user {$emailTo}");
     }
