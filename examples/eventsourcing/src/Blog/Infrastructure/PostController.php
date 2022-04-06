@@ -15,8 +15,8 @@ final class PostController
 
     public function publish(): void
     {
-        $postId = $this->getPost("postId", 1);
-        $userId = $this->getPost("userId", 1);
+        $userId = $this->getRequestSession("userId", 1);
+        $postId = $this->getRequestPost("postId", 1);
 
         DomainEventPublisher::instance()->subscribe(new NotifyService(new UserRepository()));
         $publishCommand = new PublishCommand($postId, $userId);
