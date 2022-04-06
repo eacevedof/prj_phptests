@@ -18,12 +18,12 @@ final class PostController
         $userId = $this->getRequestSession("userId", 1);
         $postId = $this->getRequestPost("postId", 1);
 
-        DomainEventPublisher::instance()->subscribe(new NotifyService(new UserRepository()));
+        DomainEventPublisher::instance()->subscribe(new NotifyService($userRepository = new UserRepository()));
         $publishCommand = new PublishCommand($postId, $userId);
 
         $post = (new PublishCommandHandler(
             new PostRepository(),
-            new UserRepository()
+            $userRepository
         ))->execute($publishCommand);
 
         $this->set("post", $post)
