@@ -1,7 +1,7 @@
 <?php
 namespace App\Blog\Application;
 
-use App\Blog\Utils\Monolog;
+use App\Blog\Infrastructure\Monolog;
 use EventSourcing\IDomainEvent;
 use EventSourcing\IDomainEventSubscriber;
 use App\Blog\Domain\Events\PostWasPublishedEvent;
@@ -10,7 +10,7 @@ use App\Blog\Infrastructure\Repositories\UserRepository;
 
 final class MonologService implements IDomainEventSubscriber
 {
-    private function emailOnPostPublished(IDomainEvent $domainEvent): void
+    private function logOnPostPublished(IDomainEvent $domainEvent): void
     {
         if (get_class($domainEvent)!==PostWasPublishedEvent::class) return;
 
@@ -22,7 +22,7 @@ final class MonologService implements IDomainEventSubscriber
 
     public function onDomainEvent(IDomainEvent $domainEvent): IDomainEventSubscriber
     {
-        $this->emailOnPostPublished($domainEvent);
+        $this->logOnPostPublished($domainEvent);
         return $this;
     }
 }
