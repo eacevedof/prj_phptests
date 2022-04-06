@@ -1,9 +1,6 @@
 <?php
 namespace App\Blog\Domain;
 
-use EventSourcing\DomainEventPublisher;
-use App\Blog\Domain\Events\PostWasPublishedEvent;
-
 final class PostEntity implements IEntity
 {
     private int $id;
@@ -39,16 +36,10 @@ final class PostEntity implements IEntity
         return $this->content;
     }
 
-    public function publish(UserEntity $user): self
+    public function publish(): self
     {
         $this->status = 1;
         echo "post status changed ...<br/>";
-        DomainEventPublisher::instance()->publish(
-            new PostWasPublishedEvent(
-                $this->id(),
-                $user->id()
-            )
-        );
         return $this;
     }
 }

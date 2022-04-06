@@ -2,9 +2,11 @@
 namespace App\Blog\Application;
 
 use App\Blog\Application\Commands\PublishCommand;
+use App\Blog\Domain\Events\PostWasPublishedEvent;
 use App\Blog\Domain\PostEntity;
 use App\Blog\Domain\Ports\IPostRepository;
 use App\Blog\Domain\Ports\IUserRepository;
+use EventSourcing\DomainEventPublisher;
 
 /**
  * La diferencia entre un application service y un command handler
@@ -33,6 +35,12 @@ final class PublishCommandHandler implements ICommandHandler
         $user = $this->userRepository->ofIdOrFail($command->authorId());
         $post->publish($user);
         $this->postRepository->save($post);
+        DomainEventPublisher::instance()->publish(
+            new PostWasPublishedEvent(
+                $this->id(),
+                $user->id()
+            )
+        );
         return $post;
     }
 }
