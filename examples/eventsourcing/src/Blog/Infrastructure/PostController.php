@@ -1,6 +1,7 @@
 <?php
 namespace App\Blog\Infrastructure;
 
+use App\Blog\Application\MonologService;
 use EventSourcing\DomainEventPublisher;
 use App\Blog\Application\Commands\PublishCommand;
 use App\Blog\Application\NotifyService;
@@ -18,9 +19,13 @@ final class PostController
         $userId = $this->getRequestSession("userId", 1);
         $postId = $this->getRequestPost("postId", 1);
 
-        DomainEventPublisher::instance()->subscribe(new NotifyService($userRepository = new UserRepository()));
+        $publisher = DomainEventPublisher::instance();
+        $publisher->subscribe(new NotifyService($userRepository = new UserRepository()));
+        $publisher->subscribe(new MonologService());
+
         $publishCommand = new PublishCommand($postId, $userId);
 
+        //el handler lanza el evento: PostWasPublishedEvent
         $post = (new PublishCommandHandler(
             new PostRepository(),
             $userRepository
