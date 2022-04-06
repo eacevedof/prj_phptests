@@ -34,10 +34,11 @@ final class PublishCommandHandler implements ICommandHandler
         $post = $this->postRepository->ofIdOrFail($command->postId());
         $user = $this->userRepository->ofIdOrFail($command->authorId());
         $post->publish($user);
+        //si la persistencia lanza una excepción no se publicaría el evento
         $this->postRepository->save($post);
         DomainEventPublisher::instance()->publish(
             new PostWasPublishedEvent(
-                $this->id(),
+                $post->id(),
                 $user->id()
             )
         );
