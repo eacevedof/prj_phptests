@@ -1,9 +1,8 @@
 <?php
-$pathappds = dirname(__FILE__).DIRECTORY_SEPARATOR;
+$pathappds = dirname(__FILE__);
+set_include_path(get_include_path().":".$pathappds);
 spl_autoload_register(function(string $nsclass) use ($pathappds) {
-    //nsclass: App\\Blog\\Infrastructure\\PostController
     $nsclass = str_replace(["App\\","\\"],["","/"], $nsclass);
     $nsclass .= ".php";
-    $pathclass = realpath("$pathappds$nsclass");
-    if (is_file($pathclass)) include_once($pathclass);
+    include_once $nsclass;
 });
