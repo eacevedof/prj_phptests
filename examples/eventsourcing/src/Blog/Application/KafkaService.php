@@ -16,8 +16,8 @@ final class KafkaService implements IDomainEventSubscriber
 
         $emailTo = (new UserRepository())->ofIdOrFail($domainEvent->authorId())->email();
         $title = (new PostRepository())->ofIdOrFail($domainEvent->postId())->title();
-        echo "Kafkaging ...";
-        (new Kafka())->log("Post with title {$title} published by user {$emailTo}");
+        echo "Kafkaing ...";
+        (new Kafka())->produce("Post with title {$title} published by user {$emailTo}");
     }
 
     public function onDomainEvent(IDomainEvent $domainEvent): IDomainEventSubscriber
