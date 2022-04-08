@@ -1,6 +1,7 @@
 <?php
 namespace App\Blog\Infrastructure;
 
+use App\Blog\Application\KafkaService;
 use App\Blog\Application\MonologService;
 use EventSourcing\DomainEventPublisher;
 use App\Blog\Application\Commands\PublishCommand;
@@ -22,6 +23,7 @@ final class PostController
         $publisher = DomainEventPublisher::instance();
         $publisher->subscribe(new NotifyService($userRepository = new UserRepository()));
         $publisher->subscribe(new MonologService());
+        $publisher->subscribe(new KafkaService());
 
         $publishCommand = new PublishCommand($postId, $userId);
 
