@@ -11,7 +11,7 @@ final class KafkaService implements IDomainEventSubscriber
     private function sendOnPostPublished(IDomainEvent $domainEvent): void
     {
         if (get_class($domainEvent)!==PostWasPublishedEvent::class) return;
-        echo "Kafkaing ...";
+        echo "kafkaing ...<br/>";
         (new Kafka())->produce(serialize($domainEvent));
     }
 
