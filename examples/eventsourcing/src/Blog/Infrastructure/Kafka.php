@@ -8,10 +8,7 @@ final class Kafka
     {
         if(!is_string($content)) $content = var_export($content, 1);
         $path = dirname(__FILE__).DIRECTORY_SEPARATOR."kafka.log";
-        $final = [
-            "",
-            date("Y-m-d H:i:s"),
-        ];
+        $final = [];
         if($title) $final[] = $title;
         $final[] = $content;
         file_put_contents($path, implode("\n", $final), FILE_APPEND);
