@@ -5,24 +5,19 @@ use App\Blog\Infrastructure\Kafka;
 use EventSourcing\IDomainEvent;
 use EventSourcing\IDomainEventSubscriber;
 use App\Blog\Domain\Events\PostWasPublishedEvent;
-use App\Blog\Infrastructure\Repositories\PostRepository;
-use App\Blog\Infrastructure\Repositories\UserRepository;
 
 final class KafkaService implements IDomainEventSubscriber
 {
-    private function logOnPostPublished(IDomainEvent $domainEvent): void
+    private function sendOnPostPublished(IDomainEvent $domainEvent): void
     {
         if (get_class($domainEvent)!==PostWasPublishedEvent::class) return;
-
-        $emailTo = (new UserRepository())->ofIdOrFail($domainEvent->authorId())->email();
-        $title = (new PostRepository())->ofIdOrFail($domainEvent->postId())->title();
         echo "Kafkaing ...";
-        (new Kafka())->produce("Post with title {$title} published by user {$emailTo}");
+        (new Kafka())->produce(serialize($domainEvent));
     }
 
     public function onDomainEvent(IDomainEvent $domainEvent): IDomainEventSubscriber
     {
-        $this->logOnPostPublished($domainEvent);
+        $this->sendOnPostPublished($domainEvent);
         return $this;
     }
 }
