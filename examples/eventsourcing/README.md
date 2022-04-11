@@ -2,6 +2,10 @@
 - [Repo Rigor Talks](https://github.com/farso/RigorTalks)
 - Videos playlist:
     - [Youtube - Rigor talks](https://www.youtube.com/watch?v=aKcmbOZV9mA&list=PLfgj7DYkKH3Cd8bdu5SIHGYXh_bPV2idP)
+
+- [CommandBus - Rigor talks](https://youtu.be/OIFwYYlO_Og?list=PLfgj7DYkKH3Cd8bdu5SIHGYXh_bPV2idP&t=308)
+
+
 - [CodelyTv - Controller](https://youtu.be/o0w-jYun6AU?t=1462)
 ```php
 final class VideoController extends Controller

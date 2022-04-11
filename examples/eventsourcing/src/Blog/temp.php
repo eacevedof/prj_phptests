@@ -1,28 +1,25 @@
 <?php
-final class VideoAggregateRoot extends AggregateRoot
+final class CommandBus
 {
-    private VideoId $id;
-    private VideoTitle $title;
-    private VideoUrl $url;
-    private CourseId $courseId;
+    private array $handlers;
 
-    public function __construct(VideoId $id, VideoTitle $title, VideoUrl $url, CourseId $courseId)
+    public function __construct()
     {
-        $this->id = $id;
-        $this->title = $title;
-        $this->url = $url;
-        $this->courseId = $courseId;
+        $this->handlers = [];
     }
 
-    public static function create(
-        VideoId $id,
-        VideoTitle $title,
-        VideoUrl $url,
-        CourseId $courseId
-    )
+    public function addHandler(ICommand $command, ICommandHandler $handler): void
     {
-        $video = new self($id, $title, $url, $courseId);
-        $video->record(new VideoCreatedDomainEvent($id));
-        return $video;
+        $this->handlers[] = ["command" => $command, "handler"=>$handler];
+    }
+
+    public function dispatch(ICommand $command): void
+    {
+        foreach ($this->handlers as $array) {
+            $commandCheck = $array["command"];
+            if (get_class($command) !== get_class($commandCheck)) continue;
+            $handler = $array["handler"];
+            $handler($command);
+        }
     }
 }
