@@ -1,25 +1,24 @@
 <?php
-final class CreateVideoCommandHandler implements ICommandHandler
+final class VideoCreatorAppService
 {
-    private VideoCreatorAppService $creatorAppService;
+    private VideoRepository $videoRepository;
+    private DomainEventPublisher $domainEventPublisher;
 
-    public function __construct(VideoCreatorAppService $creatorAppService)
+    public function __construct(VideoRepository $videoRepository, DomainEventPublisher $domainEventPublisher)
     {
-        $this->creatorAppService = $creatorAppService;
+        $this->videoRepository = $videoRepository;
+        $this->domainEventPublisher = $domainEventPublisher;
     }
 
-    public function __invoke(CreateVideoCommand $command)
+    public function create(
+        VideoId $id,
+        VideoTitle $title,
+        VideoUrl $url,
+        CourseId $courseId
+    )
     {
-        $id = new VideoId($command->id());
-        $title = new VideoTitle($command->title());
-        $url = new VideoUrl($command->url());
-        $courseId = new CourseId($command->courseId());
-
-        $this->creatorAppService->create(
-            $id,
-            $title,
-            $url,
-            $courseId
-        );
+        $videoEntity = Video::create($id, $title, $url, $courseId);
+        $this->videoRepository->save($videoEntity);
+        $this->domainEventPublisher->publish($videoEntity->pullDomainEvents());
     }
 }

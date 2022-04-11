@@ -59,5 +59,8 @@ final class CreateVideoCommandHandler implements ICommandHandler
 
 - [CodelyTv - VideoCreatorAppService](https://youtu.be/o0w-jYun6AU?t=1566)
 ```php
+final class VideoCreator
+{
 
+}
 ```
