@@ -1,25 +1,25 @@
 <?php
-final class VideoController
+final class CreateVideoCommandHandler implements ICommandHandler
 {
-    private ICommandBus $bus;
+    private VideoCreatorAppService $creatorAppService;
 
-    public function __construct(ICommandBus $bus)
+    public function __construct(VideoCreatorAppService $creatorAppService)
     {
-        $this->bus = $bus;
+        $this->creatorAppService = $creatorAppService;
     }
 
-    public function createAction(
-        string $id,
-        Request $request
-    ) {
-        $command = new CreateVideoCommand(
-            $id,
-            $request->get("title"),
-            $request->get("url"),
-            $request->get("course_id")
-        );
+    public function __invoke(CreateVideoCommand $command)
+    {
+        $id = new VideoId($command->id());
+        $title = new VideoTitle($command->title());
+        $url = new VideoUrl($command->url());
+        $courseId = new CourseId($command->courseId());
 
-        $this->bus->dispatch($command);
-        return new HttpCreateResponse();
+        $this->creatorAppService->create(
+            $id,
+            $title,
+            $url,
+            $courseId
+        );
     }
 }
