@@ -16,15 +16,15 @@ final class CommandBus
 
     public function addHandler(ICommand $command, ICommandHandler $handler): void
     {
-        $this->handlers[] = ["command" => $command, "handler"=>$handler];
+        $this->handlers[] = ["command" => get_class($command), "handler"=>$handler];
     }
 
     public function dispatch(ICommand $command): void
     {
         foreach ($this->handlers as $array) {
-            $commandCheck = $array["command"];
-            if (get_class($command) !== get_class($commandCheck)) continue;
+            if (get_class($command) !== $array["command"]) continue;
             $handler = $array["handler"];
+            //aqui se usa invoke, pero depende de la interfaz IComandHandler
             $handler($command);
         }
     }
