@@ -83,3 +83,4 @@ final class VideoCreatorAppService
     }
 }
 ```
+- [CodelyTv - VideoAggregateRoot](https://youtu.be/o0w-jYun6AU?t=1597)

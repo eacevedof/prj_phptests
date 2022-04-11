@@ -1,24 +1,28 @@
 <?php
-final class VideoCreatorAppService
+final class VideoAggregateRoot extends AggregateRoot
 {
-    private VideoRepository $videoRepository;
-    private DomainEventPublisher $domainEventPublisher;
+    private VideoId $id;
+    private VideoTitle $title;
+    private VideoUrl $url;
+    private CourseId $courseId;
 
-    public function __construct(VideoRepository $videoRepository, DomainEventPublisher $domainEventPublisher)
+    public function __construct(VideoId $id, VideoTitle $title, VideoUrl $url, CourseId $courseId)
     {
-        $this->videoRepository = $videoRepository;
-        $this->domainEventPublisher = $domainEventPublisher;
+        $this->id = $id;
+        $this->title = $title;
+        $this->url = $url;
+        $this->courseId = $courseId;
     }
 
-    public function create(
+    public static function create(
         VideoId $id,
         VideoTitle $title,
         VideoUrl $url,
         CourseId $courseId
     )
     {
-        $videoEntity = Video::create($id, $title, $url, $courseId);
-        $this->videoRepository->save($videoEntity);
-        $this->domainEventPublisher->publish($videoEntity->pullDomainEvents());
+        $video = new self($id, $title, $url, $courseId);
+        $video->record(new VideoCreatedDomainEvent($id));
+        return $video;
     }
 }
