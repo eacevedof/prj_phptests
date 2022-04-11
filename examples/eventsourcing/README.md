@@ -59,8 +59,27 @@ final class CreateVideoCommandHandler implements ICommandHandler
 
 - [CodelyTv - VideoCreatorAppService](https://youtu.be/o0w-jYun6AU?t=1566)
 ```php
-final class VideoCreator
+final class VideoCreatorAppService
 {
+    private VideoRepository $videoRepository;
+    private DomainEventPublisher $domainEventPublisher;
 
+    public function __construct(VideoRepository $videoRepository, DomainEventPublisher $domainEventPublisher)
+    {
+        $this->videoRepository = $videoRepository;
+        $this->domainEventPublisher = $domainEventPublisher;
+    }
+
+    public function create(
+        VideoId $id,
+        VideoTitle $title,
+        VideoUrl $url,
+        CourseId $courseId
+    )
+    {
+        $videoAggregateRoot = Video::create($id, $title, $url, $courseId);
+        $this->videoRepository->save($videoAggregateRoot);
+        $this->domainEventPublisher->publish($videoAggregateRoot->pullDomainEvents());
+    }
 }
 ```
