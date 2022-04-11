@@ -85,6 +85,23 @@ final class VideoCreatorAppService
 ```
 - [CodelyTv - VideoAggregateRoot](https://youtu.be/o0w-jYun6AU?t=1597)
 ```php
+abstract class AggregateRoot
+{
+    private array $domainEvents;
+    
+    public function addDomainEvent(IDomainEvent $event): void
+    {
+        $this->domainEvents[] = $event;
+    }
+    
+    public function pullDomainEvents(): array
+    {
+        $events = $this->domainEvents;
+        $this->domainEvents = [];
+        return $events;
+    }
+}
+
 final class VideoAggregateRoot extends AggregateRoot
 {
     private VideoId $id;
@@ -108,7 +125,7 @@ final class VideoAggregateRoot extends AggregateRoot
     )
     {
         $video = new self($id, $title, $url, $courseId);
-        $video->record(new VideoCreatedDomainEvent($id));
+        $video->addDomainEvent(new VideoCreatedDomainEvent($id));
         return $video;
     }
 }
