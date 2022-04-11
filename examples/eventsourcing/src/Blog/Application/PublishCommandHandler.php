@@ -7,6 +7,7 @@ use App\Blog\Domain\PostEntity;
 use App\Blog\Domain\Ports\IPostRepository;
 use App\Blog\Domain\Ports\IUserRepository;
 use EventSourcing\DomainEventPublisher;
+use App\Blog\Application\Commands\ICommandHandler;
 
 /**
  * La diferencia entre un application service y un command handler
