@@ -9,11 +9,14 @@ use App\Blog\Application\NotifyService;
 use App\Blog\Application\PublishCommandHandler;
 use App\Blog\Infrastructure\Repositories\PostRepository;
 use App\Blog\Infrastructure\Repositories\UserRepository;
+use App\Blog\Application\Commands\CommandBus;
 
 final class PostController
 {
     use RequestTrait;
     use ViewTrait;
+
+
 
     public function publish(): void
     {

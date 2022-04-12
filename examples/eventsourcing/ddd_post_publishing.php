@@ -6,5 +6,8 @@
 include_once(TFW_PATHROOTDS."vendor/autoload.php");
 include_once("src/autoload.php");
 
+use App\Blog\Application\Commands\CommandBus;
+$bus = new CommandBus();
+
 use App\Blog\Infrastructure\PostController;
 (new PostController())->publish();

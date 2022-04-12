@@ -17,5 +17,5 @@ remlogs: ## remove logs
 	rm -fr ./logs/session/*.log
 	rm -fr ./logs/shellscripts/*.log
 
-server: ## dumpdb
+server: ## localhost:1024
 	php -S localhost:1024 -t ./public
