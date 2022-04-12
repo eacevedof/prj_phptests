@@ -16,7 +16,7 @@ use App\Blog\Application\Commands\ICommandHandler;
  *
  * Este DTO permite que se pueda hacer un Decorator del Command Handler
  */
-final class PublishCommandHandler implements ICommandHandler
+final class PublishPostCommandHandler implements ICommandHandler
 {
     private IPostRepository $postRepository;
     private IUserRepository $userRepository;

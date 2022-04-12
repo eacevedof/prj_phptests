@@ -1,7 +1,7 @@
 <?php
 namespace App\Blog\Application;
 
-final class PublishCommand implements ICommand
+final class PublishPostCommand implements ICommand
 {
     private int $postId;
     private int $authorId;
