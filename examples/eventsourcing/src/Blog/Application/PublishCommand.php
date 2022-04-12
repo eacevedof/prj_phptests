@@ -1,5 +1,5 @@
 <?php
-namespace App\Blog\Application\Commands;
+namespace App\Blog\Application;
 
 final class PublishCommand implements ICommand
 {
