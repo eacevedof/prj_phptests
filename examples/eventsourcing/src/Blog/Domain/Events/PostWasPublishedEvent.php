@@ -44,13 +44,18 @@ final class PostWasPublishedEvent implements IDomainEvent
         return $this->authorId;
     }
 
-    public function messageId():string
+    public function messageId(): string
     {
         return $this->messageId;
     }
 
-    public function messageId():string
+    public function correlationId(): string
     {
-        return $this->messageId;
+        return $this->correlationId;
+    }
+
+    public function causationId(): string
+    {
+        return $this->causationId;
     }
 }
