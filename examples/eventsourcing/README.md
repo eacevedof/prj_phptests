@@ -3,6 +3,8 @@
 - Videos playlist:
     - [Youtube - Rigor talks](https://www.youtube.com/watch?v=aKcmbOZV9mA&list=PLfgj7DYkKH3Cd8bdu5SIHGYXh_bPV2idP)
 
+- [Youtube - PulpoCon19 - Eventos, mensajería y otras fábulas (Carlos Buenosvinos)](https://www.youtube.com/watch?v=qwPFZ9v91kw&t=17s)  
+
 - [CommandBus - Rigor talks](https://youtu.be/OIFwYYlO_Og?list=PLfgj7DYkKH3Cd8bdu5SIHGYXh_bPV2idP&t=308)
 ```php
 final class CommandBus
