@@ -26,11 +26,14 @@ final class PostController
         $this->bus = $bus;
     }
 
-
     public function publish(): void
     {
         $userId = $this->getRequestSession("userId", 1);
         $postId = $this->getRequestPost("postId", 1);
+
+        $publishCommand = new PublishPostCommand($postId, $userId);
+        $this->bus->register(PublishPostCommand::class, );
+        $this->bus->dispatch($publishCommand);
 
         $publisher = DomainEventPublisher::instance();
         $publisher->subscribe(new NotifyService($userRepository = new UserRepository()));
