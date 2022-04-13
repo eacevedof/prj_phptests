@@ -18,20 +18,20 @@ use App\Blog\Domain\Bus\ICommandHandler;
  */
 final class PostPublishCommandHandler implements ICommandHandler
 {
-    private IPostRepository $postRepository;
-    private IUserRepository $userRepository;
+    private PostPublisherService $publisherService;
 
     public function __construct(
-        IPostRepository $postRepository,
-        IUserRepository $userRepository
+        PostPublisherService $publisherService
     ){
-        $this->postRepository = $postRepository;
-        $this->userRepository = $userRepository;
+        $this->publisherService = $publisherService;
     }
 
-    public function execute(PostPublishCommand $command): PostEntity
+    public function __invoke(PostPublishCommand $command)
     {
         echo "command handler execute ...<br/>";
+
+        $this->publisherService->publish($command->postId(), $command->authorId());
+        /*
         $post = $this->postRepository->ofIdOrFail($command->postId());
         $user = $this->userRepository->ofIdOrFail($command->authorId());
         $post->publish($user);
@@ -43,7 +43,9 @@ final class PostPublishCommandHandler implements ICommandHandler
                 $user->id()
             )
         );
-        return $post;
+        */
+        //return $post;
+
     }
 }
 

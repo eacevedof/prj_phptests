@@ -1,6 +1,7 @@
 <?php
 namespace App\Blog\Application;
 
+use App\Blog\Domain\Events\PostWasPublishedEvent;
 use App\Blog\Infrastructure\Repositories\PostRepository;
 use App\Blog\Infrastructure\Repositories\UserRepository;
 use EventSourcing\DomainEventPublisher;
@@ -22,6 +23,6 @@ final class PostPublisherService
         //$user = $this->userRepository->ofIdOrFail($authorId);
         $post->publish();
         $this->postRepository->save($post);
-
+        DomainEventPublisher::instance()->publish(new PostWasPublishedEvent($postId, $authorId));
     }
 }
