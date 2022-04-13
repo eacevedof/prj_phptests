@@ -2,6 +2,8 @@
 namespace App\Blog\Domain;
 
 //https://github.com/CodelyTV/php-ddd-example/blob/main/src/Mooc/Videos/Domain/Video.php
+use App\Blog\Domain\Events\PostWasCreatedEvent;
+
 final class PostEntity extends AggregateRoot implements IEntity
 {
     private int $id;
@@ -23,7 +25,7 @@ final class PostEntity extends AggregateRoot implements IEntity
     {
         $postEntity = new self($id, $authorId, $title, $content);
         //aqui se deberia agregar el evento createdomainevent
-
+        $postEntity->record(new PostWasCreatedEvent($id, $authorId));
         return $postEntity;
     }
 

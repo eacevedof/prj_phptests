@@ -7,9 +7,9 @@ use App\Blog\Domain\Bus\ICommandBus;
 use App\Blog\Domain\Ports\IPostRepository;
 use App\Blog\Domain\Ports\IUserRepository;
 use EventSourcing\DomainEventPublisher;
-use App\Blog\Application\PublishPostCommand;
+use App\Blog\Application\PostPublishCommand;
 use App\Blog\Application\NotifyService;
-use App\Blog\Application\PublishPostCommandHandler;
+use App\Blog\Application\PostPublishCommandHandler;
 use App\Blog\Infrastructure\Repositories\PostRepository;
 use App\Blog\Infrastructure\Repositories\UserRepository;
 use App\Blog\Application\Commands\CommandBus;
@@ -31,25 +31,27 @@ final class PostController
         $userId = $this->getRequestSession("userId", 1);
         $postId = $this->getRequestPost("postId", 1);
 
-        $publishCommand = new PublishPostCommand($postId, $userId);
-        $this->bus->register(PublishPostCommand::class, new PublishPostCommandHandler(
+        $publishCommand = new PostPublishCommand($postId, $userId);
+        $this->bus->register(PostPublishCommand::class, new PostPublishCommandHandler(
             new PostRepository(),
-            new UserRepository()
+            $userRepository = new UserRepository()
         ));
         $this->bus->dispatch($publishCommand);
 
         $publisher = DomainEventPublisher::instance();
-        $publisher->subscribe(new NotifyService($userRepository = new UserRepository()));
+        $publisher->subscribe(new NotifyService($userRepository));
         $publisher->subscribe(new MonologService());
         $publisher->subscribe(new KafkaService());
 
-        $publishCommand = new PublishPostCommand($postId, $userId);
+        /*
+        $publishCommand = new PostPublishCommand($postId, $userId);
 
         //el handler lanza el evento: PostWasPublishedEvent
-        $post = (new PublishPostCommandHandler(
+        $post = (new PostPublishCommandHandler(
             new PostRepository(),
             $userRepository
         ))->execute($publishCommand);
+        */
 
         $this->set("post", $post)
             ->render("post-status");

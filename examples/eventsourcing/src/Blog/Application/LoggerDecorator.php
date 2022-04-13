@@ -27,7 +27,7 @@ final class LoggerDecorator
     }
 }
 
-$decorator = new LoggerDecorator(new PublishPostCommandHandler(
+$decorator = new LoggerDecorator(new PostPublishCommandHandler(
     new PostRepository(),
     new UserRepository()
 ));

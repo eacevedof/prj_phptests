@@ -1,7 +1,7 @@
 <?php
 namespace App\Blog\Application;
 
-use App\Blog\Application\PublishPostCommand;
+use App\Blog\Application\PostPublishCommand;
 use App\Blog\Domain\Events\PostWasPublishedEvent;
 use App\Blog\Domain\PostEntity;
 use App\Blog\Domain\Ports\IPostRepository;
@@ -16,7 +16,7 @@ use App\Blog\Domain\Bus\ICommandHandler;
  *
  * Este DTO permite que se pueda hacer un Decorator del Command Handler
  */
-final class PublishPostCommandHandler implements ICommandHandler
+final class PostPublishCommandHandler implements ICommandHandler
 {
     private IPostRepository $postRepository;
     private IUserRepository $userRepository;
@@ -29,7 +29,7 @@ final class PublishPostCommandHandler implements ICommandHandler
         $this->userRepository = $userRepository;
     }
 
-    public function execute(PublishPostCommand $command): PostEntity
+    public function execute(PostPublishCommand $command): PostEntity
     {
         echo "command handler execute ...<br/>";
         $post = $this->postRepository->ofIdOrFail($command->postId());

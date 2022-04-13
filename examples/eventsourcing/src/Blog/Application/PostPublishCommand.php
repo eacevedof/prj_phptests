@@ -3,7 +3,7 @@ namespace App\Blog\Application;
 
 use App\Blog\Domain\Bus\ICommand;
 
-final class PublishPostCommand implements ICommand
+final class PostPublishCommand implements ICommand
 {
     private int $postId;
     private int $authorId;
