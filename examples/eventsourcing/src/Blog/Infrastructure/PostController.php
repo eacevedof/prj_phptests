@@ -32,7 +32,10 @@ final class PostController
         $postId = $this->getRequestPost("postId", 1);
 
         $publishCommand = new PublishPostCommand($postId, $userId);
-        $this->bus->register(PublishPostCommand::class, );
+        $this->bus->register(PublishPostCommand::class, new PublishPostCommandHandler(
+            new PostRepository(),
+            new UserRepository()
+        ));
         $this->bus->dispatch($publishCommand);
 
         $publisher = DomainEventPublisher::instance();
