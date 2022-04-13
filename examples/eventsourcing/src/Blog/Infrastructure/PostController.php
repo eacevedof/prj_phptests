@@ -3,6 +3,7 @@ namespace App\Blog\Infrastructure;
 
 use App\Blog\Application\KafkaService;
 use App\Blog\Application\MonologService;
+use App\Blog\Application\PostPublisherService;
 use App\Blog\Domain\Bus\ICommandBus;
 use App\Blog\Domain\Ports\IPostRepository;
 use App\Blog\Domain\Ports\IUserRepository;
@@ -33,9 +34,14 @@ final class PostController
 
         $publishCommand = new PostPublishCommand($postId, $userId);
         $this->bus->register(PostPublishCommand::class, new PostPublishCommandHandler(
-            new PostRepository(),
-            $userRepository = new UserRepository()
+            new PostPublisherService(
+                new PostRepository(),
+                $userRepository = new UserRepository()
+            )
         ));
+
+        //ejecuta handler->invoke($publishCommand)
+        //que a su vez ejecuta service->publish($postId, $authorId)
         $this->bus->dispatch($publishCommand);
 
         $publisher = DomainEventPublisher::instance();
