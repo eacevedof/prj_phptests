@@ -10,10 +10,18 @@ final class PostWasPublishedEvent implements IDomainEvent
     private int $authorId;
     private int $occurredOn;
 
+    //https://youtu.be/qwPFZ9v91kw?t=2112
+    private string $messageId;
+    private string $causationId;
+    private string $correlationId;
+
     public function __construct(int $postId, int $authorId)
     {
         $this->postId = $postId;
         $this->authorId = $authorId;
+        $this->messageId = uniqid();
+        $this->causationId = "1";
+        $this->correlationId = "1";
         $this->occurredOn = (new DateTimeImmutable())->getTimestamp();
     }
 
