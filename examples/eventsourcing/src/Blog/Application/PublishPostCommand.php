@@ -1,6 +1,8 @@
 <?php
 namespace App\Blog\Application;
 
+use App\Blog\Domain\Bus\ICommand;
+
 final class PublishPostCommand implements ICommand
 {
     private int $postId;
