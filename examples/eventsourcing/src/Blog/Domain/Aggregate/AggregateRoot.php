@@ -1,5 +1,5 @@
 <?php
-namespace App\Blog\Domain;
+namespace App\Blog\Domain\Aggregate;
 
 use EventSourcing\IDomainEvent;
 

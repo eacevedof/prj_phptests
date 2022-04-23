@@ -5,6 +5,7 @@ use App\Blog\Application\KafkaService;
 use App\Blog\Application\MonologService;
 use App\Blog\Application\PostPublisherService;
 use App\Blog\Domain\Bus\ICommandBus;
+use App\Blog\Domain\Events\PostWasPublishedEvent;
 use App\Blog\Domain\Ports\IPostRepository;
 use App\Blog\Domain\Ports\IUserRepository;
 use EventSourcing\DomainEventPublisher;
@@ -48,7 +49,7 @@ final class PostController
         $publisher->subscribe(new NotifyService($userRepository));
         $publisher->subscribe(new MonologService());
         $publisher->subscribe(new KafkaService());
-
+        $publisher->publish(new PostWasPublishedEvent($publishCommand->postId(), $publishCommand->authorId()));
         /*
         $publishCommand = new PostPublishCommand($postId, $userId);
 
