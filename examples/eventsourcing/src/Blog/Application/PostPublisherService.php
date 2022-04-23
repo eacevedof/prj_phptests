@@ -3,27 +3,24 @@ namespace App\Blog\Application;
 
 use App\Blog\Domain\Events\PostWasPublishedEvent;
 use App\Blog\Infrastructure\Repositories\PostRepository;
-use App\Blog\Infrastructure\Repositories\UserRepository;
-use EventSourcing\DomainEventPublisher;
+use EventSourcing\DomainEventBus;
 
+//https://github.com/CodelyTV/php-ddd-example/blob/main/src/Mooc/Videos/Application/Create/VideoCreator.php
 final class PostPublisherService
 {
     private PostRepository $postRepository;
-    private UserRepository $userRepository;
 
-    public function __construct(PostRepository $postRepository, UserRepository $userRepository)
+    public function __construct(PostRepository $postRepository)
     {
         $this->postRepository = $postRepository;
-        $this->userRepository = $userRepository;
     }
 
     public function publish(int $postId, int $authorId)
     {
         $post = $this->postRepository->ofIdOrFail($postId);
-        //$user = $this->userRepository->ofIdOrFail($authorId);
         $post->publish();
         $this->postRepository->save($post);
-        DomainEventPublisher::instance()->publish(new PostWasPublishedEvent($postId, $authorId));
+        DomainEventBus::instance()->publish(new PostWasPublishedEvent($postId, $authorId));
         return $post;
     }
 }

@@ -6,7 +6,7 @@ use App\Blog\Domain\Events\PostWasPublishedEvent;
 use App\Blog\Domain\PostEntity;
 use App\Blog\Domain\Ports\IPostRepository;
 use App\Blog\Domain\Ports\IUserRepository;
-use EventSourcing\DomainEventPublisher;
+use EventSourcing\DomainEventBus;
 use App\Blog\Domain\Bus\ICommandHandler;
 
 /**

@@ -1,10 +1,10 @@
 <?php
 namespace EventSourcing;
 
-final class DomainEventPublisher
+final class DomainEventBus
 {
     private array $subscribers;
-    private static ?DomainEventPublisher $instance = null;
+    private static ?DomainEventBus $instance = null;
     private int $id = 0;
 
     public static function instance(): self
