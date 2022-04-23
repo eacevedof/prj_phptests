@@ -34,31 +34,13 @@ final class PostController
         $postId = $this->getRequestPost("postId", 1);
 
         $publishCommand = new PostPublishCommand($postId, $userId);
-        $this->bus->register(PostPublishCommand::class, new PostPublishCommandHandler(
-            new PostPublisherService(
-                new PostRepository(),
-                $userRepository = new UserRepository()
-            )
-        ));
-
         //ejecuta handler->invoke($publishCommand)
         //que a su vez ejecuta service->publish($postId, $authorId)
         $post = $this->bus->dispatch($publishCommand);
 
         $publisher = DomainEventPublisher::instance();
-        $publisher->subscribe(new NotifyService($userRepository));
-        $publisher->subscribe(new MonologService());
-        $publisher->subscribe(new KafkaService());
         $publisher->publish(new PostWasPublishedEvent($publishCommand->postId(), $publishCommand->authorId()));
-        /*
-        $publishCommand = new PostPublishCommand($postId, $userId);
 
-        //el handler lanza el evento: PostWasPublishedEvent
-        $post = (new PostPublishCommandHandler(
-            new PostRepository(),
-            $userRepository
-        ))->execute($publishCommand);
-        */
 
         $this->set("post", $post)
             ->render("post-status");
