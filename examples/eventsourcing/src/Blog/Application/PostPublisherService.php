@@ -24,5 +24,6 @@ final class PostPublisherService
         $post->publish();
         $this->postRepository->save($post);
         DomainEventPublisher::instance()->publish(new PostWasPublishedEvent($postId, $authorId));
+        return $post;
     }
 }

@@ -8,17 +8,17 @@ final class PostEntity extends AggregateRoot implements IEntity
 {
     private int $id;
     private int $authorId;
-    private int $status;
     private string $title;
     private string $content;
+    private int $status;
 
     public function __construct(int $id, int $authorId, string $title="", string $content="")
     {
         $this->id = $id;
-        $this->status = 0;
+        $this->authorId = $authorId;
         $this->title = $title;
         $this->content = $content;
-        $this->authorId = $authorId;
+        $this->status = 0;
     }
 
     public static function create(int $id, int $authorId, string $title="", string $content=""): self
@@ -47,6 +47,11 @@ final class PostEntity extends AggregateRoot implements IEntity
     public function content(): string
     {
         return $this->content;
+    }
+
+    public function authorId(): int
+    {
+        return $this->authorId;
     }
 
     public function publish(): self

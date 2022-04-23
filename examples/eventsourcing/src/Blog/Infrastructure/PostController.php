@@ -42,7 +42,7 @@ final class PostController
 
         //ejecuta handler->invoke($publishCommand)
         //que a su vez ejecuta service->publish($postId, $authorId)
-        $this->bus->dispatch($publishCommand);
+        $post = $this->bus->dispatch($publishCommand);
 
         $publisher = DomainEventPublisher::instance();
         $publisher->subscribe(new NotifyService($userRepository));

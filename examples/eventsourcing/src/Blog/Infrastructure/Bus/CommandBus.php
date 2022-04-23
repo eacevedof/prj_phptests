@@ -20,11 +20,11 @@ final class CommandBus implements ICommandBus
         $this->handlers[$command] = $handler;
     }
 
-    public function dispatch(ICommand $command): void
+    public function dispatch(ICommand $command)
     {
         $commandHandler = $this->handlers[get_class($command)] ?? "";
         if (!$commandHandler) throw new InvalidArgumentException();
         //usa el invoke
-        $commandHandler($command);
+        return $commandHandler($command);
     }
 }

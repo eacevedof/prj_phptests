@@ -20,9 +20,8 @@ final class PostPublishCommandHandler implements ICommandHandler
 {
     private PostPublisherService $publisherService;
 
-    public function __construct(
-        PostPublisherService $publisherService
-    ){
+    public function __construct(PostPublisherService $publisherService)
+    {
         $this->publisherService = $publisherService;
     }
 
@@ -30,7 +29,7 @@ final class PostPublishCommandHandler implements ICommandHandler
     {
         echo "command handler execute ...<br/>";
 
-        $this->publisherService->publish($command->postId(), $command->authorId());
+        return $this->publisherService->publish($command->postId(), $command->authorId());
         /*
         $post = $this->postRepository->ofIdOrFail($command->postId());
         $user = $this->userRepository->ofIdOrFail($command->authorId());

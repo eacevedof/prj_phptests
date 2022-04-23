@@ -6,5 +6,6 @@ interface ICommandBus
 {
     public function register(string $command, ICommandHandler $handler): void;
 
-    public function dispatch(ICommand $command): void;
+    //sin tipado de retorno porque puede que el servicio puede
+    public function dispatch(ICommand $command);
 }
