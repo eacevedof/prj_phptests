@@ -5,6 +5,10 @@ use App\Blog\Domain\Bus\ICommandBus;
 use App\Blog\Application\Commands\CommandBus;
 use App\Blog\Application\PostPublishCommand;
 
+/**
+ * https://github.com/CodelyTV/php-ddd-example/blob/main/src/Shared/Infrastructure/Symfony/ApiController.php
+ * https://github.com/CodelyTV/php-ddd-example/blob/main/apps/mooc/backend/src/Controller/Courses/CoursesPutController.php
+ */
 final class PostController
 {
     use RequestTrait;
@@ -28,6 +32,7 @@ final class PostController
          *          - lanza el evento: DomainEventBus::instance()->publish(postIdVO, userIdVO)
          */
         $post = $this->bus->dispatch(new PostPublishCommand($postId, $userId));
+
         $this->set("post", $post)
             ->render("post-status");
     }
