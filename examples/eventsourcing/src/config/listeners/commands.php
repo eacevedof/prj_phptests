@@ -10,8 +10,8 @@ use App\Blog\Application\PostPublisherService;
 use App\Blog\Application\PostPublishCommandHandler;
 use App\Blog\Application\PostPublishCommand;
 
-$bus = CommandBus::instance();
-$bus->subscribe(PostPublishCommand::class, new PostPublishCommandHandler(
+$commandBus = CommandBus::instance();
+$commandBus->subscribe(PostPublishCommand::class, new PostPublishCommandHandler(
     new PostPublisherService(
         new PostRepository(),
         new UserRepository()

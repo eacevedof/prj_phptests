@@ -9,4 +9,6 @@ include_once("src/config/listeners/commands.php");
 include_once("src/config/listeners/events.php");
 
 use App\Blog\Infrastructure\PostController;
-(new PostController($bus))->publish();
+use App\Shared\Infrastructure\Bus\CommandBus;
+
+(new PostController(CommandBus::instance()))->publish();
