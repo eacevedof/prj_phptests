@@ -3,7 +3,7 @@ namespace App\Shared\Domain\Aggregate;
 
 use App\Shared\Domain\Bus\Event\IEvent;
 
-abstract class AggregateRoot
+abstract class AbsAggregateRoot
 {
     private array $domainEvents = [];
 
