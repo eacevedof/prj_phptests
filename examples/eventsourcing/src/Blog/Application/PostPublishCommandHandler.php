@@ -1,12 +1,7 @@
 <?php
 namespace App\Blog\Application;
 
-use App\Blog\Application\PostPublishCommand;
-use App\Blog\Domain\Events\PostWasPublishedEvent;
 use App\Blog\Domain\PostEntity;
-use App\Blog\Domain\Ports\IPostRepository;
-use App\Blog\Domain\Ports\IUserRepository;
-use EventSourcing\DomainEventBus;
 use App\Shared\Domain\Bus\Command\ICommandHandler;
 
 /**
@@ -16,6 +11,7 @@ use App\Shared\Domain\Bus\Command\ICommandHandler;
  *
  * Este DTO permite que se pueda hacer un Decorator del Command Handler
  */
+//https://github.com/CodelyTV/php-ddd-example/blob/main/src/Mooc/Videos/Application/Create/CreateVideoCommandHandler.php
 final class PostPublishCommandHandler implements ICommandHandler
 {
     private PostPublisherService $publisherService;
@@ -25,26 +21,10 @@ final class PostPublishCommandHandler implements ICommandHandler
         $this->publisherService = $publisherService;
     }
 
-    public function __invoke(PostPublishCommand $command)
+    public function __invoke(PostPublishCommand $command): PostEntity
     {
         echo "command handler execute ...<br/>";
-
         return $this->publisherService->publish($command->postId(), $command->authorId());
-        /*
-        $post = $this->postRepository->ofIdOrFail($command->postId());
-        $user = $this->userRepository->ofIdOrFail($command->authorId());
-        $post->publish($user);
-        //si la persistencia lanza una excepción no se publicaría el evento
-        $this->postRepository->save($post);
-        DomainEventPublisher::instance()->publish(
-            new PostWasPublishedEvent(
-                $post->id(),
-                $user->id()
-            )
-        );
-        */
-        //return $post;
-
     }
 }
 

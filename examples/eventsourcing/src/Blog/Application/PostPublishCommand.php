@@ -3,6 +3,7 @@ namespace App\Blog\Application;
 
 use App\Shared\Domain\Bus\Command\ICommand;
 
+//https://github.com/CodelyTV/php-ddd-example/blob/main/src/Mooc/Videos/Application/Create/CreateVideoCommand.php
 final class PostPublishCommand implements ICommand
 {
     private int $postId;

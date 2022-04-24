@@ -2,6 +2,7 @@
 namespace App\Blog\Application;
 
 use App\Blog\Domain\Events\PostWasPublishedEvent;
+use App\Blog\Domain\PostEntity;
 use App\Blog\Infrastructure\Repositories\PostRepository;
 use App\Shared\Infrastructure\Bus\EventBus;
 
@@ -15,7 +16,7 @@ final class PostPublisherService
         $this->postRepository = $postRepository;
     }
 
-    public function publish(int $postId, int $authorId)
+    public function publish(int $postId, int $authorId): PostEntity
     {
         $post = $this->postRepository->ofIdOrFail($postId);
         $post->publish();
