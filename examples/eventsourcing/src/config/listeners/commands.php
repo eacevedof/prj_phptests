@@ -1,6 +1,6 @@
 <?php
 /**
- * bus config file
+ * handles listeners
  */
 use App\Blog\Application\PostPublishCommand;
 use App\Blog\Application\PostPublishCommandHandler;

@@ -5,8 +5,8 @@
  */
 include_once(TFW_PATHROOTDS."vendor/autoload.php");
 include_once("src/autoload.php");
-$bus = include_once("src/config/bus.php");
-include_once("src/config/events.php");
+$bus = include_once("src/config/listeners/commands.php");
+include_once("src/config/listeners/events.php");
 
 use App\Blog\Infrastructure\PostController;
 (new PostController($bus))->publish();

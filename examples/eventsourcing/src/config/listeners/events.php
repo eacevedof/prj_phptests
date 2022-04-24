@@ -1,4 +1,7 @@
 <?php
+/**
+ * events listeners
+ */
 use App\Blog\Application\KafkaService;
 use App\Blog\Application\MonologService;
 use App\Blog\Application\NotifyService;
