@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Blog\Infrastructure;
+namespace App\Shared\Infrastructure\Kafka;
 
 final class Kafka
 {
