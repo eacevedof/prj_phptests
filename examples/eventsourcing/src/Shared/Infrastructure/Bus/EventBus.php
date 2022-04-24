@@ -2,8 +2,8 @@
 namespace App\Shared\Infrastructure\Bus;
 
 use App\Shared\Domain\Bus\Event\IEventBus;
-use App\Shared\Domain\Bus\Event\IDomainEventSubscriber;
-use App\Shared\Domain\Bus\Event\IDomainEvent;
+use App\Shared\Domain\Bus\Event\IEventSubscriber;
+use App\Shared\Domain\Bus\Event\IEvent;
 
 final class EventBus implements IEventBus
 {
@@ -29,7 +29,7 @@ final class EventBus implements IEventBus
         throw new \BadMethodCallException("Clone is not supported");
     }
 
-    public function subscribe(IDomainEventSubscriber $subscriber): int
+    public function subscribe(IEventSubscriber $subscriber): int
     {
         $id = $this->id;
         $this->subscribers[$id] = $subscriber;
@@ -37,7 +37,7 @@ final class EventBus implements IEventBus
         return $id;
     }
 
-    public function publish(IDomainEvent $domainEvent): self
+    public function publish(IEvent $domainEvent): self
     {
         foreach($this->subscribers as $subscriber) {
             $subscriber->onDomainEvent($domainEvent);
@@ -45,7 +45,7 @@ final class EventBus implements IEventBus
         return $this;
     }
 
-    public function ofId(int $id): ?IDomainEventSubscriber
+    public function ofId(int $id): ?IEventSubscriber
     {
         return $this->subscribers[$id] ?? null;
     }

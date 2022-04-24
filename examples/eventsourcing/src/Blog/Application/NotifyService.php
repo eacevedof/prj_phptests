@@ -1,12 +1,12 @@
 <?php
 namespace App\Blog\Application;
 
-use App\Shared\Domain\Bus\Event\IDomainEvent;
-use App\Shared\Domain\Bus\Event\IDomainEventSubscriber;
+use App\Shared\Domain\Bus\Event\IEvent;
+use App\Shared\Domain\Bus\Event\IEventSubscriber;
 use App\Blog\Domain\Ports\IUserRepository;
 use App\Blog\Domain\Events\PostWasPublishedEvent;
 
-final class NotifyService implements IDomainEventSubscriber
+final class NotifyService implements IEventSubscriber
 {
     private IUserRepository $userRepository;
 
@@ -15,7 +15,7 @@ final class NotifyService implements IDomainEventSubscriber
         $this->userRepository = $userRepository;
     }
 
-    private function emailOnPostPublished(IDomainEvent $domainEvent): void
+    private function emailOnPostPublished(IEvent $domainEvent): void
     {
         if (get_class($domainEvent)!==PostWasPublishedEvent::class) return;
 
@@ -28,7 +28,7 @@ final class NotifyService implements IDomainEventSubscriber
         );
     }
 
-    public function onDomainEvent(IDomainEvent $domainEvent): IDomainEventSubscriber
+    public function onDomainEvent(IEvent $domainEvent): IEventSubscriber
     {
         $this->emailOnPostPublished($domainEvent);
         return $this;

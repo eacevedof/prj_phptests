@@ -1,7 +1,7 @@
 <?php
 namespace App\Blog\Domain\Aggregate;
 
-use EventSourcing\IDomainEvent;
+use App\Shared\Domain\Bus\Event\IEvent;
 
 abstract class AggregateRoot
 {
@@ -15,7 +15,7 @@ abstract class AggregateRoot
         return $domainEvents;
     }
 
-    final protected function record(IDomainEvent $domainEvent): void
+    final protected function record(IEvent $domainEvent): void
     {
         $this->domainEvents[] = $domainEvent;
     }

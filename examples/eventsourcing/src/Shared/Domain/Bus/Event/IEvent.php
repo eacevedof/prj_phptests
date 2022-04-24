@@ -1,7 +1,7 @@
 <?php
 namespace App\Shared\Domain\Bus\Event;
 
-interface IDomainEvent
+interface IEvent
 {
     public function occurredOn(): int;
 }

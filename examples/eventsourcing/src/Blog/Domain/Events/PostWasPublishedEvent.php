@@ -1,11 +1,11 @@
 <?php
 namespace App\Blog\Domain\Events;
 
-use App\Shared\Domain\Bus\Event\IDomainEvent;
+use App\Shared\Domain\Bus\Event\IEvent;
 use \DateTimeImmutable;
 
 //https://github.com/CodelyTV/php-ddd-example/blob/main/src/Mooc/Videos/Domain/VideoCreatedDomainEvent.php
-final class PostWasPublishedEvent implements IDomainEvent
+final class PostWasPublishedEvent implements IEvent
 {
     private int $postId;
     private int $authorId;

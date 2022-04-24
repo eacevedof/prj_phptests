@@ -2,15 +2,15 @@
 namespace App\Blog\Application;
 
 use App\Blog\Infrastructure\Monolog;
-use App\Shared\Domain\Bus\Event\IDomainEvent;
-use App\Shared\Domain\Bus\Event\IDomainEventSubscriber;
+use App\Shared\Domain\Bus\Event\IEvent;
+use App\Shared\Domain\Bus\Event\IEventSubscriber;
 use App\Blog\Domain\Events\PostWasPublishedEvent;
 use App\Blog\Infrastructure\Repositories\PostRepository;
 use App\Blog\Infrastructure\Repositories\UserRepository;
 
-final class MonologService implements IDomainEventSubscriber
+final class MonologService implements IEventSubscriber
 {
-    private function logOnPostPublished(IDomainEvent $domainEvent): void
+    private function logOnPostPublished(IEvent $domainEvent): void
     {
         if (get_class($domainEvent)!==PostWasPublishedEvent::class) return;
 
@@ -20,7 +20,7 @@ final class MonologService implements IDomainEventSubscriber
         (new Monolog())->log("Post with title {$title} published by user {$emailTo}");
     }
 
-    public function onDomainEvent(IDomainEvent $domainEvent): IDomainEventSubscriber
+    public function onDomainEvent(IEvent $domainEvent): IEventSubscriber
     {
         $this->logOnPostPublished($domainEvent);
         return $this;

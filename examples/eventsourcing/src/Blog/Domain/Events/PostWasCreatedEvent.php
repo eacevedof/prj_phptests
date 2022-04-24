@@ -1,10 +1,10 @@
 <?php
 namespace App\Blog\Domain\Events;
 
-use App\Shared\Domain\Bus\Event\IDomainEvent;
+use App\Shared\Domain\Bus\Event\IEvent;
 use \DateTimeImmutable;
 
-final class PostWasCreatedEvent implements IDomainEvent
+final class PostWasCreatedEvent implements IEvent
 {
     private int $postId;
     private int $authorId;
