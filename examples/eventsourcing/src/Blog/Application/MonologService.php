@@ -1,7 +1,7 @@
 <?php
 namespace App\Blog\Application;
 
-use App\Blog\Infrastructure\Monolog;
+use App\Shared\Infrastructure\Monolog\Monolog;
 use App\Shared\Domain\Bus\Event\IEvent;
 use App\Shared\Domain\Bus\Event\IEventSubscriber;
 use App\Blog\Domain\Events\PostWasPublishedEvent;
