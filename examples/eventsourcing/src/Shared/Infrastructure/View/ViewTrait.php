@@ -17,7 +17,12 @@ trait ViewTrait
             $$name = $value;
         }
 
-        include_once("views/$path.php");
+        include_once("$path.php");
         exit();
+    }
+
+    private function _get_view(string $thisdir, string $view): string
+    {
+        return "$thisdir/views/$view";
     }
 }

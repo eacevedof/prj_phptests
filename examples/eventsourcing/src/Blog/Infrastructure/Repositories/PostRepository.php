@@ -1,6 +1,7 @@
 <?php
 namespace App\Blog\Infrastructure\Repositories;
 
+use App\Shared\Domain\Aggregate\AggregateRoot;
 use App\Blog\Domain\Ports\IPostRepository;
 use App\Blog\Domain\PostEntity;
 
@@ -25,7 +26,7 @@ final class PostRepository implements IPostRepository
         );
     }
 
-    public function save(PostEntity $postEntity): void
+    public function save(AggregateRoot $postEntity): void
     {
         echo "post {$postEntity->title()} saved ...<br/>";
     }

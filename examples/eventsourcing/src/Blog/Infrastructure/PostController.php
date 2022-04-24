@@ -7,7 +7,6 @@ use App\Blog\Application\PostPublishCommand;
 use App\Shared\Infrastructure\Request\RequestTrait;
 use App\Shared\Infrastructure\View\ViewTrait;
 
-
 /**
  * https://github.com/CodelyTV/php-ddd-example/blob/main/src/Shared/Infrastructure/Symfony/ApiController.php
  * https://github.com/CodelyTV/php-ddd-example/blob/main/apps/mooc/backend/src/Controller/Courses/CoursesPutController.php
@@ -36,8 +35,8 @@ final class PostController
          */
         $post = $this->bus->publish(new PostPublishCommand($postId, $userId));
 
-        $this->set("post", $post)
-            ->render("post-status");
-    }
 
+        $this->set("post", $post)
+            ->render($this->_get_view(__DIR__,"post-status"));
+    }
 }
