@@ -1,7 +1,7 @@
 <?php
 namespace App\Blog\Infrastructure;
 
-use App\Blog\Domain\Bus\ICommandBus;
+use App\Blog\Domain\Bus\Command\ICommandBus;
 use App\Blog\Application\Commands\CommandBus;
 use App\Blog\Application\PostPublishCommand;
 
