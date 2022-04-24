@@ -2,7 +2,7 @@
 /**
  * events listeners
  */
-use App\Blog\Infrastructure\Bus\EventBus;
+use App\Shared\Infrastructure\Bus\EventBus;
 
 use App\Blog\Application\KafkaService;
 use App\Blog\Application\MonologService;

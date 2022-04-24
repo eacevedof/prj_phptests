@@ -1,5 +1,5 @@
 <?php
-namespace App\Blog\Infrastructure\Bus;
+namespace App\Shared\Infrastructure\Bus;
 
 use App\Shared\Domain\Bus\Event\IEventBus;
 use App\Shared\Domain\Bus\Event\IDomainEventSubscriber;

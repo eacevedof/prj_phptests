@@ -2,7 +2,7 @@
 /**
  * handles listeners
  */
-use App\Blog\Infrastructure\Bus\CommandBus;
+use App\Shared\Infrastructure\Bus\CommandBus;
 use App\Blog\Application\PostPublishCommand;
 use App\Blog\Application\PostPublishCommandHandler;
 use App\Blog\Application\PostPublisherService;

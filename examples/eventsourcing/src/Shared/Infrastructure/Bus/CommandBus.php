@@ -1,5 +1,5 @@
 <?php
-namespace App\Blog\Infrastructure\Bus;
+namespace App\Shared\Infrastructure\Bus;
 
 use App\Shared\Domain\Bus\Command\ICommandBus;
 use App\Shared\Domain\Bus\Command\ICommandHandler;

@@ -3,7 +3,7 @@ namespace App\Blog\Application;
 
 use App\Blog\Domain\Events\PostWasPublishedEvent;
 use App\Blog\Infrastructure\Repositories\PostRepository;
-use App\Blog\Infrastructure\Bus\EventBus;
+use App\Shared\Infrastructure\Bus\EventBus;
 
 //https://github.com/CodelyTV/php-ddd-example/blob/main/src/Mooc/Videos/Application/Create/VideoCreator.php
 final class PostPublisherService
