@@ -35,8 +35,9 @@ final class PostController
          */
         $post = $this->bus->publish(new PostPublishCommand($postId, $userId));
 
-
         $this->set("post", $post)
-            ->render($this->_get_view(__DIR__,"post-status"));
+            ->render(
+                $this->_get_view(__DIR__,"post-status")
+            );
     }
 }
