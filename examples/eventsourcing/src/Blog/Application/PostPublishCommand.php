@@ -1,7 +1,7 @@
 <?php
 namespace App\Blog\Application;
 
-use App\Blog\Domain\Bus\Command\ICommand;
+use App\Shared\Domain\Bus\Command\ICommand;
 
 final class PostPublishCommand implements ICommand
 {

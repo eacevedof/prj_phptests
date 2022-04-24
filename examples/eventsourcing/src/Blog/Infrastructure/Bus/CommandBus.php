@@ -1,9 +1,9 @@
 <?php
 namespace App\Blog\Infrastructure\Bus;
 
-use App\Blog\Domain\Bus\Command\ICommandBus;
-use App\Blog\Domain\Bus\Command\ICommandHandler;
-use App\Blog\Domain\Bus\Command\ICommand;
+use App\Shared\Domain\Bus\Command\ICommandBus;
+use App\Shared\Domain\Bus\Command\ICommandHandler;
+use App\Shared\Domain\Bus\Command\ICommand;
 
 use \InvalidArgumentException;
 

@@ -1,5 +1,5 @@
 <?php
-namespace App\Blog\Domain\Bus\Event;
+namespace App\Shared\Domain\Bus\Event;
 
 interface IDomainEvent
 {

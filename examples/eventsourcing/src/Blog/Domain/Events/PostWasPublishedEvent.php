@@ -1,7 +1,7 @@
 <?php
 namespace App\Blog\Domain\Events;
 
-use App\Blog\Domain\Bus\Event\IDomainEvent;
+use App\Shared\Domain\Bus\Event\IDomainEvent;
 use \DateTimeImmutable;
 
 //https://github.com/CodelyTV/php-ddd-example/blob/main/src/Mooc/Videos/Domain/VideoCreatedDomainEvent.php

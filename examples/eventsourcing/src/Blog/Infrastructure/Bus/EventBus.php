@@ -1,9 +1,9 @@
 <?php
 namespace App\Blog\Infrastructure\Bus;
 
-use App\Blog\Domain\Bus\Event\IEventBus;
-use App\Blog\Domain\Bus\Event\IDomainEventSubscriber;
-use App\Blog\Domain\Bus\Event\IDomainEvent;
+use App\Shared\Domain\Bus\Event\IEventBus;
+use App\Shared\Domain\Bus\Event\IDomainEventSubscriber;
+use App\Shared\Domain\Bus\Event\IDomainEvent;
 
 final class EventBus implements IEventBus
 {
