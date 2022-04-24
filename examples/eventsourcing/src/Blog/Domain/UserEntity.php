@@ -1,6 +1,8 @@
 <?php
 namespace App\Blog\Domain;
 
+use App\Shared\Domain\IEntity;
+
 final class UserEntity implements IEntity
 {
     private int $id;

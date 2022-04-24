@@ -1,5 +1,5 @@
 <?php
-namespace App\Blog\Domain\Aggregate;
+namespace App\Shared\Domain\Aggregate;
 
 use App\Shared\Domain\Bus\Event\IEvent;
 

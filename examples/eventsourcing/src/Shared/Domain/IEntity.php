@@ -1,5 +1,5 @@
 <?php
-namespace App\Blog\Domain;
+namespace App\Shared\Domain;
 
 interface IEntity
 {
