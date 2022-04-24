@@ -1,5 +1,5 @@
 <?php
-namespace App\Blog\Infrastructure;
+namespace App\Shared\Infrastructure\View;
 
 trait ViewTrait
 {

@@ -4,6 +4,9 @@ namespace App\Blog\Infrastructure;
 use App\Shared\Domain\Bus\Command\ICommandBus;
 use App\Blog\Application\Commands\CommandBus;
 use App\Blog\Application\PostPublishCommand;
+use App\Shared\Infrastructure\Request\RequestTrait;
+use App\Shared\Infrastructure\View\ViewTrait;
+
 
 /**
  * https://github.com/CodelyTV/php-ddd-example/blob/main/src/Shared/Infrastructure/Symfony/ApiController.php
