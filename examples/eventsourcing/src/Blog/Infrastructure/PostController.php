@@ -26,12 +26,12 @@ final class PostController
         $userId = $this->getRequestSession("userId", 1);
         $postId = $this->getRequestPost("postId", 1);
         /**
-         *- bus->dispatch(command):
+         *- bus->publish(command):
          *  - ejecuta commandHandler()(command)
          *      ejecuta: publisherService->publish(postidVO, useridVO)
          *          - lanza el evento: DomainEventBus::instance()->publish(postIdVO, userIdVO)
          */
-        $post = $this->bus->dispatch(new PostPublishCommand($postId, $userId));
+        $post = $this->bus->publish(new PostPublishCommand($postId, $userId));
 
         $this->set("post", $post)
             ->render("post-status");
