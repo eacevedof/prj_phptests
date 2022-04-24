@@ -1,8 +1,8 @@
 <?php
 namespace App\Blog\Application;
 
-use EventSourcing\IDomainEvent;
-use EventSourcing\IDomainEventSubscriber;
+use App\Blog\Domain\Bus\Event\IDomainEvent;
+use App\Blog\Domain\Bus\Event\IDomainEventSubscriber;
 use App\Blog\Domain\Ports\IUserRepository;
 use App\Blog\Domain\Events\PostWasPublishedEvent;
 

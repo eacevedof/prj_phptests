@@ -1,9 +1,10 @@
 <?php
 namespace App\Blog\Domain\Events;
 
-use EventSourcing\IDomainEvent;
+use App\Blog\Domain\Bus\Event\IDomainEvent;
 use \DateTimeImmutable;
 
+//https://github.com/CodelyTV/php-ddd-example/blob/main/src/Mooc/Videos/Domain/VideoCreatedDomainEvent.php
 final class PostWasPublishedEvent implements IDomainEvent
 {
     private int $postId;

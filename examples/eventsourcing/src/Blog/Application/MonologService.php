@@ -2,8 +2,8 @@
 namespace App\Blog\Application;
 
 use App\Blog\Infrastructure\Monolog;
-use EventSourcing\IDomainEvent;
-use EventSourcing\IDomainEventSubscriber;
+use App\Blog\Domain\Bus\Event\IDomainEvent;
+use App\Blog\Domain\Bus\Event\IDomainEventSubscriber;
 use App\Blog\Domain\Events\PostWasPublishedEvent;
 use App\Blog\Infrastructure\Repositories\PostRepository;
 use App\Blog\Infrastructure\Repositories\UserRepository;

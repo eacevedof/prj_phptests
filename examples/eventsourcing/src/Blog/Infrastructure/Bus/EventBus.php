@@ -8,7 +8,7 @@ use App\Blog\Domain\Bus\Event\IDomainEvent;
 final class EventBus implements IEventBus
 {
     private array $subscribers;
-    private static ?DomainEventBus $instance = null;
+    private static ?IEventBus $instance = null;
     private int $id = 0;
 
     public static function instance(): self
