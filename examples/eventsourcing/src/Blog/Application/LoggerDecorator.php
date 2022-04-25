@@ -6,7 +6,7 @@ use App\Blog\Domain\ICommandHandler;
 use App\Blog\Domain\IEntity;
 use App\Blog\Domain\PostRepository;
 use App\Blog\Domain\UserRepository;
-use App\Blog\Domain\Events\PostWasPublishedEvent;
+//use App\Blog\Domain\Events\PostWasPublishedEvent;
 use App\Blog\Infrastructure\Monolog;
 
 final class LoggerDecorator
@@ -27,8 +27,10 @@ final class LoggerDecorator
     }
 }
 
+/*
 $decorator = new LoggerDecorator(new PostPublishCommandHandler(
     new PostRepository(),
     new UserRepository()
 ));
 $decorator->execute(new PostWasPublishedEvent(1, 1));
+*/

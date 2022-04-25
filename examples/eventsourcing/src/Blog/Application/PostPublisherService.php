@@ -3,9 +3,12 @@ namespace App\Blog\Application;
 
 use App\Blog\Domain\Events\PostWasPublishedEvent;
 use App\Blog\Domain\PostEntity;
+use App\Blog\Domain\Types\PostAuthorIdType;
+use App\Blog\Domain\Types\PostIdType;
 use App\Blog\Infrastructure\Repositories\PostRepository;
 use App\Shared\Infrastructure\Bus\EventBus;
 
+//https://github.com/CodelyTV/php-ddd-example/blob/main/src/Mooc/Courses/Application/Create/CourseCreator.php
 //https://github.com/CodelyTV/php-ddd-example/blob/main/src/Mooc/Videos/Application/Create/VideoCreator.php
 final class PostPublisherService
 {
@@ -16,12 +19,13 @@ final class PostPublisherService
         $this->postRepository = $postRepository;
     }
 
-    public function publish(int $postId, int $authorId): PostEntity
+    //aqui se debe usar tipos personalizados
+    public function publish(PostIdType $postId, PostAuthorIdType $authorId): PostEntity
     {
         $post = $this->postRepository->ofIdOrFail($postId);
         $post->publish();
         $this->postRepository->save($post);
-        EventBus::instance()->publish(new PostWasPublishedEvent($postId, $authorId));
+        EventBus::instance()->publish(new PostWasPublishedEvent($postId->value(), $authorId->value()));
         return $post;
     }
 }

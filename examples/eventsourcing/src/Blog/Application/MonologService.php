@@ -1,6 +1,8 @@
 <?php
 namespace App\Blog\Application;
 
+use App\Blog\Domain\Types\PostIdType;
+use App\Blog\Domain\Types\UserIdType;
 use App\Shared\Infrastructure\Monolog\Monolog;
 use App\Shared\Domain\Bus\Event\IEvent;
 use App\Shared\Domain\Bus\Event\IEventSubscriber;
@@ -14,8 +16,8 @@ final class MonologService implements IEventSubscriber
     {
         if (get_class($domainEvent)!==PostWasPublishedEvent::class) return;
 
-        $emailTo = (new UserRepository())->ofIdOrFail($domainEvent->authorId())->email();
-        $title = (new PostRepository())->ofIdOrFail($domainEvent->postId())->title();
+        $emailTo = (new UserRepository())->ofIdOrFail(new UserIdType($domainEvent->authorId()))->email()->value();
+        $title = (new PostRepository())->ofIdOrFail(new PostIdType($domainEvent->postId()))->title()->value();
         echo "monologging ...<br/>";
         (new Monolog())->log("Post with title {$title} published by user {$emailTo}");
     }

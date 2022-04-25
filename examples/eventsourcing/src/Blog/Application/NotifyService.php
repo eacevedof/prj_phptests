@@ -1,6 +1,7 @@
 <?php
 namespace App\Blog\Application;
 
+use App\Blog\Domain\Types\UserIdType;
 use App\Shared\Domain\Bus\Event\IEvent;
 use App\Shared\Domain\Bus\Event\IEventSubscriber;
 use App\Blog\Domain\Ports\IUserRepository;
@@ -19,7 +20,7 @@ final class NotifyService implements IEventSubscriber
     {
         if (get_class($domainEvent)!==PostWasPublishedEvent::class) return;
 
-        $emailTo = $this->userRepository->ofIdOrFail($domainEvent->authorId())->email();
+        $emailTo = $this->userRepository->ofIdOrFail(new UserIdType($domainEvent->authorId()))->email()->value();
         echo "sending email ...<br/>";
         mb_send_mail(
             $emailTo,

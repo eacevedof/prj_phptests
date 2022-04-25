@@ -2,6 +2,8 @@
 namespace App\Blog\Application;
 
 use App\Blog\Domain\PostEntity;
+use App\Blog\Domain\Types\PostAuthorIdType;
+use App\Blog\Domain\Types\PostIdType;
 use App\Shared\Domain\Bus\Command\ICommandHandler;
 
 /**
@@ -24,7 +26,9 @@ final class PostPublishCommandHandler implements ICommandHandler
     public function __invoke(PostPublishCommand $command): PostEntity
     {
         echo "command handler execute ...<br/>";
-        return $this->publisherService->publish($command->postId(), $command->authorId());
+        $postId = new PostIdType($command->postId());
+        $authorId = new PostAuthorIdType($command->authorId());
+        return $this->publisherService->publish($postId, $authorId);
     }
 }
 
