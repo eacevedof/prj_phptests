@@ -21,6 +21,6 @@ final class EventStoreRepository
 
     private function _save(EventStoreEntity $eventStoreEntity): void
     {
-        echo "saving event: ". print_r($eventStoreEntity, 1);
+        echo "<pre>saving event: ". print_r($eventStoreEntity, 1)."</pre>";
     }
 }

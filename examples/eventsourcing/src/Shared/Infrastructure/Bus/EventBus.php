@@ -46,9 +46,9 @@ final class EventBus implements IEventBus
     {
         echo "processing events <br/>";
         //echo "<pre>";var_dump($domainEvents);die;
-        foreach($this->subscribers as $subscriber) {
-            foreach ($domainEvents as $event) {
-                (new EventStoreRepository())->append($event);
+        foreach ($domainEvents as $event) {
+            (new EventStoreRepository())->append($event);
+            foreach($this->subscribers as $subscriber) {
                 $subscriber->onDomainEvent($event);
             }
         }

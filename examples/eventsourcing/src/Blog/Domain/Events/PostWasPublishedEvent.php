@@ -21,7 +21,7 @@ final class PostWasPublishedEvent implements IEvent
 
     public function __construct(int $postId, int $authorId)
     {
-        $this->messageId = "1";
+        $this->messageId = uniqid();
         $this->correlationId = "1";
         $this->causationId = "1";
 
