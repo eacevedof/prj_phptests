@@ -25,7 +25,14 @@ final class PostPublisherService
         $post = $this->postRepository->ofIdOrFail($postId);
         $post->publish();
         $this->postRepository->save($post);
-        EventBus::instance()->publish(new PostWasPublishedEvent($postId->value(), $authorId->value()));
+        /**
+         * forma carlos b.
+         */
+        //EventBus::instance()->publish(new PostWasPublishedEvent($postId->value(), $authorId->value()));
+        /**
+         * forma Codely
+         */
+        EventBus::instance()->publish(...$post->pullDomainEvents());
         return $post;
     }
 }

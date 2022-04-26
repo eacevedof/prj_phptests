@@ -37,12 +37,18 @@ final class EventBus implements IEventBus
         return $id;
     }
 
-    public function publish(IEvent $domainEvent): self
+    /**
+     * @param IEvent ...$domainEvents
+     * con la destructuracion permitimos validar el tipo de cada evento pasado
+     */
+    public function publish(IEvent ...$domainEvents): void
     {
+        echo "processing events <br/>";
+        //echo "<pre>";var_dump($domainEvents);die;
         foreach($this->subscribers as $subscriber) {
-            $subscriber->onDomainEvent($domainEvent);
+            foreach ($domainEvents as $d)
+                $subscriber->onDomainEvent($d);
         }
-        return $this;
     }
 
     public function ofId(int $id): ?IEventSubscriber

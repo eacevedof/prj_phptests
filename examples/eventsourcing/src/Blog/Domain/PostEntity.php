@@ -2,6 +2,7 @@
 namespace App\Blog\Domain;
 
 //https://github.com/CodelyTV/php-ddd-example/blob/main/src/Mooc/Videos/Domain/Video.php
+use App\Blog\Domain\Events\PostWasPublishedEvent;
 use App\Shared\Domain\Aggregate\AbsAggregateRoot;
 use App\Shared\Domain\IEntity;
 use App\Blog\Domain\Types\PostIdType;
@@ -90,6 +91,7 @@ final class PostEntity extends AbsAggregateRoot implements IEntity
     {
         $this->status = new PostStatusType(1);
         echo "post status changed ...<br/>";
-        $this->record(new PostWasCreatedEvent($this->id->value(), $this->authorId()->value()));
+        $this->record(new PostWasPublishedEvent($this->id->value(), $this->authorId()->value()));
+        //$this->record(new PostWasPublishedEvent(3, 8));
     }
 }
