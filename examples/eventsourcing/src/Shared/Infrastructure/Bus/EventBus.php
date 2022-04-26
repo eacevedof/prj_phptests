@@ -4,6 +4,7 @@ namespace App\Shared\Infrastructure\Bus;
 use App\Shared\Domain\Bus\Event\IEventBus;
 use App\Shared\Domain\Bus\Event\IEventSubscriber;
 use App\Shared\Domain\Bus\Event\IEvent;
+use App\Shared\Infrastructure\Repositories\EventStoreRepository;
 
 final class EventBus implements IEventBus
 {
@@ -46,8 +47,10 @@ final class EventBus implements IEventBus
         echo "processing events <br/>";
         //echo "<pre>";var_dump($domainEvents);die;
         foreach($this->subscribers as $subscriber) {
-            foreach ($domainEvents as $d)
-                $subscriber->onDomainEvent($d);
+            foreach ($domainEvents as $event) {
+                (new EventStoreRepository())->append($event);
+                $subscriber->onDomainEvent($event);
+            }
         }
     }
 
