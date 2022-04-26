@@ -10,6 +10,7 @@ use App\Blog\Domain\Types\PostTitleType;
 use App\Blog\Domain\Types\PostContentType;
 use App\Blog\Domain\Types\PostStatusType;
 use App\Blog\Domain\Events\PostWasCreatedEvent;
+use App\Shared\Infrastructure\Bus\EventBus;
 
 //https://github.com/CodelyTV/php-ddd-example/blob/main/src/Mooc/Courses/Domain/Course.php
 //https://github.com/CodelyTV/php-ddd-example/blob/main/src/Mooc/Videos/Domain/Video.php
@@ -28,12 +29,34 @@ final class PostEntity extends AbsAggregateRoot implements IEntity
         $this->title = $title;
         $this->content = $content;
         $this->status = new PostStatusType(0);
+
+        /**
+         * forma carlos b:
+         * mi duda: Si esto se hace en el new... cuando se recuperen registros de una bd y se use este método
+         * se lanzaría el evento?
+         */
+        //EventBus::instance()->publish(new PostWasCreatedEvent($id->value(), $authorId->value()));
     }
 
-    public static function create(PostIdType $id, PostAuthorIdType $authorId, PostTitleType $title, PostContentType $content): self
+    public static function create(
+        PostIdType $id,
+        PostAuthorIdType $authorId,
+        PostTitleType $title,
+        PostContentType $content
+    ): self
     {
+        /**
+         * Punto importante. En codely usan la estrategia de los name constructors mientras que Carlos B.
+         * sugiere que deberia lanzarse el evento dentro del new EntidadX()
+         * [DDD y CQRS: Preguntas Frecuentes](https://youtu.be/auEhX4WfCRA?t=1008)
+         *
+         * - Los valores del constructor del evento son de tipos primitivos
+         */
         $postEntity = new self($id, $authorId, $title, $content);
-        //aqui se deberia agregar el evento createdomainevent. El contenido de los eventos va en raw
+
+        /**
+         * forma Codely
+         */
         $postEntity->record(new PostWasCreatedEvent($id->value(), $authorId->value()));
         return $postEntity;
     }
@@ -63,10 +86,10 @@ final class PostEntity extends AbsAggregateRoot implements IEntity
         return $this->authorId;
     }
 
-    public function publish(): self
+    public function publish(): void
     {
         $this->status = new PostStatusType(1);
         echo "post status changed ...<br/>";
-        return $this;
+        $this->record(new PostWasCreatedEvent($this->id->value(), $this->authorId()->value()));
     }
 }
