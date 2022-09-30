@@ -58,7 +58,10 @@ final class IntersectHelper
         }
 
         //req-end < for-end
-        
+        $this->result["history"]["end"] = $reqend;
+        if ($reqend>$today) {
+            $this->result["history"]["end"] = $today;
+        }
     }
 }
 
