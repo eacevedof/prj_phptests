@@ -42,6 +42,12 @@ final class IntersectHelper
 
         return $this->result;
     }
+
+    private function get_end(): string
+    {
+        //si req-end == f-end
+
+    }
 }
 
 $request = [
