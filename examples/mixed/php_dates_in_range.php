@@ -5,17 +5,13 @@
  */
 include("vendor/autoload.php");
 
-$history = [
-    ["start" => "", "end" => ""],
-
-];
-
 final class IntersectHelper
 {
     private array $request = ["start"=>"", "end" => ""];
     private array $forecast = ["start"=>"", "end" => ""];
 
     private array $result = [
+        "request" => ["start"=>"", "end" => ""],
         "history" => ["start"=>"", "end" => ""],
         "forecast" => ["start"=>"", "end" => ""],
     ];
@@ -34,7 +30,26 @@ final class IntersectHelper
 
     public function get_calculated(): array
     {
+        $this->result["request"]["start"] = $this->request["start"];
+        $this->result["request"]["end"] = $this->request["end"];
 
         return $this->result;
     }
+}
+
+$request = [
+    ["start" => "", "end" => ""],
+];
+
+$forecast = [
+    ["start" => "", "end" => ""],
+];
+
+$history = [
+    ["start" => "", "end" => ""],
+];
+
+foreach($request as $req) {
+    $r = (new IntersectHelper())->set_request();
+    pr($r);
 }
