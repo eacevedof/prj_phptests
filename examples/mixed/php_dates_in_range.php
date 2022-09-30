@@ -41,6 +41,7 @@ final class IntersectHelper
         $this->result["request"]["end"] = $this->request["end"];
 
         $this->_calc_ends();
+        $this->_calc_starts();
         return $this->result;
     }
 
@@ -65,6 +66,11 @@ final class IntersectHelper
         //hay que obtener el mes siguiente de req-end y dejarlo en día 1
         $nextmonth = date("Y-m-01", strtotime("+1 month", strtotime($reqend)));
         $this->result["forecast"]["end"] = $nextmonth;
+    }
+
+    private function _calc_starts(): void
+    {
+
     }
 }
 
