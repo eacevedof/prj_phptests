@@ -63,7 +63,8 @@ final class IntersectHelper
             $this->result["history"]["end"] = $today;
         }
         //hay que obtener el mes siguiente de req-end y dejarlo en día 1
-        $this->result["forecast"]["end"] = $forend;
+        $nextmonth = date("Y-m-01", strtotime("+1 month", strtotime($reqend)));
+        $this->result["forecast"]["end"] = $nextmonth;
     }
 }
 
