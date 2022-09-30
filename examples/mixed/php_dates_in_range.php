@@ -40,13 +40,24 @@ final class IntersectHelper
         $this->result["request"]["start"] = $this->request["start"];
         $this->result["request"]["end"] = $this->request["end"];
 
+        $this->_set_end();
         return $this->result;
     }
 
-    private function get_end(): string
+    private function _set_end(): void
     {
-        //si req-end == f-end
+        //si req-end >= for-end => hasta el fin del forecast history hasta req
+        if ($reqend = $this->request["end"] >= $forend = $this->forecast["end"]) {
+            $this->result["forecast"]["end"] = $forend;
+            $this->result["history"]["end"] = $reqend;
+            $today = date("Y-m-d");
+            if ($reqend>$today) {
+                $this->result["history"]["end"] = $today;
+            }
+            return;
+        }
 
+        //req-end < for-end
     }
 }
 
