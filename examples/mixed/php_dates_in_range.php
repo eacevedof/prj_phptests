@@ -32,4 +32,9 @@ final class IntersectHelper
         return $this;
     }
 
+    public function get_calculated(): array
+    {
+
+        return $this->result;
+    }
 }
