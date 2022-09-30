@@ -9,6 +9,7 @@ final class IntersectHelper
 {
     private array $request = ["start"=>"", "end" => ""];
     private array $forecast = ["start"=>"", "end" => ""];
+    private array $history = ["start"=>"", "end" => ""];
 
     private array $result = [
         "request" => ["start"=>"", "end" => ""],
@@ -25,6 +26,12 @@ final class IntersectHelper
     public function set_forecast(string $start, $end): self
     {
         $this->forecast = ["start" => $start, "end" => $end];
+        return $this;
+    }
+
+    public function set_history(string $start, $end): self
+    {
+        $this->history = ["start" => $start, "end" => $end];
         return $this;
     }
 
