@@ -45,18 +45,22 @@ final class IntersectHelper
 }
 
 $request = [
-    ["start" => "", "end" => ""],
+    ["start" => "2022-01-01", "end" => "2022-01-01"],
 ];
 
 $forecast = [
-    ["start" => "", "end" => ""],
+    ["start" => "2022-01-01", "end" => "2022-01-01"],
 ];
 
 $history = [
-    ["start" => "", "end" => ""],
+    ["start" => "2022-01-01", "end" => "2022-01-01"],
 ];
 
 foreach($request as $req) {
-    $r = (new IntersectHelper())->set_request();
+    $r = (new IntersectHelper())
+        ->set_request()
+        ->set_history()
+        ->set_forecast()
+    ;
     pr($r);
 }
