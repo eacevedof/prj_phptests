@@ -74,11 +74,9 @@ final class IntersectHelper
         if ($reqstart = $this->request["start"] <= $forstart = $this->forecast["start"]) {
             $this->result["forecast"]["start"] = $forstart;
             $this->result["history"]["start"] = $reqstart;
-            if ($reqstart>$today) {
-                $this->result["history"]["start"] = $today;
-            }
             return;
         }
+
     }
 }
 
