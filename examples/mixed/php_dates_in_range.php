@@ -58,9 +58,10 @@ $history = [
 
 foreach($request as $req) {
     $r = (new IntersectHelper())
-        ->set_request()
-        ->set_history()
-        ->set_forecast()
+        ->set_request($req["start"], $req["end"])
+        ->set_history($history[0]["start"], $history[0]["end"])
+        ->set_forecast($forecast[0]["start"], $forecast[0]["end"])
+        ->get_calculated()
     ;
     pr($r);
 }
