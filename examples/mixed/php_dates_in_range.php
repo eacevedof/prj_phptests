@@ -62,6 +62,8 @@ final class IntersectHelper
         if ($reqend>$today) {
             $this->result["history"]["end"] = $today;
         }
+        //hay que obtener el mes siguiente de req-end y dejarlo en día 1
+        $this->result["forecast"]["end"] = $forend;
     }
 }
 
