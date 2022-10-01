@@ -77,6 +77,8 @@ final class IntersectHelper
             return;
         }
 
+        //reqstart > forstart
+        //forecast debe ser el mes previo con dia 1
     }
 }
 
