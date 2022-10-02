@@ -60,10 +60,10 @@ final class IntersectHelper
 
         //Hay q recordar que el día 1 almacena el dato de todo el mes
         //o habría que obtener del mes actual y del siguiente?
-        $day = date("Y-m-01", strtotime($reqend));
+        $day = date("d", $seconds = strtotime($reqend));
         $nextmonth = ($day==="01")
-            ? date("Y-m-01", strtotime($reqend))
-            : date("Y-m-01", strtotime("+1 month", strtotime($reqend)));
+            ? date("Y-m-01", $seconds)
+            : date("Y-m-01", strtotime("+1 month", $seconds));
         $this->result["forecast"]["end"] = $nextmonth;
     }
 
