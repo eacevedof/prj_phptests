@@ -70,7 +70,6 @@ final class IntersectHelper
 
     private function _calc_starts(): void
     {
-        $today = date("Y-m-d");
         if ($reqstart = $this->request["start"] <= $forstart = $this->forecast["start"]) {
             $this->result["forecast"]["start"] = $forstart;
             $this->result["history"]["start"] = $reqstart;
@@ -78,7 +77,10 @@ final class IntersectHelper
         }
 
         //reqstart > forstart
+        $start = date("Y-m", strtotime($reqstart))."-01";
         //forecast debe ser el mes previo con dia 1
+        $this->result["forecast"]["start"] = $start;
+        $this->result["history"]["start"] = $start;
     }
 }
 
