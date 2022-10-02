@@ -88,20 +88,14 @@ $request = [
     ["start" => "2022-03-01", "end" => "2022-09-01"],
 ];
 
-$history = [
-    ["start" => "2022-03-01", "end" => "2022-09-01"],
-    ["start" => "2022-01-01", "end" => "2022-01-01"],
-];
-
 $forecast = [
     ["start" => "2022-03-01", "end" => "2022-09-01"],
 ];
 
-foreach($request as $req) {
+foreach($request as $i => $req) {
     $r = (new IntersectHelper())
         ->set_request($req["start"], $req["end"])
-        //->set_history($history[0]["start"], $history[0]["end"])
-        ->set_forecast($forecast[0]["start"], $forecast[0]["end"])
+        ->set_forecast($forecast[$i]["start"], $forecast[$i]["end"])
         ->get_calculated()
     ;
     pr($r);
