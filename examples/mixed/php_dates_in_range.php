@@ -83,7 +83,7 @@ final class IntersectHelper
             ? date("Y-m-01", $seconds)
             : date("Y-m-01", strtotime("+1 month", $seconds));
 */
-        $start = date("Y-m-01", strtotime($forstart));
+        $start = date("Y-m-01", strtotime($reqstart));
         //forecast debe ser el mes previo con dia 1
         $this->result["forecast"]["start"] = $start;
         $this->result["history"]["start"] = $start;
