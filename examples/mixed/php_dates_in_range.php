@@ -57,9 +57,10 @@ final class IntersectHelper
         if ($reqend>$today) {
             $this->result["history"]["end"] = $today;
         }
-        //hay que obtener el mes siguiente de req-end y dejarlo en día 1
-        $nextmonth = date("Y-m-01", strtotime("+1 month", strtotime($reqend)));
-        $this->result["forecast"]["end"] = $nextmonth;
+
+        //Hay q recordar que el día 1 almacena el dato de todo el mes
+        //o habría que obtener del mes actual y del siguiente?
+        $this->result["forecast"]["end"] = date("Y-m-01", strtotime($reqend));
     }
 
     private function _calc_starts(): void
