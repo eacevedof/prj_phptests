@@ -76,7 +76,14 @@ final class IntersectHelper
         }
 
         //reqstart > forstart
-        $start = date("Y-m", strtotime($reqstart))."-01";
+
+/*
+        $day = date("d", $seconds = strtotime($reqstart));
+        $prevmonth = ($day==="01")
+            ? date("Y-m-01", $seconds)
+            : date("Y-m-01", strtotime("+1 month", $seconds));
+*/
+        $start = date("Y-m-01", strtotime($forstart));
         //forecast debe ser el mes previo con dia 1
         $this->result["forecast"]["start"] = $start;
         $this->result["history"]["start"] = $start;
@@ -87,6 +94,7 @@ $request = [
     //["start" => "2022-03-01", "end" => "2022-09-01"],
     //["start" => "2022-03-01", "end" => "2022-08-13"],
     //["start" => "2022-03-01", "end" => "2022-12-01"],
+    //["start" => "2022-03-01", "end" => "2023-01-03"],
     ["start" => "2022-03-01", "end" => "2023-01-03"],
 ];
 
@@ -94,7 +102,7 @@ $forecast = [
     //["start" => "2022-03-01", "end" => "2022-09-01"],
     //["start" => "2022-03-01", "end" => "2022-08-01"],
     //["start" => "2022-03-01", "end" => "2022-10-01"],
-    ["start" => "2022-03-01", "end" => "2022-12-01"],
+    ["start" => "2022-02-01", "end" => "2022-12-01"],
 ];
 
 foreach($request as $i => $req) {
