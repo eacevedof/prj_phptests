@@ -29,12 +29,6 @@ final class IntersectHelper
         return $this;
     }
 
-    private function set_history(string $start, $end): self
-    {
-        //$this->history = ["start" => $start, "end" => $end];
-        //return $this;
-    }
-
     public function get_calculated(): array
     {
         $this->result["request"]["start"] = $this->request["start"];
