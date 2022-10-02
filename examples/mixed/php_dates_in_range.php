@@ -84,7 +84,9 @@ final class IntersectHelper
 }
 
 $request = [
-    ["start" => "2022-03-01", "end" => "2022-09-01"],
+    //["start" => "2022-03-01", "end" => "2022-09-01"],
+    //["start" => "2022-03-01", "end" => "2022-08-13"],
+    ["start" => "2022-03-01", "end" => "2022-12-01"],
 ];
 
 $forecast = [
@@ -95,6 +97,7 @@ $forecast = [
 ];
 
 foreach($request as $i => $req) {
+    bug($req, "req-date");
     bug($forecast[$i], "forecast-range");
     $r = (new IntersectHelper())
         ->set_request($req["start"], $req["end"])
