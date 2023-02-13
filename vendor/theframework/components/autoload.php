@@ -11,6 +11,7 @@ $arSubFolders[] = $sPathRoot."db";
 $arSubFolders[] = $sPathRoot."db".DIRECTORY_SEPARATOR."integration";
 $arSubFolders[] = $sPathRoot."motosceni";
 $arSubFolders[] = $sPathRoot."converters";
+$arSubFolders[] = $sPathRoot."google";
 
 $sPathInclude = implode(PATH_SEPARATOR,$arSubFolders);
 set_include_path($sPathInclude);
