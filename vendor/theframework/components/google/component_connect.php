@@ -5,6 +5,7 @@ namespace TheFramework\Components\Google;
 final class ComponentConnect
 {
     private static string $bearer = "";
+    private const URL_AUTH = "https://oauth2.googleapis.com/token";
 
     public function get_token(): string
     {
@@ -14,9 +15,9 @@ final class ComponentConnect
     private function connect(): void
     {
         $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, "https://oauth2.googleapis.com/token");
+        curl_setopt($ch, CURLOPT_URL, self::URL_AUTH);
         curl_setopt($ch, CURLOPT_POST, 1);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
+        curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($this->get_credentials()));
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 
         $response = curl_exec($ch);
