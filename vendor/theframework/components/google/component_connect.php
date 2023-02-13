@@ -23,6 +23,15 @@ final class ComponentConnect
         $response = curl_exec($ch);
         $http_status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         curl_close($ch);
+
+        if ($http_status != 200) {
+            exit();
+        }
+
+// Decodifica la respuesta JSON
+        $data = json_decode($response, true);
+// Obtén el token de acceso
+        $access_token = $data['access_token'];
     }
 
     private function get_credentials(): array
