@@ -4,6 +4,7 @@ namespace TheFramework\Components\Google;
 
 final class ComponentConnect
 {
+
     private static string $bearer = "";
     private const URL_AUTH = "https://oauth2.googleapis.com/token";
 
