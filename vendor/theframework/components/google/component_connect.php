@@ -6,7 +6,7 @@ final class ComponentConnect
 {
 
     private static string $bearer = "";
-    private const URL_AUTH = "https://oauth2.googleapis.com/token";
+    private const URL_AUTH = "https://docs.google.com/spreadsheets/d/1n06_yqIB88peex3zNDB5PHCfIAVQhrbLUp0xKocXUsw/export?format=csv";
 
     private const GOOGLE_CLIENT_ID = "your-client-id.apps.googleusercontent.com";
     private const GOOGLE_CLIENT_SECRET = "your-client-secret";
@@ -22,7 +22,19 @@ final class ComponentConnect
         return self::$bearer;
     }
 
-    private function connect(): void
+    private function connect()
+    {
+        $url = "https://docs.google.com/spreadsheets/d/{SPREADSHEET_ID}/export?format=csv";
+// Reemplaza {SPREADSHEET_ID} por el ID de la hoja de cálculo de Google que deseas leer
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+        $response = curl_exec($ch);
+        curl_close($ch);
+    }
+
+    private function _connect(): void
     {
         $ch = curl_init();
         $postPayload = http_build_query($this->get_credentials());
