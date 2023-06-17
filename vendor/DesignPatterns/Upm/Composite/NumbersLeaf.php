@@ -2,7 +2,13 @@
 
 namespace DesignPatterns\Upm\Composite;
 
-final class NumbersLeaf
+final readonly class NumbersLeaf
 {
+    private int $value;
+
+    public function __construct()
+    {
+
+    }
 
 }
