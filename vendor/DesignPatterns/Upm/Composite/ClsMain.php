@@ -17,7 +17,7 @@ final class ClsMain
         $node->addNumber(7);
         $node->addNumber(8);
         $node->addNode(
-            Node::getNode()
+            Node::getNode("two")->addNumber(89)
         );
         $theTree->addNode($node);
     }
