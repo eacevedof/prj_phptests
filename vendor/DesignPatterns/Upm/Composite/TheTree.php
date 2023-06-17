@@ -26,20 +26,6 @@ final class TheTree
         return new self($name);
     }
 
-    public function isComposite(): bool
-    {
-        return true;
-    }
-
-    public function add(TreeNumbers $treeNumbers): void
-    {
-        $this->theTree[] = $treeNumbers;
-    }
-
-    public function remove(TreeNumbers $treeNumbers): void
-    {
-        $this->theTree[] = $treeNumbers;
-    }
 
     public function numberOfNodes(): int
     {

@@ -4,21 +4,23 @@ namespace DesignPatterns\Upm\Composite;
 
 final readonly class Node
 {
+    private array $components;
 
-    public function __construct(
-        private array $components = []
-    )
-    {}
+    public function __construct(private string $name)
+    {
+        $this->components = [
+            $this->name => []
+        ];
+    }
 
     public function addNumber(Number $number): void
     {
-        $this->components[] = $number;
+        $this->components[$this->name][] = $number;
     }
 
     public function addNode(Node $node): void
     {
-        $this->components[] = $node;
+        $this->components[$this->name][] = $node;
     }
-
 
 }
