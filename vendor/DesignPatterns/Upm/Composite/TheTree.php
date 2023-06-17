@@ -21,7 +21,7 @@ final class TheTree
         $this->theTree[self::ROOT_NAME][] = $node;
     }
 
-    public function addNumber(Node $number): void
+    public function addNumber(Number $number): void
     {
         $this->theTree[self::ROOT_NAME][] = $number;
     }
