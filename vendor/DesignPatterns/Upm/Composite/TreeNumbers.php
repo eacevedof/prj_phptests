@@ -25,9 +25,9 @@ final class TreeNumbers
         $this->treeNumbersList[] = $treeNumbers;
     }
 
-    public function numberOfTreeNumbers(): int
+    public function numberOfTreeNumbers(): void
     {
-        return count($this->treeNumbersList);
+
     }
 
     public function sum(): int
