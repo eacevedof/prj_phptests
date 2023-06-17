@@ -12,7 +12,8 @@ final readonly class NumbersLeaf
 
     public function addNumber(Number $number): void
     {
-
+        $this->numbers[] = $number;
     }
+
 
 }
