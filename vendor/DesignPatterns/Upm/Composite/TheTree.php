@@ -16,6 +16,16 @@ final class TheTree
         ];
     }
 
+    public function addNode(Node $node): void
+    {
+        $this->theTree[self::ROOT_NAME][] = $node;
+    }
+
+    public function addNumber(Node $number): void
+    {
+        $this->theTree[self::ROOT_NAME][] = $number;
+    }
+
     public function numberOfNodes(): int
     {
         return 0;
