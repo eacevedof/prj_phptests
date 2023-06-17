@@ -8,6 +8,11 @@ final class Number
     {
     }
 
+    public static function getNumber(int $value): self
+    {
+        return new self($number);
+    }
+
     public function value(): int
     {
         return $this->value;

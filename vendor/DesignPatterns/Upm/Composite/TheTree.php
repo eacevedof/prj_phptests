@@ -6,24 +6,14 @@ use DesignPatterns\Upm\Composite\Number;
 
 final class TheTree
 {
-    private ?Number $number = null;
-    private string $name = "";
+    private const ROOT_NAME = "root";
     private array $theTree = [];
 
-    private function __construct(Number $number, string $name = "")
+    private function __construct()
     {
-        $this->number = $number;
-        $this->name = $name;
-    }
-
-    public static function getTreeNumbersByNumber(Number $number): self
-    {
-        return new self($number);
-    }
-
-    public static function getTreeNumbersByName(string $name): self
-    {
-        return new self($name);
+        $this->theTree = [
+            self::ROOT_NAME => []
+        ];
     }
 
 
