@@ -16,7 +16,6 @@ final class TheTree
         ];
     }
 
-
     public function numberOfNodes(): int
     {
         return 0;
