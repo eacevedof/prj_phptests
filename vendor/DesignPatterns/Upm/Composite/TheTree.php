@@ -4,7 +4,7 @@ namespace DesignPatterns\Upm\Composite;
 
 use DesignPatterns\Upm\Composite\Number;
 
-final class TreeNumbers
+final class TheTree
 {
     private ?Number $number = null;
     private string $name = "";
@@ -41,9 +41,9 @@ final class TreeNumbers
         $this->theTree[] = $treeNumbers;
     }
 
-    public function numberOfTreeNumbers(): void
+    public function numberOfNodes(): int
     {
-
+        return 0;
     }
 
     public function sum(): int
