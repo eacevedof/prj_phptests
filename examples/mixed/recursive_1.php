@@ -7,3 +7,8 @@
 $data = [];
 for($i = 0; $i<100; $i++)
     $data[] = $i;
+
+function printAll(array $ar, int $i): void
+{
+
+}
