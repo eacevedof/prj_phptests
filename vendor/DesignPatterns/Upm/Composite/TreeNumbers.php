@@ -2,12 +2,9 @@
 
 namespace DesignPatterns\Upm\Composite;
 
+use DesignPatterns\Upm\Composite\Number;
+
 final class TreeNumbers
 {
-    public function __construct(
-        private array $numbers = []
-    )
-    {}
-
 
 }
