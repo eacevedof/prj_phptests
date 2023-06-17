@@ -13,3 +13,8 @@
     Si se intenta añadir a un nodo hoja, se debe lanzar la excepción:
     UnsupportedOperationException. Si se intenta borrar nodos a una hoja no se hace nada
     Si se intenta añadir o borrar con parámetro ll, no hace nat debe dar errores
+  - Se deben crear las opreaciones:
+    - numberOfNodes
+    - sum
+    - higher
+    sobre si mismo y todos los nodos que dependen de él.
