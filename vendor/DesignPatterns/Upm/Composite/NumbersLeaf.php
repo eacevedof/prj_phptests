@@ -4,11 +4,10 @@ namespace DesignPatterns\Upm\Composite;
 
 final readonly class NumbersLeaf
 {
-    private int $value;
-
-    public function __construct()
+    public function __construct(private readonly int $value)
     {
-
     }
+
+
 
 }
