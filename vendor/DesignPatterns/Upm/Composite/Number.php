@@ -8,4 +8,8 @@ final class Number
     {
     }
 
+    public function value(): int
+    {
+        return $this->value;
+    }
 }
