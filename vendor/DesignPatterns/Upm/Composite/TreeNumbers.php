@@ -8,7 +8,7 @@ final class TreeNumbers
 {
     private ?Number $number = null;
     private string $name = "";
-    private array $treeNumbersList = [];
+    private array $theTree = [];
 
     private function __construct(Number $number, string $name = "")
     {
@@ -33,12 +33,12 @@ final class TreeNumbers
 
     public function add(TreeNumbers $treeNumbers): void
     {
-        $this->treeNumbersList[] = $treeNumbers;
+        $this->theTree[] = $treeNumbers;
     }
 
     public function remove(TreeNumbers $treeNumbers): void
     {
-        $this->treeNumbersList[] = $treeNumbers;
+        $this->theTree[] = $treeNumbers;
     }
 
     public function numberOfTreeNumbers(): void
