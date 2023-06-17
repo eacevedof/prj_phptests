@@ -3,6 +3,7 @@
 namespace DesignPatterns\Upm\Composite;
 
 use DesignPatterns\Upm\Composite\TreeException;
+use function PHPUnit\Framework\isInstanceOf;
 
 final readonly class Node
 {
@@ -39,6 +40,9 @@ final readonly class Node
         //supongamos que solo tiene un nivel
         $components = $node->getComponents();
         foreach ($components as $component) {
+            if (isInstanceOf(Number::class, $component))
+                continue;
+
 
         }
     }
