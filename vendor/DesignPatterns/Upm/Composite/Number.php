@@ -2,8 +2,7 @@
 
 namespace DesignPatterns\Upm\Composite;
 
-final class TreeNumbers
+final class Number
 {
-
 
 }
