@@ -10,10 +10,20 @@ final class TreeNumbers
     private string $name = "";
     private array $treeNumbersList = [];
 
-    private function __construct(Number $number, string $name)
+    private function __construct(Number $number, string $name = "")
     {
         $this->number = $number;
         $this->name = $name;
+    }
+
+    public static function getTreeNumbersByNumber(Number $number): self
+    {
+        return new self($number);
+    }
+
+    public static function getTreeNumbersByName(string $name): self
+    {
+        return new self($name);
     }
 
     public function isComposite(): bool
