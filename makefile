@@ -17,5 +17,9 @@ remlogs: ## remove logs
 	rm -fr ./logs/session/*.log
 	rm -fr ./logs/shellscripts/*.log
 
+gitpush: ## git push m=any message
+	clear;
+	git add .; git commit -m "$(m)"; git push;
+
 server: ## localhost:1024
 	php -S localhost:1024 -t ./public
