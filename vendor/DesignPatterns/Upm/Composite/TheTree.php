@@ -16,6 +16,11 @@ final class TheTree
         ];
     }
 
+    public static function fromPrimitives(): self
+    {
+        return new self();
+    }
+
     public function addNode(Node $node): void
     {
         $this->theTree[self::ROOT_NAME][] = $node;

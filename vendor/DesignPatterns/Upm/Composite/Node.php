@@ -2,18 +2,23 @@
 
 namespace DesignPatterns\Upm\Composite;
 
+use DesignPatterns\Upm\Composite\TreeException;
+
 final readonly class Node
 {
     private array $components;
 
     public function __construct(private string $name)
     {
+        if (!$this->name = trim($name))
+            TreeException::nameCanNotBeEmpty();
+
         $this->components = [
             $this->name => []
         ];
     }
 
-    public function fromPrimitives(string $name): self
+    public static function getNode(string $name): self
     {
         return new self($name);
     }
