@@ -13,6 +13,11 @@ final readonly class Node
         ];
     }
 
+    public function fromPrimitives(string $name): self
+    {
+        return new self($name);
+    }
+
     public function addNumber(Number $number): void
     {
         $this->components[$this->name][] = $number;
