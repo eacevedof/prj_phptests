@@ -36,7 +36,23 @@ final readonly class Node
     private function failIfNotValidNode(Node $node): void
     {
         //TreeException::wrongNode();
+        //supongamos que solo tiene un nivel
+        $components = $node->getComponents();
+        foreach ($components as $component) {
 
+        }
     }
+
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    public function getComponents(): Node | Number
+    {
+        return $this->components[$this->name];
+    }
+
+
 
 }
