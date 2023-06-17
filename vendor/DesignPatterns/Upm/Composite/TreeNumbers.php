@@ -6,9 +6,15 @@ use DesignPatterns\Upm\Composite\Number;
 
 final class TreeNumbers
 {
-    private Number $number;
+    private ?Number $number = null;
+    private string $name = "";
     private array $treeNumbersList = [];
 
+    private function __construct(Number $number, string $name)
+    {
+        $this->number = $number;
+        $this->name = $name;
+    }
 
     public function isComposite(): bool
     {
