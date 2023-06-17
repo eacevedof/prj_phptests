@@ -33,4 +33,10 @@ final readonly class Node
         $this->components[$this->name][] = $node;
     }
 
+    private function failIfNotValidNode(Node $node): void
+    {
+        //TreeException::wrongNode();
+
+    }
+
 }

@@ -15,4 +15,9 @@ final class TreeException extends Exception
     {
         throw new self("Name can not be emtpy", 500);
     }
+
+    public static function wrongNode(): void
+    {
+        throw new self("Lowest level of this node must be a number", 500);
+    }
 }

@@ -13,9 +13,11 @@ final class ClsMain
         $theTree = TheTree::fromPrimitives();
         $number = Number::getNumber(5);
         $theTree->addNumber($number);
+
         $node = Node::getNode("one");
         $node->addNumber(7);
         $node->addNumber(8);
+
         $node->addNode(
             Node::getNode("two")->addNumber(89)
         );
