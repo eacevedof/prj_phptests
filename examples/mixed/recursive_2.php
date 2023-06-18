@@ -14,14 +14,15 @@ for($i = 0; $i<33; $i=$i+2)
 for($i = 33; $i<45; $i=$i+2)
     $data[$i] = [[$i]];
 
-print_r($data);
-
-function printAll(array $ar, int $i): void
+function printTree(array $tree): void
 {
-    if (!isset($ar[$i]))
-        return;
-    echo "\n{$ar[$i]}";
-    printAll($ar, $i + 1);
+    foreach ($tree as $leaf) {
+        if (!is_array($leaf)) {
+            echo $leaf;
+            continue;
+        }
+        printTree($tree);
+    }
 }
 
-//printAll($data, 0);
+printAll($data);

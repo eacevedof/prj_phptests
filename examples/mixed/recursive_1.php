@@ -13,7 +13,7 @@ function printAll(array $ar, int $i): void
     if (!isset($ar[$i]))
         return;
     echo "\n{$ar[$i]}";
-    printAll($ar, $i + 1);
+    printTree($ar, $i + 1);
 }
 
-printAll($data, 0);
+printTree($data, 0);
