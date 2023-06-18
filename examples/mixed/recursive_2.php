@@ -25,4 +25,4 @@ function printTree(array $tree): void
     }
 }
 
-printAll($data);
+printTree($data);
