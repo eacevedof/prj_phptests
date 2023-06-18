@@ -10,5 +10,8 @@ for($i = 0; $i<100; $i++)
 
 function printAll(array $ar, int $i): void
 {
-
+    if (!isset($ar[$i]))
+        return;
+    echo $ar[$i];
+    printAll($ar, $i + 1);
 }
