@@ -25,10 +25,7 @@ function printTree(array $tree): void
             echo "$leaf, ";
             continue;
         }
-        else {
-            printTree($tree);
-        }
-        //printTree($tree);
+        printTree($leaf);
     }
 }
 
