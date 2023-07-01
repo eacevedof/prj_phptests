@@ -4,6 +4,7 @@ namespace DesignPatterns\Upm\Composite;
 
 use DesignPatterns\Upm\Composite\Number;
 
+
 final class TheTree
 {
     private const ROOT_NAME = "root";
