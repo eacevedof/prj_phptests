@@ -7,8 +7,10 @@
 
   - **Motivación**
     Enlas aplicaciones gráficas, se permiten realizar dibujos por la agrupación de elementos simples y otros elementos agrupados
+  
   - **Fuentes**:
     - paquete composite, paquete test composite
+  
   - **Árbol de números**
     Se quiere construir una estructura de árbol con valores numéricos.
     Existen nodos con valores numéricos (hojas) y nodos que contienen otros nodos (compuestos)
