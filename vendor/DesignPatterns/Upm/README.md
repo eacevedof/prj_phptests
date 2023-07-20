@@ -1,13 +1,16 @@
 - Patrones de Diseño - Universidad Politécnica de Madrid (MIW)
 - [Youtube Playlist] (https://www.youtube.com/watch?v=kD1Cr6hp7ow&list=PLj2IVmcP-_QOQcDplVNiLbBQ6OLCXX7fv&index=1&t=5s)
-- Composite
+
+### Composite
   - [Enunciado](https://youtu.be/E85Nu2auOFI?list=PLj2IVmcP-_QOQcDplVNiLbBQ6OLCXX7fv) 
   - composite (Compuesto)
 
   - **Motivación**
     Enlas aplicaciones gráficas, se permiten realizar dibujos por la agrupación de elementos simples y otros elementos agrupados
+  
   - **Fuentes**:
     - paquete composite, paquete test composite
+  
   - **Árbol de números**
     Se quiere construir una estructura de árbol con valores numéricos.
     Existen nodos con valores numéricos (hojas) y nodos que contienen otros nodos (compuestos)
