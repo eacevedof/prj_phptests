@@ -90,6 +90,6 @@ abstract class AbstractEvaluateConditions
 
     private function getEvaluationClassByOperator(string $operator): string
     {
-        return self::OPERATOR[$operator] ?? null;
+        return self::OPERATOR[$operator] ?? "";
     }
 }
