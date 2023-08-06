@@ -4,31 +4,24 @@ namespace LHub\StateMachineRulesEvaluator;
 
 abstract class AbstractEvaluateConditions
 {
-    public const OPERATOR = [
-        "AND" => "Modules\TacticalRequests\Utils\RulesValidation\EvaluateConditionsAnd",
-        "OR" => "Modules\TacticalRequests\Utils\RulesValidation\EvaluateConditionsOr",
-        "NOT" => "Modules\TacticalRequests\Utils\RulesValidation\EvaluateConditionsNot",
-        "ASSIGN" => "Modules\TacticalRequests\Utils\RulesValidation\AssignFromAttributes",
-        "MOTIVE-TACTICAL" => "Modules\TacticalRequests\Utils\RulesValidation\EvaluateMotiveTactical",
-        "NOT-MOTIVE-TACTICAL" => "Modules\TacticalRequests\Utils\RulesValidation\EvaluateNotMotiveTactical",
-        "REJECTION-REASON" => "Modules\TacticalRequests\Utils\RulesValidation\EvaluateRejectionReason",
-        "NOT-REJECTION-REASON" => "Modules\TacticalRequests\Utils\RulesValidation\EvaluateNotRejectionReason",
-    ];
 
-    public function evaluate(array $conditions)
+    public function __construct(private RulesEvaluatorFactory $rulesEvaluatorFactory)
+    {}
+
+    public function evaluate(array $conditions): ?RulesEvaluatorInterface
     {
-        $result = null;
-
         foreach ($conditions as $key => $condition) {
+            $strOperator = $condition["operator"];
+            if (!$operator = OperatorEnum::from($strOperator))
+                continue;
 
-            if($operation = $this->getEvaluationClassByOperator($condition["operator"])){
-                if(!$result || $result->isEval()){
-                    $result = $operation::init($condition, $this->task ?? $this->assetId);
-                }
-            }
+            $evaluator = $this->rulesEvaluatorFactory->getEvaluatorByOperator($operator);
+            $evaluator->evaluate();
+            if ($evaluator->isEvaluationOk())
+                return $evaluator;
         }
 
-        return $result;
+        return null;
     }
 
     public function evaluateStatus()
