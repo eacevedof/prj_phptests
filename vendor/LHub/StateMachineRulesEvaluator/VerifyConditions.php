@@ -9,19 +9,23 @@ final class VerifyConditions extends AbstractEvaluateConditions
     private mixed $rules;
     protected int $assetId;
     protected mixed $task;
-    protected array $action;
     protected int $status;
-    private mixed $jsonValue;
 
-    public function __construct($json, $assetId, $task = null)
+    private string $prePostConditionJson;
+
+    public function __construct(string $prePostConditionJson, int $assetId, mixed $task = null)
     {
-        $this->rules = json_decode($json, true)["rules"];
+        $this->prePostConditionJson = $prePostConditionJson;
+        $this->rules = json_decode($prePostConditionJson, true)["rules"];
         $this->assetId = $assetId;
         $this->task = $task;
         $this->action = [];
-        $this->jsonValue = $json;
+
     }
 
+    /**
+     * esto devuelve el validador
+     */
     public function verify()
     {
         try {
@@ -43,7 +47,7 @@ final class VerifyConditions extends AbstractEvaluateConditions
 
             // si el json debe evaluarse completo entra por aca
             if($isCheckAll){
-                $this->fullEvaluate($this->rules);
+                $this->evaluateAllRules();
                 $this->replaceActionArray();
             }
 
@@ -55,7 +59,7 @@ final class VerifyConditions extends AbstractEvaluateConditions
         }
     }
 
-    private function fullEvaluate(array $rule): void
+    private function evaluateAllRules(): void
     {
         foreach ($this->rules as $rule) {
             foreach ($rule as $condition) {
