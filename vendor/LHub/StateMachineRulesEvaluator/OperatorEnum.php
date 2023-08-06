@@ -16,14 +16,14 @@ namespace LHub\StateMachineRulesEvaluator;
 'NOT-REJECTION-REASON' => 'Modules\TacticalRequests\Utils\RulesValidation\EvaluateNotRejectionReason',
 
 */
-enum OperatorEnum
+enum OperatorEnum: string
 {
-    case AND;
-    case OR;
-    case NOT;
-    case ASSIGN;
-    case MOTIVE_TACTICAL;
-    case NON_MOTIVE_TACTICAL;
-    case REJECTION_REASON;
-    case NOT_REJECTION_REASON;
+    case AND = "AND";
+    case OR = "OR";
+    case NOT = "NOT";
+    case ASSIGN = "ASSIGN";
+    case MOTIVE_TACTICAL = "MOTIVIE_TACTICAL";
+    case NON_MOTIVE_TACTICAL = "NON_MOTIVE_TACTICAL";
+    case REJECTION_REASON = "REJECTION_REASON";
+    case NOT_REJECTION_REASON = "NOT_REJECTION_REASON";
 }
