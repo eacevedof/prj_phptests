@@ -25,7 +25,6 @@ final class VerifyConditions extends AbstractEvaluateConditions
     public function verify()
     {
         try {
-
             $isCheckAll = json_decode($this->jsonValue, true)["checkAll"] ?? false;
 
             // si el json tiene que detenerse a la primera condicion que se cumpla entra por aca
@@ -50,7 +49,8 @@ final class VerifyConditions extends AbstractEvaluateConditions
 
             return $this;
 
-        } catch (Exception $e){
+        }
+        catch (Exception $e){
             throw new Exception(trans('rulesjson.exception.validation'), 400);
         }
     }
@@ -83,5 +83,4 @@ final class VerifyConditions extends AbstractEvaluateConditions
         }
         $this->action = $replaceActionArray;
     }
-
 }
