@@ -5,14 +5,14 @@ namespace LHub\StateMachineRulesEvaluator;
 abstract class AbstractEvaluateConditions
 {
     public const OPERATOR = [
-        'AND' => 'Modules\TacticalRequests\Utils\RulesValidation\EvaluateConditionsAnd',
-        'OR' => 'Modules\TacticalRequests\Utils\RulesValidation\EvaluateConditionsOr',
-        'NOT' => 'Modules\TacticalRequests\Utils\RulesValidation\EvaluateConditionsNot',
-        'ASSIGN' => 'Modules\TacticalRequests\Utils\RulesValidation\AssignFromAttributes',
-        'MOTIVE-TACTICAL' => 'Modules\TacticalRequests\Utils\RulesValidation\EvaluateMotiveTactical',
-        'NOT-MOTIVE-TACTICAL' => 'Modules\TacticalRequests\Utils\RulesValidation\EvaluateNotMotiveTactical',
-        'REJECTION-REASON' => 'Modules\TacticalRequests\Utils\RulesValidation\EvaluateRejectionReason',
-        'NOT-REJECTION-REASON' => 'Modules\TacticalRequests\Utils\RulesValidation\EvaluateNotRejectionReason',
+        "AND" => "Modules\TacticalRequests\Utils\RulesValidation\EvaluateConditionsAnd",
+        "OR" => "Modules\TacticalRequests\Utils\RulesValidation\EvaluateConditionsOr",
+        "NOT" => "Modules\TacticalRequests\Utils\RulesValidation\EvaluateConditionsNot",
+        "ASSIGN" => "Modules\TacticalRequests\Utils\RulesValidation\AssignFromAttributes",
+        "MOTIVE-TACTICAL" => "Modules\TacticalRequests\Utils\RulesValidation\EvaluateMotiveTactical",
+        "NOT-MOTIVE-TACTICAL" => "Modules\TacticalRequests\Utils\RulesValidation\EvaluateNotMotiveTactical",
+        "REJECTION-REASON" => "Modules\TacticalRequests\Utils\RulesValidation\EvaluateRejectionReason",
+        "NOT-REJECTION-REASON" => "Modules\TacticalRequests\Utils\RulesValidation\EvaluateNotRejectionReason",
     ];
 
     public function evaluate(array $conditions)
@@ -21,7 +21,7 @@ abstract class AbstractEvaluateConditions
 
         foreach ($conditions as $key => $condition) {
 
-            if($operation = $this->getEvaluationClassByOperator($condition['operator'])){
+            if($operation = $this->getEvaluationClassByOperator($condition["operator"])){
                 if(!$result || $result->isEval()){
                     $result = $operation::init($condition, $this->task ?? $this->assetId);
                 }
@@ -36,7 +36,7 @@ abstract class AbstractEvaluateConditions
         if(count($this->action) === 0){
             return null;
         }
-        $statuses = array_column(array_column($this->action, 0), 'status');
+        $statuses = array_column(array_column($this->action, 0), "status");
         return $statuses[0] ?? null;
     }
 
@@ -48,7 +48,7 @@ abstract class AbstractEvaluateConditions
         }
 
         $arrayFinal = [];
-        $arrayReplace = array_column(array_column($this->action, 0), 'assign');
+        $arrayReplace = array_column(array_column($this->action, 0), "assign");
 
         foreach ($arrayReplace as $value){
             foreach ($value as $key => $data) {
@@ -67,7 +67,7 @@ abstract class AbstractEvaluateConditions
         }
 
         $arrayFinal = [];
-        $arrayReplace = array_column(array_column($this->action, 0), 'replace');
+        $arrayReplace = array_column(array_column($this->action, 0), "replace");
 
         foreach ($arrayReplace as $value){
             foreach ($value as $key => $data) {
