@@ -19,14 +19,11 @@ final class VerifyConditions extends AbstractEvaluateConditions
         $this->rules = json_decode($prePostConditionJson, true)["rules"];
         $this->assetId = $assetId;
         $this->task = $task;
-        $this->action = [];
+        $this->actions = [];
 
     }
 
-    /**
-     * esto devuelve el validador
-     */
-    public function verify()
+    public function verify(): self
     {
         try {
             $isCheckAll = json_decode($this->jsonValue, true)["checkAll"] ?? false;
@@ -35,11 +32,16 @@ final class VerifyConditions extends AbstractEvaluateConditions
             if(!$isCheckAll){
                 foreach ($this->rules as $rule) {
                     foreach ($rule as $condition){
-                        if(isset($condition['conditions'])){
-                            $result = $this->evaluate($condition['conditions']);
-                            if($result && $result->isEval()){
-                                return $this->setAction($rule);
-                            }
+                        if (!isset($condition["conditions"]))
+                            continue;
+
+                        //esto devuelve un evaluador
+                        if (!$rulesEvaluator = $this->evaluate($condition['conditions']))
+                            continue;
+
+                        if($rulesEvaluator->isEval()){
+                            $this->setAction($rule);
+                            return $this;
                         }
                     }
                 }
@@ -63,28 +65,31 @@ final class VerifyConditions extends AbstractEvaluateConditions
     {
         foreach ($this->rules as $rule) {
             foreach ($rule as $condition) {
-                if (isset($condition['conditions'])) {
-                    $result = $this->evaluate($condition['conditions']);
-                    if ($result && $result->isEval()) {
-                        $this->action[] = array_column($rule, 'action');
-                    }
+
+                if (!isset($condition['conditions']))
+                    continue;
+
+                $result = $this->evaluate($condition['conditions']);
+                if ($result && $result->isEval()) {
+                    $this->actions[] = array_column($rule, 'action');
                 }
+
             }
         }
     }
 
-    private function setAction(array $conditions): self
+    private function setAction(array $conditions): void
     {
-        $this->action = array_column($conditions, 'action');
-        return $this;
+        $this->actions = array_column($conditions, 'action');
+        //return $this;
     }
 
     private function replaceActionArray(): void
     {
         $replaceActionArray = [];
-        foreach ($this->action as $key => $value) {
+        foreach ($this->actions as $key => $value) {
             $replaceActionArray[$key] = $value[0];
         }
-        $this->action = $replaceActionArray;
+        $this->actions = $replaceActionArray;
     }
 }

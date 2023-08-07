@@ -16,11 +16,14 @@ abstract class AbstractEvaluateConditions
                 continue;
 
             $evaluator = $this->rulesEvaluatorFactory->getEvaluatorByOperator($operator);
+
+            if (!$comparison = $condition["comparison"])
+                continue;
+
             $evaluator->evaluate();
             if ($evaluator->isEvaluationOk())
                 return $evaluator;
         }
-
         return null;
     }
 

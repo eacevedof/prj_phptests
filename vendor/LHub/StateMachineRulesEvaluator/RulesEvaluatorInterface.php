@@ -6,5 +6,5 @@ interface RulesEvaluatorInterface
 {
                     public function isEvaluationOk(): bool;
 
-                        public function evaluate(): void;
+                        public function evaluate(array $comparison): void;
 }
