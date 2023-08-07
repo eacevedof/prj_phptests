@@ -20,7 +20,7 @@ abstract class AbstractEvaluateConditions
             if (!$comparison = $condition["comparison"])
                 continue;
 
-            $evaluator->evaluate();
+            $evaluator->evaluate($comparison);
             if ($evaluator->isEvaluationOk())
                 return $evaluator;
         }

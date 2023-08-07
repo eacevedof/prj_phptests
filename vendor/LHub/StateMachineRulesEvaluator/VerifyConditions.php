@@ -36,7 +36,7 @@ final class VerifyConditions extends AbstractEvaluateConditions
                             continue;
 
                         //esto devuelve un evaluador
-                        if (!$rulesEvaluator = $this->evaluate($condition['conditions']))
+                        if (!$rulesEvaluator = $this->evaluate($condition["conditions"]))
                             continue;
 
                         if($rulesEvaluator->isEval()){
@@ -57,7 +57,7 @@ final class VerifyConditions extends AbstractEvaluateConditions
 
         }
         catch (Exception $e){
-            throw new Exception(trans('rulesjson.exception.validation'), 400);
+            throw new Exception(trans("rulesjson.exception.validation"), 400);
         }
     }
 
@@ -66,12 +66,12 @@ final class VerifyConditions extends AbstractEvaluateConditions
         foreach ($this->rules as $rule) {
             foreach ($rule as $condition) {
 
-                if (!isset($condition['conditions']))
+                if (!isset($condition["conditions"]))
                     continue;
 
-                $result = $this->evaluate($condition['conditions']);
+                $result = $this->evaluate($condition["conditions"]);
                 if ($result && $result->isEval()) {
-                    $this->actions[] = array_column($rule, 'action');
+                    $this->actions[] = array_column($rule, "action");
                 }
 
             }
@@ -80,7 +80,7 @@ final class VerifyConditions extends AbstractEvaluateConditions
 
     private function setAction(array $conditions): void
     {
-        $this->actions = array_column($conditions, 'action');
+        $this->actions = array_column($conditions, "action");
         //return $this;
     }
 
