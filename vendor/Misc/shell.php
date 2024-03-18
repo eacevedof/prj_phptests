@@ -20,7 +20,7 @@ final class Shell
     {
         if (!$this->commands)
             return [
-                "output" => "",
+                "output" => [],
                 "result_code" => null,
             ];
         $output = [];

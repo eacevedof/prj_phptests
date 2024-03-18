@@ -11,7 +11,8 @@ use \Misc\Shell;
 $shell = Shell::getInstance();
 $result = $shell
             ->addCmd("ls -lat")
+            ->addCmd("")
             ->exec()
 ;
-
-print_r($result);
+foreach ($result["output"] as $output)
+    echo $output;
