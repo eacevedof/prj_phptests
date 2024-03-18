@@ -17,8 +17,8 @@ $result = $shell
             ->exec()
 ;
 
-echo "<pre>";
-echo $result["result_code"]."<br/>";
+//echo "<pre>";
+//echo $result["result_code"]."<br/>";
 
 foreach ($result["output"] as $output)
-    echo "$output<br/>";
+    echo "$output\n";
