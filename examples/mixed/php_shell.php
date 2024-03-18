@@ -15,4 +15,4 @@ $result = $shell
             ->exec()
 ;
 foreach ($result["output"] as $output)
-    echo "$output\n";
+    echo "$output\n\n";
