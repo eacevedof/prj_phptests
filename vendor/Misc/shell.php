@@ -23,10 +23,11 @@ final class Shell
                 "output" => [],
                 "result_code" => null,
             ];
+
         $output = [];
         $resultCode = 0;
 
-        $cmds = implode("; ", $this->commands);
+        $cmds = implode(" ", $this->commands);
         $cmds = trim($cmds);
 
         exec($cmds, $output, $resultCode);
