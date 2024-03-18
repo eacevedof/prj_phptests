@@ -11,10 +11,13 @@ use \Misc\Shell;
 $shell = Shell::getInstance();
 $result = $shell
             ->addCmd("pwd;")
+            ->addCmd("cd ../../;")
             ->addCmd("ls -lat")
             ->addCmd("| grep dr")
             ->exec()
 ;
+
+echo "<pre>";
 echo $result["result_code"]."<br/>";
 
 foreach ($result["output"] as $output)
