@@ -10,11 +10,13 @@ use \Misc\Shell;
 
 $shell = Shell::getInstance();
 $result = $shell
-            ->addCmd("git --version;")
+            ->addCmd("git --versio;")
             ->addCmd("pwd;")
             ->addCmd("ls -lat")
             ->addCmd("| grep dr")
             ->exec()
 ;
+echo $result["result_code"]."<br/>";
+
 foreach ($result["output"] as $output)
     echo "$output<br/>";
