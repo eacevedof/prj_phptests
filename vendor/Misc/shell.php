@@ -25,8 +25,12 @@ final class Shell
             ];
         $output = [];
         $resultCode = 0;
+
         $cmds = implode("; ", $this->commands);
+        $cmds = trim($cmds);
+
         exec($cmds, $output, $resultCode);
+
         return [
             "output" => $output,
             "result_code" => $resultCode,
