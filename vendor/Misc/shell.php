@@ -18,10 +18,19 @@ final class Shell
     
     public function exec(): array
     {
+        if (!$this->commands)
+            return [
+                "output" => "",
+                "result_code" => null,
+            ];
         $output = [];
         $resultCode = 0;
-        exec('ls -l', $output, $resultCode);
-        return $output;
+        $cmds = implode("; ", $this->commands);
+        exec($cmds, $output, $resultCode);
+        return [
+            "output" => $output,
+            "result_code" => $resultCode,
+        ];
     }
 
     public function reset(): self
