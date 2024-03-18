@@ -1,7 +1,7 @@
 <?php
 /**
- * @file: php_di.php
- * @info: ensayos con el inyector de dependencias php-di 6.0: http://php-di.org/
+ * @file: php_shell.php
+ * @info: ejecutor de comandos shell
  */
 include("vendor/autoload.php");
 
