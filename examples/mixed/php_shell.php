@@ -11,7 +11,7 @@ use \Misc\Shell;
 $shell = Shell::getInstance();
 $result = $shell
             ->addCmd("ls -lat")
-            ->addCmd("| grep d")
+            ->addCmd("| grep dr")
             ->exec()
 ;
 foreach ($result["output"] as $output)
