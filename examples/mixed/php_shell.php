@@ -4,8 +4,9 @@
  * @info: ejecutor de comandos shell
  */
 include("vendor/autoload.php");
+include "vendor/Misc/shell.php";
 
-use Misc\Shell;
+use \Misc\Shell;
 
 $shell = Shell::getInstance();
 $result = $shell
