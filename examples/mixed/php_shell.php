@@ -10,6 +10,8 @@ use \Misc\Shell;
 
 $shell = Shell::getInstance();
 $result = $shell
+            ->addCmd("git --version;")
+            ->addCmd("pwd;")
             ->addCmd("ls -lat")
             ->addCmd("| grep dr")
             ->exec()
