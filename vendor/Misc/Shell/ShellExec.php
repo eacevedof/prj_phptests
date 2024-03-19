@@ -4,6 +4,10 @@ namespace Misc\Shell;
 final class ShellExec
 {
     private array $commands = [];
+    private string $cmds = "";
+    
+    private array $output = [];
+    private ?int $resultCode = null;
 
     public static function getInstance(): self
     {
@@ -16,7 +20,7 @@ final class ShellExec
         return $this;
     }
     
-    public function exec(): array
+    public function exec(): self
     {
         if (!$this->commands)
             return [
@@ -28,19 +32,34 @@ final class ShellExec
         $resultCode = 0;
 
         $cmds = implode(" ", $this->commands);
-        $cmds = trim($cmds);
+        $this->cmds = trim($cmds);
 
-        exec($cmds, $output, $resultCode);
+        exec(
+            $this->cmds, 
+            $this->output, 
+            $this->resultCode
+        );
 
-        return [
-            "output" => $output,
-            "result_code" => $resultCode,
-        ];
+        return $this;
+    }
+    
+    public function output(): array
+    {
+        return $this->output;
+    }
+    
+    public function rresultCode(): ?int
+    {
+        return $this->resultCode;
     }
 
     public function reset(): self
     {
         $this->commands = [];
+        $this->cmds = "";
+        $this->output = [];
+        $this->resultCode = null;
+        
         return $this;
     }
 }
