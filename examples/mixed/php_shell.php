@@ -9,9 +9,9 @@ include "vendor/Misc/Shell/ShellAuth.php";
 $config = include "vendor/Misc/Shell/shell-client.php";
 use \Misc\Shell\ShellAuth;
 
+echo "<pre>";
 $output = ShellAuth::getInstance()->getAuthToken(
     $config["a"]["auth"]
 );
 
-echo "<pre>";
 print_r($output);
