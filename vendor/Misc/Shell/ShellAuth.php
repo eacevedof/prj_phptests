@@ -26,7 +26,7 @@ final class ShellAuth
             }")
         ;
         $shelExec->exec();
-
+        $shelExec->debugCmds();
         return $shelExec->output();
     }
 }

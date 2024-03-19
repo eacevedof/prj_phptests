@@ -13,4 +13,5 @@ $output = ShellAuth::getInstance()->getAuthToken(
     $config["a"]["auth"]
 );
 
+echo "<pre>";
 print_r($output);
