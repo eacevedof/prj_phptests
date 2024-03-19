@@ -43,14 +43,19 @@ final class ShellExec
         return $this;
     }
     
-    public function output(): array
+    public function getOutput(): array
     {
         return $this->output;
     }
     
-    public function rresultCode(): ?int
+    public function getResultCode(): ?int
     {
         return $this->resultCode;
+    }
+    
+    public function debugCmds(): void
+    {
+        print_r($this->cmds);
     }
 
     public function reset(): self

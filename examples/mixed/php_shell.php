@@ -4,21 +4,13 @@
  * @info: ejecutor de comandos shell
  */
 include("vendor/autoload.php");
-include "vendor/Misc/Shell/ShellServer.php";
+include "vendor/Misc/Shell/ShellAuth.php";
 
-use \Misc\Shell\ShellServer;
+$config = include "vendor/Misc/Shell/shell-client.php";
+use \Misc\Shell\ShellAuth;
 
-$shell = ShellServer::getInstance();
-$result = $shell
-            ->addCmd("pwd;")
-            ->addCmd("cd ../../;")
-            ->addCmd("ls -lat")
-            ->addCmd("| grep dr")
-            ->exec()
-;
+$output = ShellAuth::getInstance()->getAuthToken(
+    $config["a"]["auth"]
+);
 
-//echo "<pre>";
-//echo $result["result_code"]."<br/>";
-
-foreach ($result["output"] as $output)
-    echo "$output\n";
+print_r($output);

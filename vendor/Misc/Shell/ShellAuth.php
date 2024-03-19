@@ -1,6 +1,7 @@
 <?php
 namespace Misc\Shell;
 
+include_once "ShellExec.php";
 use Misc\Shell\ShellExec;
 
 final class ShellAuth
@@ -12,7 +13,7 @@ final class ShellAuth
         return new self();
     }
 
-    public function getAuthToken(array $auth): string
+    public function getAuthToken(array $auth): array
     {
         $shelExec = ShellExec::getInstance();
         $shelExec
@@ -26,6 +27,6 @@ final class ShellAuth
         ;
         $shelExec->exec();
 
-        $output = $shelExec->output();
+        return $shelExec->output();
     }
 }
