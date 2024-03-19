@@ -24,6 +24,8 @@ final class ShellAuth
                 \"password\": \"{$auth["password"]}\"
             }")
         ;
-        $shelExec->exec()["output"];
+        $shelExec->exec();
+
+        $output = $shelExec->output();
     }
 }
