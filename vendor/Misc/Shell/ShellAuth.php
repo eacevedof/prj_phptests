@@ -20,10 +20,10 @@ final class ShellAuth
             ->addCmd("curl --location '{$auth["url"]}'")
             ->addCmd("--header 'Content-Type: application/json'")
             ->addCmd("--header 'X-Requested-With: application/xml'")
-            ->addCmd("--data-raw {
+            ->addCmd("--data-raw '{
                 \"email\": \"{$auth["username"]}\",
                 \"password\": \"{$auth["password"]}\"
-            }")
+            }'")
         ;
         $shelExec->exec();
         $shelExec->debugCmds();
