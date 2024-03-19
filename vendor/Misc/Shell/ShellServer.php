@@ -1,7 +1,7 @@
 <?php
-namespace Misc;
+namespace Misc\Shell;
 
-final class Shell
+final class ShellServer
 {
     private array $commands = [];
 

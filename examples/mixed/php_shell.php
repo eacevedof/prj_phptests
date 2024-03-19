@@ -4,11 +4,11 @@
  * @info: ejecutor de comandos shell
  */
 include("vendor/autoload.php");
-include "vendor/Misc/shell.php";
+include "vendor/Misc/Shell/ShellServer.php";
 
-use \Misc\Shell;
+use \Misc\Shell\ShellServer;
 
-$shell = Shell::getInstance();
+$shell = ShellServer::getInstance();
 $result = $shell
             ->addCmd("pwd;")
             ->addCmd("cd ../../;")
