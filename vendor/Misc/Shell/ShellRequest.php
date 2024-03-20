@@ -28,16 +28,16 @@ final class ShellRequest
         return $shelExec->getOutput();
     }
 
-    public function postCommand(array $cmd): array
+    public function postCommand(array $cmdRequest): array
     {
         $shelExec = ShellExec::getInstance();
         $shelExec
-            ->addCmd("curl --location '{$cmd["url"]}'")
+            ->addCmd("curl --location '{$cmdRequest["url"]}'")
             ->addCmd("--header 'Content-Type: application/json'")
-            ->addCmd("--header 'Authorization: Bearer {$cmd["bearerToken"]}'")
+            ->addCmd("--header 'Authorization: Bearer {$cmdRequest["bearerToken"]}'")
             ->addCmd("--data-raw '{
-                \"sectoken\": \"{$cmd["sectoken"]}\",
-                \"command\": \"{$cmd["command"]}\"
+                \"sectoken\": \"{$cmdRequest["sectoken"]}\",
+                \"command\": \"{$cmdRequest["command"]}\"
             }'")
         ;
         $shelExec->exec();
