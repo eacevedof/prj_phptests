@@ -14,14 +14,14 @@ use Misc\Shell\ShellResponse;
 $request = ShellRequest::getInstance();
 $response = ShellResponse::getInstance();
 
-$bearerToken = $response->getTokenFromCache("dev-normon");
+const KEY_ENV = "dev-normon";
+$bearerToken = $response->getTokenFromCache(KEY_ENV);
 if (!$bearerToken) {
     $output = $request->getAuthToken(
-        $config["dev-normon"]["auth"]
+        $config[KEY_ENV]["auth"]
     );
     $bearerToken = $response->getTokenFromOutput($output);
-    $response->saveTokenInCache($bearerToken, "dev-normon");
-
+    $response->saveTokenInCache($bearerToken, KEY_ENV);
 }
 echo "<pre>";
 print_r($output);
