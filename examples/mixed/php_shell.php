@@ -29,8 +29,9 @@ if (!$bearerToken = $response->getTokenFromCache(KEY_ENV))
 
 $output = $request->postCommand([
     "url" => $config["shell"]["url"],
+    "bearerToken" => $bearerToken,
     "sectoken" => $config["shell"]["sectoken"],
-    "command" => $config["shell"]["command"],
+    "command" => "ls -lat",
 ]);
 
 $response->printOutput($output);

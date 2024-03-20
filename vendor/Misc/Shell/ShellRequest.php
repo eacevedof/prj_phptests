@@ -24,7 +24,7 @@ final class ShellRequest
             }'")
         ;
         $shelExec->exec();
-        $shelExec->debugCmds();
+        //$shelExec->debugCmds();
         return $shelExec->getOutput();
     }
 
@@ -41,7 +41,7 @@ final class ShellRequest
             }'")
         ;
         $shelExec->exec();
-        $shelExec->debugCmds();
+        //$shelExec->debugCmds();
         return $shelExec->getOutput();
     }
 }
