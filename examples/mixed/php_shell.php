@@ -4,7 +4,7 @@
  * @info: ejecutor de comandos shell
  */
 include("vendor/autoload.php");
-include "vendor/Misc/Shell/ShellAuth.php";
+include "vendor/Misc/Shell/ShellRequest.php";
 include "vendor/Misc/Shell/ShellResponse.php";
 
 $config = include "vendor/Misc/Shell/shell-client.php";
