@@ -40,11 +40,12 @@ foreach ($argv as $i => $cmd) {
 }
 
 $command = $shell->exec()->getCommand();
+
 $output = $request->postCommand([
     "url" => $config["shell"]["url"],
     "bearerToken" => $bearerToken,
     "sectoken" => $config["shell"]["sectoken"],
-    "command" => ,
+    "command" => $command,
 ]);
 
 $response->printOutput($output);
