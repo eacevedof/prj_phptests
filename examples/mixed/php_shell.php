@@ -8,7 +8,7 @@ include "vendor/Misc/Shell/ShellAuth.php";
 include "vendor/Misc/Shell/ShellResponse.php";
 
 $config = include "vendor/Misc/Shell/shell-client.php";
-use \Misc\Shell\ShellRequest;
+use Misc\Shell\ShellRequest;
 use Misc\Shell\ShellResponse;
 
 $request = ShellRequest::getInstance();
