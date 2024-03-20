@@ -27,11 +27,10 @@ if (!$bearerToken) {
 if (!$bearerToken = $response->getTokenFromCache(KEY_ENV))
     exit("no token");
 
-$response = $request->postCommand([
+$output = $request->postCommand([
     "url" => $config["shell"]["url"],
     "sectoken" => $config["shell"]["sectoken"],
     "command" => $config["shell"]["command"],
 ]);
 
-echo "<pre>";
-print_r($output);
+$response->printOutput($output);

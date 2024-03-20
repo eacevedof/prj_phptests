@@ -24,4 +24,10 @@ final class ShellResponse
     {
         return file_get_contents("./cache/$fileName.dat");
     }
+
+    public function printOutput(array $output): void
+    {
+        foreach ($output as $line)
+            print_r($line);
+    }
 }
