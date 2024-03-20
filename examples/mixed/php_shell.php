@@ -11,11 +11,14 @@ $config = include "vendor/Misc/Shell/shell-client.php";
 use \Misc\Shell\ShellAuth;
 use Misc\Shell\ShellResponse;
 
-$bearerToken = ShellResponse::getInstance()->getTokenFromCache("dev-normon");
+$response = ShellResponse::getInstance();
+$bearerToken = $response->getTokenFromCache("dev-normon");
 if (!$bearerToken) {
     $output = ShellAuth::getInstance()->getAuthToken(
         $config["dev-normon"]["auth"]
     );
+    $bearerToken = $response->getTokenFromOutput($output);
+    $response->saveTokenInCache($bearerToken, "dev-normon");
 
 }
 echo "<pre>";
