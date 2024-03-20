@@ -17,12 +17,14 @@ final class ShellResponse
 
     public function saveTokenInCache(string $bearerToken, string $fileName): void
     {
-        file_put_contents("./cache/$fileName.dat", $bearerToken);
+        $dir = __DIR__;
+        file_put_contents("$dir/cache/$fileName.dat", $bearerToken);
     }
 
     public function getTokenFromCache(string $fileName): string
     {
-        return file_get_contents("./cache/$fileName.dat");
+        $dir = __DIR__;
+        return file_get_contents("$dir/cache/$fileName.dat");
     }
 
     public function printOutput(array $output): void
