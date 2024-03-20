@@ -15,13 +15,13 @@ final class ShellResponse
         return $response["data"]["accessToken"] ?? "";
     }
 
-    public function saveToken(string $bearerToken, string $fileName): void
+    public function saveTokenInCache(string $bearerToken, string $fileName): void
     {
-        file_put_contents("./cache/$fileName", $bearerToken);
+        file_put_contents("./cache/$fileName.dat", $bearerToken);
     }
 
-    public function getTooken(string $fileName): string
+    public function getTokenFromCache(string $fileName): string
     {
-        return file_get_contents("./cache/$fileName");
+        return file_get_contents("./cache/$fileName.dat");
     }
 }
