@@ -15,17 +15,23 @@ $request = ShellRequest::getInstance();
 $response = ShellResponse::getInstance();
 
 const KEY_ENV = "dev-normon";
+$config = $config[KEY_ENV];
+
 $bearerToken = $response->getTokenFromCache(KEY_ENV);
 if (!$bearerToken) {
-    $output = $request->getAuthToken(
-        $config[KEY_ENV]["auth"]
-    );
+    $output = $request->getAuthToken($config["auth"]);
     $bearerToken = $response->getTokenFromOutput($output);
     $response->saveTokenInCache($bearerToken, KEY_ENV);
 }
 
 if (!$bearerToken = $response->getTokenFromCache(KEY_ENV))
     exit("no token");
+
+$response = $request->postCommand([
+    "url" => $config["shell"]["url"],
+    "sectoken" => $config["shell"]["sectoken"],
+    "command" => $config["shell"]["command"],
+]);
 
 echo "<pre>";
 print_r($output);
