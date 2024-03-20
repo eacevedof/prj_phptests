@@ -23,5 +23,9 @@ if (!$bearerToken) {
     $bearerToken = $response->getTokenFromOutput($output);
     $response->saveTokenInCache($bearerToken, KEY_ENV);
 }
+
+if (!$bearerToken = $response->getTokenFromCache(KEY_ENV))
+    exit("no token");
+
 echo "<pre>";
 print_r($output);
