@@ -11,11 +11,11 @@ $config = include "vendor/Misc/Shell/shell-client.php";
 use Misc\Shell\ShellRequest;
 use Misc\Shell\ShellResponse;
 
-$request = ShellRequest::getInstance();
-$response = ShellResponse::getInstance();
-
 const KEY_ENV = "dev-normon";
 $config = $config[KEY_ENV];
+
+$request = ShellRequest::getInstance();
+$response = ShellResponse::getInstance();
 
 $bearerToken = $response->getTokenFromCache(KEY_ENV);
 if (!$bearerToken) {
