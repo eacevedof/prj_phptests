@@ -8,13 +8,15 @@ include "vendor/Misc/Shell/ShellAuth.php";
 include "vendor/Misc/Shell/ShellResponse.php";
 
 $config = include "vendor/Misc/Shell/shell-client.php";
-use \Misc\Shell\ShellAuth;
+use \Misc\Shell\ShellRequest;
 use Misc\Shell\ShellResponse;
 
+$request = ShellRequest::getInstance();
 $response = ShellResponse::getInstance();
+
 $bearerToken = $response->getTokenFromCache("dev-normon");
 if (!$bearerToken) {
-    $output = ShellAuth::getInstance()->getAuthToken(
+    $output = $request->getAuthToken(
         $config["dev-normon"]["auth"]
     );
     $bearerToken = $response->getTokenFromOutput($output);

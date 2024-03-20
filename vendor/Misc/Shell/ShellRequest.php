@@ -4,7 +4,7 @@ namespace Misc\Shell;
 include_once "ShellExec.php";
 use Misc\Shell\ShellExec;
 
-final class ShellAuth
+final class ShellRequest
 {
     private array $commands = [];
 
