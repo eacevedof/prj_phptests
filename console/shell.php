@@ -11,8 +11,11 @@ include_once "vendor/Misc/Shell/ShellExec.php";
 
 $config = include "vendor/Misc/Shell/shell-client.php";
 
-use Misc\Shell\ShellRequest;
-use Misc\Shell\ShellResponse;
+use Misc\Shell\{
+    ShellRequest,
+    ShellExec,
+    ShellResponse
+};
 
 const KEY_ENV = "dev-normon";
 $config = $config[KEY_ENV];
@@ -30,11 +33,18 @@ if (!$bearerToken) {
 if (!$bearerToken = $response->getTokenFromCache(KEY_ENV))
     exit("no token");
 
+$shell = ShellExec::getInstance();
+foreach ($argv as $i => $cmd) {
+    if ($i === 0) continue;
+    $shell->addCmd($cmd);
+}
+
+$command = $shell->exec()->getCommand();
 $output = $request->postCommand([
     "url" => $config["shell"]["url"],
     "bearerToken" => $bearerToken,
     "sectoken" => $config["shell"]["sectoken"],
-    "command" => "ls -lat",
+    "command" => ,
 ]);
 
 $response->printOutput($output);

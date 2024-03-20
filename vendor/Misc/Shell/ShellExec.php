@@ -58,6 +58,11 @@ final class ShellExec
         print_r($this->cmds);
     }
 
+    public function getCommand(): string
+    {
+        return $this->cmds;
+    }
+
     public function reset(): self
     {
         $this->commands = [];
