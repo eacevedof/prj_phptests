@@ -27,6 +27,13 @@ final class ShellResponse
         return file_get_contents("$dir/cache/$fileName.dat");
     }
 
+    public function printOutputHtml(array $output): void
+    {
+        echo "<pre>";
+        foreach ($output as $line)
+            print_r($line);
+    }
+
     public function printOutput(array $output): void
     {
         foreach ($output as $line)

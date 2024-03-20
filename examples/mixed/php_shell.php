@@ -34,4 +34,4 @@ $output = $request->postCommand([
     "command" => "ls -lat",
 ]);
 
-$response->printOutput($output);
+$response->printOutputHtml($output);
