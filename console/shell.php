@@ -1,7 +1,7 @@
 <?php
 
 if ($argc < 2) {
-    echo "Usage: php script.php <param1> <param2> ...\n";
+    echo "Usage: php shell.php <param1> <param2> ...\n";
     exit(1);
 }
 
