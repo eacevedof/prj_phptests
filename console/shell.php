@@ -6,46 +6,49 @@ if ($argc < 2) {
 }
 
 $vendorShellDir = realpath(__DIR__."/../vendor/Misc/Shell");
+include_once "{$vendorShellDir}/Exceptions/AbstractShellException.php";
+include_once "{$vendorShellDir}/Exceptions/ShellExecException.php";
+include_once "{$vendorShellDir}/ShellExec.php";
 include_once "{$vendorShellDir}/ShellRequest.php";
 include_once "{$vendorShellDir}/ShellResponse.php";
-include_once "{$vendorShellDir}/ShellExec.php";
+
 $config = include "{$vendorShellDir}/config/shell-client.php";
 
 use Misc\Shell\{
     ShellRequest,
     ShellExec,
-    ShellResponse
+    ShellResponse,
 };
+use Misc\Shell\Exceptions\AbstractShellException;
 
 const KEY_ENV = "dev-normon";
 $config = $config[KEY_ENV];
 
-$request = ShellRequest::getInstance();
-$response = ShellResponse::getInstance();
+$shellRequest = ShellRequest::getInstance();
+$shellResponse = ShellResponse::getInstance();
 
-$bearerToken = $response->getTokenFromCache(KEY_ENV);
+$bearerToken = $shellResponse->getTokenFromCache(KEY_ENV);
 if (!$bearerToken) {
-    $output = $request->getAuthTokenByCurl($config["auth"]);
-    $bearerToken = $response->getTokenFromOutput($output);
-    $response->saveTokenInCache($bearerToken, KEY_ENV);
+    $output = $shellRequest->getAuthTokenByCurl($config["auth"]);
+    $bearerToken = $shellResponse->getTokenFromOutput($output);
+    $shellResponse->saveTokenInCache($bearerToken, KEY_ENV);
 }
 
-if (!$bearerToken = $response->getTokenFromCache(KEY_ENV))
+if (!$bearerToken = $shellResponse->getTokenFromCache(KEY_ENV))
     exit("shell.php: empty auth token");
 
 $shell = ShellExec::getInstance();
-foreach ($argv as $i => $cmd) {
-    if ($i === 0) continue;
-    $shell->addCommand($cmd);
+foreach ($argv as $argNum => $argCommand) {
+    if ($argNum === 0) continue;
+    $shell->addCommand($argCommand);
 }
-
 $remoteCommand = $shell->exec()->getCommand();
 
-$output = $request->postCommandByCurl([
+$output = $shellRequest->postCommandByCurl([
     "url" => $config["shell"]["url"],
     "bearerToken" => $bearerToken,
     "sectoken" => $config["shell"]["sectoken"],
     "command" => $remoteCommand,
 ]);
 
-$response->printOutput($output);
+$shellResponse->printOutput($output);

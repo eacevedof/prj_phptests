@@ -1,6 +1,8 @@
 <?php
 namespace Misc\Shell;
 
+use Exception;
+
 final class ShellExec
 {
     private array $commands = [];
