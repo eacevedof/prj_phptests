@@ -14,9 +14,9 @@ final class ShellExec
         return new self();
     }
 
-    public function addCmd(string $cmd): self
+    public function addCommand(string $command): self
     {
-        $this->commands[] = $cmd;
+        $this->commands[] = $command;
         return $this;
     }
     

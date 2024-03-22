@@ -11,7 +11,7 @@ final class ShellRequest
         return new self();
     }
 
-    public function getAuthToken(array $auth): array
+    public function getAuthTokenByCurl(array $auth): array
     {
         $shelExec = ShellExec::getInstance();
         $jsonRaw = $this->getDataRawJson([
@@ -19,20 +19,19 @@ final class ShellRequest
             "password" => $cmdRequest["password"],
         ]);
         $shelExec
-            ->addCmd("curl -s --location '{$auth["url"]}'")
-            ->addCmd("--header 'Content-Type: application/json'")
-            ->addCmd("--header 'X-Requested-With: application/xml'")
-            ->addCmd("--data-raw '{
-                \"email\": \"{$auth["username"]}\",
-                \"password\": \"{$auth["password"]}\"
-            }'")
+            ->addCommand("curl -s --location '{$auth["url"]}'")
+            ->addCommand("--header 'Content-Type: application/json'")
+            ->addCommand("--header 'X-Requested-With: application/xml'")
+            ->addCommand("--data-raw '
+            $jsonRaw
+            '")
         ;
         $shelExec->exec();
-        //$shelExec->debugCmds();
+        $shelExec->printDebugCommand();
         return $shelExec->getOutput();
     }
 
-    public function postCommand(array $cmdRequest): array
+    public function postCommandByCurl(array $cmdRequest): array
     {
         $shelExec = ShellExec::getInstance();
         $jsonRaw = $this->getDataRawJson([
@@ -40,18 +39,25 @@ final class ShellRequest
             "command" => $cmdRequest["command"],
         ]);
         $shelExec
-            ->addCmd("curl -s --location '{$cmdRequest["url"]}'")
-            ->addCmd("--header 'Content-Type: application/json'")
-            ->addCmd("--header 'Authorization: Bearer {$cmdRequest["bearerToken"]}'")
-            ->addCmd("--data-raw '$jsonRaw'")
+            ->addCommand("curl -s --location '{$cmdRequest["url"]}'")
+            ->addCommand("--header 'Content-Type: application/json'")
+            ->addCommand("--header 'Authorization: Bearer {$cmdRequest["bearerToken"]}'")
+            ->addCommand("--data-raw '
+            $jsonRaw
+            '")
         ;
         $shelExec->exec();
-        //$shelExec->debugCmds();
+        $shelExec->printDebugCommand();
         return $shelExec->getOutput();
     }
 
     private function getDataRawJson(array $dataRaw): string
     {
-        return json_encode($dataRaw, JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES);
+        return json_encode(
+            $dataRaw,
+            JSON_UNESCAPED_UNICODE |
+            JSON_UNESCAPED_SLASHES |
+            JSON_PRETTY_PRINT
+        );
     }
 }

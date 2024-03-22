@@ -25,7 +25,7 @@ $response = ShellResponse::getInstance();
 
 $bearerToken = $response->getTokenFromCache(KEY_ENV);
 if (!$bearerToken) {
-    $output = $request->getAuthToken($config["auth"]);
+    $output = $request->getAuthTokenByCurl($config["auth"]);
     $bearerToken = $response->getTokenFromOutput($output);
     $response->saveTokenInCache($bearerToken, KEY_ENV);
 }
@@ -36,12 +36,12 @@ if (!$bearerToken = $response->getTokenFromCache(KEY_ENV))
 $shell = ShellExec::getInstance();
 foreach ($argv as $i => $cmd) {
     if ($i === 0) continue;
-    $shell->addCmd($cmd);
+    $shell->addCommand($cmd);
 }
 
 $command = $shell->exec()->getCommand();
 
-$output = $request->postCommand([
+$output = $request->postCommandByCurl([
     "url" => $config["shell"]["url"],
     "bearerToken" => $bearerToken,
     "sectoken" => $config["shell"]["sectoken"],
