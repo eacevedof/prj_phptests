@@ -39,13 +39,13 @@ foreach ($argv as $i => $cmd) {
     $shell->addCommand($cmd);
 }
 
-$command = $shell->exec()->getCommand();
+$remoteCommand = $shell->exec()->getCommand();
 
 $output = $request->postCommandByCurl([
     "url" => $config["shell"]["url"],
     "bearerToken" => $bearerToken,
     "sectoken" => $config["shell"]["sectoken"],
-    "command" => $command,
+    "command" => $remoteCommand,
 ]);
 
 $response->printOutput($output);
