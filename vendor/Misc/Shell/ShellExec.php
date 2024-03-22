@@ -1,7 +1,7 @@
 <?php
 namespace Misc\Shell;
 
-use Exception;
+use Misc\Shell\Exceptions\ShellExecException;
 
 final class ShellExec
 {
@@ -24,16 +24,15 @@ final class ShellExec
     
     public function exec(): self
     {
-        if (!$this->commands)
-            return $this;
-
         $this->loadOnleLineCommand();
+        if (!$this->oneLineCommand)
+            ShellExecException::failIfEmptyCommands();
+        
         exec(
             $this->oneLineCommand, 
             $this->output, 
             $this->resultCode
         );
-
         return $this;
     }
 
