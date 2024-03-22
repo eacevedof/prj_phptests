@@ -1,19 +1,21 @@
 <?php
 namespace Misc\Shell;
 
+use Error;
+use Exception;
 use Misc\Shell\Exceptions\ShellExecException;
 
 final class ShellExec
 {
     private array $commands = [];
     private string $oneLineCommand = "";
-    
+
     private array $output = [];
-    private ?int $resultCode = null;
+    private int $resultCode = 0; //ok
 
     public static function getInstance(): self
     {
-        return new self();
+        return new self;
     }
 
     public function addCommand(string $command): self
@@ -21,22 +23,34 @@ final class ShellExec
         $this->commands[] = $command;
         return $this;
     }
-    
+
     public function exec(): self
     {
-        $this->loadOnleLineCommand();
+        $this->loadOneLineCommand();
         if (!$this->oneLineCommand)
             ShellExecException::failIfEmptyCommands();
-        
-        exec(
-            $this->oneLineCommand, 
-            $this->output, 
-            $this->resultCode
-        );
+
+        try {
+            $lastLine = exec(
+                $this->oneLineCommand,
+                $this->output,
+                $this->resultCode
+            );
+            if ($this->resultCode)
+                $this->output[] = "error:\t$this->oneLineCommand\t(result_code: $this->resultCode)";
+        }
+        catch (Exception $ex) {
+            $this->resultCode = 1;
+            $this->output[] = $ex->getMessage();
+        }
+        catch (Error $err) {
+            $this->resultCode = 1;
+            $this->output[] = $err->getMessage();
+        }
         return $this;
     }
 
-    private function loadOnleLineCommand(): void
+    private function loadOneLineCommand(): void
     {
         if ($this->oneLineCommand) return;
 
@@ -48,21 +62,21 @@ final class ShellExec
     {
         return $this->output;
     }
-    
-    public function getResultCode(): ?int
+
+    public function isError(): bool
     {
-        return $this->resultCode;
+        return (bool) $this->resultCode;
     }
-    
+
     public function printDebugCommand(): void
     {
-        $this->loadOnleLineCommand();
-        print_r($this->oneLineCommand);
+        $this->loadOneLineCommand();
+        echo $this->oneLineCommand;
     }
 
     public function getCommand(): string
     {
-        $this->loadOnleLineCommand();
+        $this->loadOneLineCommand();
         return $this->oneLineCommand;
     }
 
@@ -71,7 +85,7 @@ final class ShellExec
         $this->commands = [];
         $this->oneLineCommand = "";
         $this->output = [];
-        $this->resultCode = null;
+        $this->resultCode = 0;
         return $this;
     }
 }
