@@ -23,10 +23,7 @@ final class ShellExec
     public function exec(): self
     {
         if (!$this->commands)
-            return [
-                "output" => [],
-                "result_code" => null,
-            ];
+            return $this;
 
         $this->loadOnleLineCommand();
         exec(
@@ -56,7 +53,7 @@ final class ShellExec
         return $this->resultCode;
     }
     
-    public function debugCommand(): void
+    public function printDebugCommand(): void
     {
         $this->loadOnleLineCommand();
         print_r($this->oneLineCommand);
