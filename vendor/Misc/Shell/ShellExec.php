@@ -4,7 +4,7 @@ namespace Misc\Shell;
 final class ShellExec
 {
     private array $commands = [];
-    private string $cmds = "";
+    private string $oneLineCommand = "";
     
     private array $output = [];
     private ?int $resultCode = null;
@@ -28,21 +28,24 @@ final class ShellExec
                 "result_code" => null,
             ];
 
-        $output = [];
-        $resultCode = 0;
-
-        $cmds = implode(" ", $this->commands);
-        $this->cmds = trim($cmds);
-
+        $this->loadOnleLineCommand();
         exec(
-            $this->cmds, 
+            $this->oneLineCommand, 
             $this->output, 
             $this->resultCode
         );
 
         return $this;
     }
-    
+
+    private function loadOnleLineCommand(): void
+    {
+        if ($oneLineCommand) return;
+
+        $oneLineCommand = implode(" ", $this->commands);
+        $this->oneLineCommand = trim($oneLineCommand);
+    }
+
     public function getOutput(): array
     {
         return $this->output;
@@ -53,23 +56,24 @@ final class ShellExec
         return $this->resultCode;
     }
     
-    public function debugCmds(): void
+    public function debugCommand(): void
     {
-        print_r($this->cmds);
+        $this->loadOnleLineCommand();
+        print_r($this->oneLineCommand);
     }
 
     public function getCommand(): string
     {
-        return $this->cmds;
+        $this->loadOnleLineCommand();
+        return $this->oneLineCommand;
     }
 
     public function reset(): self
     {
         $this->commands = [];
-        $this->cmds = "";
+        $this->oneLineCommand = "";
         $this->output = [];
         $this->resultCode = null;
-        
         return $this;
     }
 }
