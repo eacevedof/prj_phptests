@@ -31,7 +31,7 @@ if (!$bearerToken) {
 }
 
 if (!$bearerToken = $response->getTokenFromCache(KEY_ENV))
-    exit("no token");
+    exit("shell.php: empty auth token");
 
 $shell = ShellExec::getInstance();
 foreach ($argv as $i => $cmd) {
