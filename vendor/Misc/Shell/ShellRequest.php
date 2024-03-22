@@ -14,8 +14,8 @@ final class ShellRequest
     {
         $shelExec = ShellExec::getInstance();
         $jsonRaw = $this->getDataRawJson([
-            "email" => $cmdRequest["username"],
-            "password" => $cmdRequest["password"],
+            "email" => $auth["username"],
+            "password" => $auth["password"],
         ]);
         $shelExec
             ->addCommand("curl -s --location '{$auth["url"]}'")

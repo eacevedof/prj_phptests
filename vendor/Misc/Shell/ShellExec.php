@@ -36,7 +36,7 @@ final class ShellExec
         return $this;
     }
 
-    private function loadOneLineCommand(): void
+    private function loadOnleLineCommand(): void
     {
         if ($this->oneLineCommand) return;
 

@@ -19,10 +19,10 @@ use Misc\Shell\{
     ShellExec,
     ShellResponse,
 };
-use Misc\Shell\Exceptions\AbstractShellException;
 
-const KEY_ENV = "dev-normon";
-$config = $config[KEY_ENV];
+const KEY_ENV = "localhost";
+if (!$config = $config[KEY_ENV])
+    die("No config");
 
 $shellRequest = ShellRequest::getInstance();
 $shellResponse = ShellResponse::getInstance();
@@ -42,7 +42,7 @@ foreach ($argv as $argNum => $argCommand) {
     if ($argNum === 0) continue;
     $shell->addCommand($argCommand);
 }
-$remoteCommand = $shell->exec()->getCommand();
+$remoteCommand = $shell->getCommand();
 
 $output = $shellRequest->postCommandByCurl([
     "url" => $config["shell"]["url"],
