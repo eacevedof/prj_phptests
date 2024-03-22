@@ -37,7 +37,7 @@ final class ShellExec
 
     private function loadOnleLineCommand(): void
     {
-        if ($oneLineCommand) return;
+        if ($this->oneLineCommand) return;
 
         $oneLineCommand = implode(" ", $this->commands);
         $this->oneLineCommand = trim($oneLineCommand);

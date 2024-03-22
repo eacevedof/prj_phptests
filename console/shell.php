@@ -9,7 +9,7 @@ $vendorShellDir = realpath(__DIR__."/../vendor/Misc/Shell");
 include_once "{$vendorShellDir}/ShellRequest.php";
 include_once "{$vendorShellDir}/ShellResponse.php";
 include_once "{$vendorShellDir}/ShellExec.php";
-$config = include "{$vendorShellDir}/shell-client.php";
+$config = include "{$vendorShellDir}/config/shell-client.php";
 
 use Misc\Shell\{
     ShellRequest,
