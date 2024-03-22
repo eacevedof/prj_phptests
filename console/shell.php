@@ -51,4 +51,4 @@ $output = $shellRequest->postCommandByCurl([
     "command" => $remoteCommand,
 ]);
 
-$shellResponse->printOutput($output);
+$shellResponse->printRawOutput($output);

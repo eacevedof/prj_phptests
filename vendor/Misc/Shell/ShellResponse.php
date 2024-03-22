@@ -34,9 +34,9 @@ final class ShellResponse
             print_r($line);
     }
 
-    public function printOutput(array $output): void
+    public function printRawOutput(array $output): void
     {
         foreach ($output as $line)
-            print_r($line);
+            echo $line.PHP_EOL;
     }
 }

@@ -26,7 +26,7 @@ final class ShellRequest
             '")
         ;
         $shelExec->exec();
-        $shelExec->printDebugCommand();
+        //$shelExec->printDebugCommand();
         return $shelExec->getOutput();
     }
 
@@ -46,7 +46,7 @@ final class ShellRequest
             '")
         ;
         $shelExec->exec();
-        $shelExec->printDebugCommand();
+        //$shelExec->printDebugCommand();
         return $shelExec->getOutput();
     }
 
