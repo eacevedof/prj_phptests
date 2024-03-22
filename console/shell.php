@@ -5,11 +5,11 @@ if ($argc < 2) {
     exit(1);
 }
 
-include_once "vendor/Misc/Shell/ShellRequest.php";
-include_once "vendor/Misc/Shell/ShellResponse.php";
-include_once "vendor/Misc/Shell/ShellExec.php";
-
-$config = include "vendor/Misc/Shell/shell-client.php";
+$vendorShellDir = realpath(__DIR__."/../vendor/Misc/Shell");
+include_once "{$vendorShellDir}/ShellRequest.php";
+include_once "{$vendorShellDir}/ShellResponse.php";
+include_once "{$vendorShellDir}/ShellExec.php";
+$config = include "{$vendorShellDir}/shell-client.php";
 
 use Misc\Shell\{
     ShellRequest,
