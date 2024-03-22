@@ -14,8 +14,12 @@ final class ShellRequest
     public function getAuthToken(array $auth): array
     {
         $shelExec = ShellExec::getInstance();
+        $jsonRaw = $this->getDataRawJson([
+            "email" => $cmdRequest["username"],
+            "password" => $cmdRequest["password"],
+        ]);
         $shelExec
-            ->addCmd("curl --location '{$auth["url"]}'")
+            ->addCmd("curl -s --location '{$auth["url"]}'")
             ->addCmd("--header 'Content-Type: application/json'")
             ->addCmd("--header 'X-Requested-With: application/xml'")
             ->addCmd("--data-raw '{
@@ -31,17 +35,23 @@ final class ShellRequest
     public function postCommand(array $cmdRequest): array
     {
         $shelExec = ShellExec::getInstance();
+        $jsonRaw = $this->getDataRawJson([
+            "sectoken" => $cmdRequest["sectoken"],
+            "command" => $cmdRequest["command"],
+        ]);
         $shelExec
-            ->addCmd("curl --location '{$cmdRequest["url"]}'")
+            ->addCmd("curl -s --location '{$cmdRequest["url"]}'")
             ->addCmd("--header 'Content-Type: application/json'")
             ->addCmd("--header 'Authorization: Bearer {$cmdRequest["bearerToken"]}'")
-            ->addCmd("--data-raw '{
-                \"sectoken\": \"{$cmdRequest["sectoken"]}\",
-                \"command\": \"{$cmdRequest["command"]}\"
-            }'")
+            ->addCmd("--data-raw '$jsonRaw'")
         ;
         $shelExec->exec();
         //$shelExec->debugCmds();
         return $shelExec->getOutput();
+    }
+
+    private function getDataRawJson(array $dataRaw): string
+    {
+        return json_encode($dataRaw, JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES);
     }
 }
