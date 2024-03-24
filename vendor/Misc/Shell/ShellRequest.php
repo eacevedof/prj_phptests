@@ -48,6 +48,23 @@ final class ShellRequest
         $shelExec->exec();
         //$shelExec->printDebugCommand();
         return $shelExec->getOutput();
+    }    
+    
+    public function postRawByCurl(array $postPayload): array
+    {
+        $shelExec = ShellExec::getInstance();
+        $jsonRaw = $this->getDataRawJson($postPayload);
+        $shelExec
+            ->addCommand("curl -s --location '{$postPayload["url"]}'")
+            ->addCommand("--header 'Content-Type: application/json'")
+            ->addCommand("--header 'Authorization: Bearer {$postPayload["bearerToken"]}'")
+            ->addCommand("--data-raw '
+            $jsonRaw
+            '")
+        ;
+        $shelExec->exec();
+        //$shelExec->printDebugCommand();
+        return $shelExec->getOutput();
     }
 
     private function getDataRawJson(array $dataRaw): string

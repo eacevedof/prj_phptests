@@ -1,7 +1,7 @@
 <?php
 
 if ($argc < 2) {
-    echo "Usage: php shell.php <command>\n";
+    echo "Usage: php redis.php <command>\n";
     exit(1);
 }
 
@@ -35,20 +35,14 @@ if (!$bearerToken) {
 }
 
 if (!$bearerToken = $shellResponse->getTokenFromCache(KEY_ENV))
-    exit("shell.php: empty auth token");
+    exit("redis.php: empty auth token");
 
-$shell = ShellExec::getInstance();
-foreach ($argv as $argNum => $argCommand) {
-    if ($argNum === 0 || $argNum>1) continue;
-    $shell->addCommand($argCommand);
-}
-$remoteCommand = $shell->getCommand();
-
-$output = $shellRequest->postCommandByCurl([
-    "url" => $config["shell"]["url"],
+$output = $shellRequest->postRawByCurl([
+    "url" => $config["redis"]["url"],
     "bearerToken" => $bearerToken,
-    "sectoken" => $config["shell"]["sectoken"],
-    "command" => $remoteCommand,
+    "sectoken" => $config["redis"]["sectoken"] ?? "",
+    "action" => $argv[1] ?? "",
+    "pattern" => $argv[2] ?? "",
 ]);
 
 $shellResponse->printRawOutput($output);
