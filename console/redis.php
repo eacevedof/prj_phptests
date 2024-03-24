@@ -16,7 +16,6 @@ $config = include "{$vendorShellDir}/config/shell-client.php";
 
 use Misc\Shell\{
     ShellRequest,
-    ShellExec,
     ShellResponse,
 };
 
