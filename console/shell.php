@@ -20,7 +20,7 @@ use Misc\Shell\{
     ShellResponse,
 };
 
-const KEY_ENV = "localhost";
+const KEY_ENV = "dev";
 if (!$config = $config[KEY_ENV])
     die("No config");
 
@@ -39,7 +39,7 @@ if (!$bearerToken = $shellResponse->getTokenFromCache(KEY_ENV))
 
 $shell = ShellExec::getInstance();
 foreach ($argv as $argNum => $argCommand) {
-    if ($argNum === 0) continue;
+    if ($argNum === 0 || $argNum>1) continue;
     $shell->addCommand($argCommand);
 }
 $remoteCommand = $shell->getCommand();
