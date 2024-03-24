@@ -9,6 +9,10 @@ return [
         "shell" => [
             "url" => "https://localhost.com/api/v01/tools/cmds",
             "sectoken" => hash("sha256", "xxx-yyyy"),
-        ]
+        ],
+        "shell" => [
+            "url" => "https://localhost.com/api/v01/tools/redis",
+            "sectoken" => hash("sha256", "aaa-bbbb"),
+        ],
     ]
 ];
