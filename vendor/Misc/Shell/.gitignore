@@ -1,3 +1,4 @@
 cache
 cache/*.dat
 config/shell-client.php
+config/redis-client.php
