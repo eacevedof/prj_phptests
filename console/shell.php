@@ -20,7 +20,7 @@ use Misc\Shell\{
     ShellResponse,
 };
 
-const KEY_ENV = "dev";
+const KEY_ENV = "stage";
 if (!$config = $config[KEY_ENV])
     die("No config");
 
