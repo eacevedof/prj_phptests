@@ -20,28 +20,26 @@ use Misc\Shell\{
     ShellResponse,
 };
 
-const KEY_ENV = "stage";
-if (!$config = $config[KEY_ENV])
-    die("No config");
+$KEY_ENV = $argv[1];
+//$KEY_ENV = "stage";
+if (!$config = $config[$KEY_ENV])
+    die("No config for $KEY_ENV");
 
 $shellRequest = ShellRequest::getInstance();
 $shellResponse = ShellResponse::getInstance();
 
-$bearerToken = $shellResponse->getTokenFromCache(KEY_ENV);
+$bearerToken = $shellResponse->getTokenFromCache($KEY_ENV);
 if (!$bearerToken) {
     $output = $shellRequest->getAuthTokenByCurl($config["auth"]);
     $bearerToken = $shellResponse->getTokenFromOutput($output);
-    $shellResponse->saveTokenInCache($bearerToken, KEY_ENV);
+    $shellResponse->saveTokenInCache($bearerToken, $KEY_ENV);
 }
 
-if (!$bearerToken = $shellResponse->getTokenFromCache(KEY_ENV))
+if (!$bearerToken = $shellResponse->getTokenFromCache($KEY_ENV))
     exit("shell.php: empty auth token");
 
 $shell = ShellExec::getInstance();
-foreach ($argv as $argNum => $argCommand) {
-    if ($argNum === 0 || $argNum>1) continue;
-    $shell->addCommand($argCommand);
-}
+$shell->addCommand($argv[2]);
 $remoteCommand = $shell->getCommand();
 
 $output = $shellRequest->postCommandByCurl([
