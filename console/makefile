@@ -14,24 +14,24 @@ gitpush: ## git push m=any message
 
 dev-debug: ## shows debug-TODAY.log
 	clear;
-	php shell.php dev "tail -100 storage/logs/debug-$(TODAY).log"
+	php shell.php dev "tail -250 storage/logs/debug-$(TODAY).log"
 
 dev-error: ## shows laravel.log
 	clear;
-	php shell.php dev "tail -100 storage/logs/laravel-$(TODAY).log"
+	php shell.php dev "tail -250 storage/logs/laravel-$(TODAY).log"
 
 qa-debug: ## shows debug-TODAY.log
 	clear;
-	php shell.php dev "tail -100 storage/logs/debug-$(TODAY).log"
+	php shell.php dev "tail -250 storage/logs/debug-$(TODAY).log"
 
 qa-error: ## shows laravel.log
 	clear;
-	php shell.php dev "tail -100 storage/logs/laravel-$(TODAY).log"
+	php shell.php dev "tail -250 storage/logs/laravel-$(TODAY).log"
 
 stage-debug: ## shows debug-TODAY.log
 	clear;
-	php shell.php stage "tail -100 storage/logs/debug-$(TODAY).log"
+	php shell.php stage "tail -250 storage/logs/debug-$(TODAY).log"
 
 stage-error: ## shows laravel.log
 	clear;
-	php shell.php stage "tail -100 storage/logs/laravel-$(TODAY).log"
+	php shell.php stage "tail -250 storage/logs/laravel-$(TODAY).log"
