@@ -28,11 +28,11 @@ qa-error: ## shows laravel.log
 	clear;
 	php shell.php qa "tail -n 500 storage/logs/laravel-$(TODAY).log" | nl
 
-qa-al: ## shows debug.log
+qa-al-debug: ## shows debug.log
 	clear;
 	php shell.php qa-al "tail -n 500 storage/logs/debug-$(TODAY).log" | nl
 
-qa-al: ## shows laravel.log
+qa-al-error: ## shows laravel.log
 	clear;
 	php shell.php qa-al "tail -n 500 storage/logs/laravel-$(TODAY).log" | nl
 
