@@ -8,78 +8,79 @@ help: ## Show this help message
 	@egrep "^(.+)\:\ ##\ (.+)" ${MAKEFILE_LIST} | column -t -c 2 -s ":#"
 
 
+NLINES := 1000
 gitpush: ## git push m=any message
 	clear;
 	git add .; git commit -m "$(m)"; git push;
 
 dev-debug: ## shows debug.log
 	clear;
-	php shell.php dev "tail -n 500 storage/logs/debug-$(TODAY).log"
+	php shell.php dev "tail -n $(NLINES) storage/logs/debug-$(TODAY).log"
 
 dev-error: ## shows laravel.log
 	clear;
-	php shell.php dev "tail -n 500 storage/logs/laravel-$(TODAY).log" | nl
+	php shell.php dev "tail -n $(NLINES) storage/logs/laravel-$(TODAY).log" | nl
 
 qa-debug: ## shows debug.log
 	clear;
-	php shell.php qa "tail -n 500 storage/logs/debug-$(TODAY).log" | nl
+	php shell.php qa "tail -n $(NLINES) storage/logs/debug-$(TODAY).log" | nl
 
 qa-error: ## shows laravel.log
 	clear;
-	php shell.php qa "tail -n 500 storage/logs/laravel-$(TODAY).log" | nl
+	php shell.php qa "tail -n $(NLINES) storage/logs/laravel-$(TODAY).log" | nl
 
 qa-al-debug: ## shows debug.log
 	clear;
-	php shell.php qa-al "tail -n 500 storage/logs/debug-$(TODAY).log" | nl
+	php shell.php qa-al "tail -n $(NLINES) storage/logs/debug-$(TODAY).log" | nl
 
 qa-al-error: ## shows laravel.log
 	clear;
-	php shell.php qa-al "tail -n 500 storage/logs/laravel-$(TODAY).log" | nl
+	php shell.php qa-al "tail -n $(NLINES) storage/logs/laravel-$(TODAY).log" | nl
 
 stage-debug: ## shows debug.log
 	clear;
-	php shell.php stage "tail -n 500 storage/logs/debug-$(TODAY).log" | nl
+	php shell.php stage "tail -n $(NLINES) storage/logs/debug-$(TODAY).log" | nl
 
 stage-error: ## shows laravel.log
 	clear;
-	php shell.php stage "tail -n 500 storage/logs/laravel-$(TODAY).log" | nl
+	php shell.php stage "tail -n $(NLINES) storage/logs/laravel-$(TODAY).log" | nl
 
 pre-mt-debug: ## shows debug.log
 	clear;
-	php shell.php pre-mt "tail -n 500 storage/logs/debug-$(TODAY).log" | nl
+	php shell.php pre-mt "tail -n $(NLINES) storage/logs/debug-$(TODAY).log" | nl
 
 pre-mt-error: ## shows laravel.log
 	clear;
-	php shell.php pre-mt "tail -n 500 storage/logs/laravel-$(TODAY).log" | nl
+	php shell.php pre-mt "tail -n $(NLINES) storage/logs/laravel-$(TODAY).log" | nl
 
 pre-nor-debug: ## shows debug.log
 	clear;
-	php shell.php pre-nor "tail -n 500 storage/logs/debug-$(TODAY).log" | nl
+	php shell.php pre-nor "tail -n $(NLINES) storage/logs/debug-$(TODAY).log" | nl
 
 pre-nor-error: ## shows laravel.log
 	clear;
-	php shell.php pre-nor "tail -n 500 storage/logs/laravel-$(TODAY).log" | nl
+	php shell.php pre-nor "tail -n $(NLINES) storage/logs/laravel-$(TODAY).log" | nl
 
 pre-fa-debug: ## shows debug.log
 	clear;
-	php shell.php pre-fa "tail -n 500 storage/logs/debug-$(TODAY).log" | nl
+	php shell.php pre-fa "tail -n $(NLINES) storage/logs/debug-$(TODAY).log" | nl
 
 pre-fa-error: ## shows laravel.log
 	clear;
-	php shell.php pre-fa "tail -n 500 storage/logs/laravel-$(TODAY).log" | nl
+	php shell.php pre-fa "tail -n $(NLINES) storage/logs/laravel-$(TODAY).log" | nl
 
 prod-mt-debug: ## shows debug.log
 	clear;
-	php shell.php prod-mt "tail -n 500 storage/logs/debug-$(TODAY).log" | nl
+	php shell.php prod-mt "tail -n $(NLINES) storage/logs/debug-$(TODAY).log" | nl
 
 prod-mt-error: ## shows laravel.log
 	clear;
-	php shell.php prod-mt "tail -n 500 storage/logs/laravel-$(TODAY).log" | nl
+	php shell.php prod-mt "tail -n $(NLINES) storage/logs/laravel-$(TODAY).log" | nl
 
 prod-nor-debug: ## shows debug.log
 	clear;
-	php shell.php prod-nor "tail -n 500 storage/logs/debug-$(TODAY).log" | nl
+	php shell.php prod-nor "tail -n $(NLINES) storage/logs/debug-$(TODAY).log" | nl
 
 prod-nor-error: ## shows laravel.log
 	clear;
-	php shell.php prod-nor "tail -n 500 storage/logs/laravel-$(TODAY).log" | nl
+	php shell.php prod-nor "tail -n $(NLINES) storage/logs/laravel-$(TODAY).log" | nl
