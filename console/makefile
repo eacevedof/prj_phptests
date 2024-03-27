@@ -84,3 +84,18 @@ prod-nor-debug: ## shows debug.log
 prod-nor-error: ## shows laravel.log
 	clear;
 	php shell.php prod-nor "tail -n $(NLINES) storage/logs/laravel-$(TODAY).log" | nl
+
+del-redis-dev: ## del redis dev
+	php redis.php del-by-tenant dev-
+
+del-redis-qa: ## del redis qa
+	php redis.php del-by-tenant qa-
+
+del-redis-stage: ## del redis stage
+	php redis.php del-by-tenant stage-
+
+del-redis-pre: ## del redis pre
+	php redis.php del-by-tenant pre-
+
+redis-get-keys: ## del redis pre
+	php redis.php get-keys
