@@ -22,7 +22,7 @@ use Misc\Shell\{
 
 $KEY_ENV = $argv[1];
 //$KEY_ENV = "stage";
-if (!$config = $config[$KEY_ENV])
+if (!$config = $config[$KEY_ENV] ?? [])
     die("No config for $KEY_ENV");
 
 $shellRequest = ShellRequest::getInstance();
