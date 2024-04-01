@@ -37,6 +37,14 @@ qa-al-error: ## shows laravel.log
 	clear;
 	php shell.php qa-al "tail -n $(NLINES) storage/logs/laravel-$(TODAY).log" | nl
 
+dev-al-debug: ## shows debug.log
+	clear;
+	php shell.php dev-al "tail -n $(NLINES) storage/logs/debug-$(TODAY).log" | nl
+
+dev-al-error: ## shows laravel.log
+	clear;
+	php shell.php dev-al "tail -n $(NLINES) storage/logs/laravel-$(TODAY).log" | nl
+
 stage-debug: ## shows debug.log
 	clear;
 	php shell.php stage "tail -n $(NLINES) storage/logs/debug-$(TODAY).log" | nl
