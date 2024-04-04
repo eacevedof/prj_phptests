@@ -48,7 +48,7 @@ final class ShellRequest
         $shelExec->exec();
         //$shelExec->printDebugCommand();
         return $shelExec->getOutput();
-    }    
+    }
     
     public function postRawByCurl(array $postPayload): array
     {
