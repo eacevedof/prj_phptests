@@ -107,3 +107,6 @@ del-redis-pre: ## del redis pre
 
 redis-get-keys: ## del redis pre
 	php redis.php get-keys
+
+health:
+	php health.php qa

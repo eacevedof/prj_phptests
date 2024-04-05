@@ -30,4 +30,4 @@ $shellRequest = ShellRequest::getInstance();
 $output = $shellRequest->getGetRequestNoAuth($healthUrl);
 
 $shellResponse = ShellResponse::getInstance();
-$shellResponse->printRawOutput($output);
+$shellResponse->printJsonHealth($output);
