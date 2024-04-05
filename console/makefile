@@ -120,5 +120,11 @@ health:
 	php health.php pre-nor
 	@echo
 	php health.php pre-fa
+	@echo
+	php health.php prod-mt
+	@echo
+	php health.php prod-nor
+	@echo
+	php health.php prod-fa
 
 
