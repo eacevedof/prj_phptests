@@ -16,7 +16,6 @@ $config = include "{$vendorShellDir}/config/shell-client.php";
 
 use Misc\Shell\{
     ShellRequest,
-    ShellExec,
     ShellResponse,
 };
 
@@ -24,16 +23,11 @@ $KEY_ENV = $argv[1];
 if (!$config = $config[$KEY_ENV] ?? [])
     die("No config for $KEY_ENV");
 
+if (!$healthUrl = trim($config["health"]["url"] ?? ""))
+    die("No health url");
+
 $shellRequest = ShellRequest::getInstance();
+$output = $shellRequest->getGetRequestNoAuth($healthUrl);
+
 $shellResponse = ShellResponse::getInstance();
-
-$shell = ShellExec::getInstance();
-$shell->addCommand($argv[2]);
-$remoteCommand = $shell->getCommand();
-
-$output = $shellRequest->postCommandByCurl([
-    "url" => $config["health"]["url"],
-    "command" => $remoteCommand,
-]);
-
 $shellResponse->printRawOutput($output);

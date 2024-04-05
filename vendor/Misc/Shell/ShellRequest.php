@@ -66,6 +66,17 @@ final class ShellRequest
         //$shelExec->printDebugCommand();
         return $shelExec->getOutput();
     }
+    
+    public function getGetRequestNoAuth(string $httpUrl): array
+    {
+        $shelExec = ShellExec::getInstance();
+        $shelExec
+            ->addCommand("curl -s --location '{$httpUrl}'")
+            ->addCommand("--header 'Content-Type: application/json'")
+        ;
+        $shelExec->exec();
+        return $shelExec->getOutput();
+    }
 
     private function getDataRawJson(array $dataRaw): string
     {
