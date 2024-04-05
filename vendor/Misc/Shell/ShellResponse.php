@@ -48,7 +48,9 @@ final class ShellResponse
             $httpCode = $arJson["code"] ?? "no code";
             $message = $arJson["message"] ?? "no message";
             $version = $arJson["data"]["version"] ?? "no version";
-            echo "health on {$now}: {$version}" . PHP_EOL;
+            if ($httpCode !== "200")
+                $version = "failed";
+            echo "{$version}" . PHP_EOL;
         }
     }
 }
