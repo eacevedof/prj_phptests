@@ -39,4 +39,16 @@ final class ShellResponse
         foreach ($output as $line)
             echo $line.PHP_EOL;
     }
+
+    public function printJsonHealth(array $healthOutput): void
+    {
+        $now = date("Y-m-d H:i:s");
+        foreach ($healthOutput as $line) {
+            $arJson = json_decode($line, true);
+            $httpCode = $arJson["code"] ?? "no code";
+            $message = $arJson["message"] ?? "no message";
+            $version = $arJson["data"]["version"] ?? "no version";
+            echo "health on {$now}: {$version}" . PHP_EOL;
+        }
+    }
 }
