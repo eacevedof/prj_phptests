@@ -110,4 +110,15 @@ redis-get-keys: ## del redis pre
 
 health:
 	php health.php qa
-	php health.php dev
+	@echo
+	php health.php qa-al
+	@echo
+	php health.php stage
+	@echo
+	php health.php pre-mt
+	@echo
+	php health.php pre-nor
+	@echo
+	php health.php pre-fa
+
+
