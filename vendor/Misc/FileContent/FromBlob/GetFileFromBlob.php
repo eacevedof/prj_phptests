@@ -31,8 +31,9 @@ final class GetFileFromBlob
 
         $content = file_get_contents($urlBlob);
         //bug($content,"content");
-        file_put_contents("./upload/{$fileName}.{$ext[0]}", $content);
-        bug("done: $urlBlob");
+        $public = "/upload/{$fileName}.{$ext[0]}";
+        file_put_contents(".$public", $content);
+        echo "<img src=\"$public\" />";
     }
 
     public function withRedirect(): void
