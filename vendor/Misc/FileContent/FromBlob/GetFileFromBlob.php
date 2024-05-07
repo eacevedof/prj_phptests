@@ -22,14 +22,18 @@ final class GetFileFromBlob
 
     public function withRedirect()
     {
-        $url = "https://drive.google.com/file/d/1lP8sQ6I-r0C9W0Vn53RWtxopIj9OQwDo/view?usp=drive_link";
-
-        $context = stream_context_create([
+        
+        $opts = [
             "http" => [
-                "follow_location" => false // Disable automatic redirection
+                "follow_location" => true // Disable automatic redirection
             ]
-        ]);
+        ];
 
+        //el contexto es null y rompe
+        $context = stream_context_create($opts);
+        pr($context, "context");
+
+        $url = "https://drive.google.com/file/d/1lP8sQ6I-r0C9W0Vn53RWtxopIj9OQwDo/view?usp=drive_link";
         $content = file_get_contents($url, false, $context);
         $metaData = stream_get_meta_data($context);
 

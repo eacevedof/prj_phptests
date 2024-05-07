@@ -18,6 +18,6 @@ $shell->exec();
 bug($shell->getOutput());
 //die;
 $blob = GetFileFromBlob::getInstance();
-$r = $blob->__invoke();
+//$r = $blob->__invoke();
 $blob->withRedirect();
 
