@@ -25,6 +25,9 @@ final class GetFileFromBlob
     {
         $fileName = pathinfo($urlBlob, PATHINFO_FILENAME);
         bug($fileName, "filename");
+        $fileName = $this->getSluggedName($fileName);
+        bug($fileName, "filename-slugged");
+
         $ext = pathinfo($urlBlob, PATHINFO_EXTENSION);
         $ext = explode("?", $ext);
         bug($ext, "ext");
@@ -32,8 +35,19 @@ final class GetFileFromBlob
         $content = file_get_contents($urlBlob);
         //bug($content,"content");
         $public = "/upload/{$fileName}.{$ext[0]}";
+
         file_put_contents(".$public", $content);
         echo "<img src=\"$public\" />";
+    }
+
+    private function getSluggedName(string $string): string
+    {
+        $string = preg_replace('/[^a-zA-Z0-9\s]/', '', $string);
+        $string = strtolower($string);
+        $string = str_replace(' ', '-', $string);
+        $string = preg_replace('/-+/', '-', $string);
+        $string = trim($string, '-');
+        return $string;
     }
 
     public function withRedirect(): void
