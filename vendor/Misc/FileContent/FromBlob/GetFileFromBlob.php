@@ -12,10 +12,15 @@ final class GetFileFromBlob
     {
         $urlOk = "https://resources.theframework.es/eduardoaf.com/20200906/095050-logo-eduardoafcom_500.png";
         $urlBlob = "https://laciahubmassfileupload.blob.core.windows.net/miarco/26672%20barcode.gif?sp=racwdl&st=2024-04-30T07:00:00Z&se=2024-05-30T07:00:00Z&spr=https&sv=2022-11-02&sr=c&sig=4XihdXy6bdLL8Uz%2Fubh9%2BP49oi828tFW6Q8123HXVaQ%3D";
-        
+
+        $fileName = pathinfo($urlBlob, PATHINFO_FILENAME);
+        bug($fileName);
+        $ext = pathinfo($urlBlob, PATHINFO_EXTENSION);
+        $ext = explode("?", $ext);
+        bug($ext, "ext");
         $content = file_get_contents($urlBlob);
         bug($content,"content");
-        file_put_contents("./upload/some-file.gif", $content);
+        file_put_contents("./upload/{$fileName}.{$ext[0]}", $content);
 
         bug("done: $urlBlob");
     }
