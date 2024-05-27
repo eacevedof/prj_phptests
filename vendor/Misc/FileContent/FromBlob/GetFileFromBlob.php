@@ -18,7 +18,6 @@ final class GetFileFromBlob
         foreach ($urls as $url) {
             $this->saveFileFromUrl($url);
         }
-
     }
 
     private function saveFileFromUrl(string $urlBlob): void
