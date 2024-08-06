@@ -12,19 +12,20 @@
 * https://secure.logmeinrescue.com/webtc/
 *
 * */
+
+const DOMAIN_FROM = "https://test.theframework.es"
+const URL_CSS= "https://test.theframework.es/styles/logmein-chat.css";
+const ENTRY_ID = "629218"
+
 function loadInstantChat(){
     var ICLoader = new RescueInstantChatLoader();
-    ICLoader.ICContainer = "ICContainer";
-    ICLoader.HostedCSS = "https://secure.logmeinrescue.com/InstantChat/Standard/InstantChat.css";
+    ICLoader.HostedCSS = URL_CSS;
+    ICLoader.EntryID = ENTRY_ID;
     ICLoader.HostedLanguagesForChatOnlyMode = "https://secure.logmeinrescue.com/InstantChat/LanguagesForChatOnlyMode.js";
     ICLoader.HostedLanguagesForAppletMode = "https://secure.logmeinrescue.com/InstantChat/LanguagesForAppletMode.js";
-    ICLoader.EntryID = "6024838";
+    ICLoader.ICContainer = "ICContainer";
     ICLoader.Name = document.getElementById("Name").value; /* optional */
     ICLoader.Comment1 = document.getElementById("Comment1").value; /* optional */
-    //ICLoader.Comment2 = document.getElementById("Comment2").value; /* optional */
-    //ICLoader.Comment3 = document.getElementById("Comment3").value; /* optional */
-    //ICLoader.Comment4 = document.getElementById("Comment4").value; /* optional */
-    //ICLoader.Comment5 = document.getElementById("Comment5").value; /* optional */
     ICLoader.Tracking0 = ""; /* optional */
     ICLoader.Language = ""; /* optional */
     ICLoader.PostMessageTargetOrigin = ""; /* optional (For implementation details, see the LogMeIn Rescue Customization and Integration Guide) */
@@ -55,5 +56,6 @@ function handleRebootOrRefresh(){
 <div id="ICContainer" style="position: absolute; left: 0px; top: 0px; width: 400px; height: 500px; display: none">
     Instant Chat will be displayed here.
 </div>
+
 </body>
 </html>
