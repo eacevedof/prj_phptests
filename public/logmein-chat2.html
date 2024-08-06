@@ -10,14 +10,24 @@ function loadInstantChat(){
     ICLoader.HostedLanguagesForChatOnlyMode = "https://secure.logmeinrescue.com/InstantChat/LanguagesForChatOnlyMode.js";
     ICLoader.HostedLanguagesForAppletMode = "https://secure.logmeinrescue.com/InstantChat/LanguagesForAppletMode.js";
     ICLoader.PrivateCode = document.getElementById("Code").value;
+    ICLoader.PrivateCode = "629218";
     ICLoader.Tracking0 = ""; /* optional */
     ICLoader.Language = ""; /* optional */
     ICLoader.PostMessageTargetOrigin = ""; /* optional (For implementation details, see the LogMeIn Rescue Customization and Integration Guide) */
-    ICLoader.HostedErrorHandler = function(ErrorName){} /* optional */
-    ICLoader.Start();}
+    ICLoader.HostedErrorHandler = function(ErrorName){
+        console.error(ErrorName);
+    } /* optional */
+    ICLoader.Start();
+}
 function handleRebootOrRefresh(){
-    if ((window.location + "").indexOf("rescuewebsessionid") != -1){document.getElementById("ICContainer").style.display=""; loadInstantChat();} /* optional */
-    if (window.location.hash.length == webSessionIdLength + 1){document.getElementById("ICContainer").style.display=""; loadInstantChat();} /* optional */
+
+    if ((window.location + "").indexOf("rescuewebsessionid") != -1){
+        document.getElementById("ICContainer").style.display=""; loadInstantChat();
+    } /* optional */
+
+    if (window.location.hash.length == webSessionIdLength + 1){
+        document.getElementById("ICContainer").style.display=""; loadInstantChat();
+    } /* optional */
 }
 </script>
 </head>
