@@ -44,11 +44,19 @@ function handleRebootOrRefresh(){
     } /* optional */
 }
 </script>
+<style>
+#ICContainer {
+    width: 100%;
+    height: auto;
+    display: none;
+}
+</style>
 </head>
 
-<body onload="handleRebootOrRefresh();">
+<body>
 
 <table>
+    <div id="win-data"></div>
     <tr>
         <td>Please enter your name: </td>
         <td><input id="Name" type="text" maxlength="64" /></td>
@@ -71,6 +79,19 @@ function handleRebootOrRefresh(){
 >
     Instant Chat will be displayed here.
 </div>
+<script>
+function getMobileViewportDimensions() {
+    const width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+    const height = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+    return { width, height };
+}
+document.addEventListener("DOMContentLoaded", function() {
 
+    handleRebootOrRefresh();
+    const windata = document.getElementById("win-data")
+    const { width, height } = getMobileViewportDimensions()
+    windata.innerHTML = `width: ${width}, height: ${height}`
+})
+</script>
 </body>
 </html>
