@@ -1,30 +1,34 @@
 <html>
 <head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <script type="text/javascript" src="https://secure.logmeinrescue.com/InstantChat/InstantChat.aspx"></script>
 <script type="text/javascript">
-//this code got from: https://secure.logmeinrescue.com/US/AdminCenter/Console
 function loadInstantChat(){
     var ICLoader = new RescueInstantChatLoader();
     ICLoader.ICContainer = "ICContainer";
     ICLoader.HostedCSS = "https://secure.logmeinrescue.com/InstantChat/Standard/InstantChat.css";
     ICLoader.HostedLanguagesForChatOnlyMode = "https://secure.logmeinrescue.com/InstantChat/LanguagesForChatOnlyMode.js";
     ICLoader.HostedLanguagesForAppletMode = "https://secure.logmeinrescue.com/InstantChat/LanguagesForAppletMode.js";
-    //ICLoader.PrivateCode = document.getElementById("Code").value;
-    ICLoader.PrivateCode = "6024838";
+    ICLoader.EntryID = "6024838";
+    ICLoader.Name = document.getElementById("Name").value; /* optional */
+    ICLoader.Comment1 = document.getElementById("Comment1").value; /* optional */
+    //ICLoader.Comment2 = document.getElementById("Comment2").value; /* optional */
+    //ICLoader.Comment3 = document.getElementById("Comment3").value; /* optional */
+    //ICLoader.Comment4 = document.getElementById("Comment4").value; /* optional */
+    //ICLoader.Comment5 = document.getElementById("Comment5").value; /* optional */
     ICLoader.Tracking0 = ""; /* optional */
     ICLoader.Language = ""; /* optional */
     ICLoader.PostMessageTargetOrigin = ""; /* optional (For implementation details, see the LogMeIn Rescue Customization and Integration Guide) */
     ICLoader.HostedErrorHandler = function(ErrorName){
-        console.error(ErrorName);
+        console.log("error on hosted error handler", ErrorName);
     } /* optional */
     ICLoader.Start();
 }
-function handleRebootOrRefresh(){
 
+function handleRebootOrRefresh(){
     if ((window.location + "").indexOf("rescuewebsessionid") != -1){
         document.getElementById("ICContainer").style.display=""; loadInstantChat();
     } /* optional */
-
     if (window.location.hash.length == webSessionIdLength + 1){
         document.getElementById("ICContainer").style.display=""; loadInstantChat();
     } /* optional */
@@ -32,12 +36,15 @@ function handleRebootOrRefresh(){
 </script>
 </head>
 <body onload="handleRebootOrRefresh();">
-    <span>Enter your six-digit code, then click the Start Download button below </span><input id="Code" type="text" /><br/>
+<table>
+    <tr><td>Please enter your name: </td><td><input id="Name" type="text" maxlength="64" /></td></tr>
+    <tr><td>Custom eaf: </td><td><input id="Comment1" type="text" maxlength="512" /></td></tr>
+</table>
 
-    <input type="button" value="Connect to technician" onclick="loadInstantChat();"/>
+<input type="button" value="Channel 01" onclick="document.getElementById('ICContainer').style.display=''; loadInstantChat();" />
 
-    <div id="ICContainer" style="position: absolute; left: 0px; top: 0px; width: 400px; height: 500px; display: none">
-        IIContainer
-    </div>
+<div id="ICContainer" style="position: absolute; left: 0px; top: 0px; width: 400px; height: 500px; display: none">
+    Instant Chat will be displayed here.
+</div>
 </body>
 </html>
