@@ -1,98 +1,61 @@
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<script type="text/javascript" src="https://secure.logmeinrescue.com/InstantChat/InstantChat.aspx"></script>
-<script type="text/javascript">
-/*
-* este codigo se obtiene desde aqui:
-*   https://secure.logmeinrescue.com/US/AdminCenter/Console
-*   pestaña channels, abajo en seccion: Custom Live Support Instant Chat
-*
-* y aqui se atiende el chat:
-* https://secure.logmeinrescue.com/webtc/
-*
-* */
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <script type="text/javascript" src="https://secure.logmeinrescue.com/InstantChat/InstantChat.aspx"></script>
+    <script type="text/javascript">
+        /*
+        * este codigo se obtiene desde aqui:
+        *   https://secure.logmeinrescue.com/US/AdminCenter/Console
+        *   pestaña channels, abajo en seccion: Custom Live Support Instant Chat
+        *
+        * y aqui se atiende el chat:
+        * https://secure.logmeinrescue.com/webtc/
+        *
+        * */
 
-const DOMAIN_FROM = "https://test.theframework.es"
-const URL_CSS= "https://test.theframework.es/styles/logmein-chat.css";
-const ENTRY_ID = "629218"
+        const DOMAIN_FROM = "https://test.theframework.es"
+        const URL_CSS= "https://test.theframework.es/styles/logmein-chat.css";
+        const ENTRY_ID = "629218"
 
-function loadInstantChat(){
-    var ICLoader = new RescueInstantChatLoader();
-    ICLoader.HostedCSS = URL_CSS;
-    ICLoader.EntryID = ENTRY_ID;
-    ICLoader.HostedLanguagesForChatOnlyMode = "https://secure.logmeinrescue.com/InstantChat/LanguagesForChatOnlyMode.js";
-    ICLoader.HostedLanguagesForAppletMode = "https://secure.logmeinrescue.com/InstantChat/LanguagesForAppletMode.js";
-    ICLoader.ICContainer = "ICContainer";
-    ICLoader.Name = document.getElementById("Name").value; /* optional */
-    ICLoader.Comment1 = document.getElementById("Comment1").value; /* optional */
-    ICLoader.Tracking0 = ""; /* optional */
-    ICLoader.Language = ""; /* optional */
-    ICLoader.PostMessageTargetOrigin = ""; /* optional (For implementation details, see the LogMeIn Rescue Customization and Integration Guide) */
-    ICLoader.HostedErrorHandler = function(ErrorName){
-        console.log("error on hosted error handler", ErrorName);
-    } /* optional */
-    ICLoader.Start();
-}
+        function loadInstantChat(){
+            var ICLoader = new RescueInstantChatLoader();
+            ICLoader.HostedCSS = URL_CSS;
+            ICLoader.EntryID = ENTRY_ID;
+            ICLoader.HostedLanguagesForChatOnlyMode = "https://secure.logmeinrescue.com/InstantChat/LanguagesForChatOnlyMode.js";
+            ICLoader.HostedLanguagesForAppletMode = "https://secure.logmeinrescue.com/InstantChat/LanguagesForAppletMode.js";
+            ICLoader.ICContainer = "ICContainer";
+            ICLoader.Name = document.getElementById("Name").value; /* optional */
+            ICLoader.Comment1 = document.getElementById("Comment1").value; /* optional */
+            ICLoader.Tracking0 = ""; /* optional */
+            ICLoader.Language = ""; /* optional */
+            ICLoader.PostMessageTargetOrigin = ""; /* optional (For implementation details, see the LogMeIn Rescue Customization and Integration Guide) */
+            ICLoader.HostedErrorHandler = function(ErrorName){
+                console.log("error on hosted error handler", ErrorName);
+            } /* optional */
+            ICLoader.Start();
+        }
 
-function handleRebootOrRefresh(){
-    if ((window.location + "").indexOf("rescuewebsessionid") != -1){
-        document.getElementById("ICContainer").style.display=""; loadInstantChat();
-    } /* optional */
-    if (window.location.hash.length == webSessionIdLength + 1){
-        document.getElementById("ICContainer").style.display=""; loadInstantChat();
-    } /* optional */
-}
-</script>
-<style>
-#ICContainer {
-    width: 100%;
-    height: auto;
-    display: none;
-}
-</style>
+        function handleRebootOrRefresh(){
+            if ((window.location + "").indexOf("rescuewebsessionid") != -1){
+                document.getElementById("ICContainer").style.display=""; loadInstantChat();
+            } /* optional */
+            if (window.location.hash.length == webSessionIdLength + 1){
+                document.getElementById("ICContainer").style.display=""; loadInstantChat();
+            } /* optional */
+        }
+    </script>
 </head>
-
-<body>
-
+<body onload="handleRebootOrRefresh();">
 <table>
-    <div id="win-data"></div>
-    <tr>
-        <td>Please enter your name: </td>
-        <td><input id="Name" type="text" maxlength="64" /></td>
-    </tr>
-
-    <tr>
-        <td>Custom eaf: </td>
-        <td><input id="Comment1" type="text" maxlength="512" /></td>
-    </tr>
+    <tr><td>Please enter your name: </td><td><input id="Name" type="text" maxlength="64" /></td></tr>
+    <tr><td>Custom eaf: </td><td><input id="Comment1" type="text" maxlength="512" /></td></tr>
 </table>
 
 <input type="button" value="Channel 01" onclick="document.getElementById('ICContainer').style.display=''; loadInstantChat();" />
 
-<div
-    id="ICContainer"
-    style="
-position: absolute; left: 100px; top: 100px; width: 285px;height: 259px; display: none
-    "
->
+<div id="ICContainer" style="position: absolute; left: 0px; top: 0px; width: 400px; height: 500px; display: none">
     Instant Chat will be displayed here.
 </div>
-<script>
-function getMobileViewportDimensions() {
-    const width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
-    const height = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
-    return { width, height };
-}
-document.addEventListener("DOMContentLoaded", function() {
 
-
-    const windata = document.getElementById("win-data")
-    const { width, height } = getMobileViewportDimensions()
-    windata.innerHTML = `width: ${width}, height: ${height}`
-
-    handleRebootOrRefresh();
-})
-</script>
 </body>
 </html>
