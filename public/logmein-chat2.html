@@ -45,15 +45,26 @@ function handleRebootOrRefresh(){
 }
 </script>
 </head>
+
 <body onload="handleRebootOrRefresh();">
+
 <table>
-    <tr><td>Please enter your name: </td><td><input id="Name" type="text" maxlength="64" /></td></tr>
-    <tr><td>Custom eaf: </td><td><input id="Comment1" type="text" maxlength="512" /></td></tr>
+    <tr>
+        <td>Please enter your name: </td>
+        <td><input id="Name" type="text" maxlength="64" /></td>
+    </tr>
+
+    <tr>
+        <td>Custom eaf: </td>
+        <td><input id="Comment1" type="text" maxlength="512" /></td>
+    </tr>
 </table>
 
 <input type="button" value="Channel 01" onclick="document.getElementById('ICContainer').style.display=''; loadInstantChat();" />
 
-<div id="ICContainer" style="position: absolute; left: 0px; top: 0px; width: 400px; height: 500px; display: none">
+<div id="ICContainer"
+     style="position: absolute; left: 0px; top: 0px; width: 400px; height: 500px; display: none"
+>
     Instant Chat will be displayed here.
 </div>
 
