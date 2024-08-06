@@ -1,0 +1,32 @@
+<html>
+<head>
+<script type="text/javascript" src="https://secure.logmeinrescue.com/InstantChat/InstantChat.aspx"></script>
+<script type="text/javascript">
+function loadInstantChat(){
+    var ICLoader = new RescueInstantChatLoader();
+    ICLoader.ICContainer = "ICContainer";
+    ICLoader.HostedCSS = "https://secure.logmeinrescue.com/InstantChat/Standard/InstantChat.css";
+    ICLoader.HostedLanguagesForChatOnlyMode = "https://secure.logmeinrescue.com/InstantChat/LanguagesForChatOnlyMode.js";
+    ICLoader.HostedLanguagesForAppletMode = "https://secure.logmeinrescue.com/InstantChat/LanguagesForAppletMode.js";
+    ICLoader.PrivateCode = document.getElementById("Code").value;
+    ICLoader.Tracking0 = ""; /* optional */
+    ICLoader.Language = ""; /* optional */
+    ICLoader.PostMessageTargetOrigin = ""; /* optional (For implementation details, see the LogMeIn Rescue Customization and Integration Guide) */
+    ICLoader.HostedErrorHandler = function(ErrorName){} /* optional */
+    ICLoader.Start();}
+function handleRebootOrRefresh(){
+    if ((window.location + "").indexOf("rescuewebsessionid") != -1){document.getElementById("ICContainer").style.display=""; loadInstantChat();} /* optional */
+    if (window.location.hash.length == webSessionIdLength + 1){document.getElementById("ICContainer").style.display=""; loadInstantChat();} /* optional */
+}
+</script>
+</head>
+<body onload="handleRebootOrRefresh();">
+    <span>Enter your six-digit code, then click the Start Download button below </span><input id="Code" type="text" /><br/>
+
+    <input type="button" value="Connect to technician" onclick="document.getElementById('ICContainer').style.display=''; loadInstantChat();"/>
+
+    <div id="ICContainer" style="position: absolute; left: 0px; top: 0px; width: 400px; height: 500px; display: none">
+        IIContainer
+    </div>
+</body>
+</html>
