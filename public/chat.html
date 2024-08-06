@@ -4,9 +4,10 @@
 <head>
 <title>The Framework TEST</title>
 
-<script type="text/javascript" src="https://secure.GoToLogMeIn Rescue.com/InstantChat/InstantChat.aspx"></script>
+<script type="text/javascript" src="https://secure.Logmeinrescue.com/InstantChat/InstantChat.aspx"></script>
 
 <script type="text/javascript">
+const DOMAIN_FROM = "test.theframework.es"
 const ENTRY_ID = "123456"
 const URL_CSS= "http://YourSite/yourstylesheet.css";
 function loadInstantChat(sessionType)
@@ -20,7 +21,7 @@ function loadInstantChat(sessionType)
     // Hide Language dropdown
     document.getElementById("LanguageForm").style.display = "none";
 
-    var ICLoader = new LogMeIn RescueInstantChatLoader();
+    var ICLoader = new LogMeInRescueInstantChatLoader();
     ICLoader.ICContainer = "InstantChatDiv";
     ICLoader.HostedCSS = URL_CSS;
     //ICLoader.HostedLanguagesForChatOnlyMode = "http://[YourSite]/LanguagesForChatOnlyMode.js";
@@ -50,7 +51,7 @@ function loadInstantChat(sessionType)
     //ICLoader.Comment5 = document.getElementById("inputComment").value;
     ICLoader.Tracking0 = "TestForm01";
     ICLoader.Language = document.getElementById("inputLanguageSelect").value;
-    ICLoader.PostMessageTargetOrigin = null; //https://[YourSite].com<:443>
+    ICLoader.PostMessageTargetOrigin = DOMAIN_FROM; //https://[YourSite].com<:443>
     // Error + No Technician available notification handling
     
     ICLoader.HostedErrorHandler = function(ErrorName) {
