@@ -5,6 +5,7 @@
 <script type="text/javascript" src="https://secure.Logmeinrescue.com/InstantChat/InstantChat.aspx"></script>
 
 <script type="text/javascript">
+
 const DOMAIN_FROM = "https://test.theframework.es"
 const URL_CSS= "https://test.theframework.es/styles/logmein-chat.css";
 const ENTRY_ID = "123456"
@@ -59,8 +60,7 @@ function loadInstantChat(sessionType) {
             case "INVALID_PARAMETERS": handleError("Invalid parameters supplied. Please contact your support provider."); break;
             case "SESSIONALREADYSTARTED": handleError("A session using this PIN Code has already been started. Please ask your support provider for a new PIN Code."); break;
             case "UCONNECTIONERROR": handleError("Unknown connection error occurred."); break;
-            case "ERRNOSUCHSSESSION": handleError("The support session cannot be started.");
-                break;
+            case "ERRNOSUCHSSESSION": handleError("The support session cannot be started.");break;
             case "ERRNOSUCHENTRY": handleError("The online support session cannot be started.Please contact your support provider directly."); break;
             case "ERRCODEDOESNOTEXIST": handleError("PIN Code does not exist. Please contact your support provider."); break;
             case "ERRCODEEXPIRED": handleError("PIN Code has expired. Please contact your support provider."); break;
@@ -99,8 +99,9 @@ function handleError(ErrorDescription) {
         Once you have enabled JavaScript, please refresh this page.
     </div>
 </noscript>
-<div id="ChannelForm" style="position: absolute; left: 100px; top: 100px; backgroundcolor:
-#303030; padding: 20px 20px 20px 20px">
+
+<div id="ChannelForm"
+     style="position: absolute; left: 100px; top: 100px; backgroundcolor:#303030; padding: 20px 20px 20px 20px">
     Your Name<br/>
     <input id="inputYourName" type="text" maxlength="64" style="width: 200px" /><br/>
     Email Address<br/>
@@ -116,13 +117,15 @@ function handleError(ErrorDescription) {
     <input type="button" value="Start Chat Now" onclick="loadInstantChat(1);" />
 </div>
 
-<div id="PinForm" style="position: absolute; left: 400px; top: 100px; background-color:#303030; padding: 20px 20px 20px 20px">
+<div id="PinForm"
+     style="position: absolute; left: 400px; top: 100px; background-color:#303030; padding: 20px 20px 20px 20px">
     Enter your 6 digit PIN code<br/>
     <input id="inputPinCode" type="text" maxlength="64" style="width: 200px" /><br/><br/>
     <input type="button" value="Connect to technician" onclick="loadInstantChat(2);" />
 </div>
 
-<div id="LanguageForm" style="position: absolute; left: 400px; top: 260px; backgroundcolor:#303030; padding: 20px 20px 20px 20px">
+<div id="LanguageForm"
+     style="position: absolute; left: 400px; top: 260px; backgroundcolor:#303030; padding: 20px 20px 20px 20px">
     Select Chat<br/>interface language<br/>
     <select id="inputLanguageSelect" style="width: 200px">
         <option value="en">English</option>
@@ -150,11 +153,13 @@ function handleError(ErrorDescription) {
         <option value="cs">Czech</option>
     </select>
 </div>
+
 <div id="ErrorForm" style="position: absolute; left: 100px; top: 100px; height: 200px; width: 300px; background-color: #303030; padding: 20px 20px 20px 20px; display: none">
     error form
 </div>
 <div id="InstantChatDiv" style="position: absolute; left: 100px; top: 100px; width: 285px;height: 259px; display: none">
     instant chat div
 </div>
+
 </body>
 </html>
