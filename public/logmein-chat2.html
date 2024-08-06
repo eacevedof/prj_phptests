@@ -73,8 +73,7 @@ function handleRebootOrRefresh(){
 <div
     id="ICContainer"
     style="
-    width: 100%; height: auto;
-    display: none;
+position: absolute; left: 100px; top: 100px; width: 285px;height: 259px; display: none
     "
 >
     Instant Chat will be displayed here.
@@ -87,10 +86,12 @@ function getMobileViewportDimensions() {
 }
 document.addEventListener("DOMContentLoaded", function() {
 
-    handleRebootOrRefresh();
+
     const windata = document.getElementById("win-data")
     const { width, height } = getMobileViewportDimensions()
     windata.innerHTML = `width: ${width}, height: ${height}`
+
+    handleRebootOrRefresh();
 })
 </script>
 </body>
