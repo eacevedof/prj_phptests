@@ -47,6 +47,7 @@
 </head>
 <body onload="handleRebootOrRefresh();">
 <table>
+    <tr><td><div id="win-data"></div></td></tr>
     <tr><td>Please enter your name: </td><td><input id="Name" type="text" maxlength="64" /></td></tr>
     <tr><td>Custom eaf: </td><td><input id="Comment1" type="text" maxlength="512" /></td></tr>
 </table>
@@ -56,6 +57,18 @@
 <div id="ICContainer" style="position: absolute; left: 0px; top: 0px; width: 400px; height: 500px; display: none">
     Instant Chat will be displayed here.
 </div>
-
+<script>
+function getMobileViewportDimensions() {
+    const width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+    const height = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+    return { width, height };
+}
+document.addEventListener("DOMContentLoaded", function() {
+    const windata = document.getElementById("win-data")
+    const { width, height } = getMobileViewportDimensions()
+    windata.innerHTML = `width: ${width}, height: ${height}`
+    //handleRebootOrRefresh();
+})
+</script>
 </body>
 </html>
