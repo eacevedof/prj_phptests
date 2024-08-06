@@ -51,32 +51,23 @@ function loadInstantChat(sessionType)
     //ICLoader.Comment5 = document.getElementById("inputComment").value;
     ICLoader.Tracking0 = "TestForm01";
     ICLoader.Language = document.getElementById("inputLanguageSelect").value;
-    ICLoader.PostMessageTargetOrigin = DOMAIN_FROM; //https://[YourSite].com<:443>
+    ICLoader.PostMessageTargetOrigin = DOMAIN_FROM; // https://[YourSite].com<:443>
     // Error + No Technician available notification handling
     
     ICLoader.HostedErrorHandler = function(ErrorName) {
         switch(ErrorName) {
-            case "NOTECHAVAILABLE": handleError("Currently no technicians are available.
-                Please check back later."); break;
-            case "NOTECHWORKING": handleError("Sorry, we're closed. No technicians are
-                available at this time. Please check back later during our hours of operation."); break;
-            case "INVALID_PARAMETERS": handleError("Invalid parameters supplied.
-                Please contact your support provider."); break;
-            case "SESSIONALREADYSTARTED": handleError("A session using this PIN Code
-                has already been started. Please ask your support provider for a new PIN Code."); break;
+            case "NOTECHAVAILABLE": handleError("Currently no technicians are available.Please check back later."); break;
+            case "NOTECHWORKING": handleError("Sorry, we're closed. No technicians are available at this time. Please check back later during our hours of operation."); break;
+            case "INVALID_PARAMETERS": handleError("Invalid parameters supplied. Please contact your support provider."); break;
+            case "SESSIONALREADYSTARTED": handleError("A session using this PIN Code has already been started. Please ask your support provider for a new PIN Code."); break;
             case "UCONNECTIONERROR": handleError("Unknown connection error occurred."); break;
             case "ERRNOSUCHSSESSION": handleError("The support session cannot be started.");
                 break;
-            case "ERRNOSUCHENTRY": handleError("The online support session cannot be started.
-                Please contact your support provider directly."); break;
-            case "ERRCODEDOESNOTEXIST": handleError("PIN Code does not exist.
-                Please contact your support provider."); break;
-            case "ERRCODEEXPIRED": handleError("PIN Code has expired.
-                Please contact your support provider."); break;
-            case "ERRNOTEXPIRED": handleError("Technician or company does not exist.
-                Please contact your support provider."); break;
-            case "ERRMISSINGTECHLICENSE": handleError("The support session cannot be started.
-                The technician is not configured to support this type of device."); break;
+            case "ERRNOSUCHENTRY": handleError("The online support session cannot be started.Please contact your support provider directly."); break;
+            case "ERRCODEDOESNOTEXIST": handleError("PIN Code does not exist. Please contact your support provider."); break;
+            case "ERRCODEEXPIRED": handleError("PIN Code has expired. Please contact your support provider."); break;
+            case "ERRNOTEXPIRED": handleError("Technician or company does not exist. Please contact your support provider."); break;
+            case "ERRMISSINGTECHLICENSE": handleError("The support session cannot be started. The technician is not configured to support this type of device."); break;
         }
     }
     ICLoader.Start();
@@ -150,7 +141,7 @@ function handleError(ErrorDescription) {
         <option value="ko">Korean</option>
         <option value="zh">Simplified Chinese</option>
         <option value="zh-tw">Traditional Chinese</option>
-        <option value="ar">Arabic </option
+        <option value="ar">Arabic </option>
         <option value="tr">Türk</option>
         <option value="pl">Polski</option>
         <option value="fi">Suomalainen</option>
