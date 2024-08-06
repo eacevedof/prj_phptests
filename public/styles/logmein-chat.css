@@ -1,0 +1,874 @@
+/* *************************************************************************************************************** */
+/* *** LogMeIn Rescue InstantChat Hosted CSS                                                                       */
+/* ***                                                                                                             */
+/* *** Each element style is documented in detail in the LogMeIn Rescue Instant Chat Feature Guide:                */
+/* *** https://secure.logmeinrescue.com/Common/Pdfs/Rescue_FeatureGuide_InstantChat.pdf                            */
+/* ***                                                                                                             */
+/* *** Image resources for self-hosted Instant Chat are available for download in a single compressed file at      */
+/* *** https://secure.logmeinrescue.com/InstantChat/Standard/Images.zip                                            */
+/* ***                                                                                                             */
+/* *** Instant Chat uses document type XHTML 1.0 Transitional!                                                     */
+/* *************************************************************************************************************** */
+@font-face {
+    font-family: Galano-regular;
+    src: url(./../fonts/GALANOGROTESQUEREGULAR.OTF);
+}
+
+.ic_htmlbody /*<body>*/ {
+    font-family: Galano-regular;
+    font-weight: 400;
+    font-size: 12px;
+    background-color: #ffffff;
+}
+.ic_bodyarea /*<div>*/ {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    background-color: #6c7e87;
+    z-index: 0;
+}
+.ic_shadow /*<div>*/ {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    background-color: #000000;
+    -moz-opacity: 0.5;
+    filter: alpha(opacity: 50);
+    opacity: 0.5;
+    -khtml-opacity: 0.5;
+    z-index: 9;
+}
+.ic_loader_animation /*<div>*/ {
+    position: absolute;
+    left: 15px;
+    top: 15px;
+    width: 32px;
+    height: 32px;
+    background-image: url("https://secure.logmeinrescue.com/InstantChat/Standard/Images/ic_loader_animation.gif");
+    z-index: 10;
+}
+.ic_maincontentarea /*<div>*/ {
+    position: absolute;
+    top: 0px;
+    left: 0px !important;
+    width: 100%;
+    height: 454px;
+    background-image: url("ic_background.png");
+}
+.ic_statusicon_waiting /*<div>*/ {
+    position: absolute;
+    left: 17px;
+    top: 85px;
+    width: 34px;
+    height: 42px;
+    background-image: url("https://secure.logmeinrescue.com/InstantChat/Standard/Images/ic_icon_waiting.gif");
+}
+.ic_statusicon_chat /*<div>*/ {
+    position: absolute;
+    left: 17px;
+    top: 85px;
+    width: 34px;
+    height: 42px;
+    background-image: url("https://secure.logmeinrescue.com/InstantChat/Standard/Images/ic_icon_chat.gif");
+}
+.ic_statusicon_rc /*<div>*/ {
+    position: absolute;
+    left: 17px;
+    top: 85px;
+    width: 34px;
+    height: 42px;
+    background-image: url("https://secure.logmeinrescue.com/InstantChat/Standard/Images/ic_icon_rc.gif");
+}
+.ic_statusicon_disconnect /*<div>*/ {
+    position: absolute;
+    left: 17px;
+    top: 85px;
+    width: 34px;
+    height: 42px;
+    background-image: url("https://secure.logmeinrescue.com/InstantChat/Standard/Images/ic_icon_disconnect.gif");
+}
+.ic_statusicon_hold /*<div>*/ {
+    position: absolute;
+    left: 17px;
+    top: 85px;
+    width: 34px;
+    height: 42px;
+    background-image: url("https://secure.logmeinrescue.com/InstantChat/Standard/Images/ic_icon_hold.gif");
+}
+.ic_statusicon_transfer /*<div>*/ {
+    position: absolute;
+    left: 17px;
+    top: 85px;
+    width: 34px;
+    height: 42px;
+    background-image: url("https://secure.logmeinrescue.com/InstantChat/Standard/Images/ic_icon_transfer.gif");
+}
+.ic_statusicon_typing /*<div>*/ {
+    position: absolute;
+    left: 17px;
+    top: 85px;
+    width: 34px;
+    height: 42px;
+    background-image: url("https://secure.logmeinrescue.com/InstantChat/Standard/Images/ic_icon_typing.gif");
+}
+.ic_statustext /*<div>*/ {
+    position: absolute;
+    left: 54px;
+    top: 82px;
+    color: #393d4d;
+    height: 45px;
+    width: 189px;
+    overflow: hidden;
+}
+.ic_windowtitle_container /*<div>*/ {
+    position: absolute;
+    left: 33px;
+    top: 11px;
+    color: #ffffff;
+    font-size: 13px;
+    display: none;
+}
+.ic_windowtitle /*span*/ {
+}
+
+.ic_fontchange_small /*<div>*/ {
+    display: none;
+    position: absolute;
+    left: 307px;
+    top: 111px;
+    width: 7px;
+    height: 13px;
+    font-size: 1px;
+    cursor: pointer;
+    border-bottom: none;
+}
+.ic_fontchange_small_border /*<div>*/ {
+    display: none;
+    position: absolute;
+    left: 307px;
+    top: 111px;
+    width: 7px;
+    height: 13px;
+    font-size: 1px;
+    cursor: pointer;
+    border-bottom: solid 1px #888dac;
+}
+.ic_fontchange_medium /*<div>*/ {
+    display: none;
+    position: absolute;
+    left: 316px;
+    top: 111px;
+    width: 7px;
+    height: 13px;
+    font-size: 1px;
+    cursor: pointer;
+    border-bottom: none;
+}
+.ic_fontchange_medium_border /*<div>*/ {
+    display: none;
+    position: absolute;
+    left: 316px;
+    top: 111px;
+    width: 7px;
+    height: 13px;
+    font-size: 1px;
+    cursor: pointer;
+    border-bottom: solid 1px #888dac;
+}
+.ic_fontchange_large /*<div>*/ {
+    display: none;
+    position: absolute;
+    left: 324px;
+    top: 111px;
+    width: 9px;
+    height: 13px;
+    font-size: 1px;
+    cursor: pointer;
+    border-bottom: none;
+}
+.ic_fontchange_large_border /*<div>*/ {
+    display: none;
+    position: absolute;
+    left: 324px;
+    top: 111px;
+    width: 9px;
+    height: 13px;
+    font-size: 1px;
+    cursor: pointer;
+    border-bottom: solid 1px #888dac;
+}
+.ic_chatlog /*<div>*/ {
+    position: absolute;
+    left: 17px;
+    top: 132px;
+    width: 312px;
+    height: 236px;
+    overflow: auto;
+    font-size: 11px;
+    padding-bottom: 3px;
+    z-index: 3;
+}
+.ic_chatlog_big /*<div>*/ {
+    position: absolute;
+    left: 17px;
+    top: 132px;
+    width: 312px;
+    height: 298px;
+    overflow: auto;
+    font-size: 11px;
+    padding-bottom: 3px;
+    z-index: 3;
+}
+.ic_chatlog_medium /*<div>*/ {
+    position: absolute;
+    left: 17px;
+    top: 132px;
+    width: 312px;
+    height: 236px;
+    overflow: auto;
+    font-size: 12px;
+    padding-bottom: 3px;
+    z-index: 3;
+}
+.ic_chatlog_medium_big /*<div>*/ {
+    position: absolute;
+    left: 17px;
+    top: 132px;
+    width: 312px;
+    height: 298px;
+    overflow: auto;
+    font-size: 12px;
+    padding-bottom: 3px;
+    z-index: 3;
+}
+.ic_chatlog_large /*<div>*/ {
+    position: absolute;
+    left: 17px;
+    top: 132px;
+    width: 312px;
+    height: 236px;
+    overflow: auto;
+    font-size: 14px;
+    padding-bottom: 3px;
+    z-index: 3;
+}
+.ic_chatlog_large_big /*<div>*/ {
+    position: absolute;
+    left: 17px;
+    top: 132px;
+    width: 312px;
+    height: 298px;
+    overflow: auto;
+    font-size: 14px;
+    padding-bottom: 3px;
+    z-index: 3;
+}
+.ic_text_chatline /*<div>*/ {
+    padding-bottom: 1px;
+}
+.ic_text_chattable /*<table>*/ {
+    display: inline;
+    /* Note: The Instant Chat engine includes display: inline-block to ensure that Instant Chat will run on Safari. */
+}
+.ic_text_chattable_tr /*<tr>*/ {
+}
+.ic_text_chattable_td1 /*<td>*/ {
+    color: #7e7e7e;
+}
+.ic_text_chattable_td2_client /*<td>*/ {
+    font-weight: 600;
+    color: #0060c7;
+}
+.ic_text_chattable_td2_tc /*<td>*/ {
+    font-weight: 600;
+    color: #c7140f;
+}
+.ic_text_chatcontent /*<span>*/ {
+    position: relative;
+    left: 0px;
+    top: -2px;
+    color: #000000;
+}
+.ic_control_chatline /*<div>*/ {
+    padding-bottom: 3px;
+}
+.ic_control_chattime /*<span>*/ {
+    color: #7e7e7e;
+}
+.ic_control_chatcontent /*<span>*/ {
+    color: #53606a;
+}
+.ic_link_chatcontent /*span*/ {
+    color: #0060c7;
+    text-decoration: underline;
+    cursor: pointer;
+}
+.ic_linkhover_chatcontent /*span*/ {
+    color: #0077fb;
+    text-decoration: underline;
+    cursor: pointer;
+}
+.ic_complementer /*<div>*/ {
+    position: absolute;
+    left: 11px;
+    top: 368px;
+    width: 326px;
+    height: 73px;
+    background-image: url("https://secure.logmeinrescue.com/InstantChat/Standard/Images/ic_complementer.jpg");
+    z-index: 2;
+}
+.ic_chatdisconnected /*<div>*/ {
+    position: absolute;
+    left: 13px;
+    top: 381px;
+    width: 284px;
+    height: 56px;
+    background-image: url("https://secure.logmeinrescue.com/InstantChat/Standard/Images/ic_chatdisconnected.jpg");
+    z-index: 1;
+}
+.ic_filesend_button /*<div>*/ {
+    position: absolute;
+    left: 13px;
+    top: 32px;
+    width: 34px;
+    height: 46px;
+    cursor: pointer;
+    background-image: url("https://secure.logmeinrescue.com/InstantChat/Standard/Images/ic_filesend_normal.jpg");
+}
+.ic_filesend_button_hover /*<div>*/ {
+    position: absolute;
+    left: 13px;
+    top: 32px;
+    width: 34px;
+    height: 46px;
+    cursor: pointer;
+    background-image: url("https://secure.logmeinrescue.com/InstantChat/Standard/Images/ic_filesend_hover.jpg");
+}
+.ic_filesend_button_pressed /*<div>*/ {
+    position: absolute;
+    left: 13px;
+    top: 32px;
+    width: 34px;
+    height: 46px;
+    cursor: pointer;
+    background-image: url("https://secure.logmeinrescue.com/InstantChat/Standard/Images/ic_filesend_pressed.jpg");
+}
+.ic_filesend_button_disabled /*<div>*/ {
+    position: absolute;
+    left: 13px;
+    top: 32px;
+    width: 34px;
+    height: 46px;
+    cursor: default;
+    background-image: url("https://secure.logmeinrescue.com/InstantChat/Standard/Images/ic_filesend_disabled.jpg");
+}
+.ic_disconnect_button /*<div>*/ {
+    position: absolute;
+    left: 54px;
+    top: 32px;
+    width: 33px;
+    height: 46px;
+    cursor: pointer;
+    background-image: url("https://secure.logmeinrescue.com/InstantChat/Standard/Images/ic_end_normal.jpg");
+}
+.ic_disconnect_button_hover /*<div>*/ {
+    position: absolute;
+    left: 54px;
+    top: 32px;
+    width: 33px;
+    height: 46px;
+    cursor: pointer;
+    background-image: url("https://secure.logmeinrescue.com/InstantChat/Standard/Images/ic_end_hover.jpg");
+}
+.ic_disconnect_button_pressed /*<div>*/ {
+    position: absolute;
+    left: 54px;
+    top: 32px;
+    width: 33px;
+    height: 46px;
+    cursor: pointer;
+    background-image: url("https://secure.logmeinrescue.com/InstantChat/Standard/Images/ic_end_pressed.jpg");
+}
+.ic_disconnect_button_disabled /*<div>*/ {
+    position: absolute;
+    left: 54px;
+    top: 32px;
+    width: 33px;
+    height: 46px;
+    cursor: default;
+    background-image: url("https://secure.logmeinrescue.com/InstantChat/Standard/Images/ic_end_disabled.jpg");
+}
+.ic_send_button /*<div>*/ {
+    position: absolute;
+    left: 297px;
+    top: 382px;
+    width: 36px;
+    height: 54px;
+    cursor: pointer;
+    background-image: url("https://secure.logmeinrescue.com/InstantChat/Standard/Images/ic_send_normal.jpg");
+}
+.ic_send_button_hover /*<div>*/ {
+    position: absolute;
+    left: 297px;
+    top: 382px;
+    width: 36px;
+    height: 54px;
+    cursor: pointer;
+    background-image: url("https://secure.logmeinrescue.com/InstantChat/Standard/Images/ic_send_hover.jpg");
+}
+.ic_send_button_pressed /*<div>*/ {
+    position: absolute;
+    left: 297px;
+    top: 382px;
+    width: 36px;
+    height: 54px;
+    cursor: pointer;
+    background-image: url("https://secure.logmeinrescue.com/InstantChat/Standard/Images/ic_send_pressed.jpg");
+}
+.ic_send_button_disabled /*<div>*/ {
+    position: absolute;
+    left: 297px;
+    top: 382px;
+    width: 36px;
+    height: 54px;
+    cursor: default;
+    background-image: url("https://secure.logmeinrescue.com/InstantChat/Standard/Images/ic_send_disabled.jpg");
+}
+.ic_lang_container /*<div>*/ {
+    position: absolute;
+    top: 28px;
+    width: 87px;
+    height: 406px;
+    background-color: #eceef4;
+    border: solid 1px #000000;
+    font-size: 11px;
+    color: #000000;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    z-index: 5;
+}
+.ic_lang_menuitem /*<div>*/ {
+    width: 79px;
+    height: 14px;
+    padding-left: 8px;
+    color: #000000;
+    background-color: #eceef4;
+    cursor: pointer;
+}
+.ic_lang_menuitem_hover /*<div>*/ {
+    width: 79px;
+    height: 14px;
+    padding-left: 8px;
+    color: #ffffff;
+    background-color: #000000;
+    cursor: pointer;
+}
+.ic_lang_menuitem_selected /*<div>*/ {
+    width: 79px;
+    height: 14px;
+    padding-left: 8px;
+    color: #000000;
+    background-color: #c9cee1;
+    cursor: pointer;
+}
+.ic_lang_select /*<div>*/ {
+    display: none; /* DESACTIVAMOS LA OPCIÓN DE ESCOGER IDIOMA */
+}
+
+.ic_chattext /*<textarea>*/ {
+    position: absolute;
+    left: 17px;
+    top: 385px;
+    width: 275px;
+    height: 46px;
+    color: #393d4d;
+    font-family: "Open Sans", arial, verdana;
+    font-size: 11px;
+    border: none;
+    background-color: transparent;
+    overflow: auto;
+    resize: none;
+    outline: none;
+    /* Note: The Instant Chat engine includes -webkit-appearance: none to ensure that Instant Chat will run on Safari (for example, for iPhone) */
+    /* Note: The Instant Chat engine includes overflow: hidden to ensure that Instant Chat will run on Opera */
+}
+.ic_chattext_first /*<textarea>*/ {
+    position: absolute;
+    left: 17px;
+    top: 385px;
+    width: 275px;
+    height: 46px;
+    color: #888888;
+    font-family: "Open Sans", arial, verdana;
+    font-size: 11px;
+    border: none;
+    background-color: transparent;
+    overflow: auto;
+    resize: none;
+    /* Note: The Instant Chat engine includes -webkit-appearance: none to ensure that Instant Chat will run on Safari (for example, for iPhone) */
+    /* Note: The Instant Chat engine includes overflow: hidden to ensure that Instant Chat will run on Opera */
+}
+.ic_chattext_medium /*<textarea>*/ {
+    position: absolute;
+    left: 17px;
+    top: 385px;
+    width: 275px;
+    height: 46px;
+    color: #393d4d;
+    font-family: "Open Sans", arial, verdana;
+    font-size: 12px;
+    border: none;
+    background-color: transparent;
+    overflow: auto;
+    resize: none;
+    /* Note: The Instant Chat engine includes -webkit-appearance: none to ensure that Instant Chat will run on Safari (for example, for iPhone) */
+    /* Note: The Instant Chat engine includes overflow: hidden to ensure that Instant Chat will run on Opera */
+}
+.ic_chattext_medium_first /*<textarea>*/ {
+    position: absolute;
+    left: 17px;
+    top: 385px;
+    width: 275px;
+    height: 46px;
+    color: #888888;
+    font-family: "Open Sans", arial, verdana;
+    font-size: 12px;
+    border: none;
+    background-color: transparent;
+    overflow: auto;
+    resize: none;
+    /* Note: The Instant Chat engine includes -webkit-appearance: none to ensure that Instant Chat will run on Safari (for example, for iPhone) */
+    /* Note: The Instant Chat engine includes overflow: hidden to ensure that Instant Chat will run on Opera */
+}
+.ic_chattext_large /*<textarea>*/ {
+    position: absolute;
+    left: 17px;
+    top: 385px;
+    width: 275px;
+    height: 46px;
+    color: #393d4d;
+    font-family: "Open Sans", arial, verdana;
+    font-size: 14px;
+    border: none;
+    background-color: transparent;
+    overflow: auto;
+    resize: none;
+    /* Note: The Instant Chat engine includes -webkit-appearance: none to ensure that Instant Chat will run on Safari (for example, for iPhone) */
+    /* Note: The Instant Chat engine includes overflow: hidden to ensure that Instant Chat will run on Opera */
+}
+.ic_chattext_large_first /*<textarea>*/ {
+    position: absolute;
+    left: 17px;
+    top: 385px;
+    width: 275px;
+    height: 46px;
+    color: #888888;
+    font-family: "Open Sans", arial, verdana;
+    font-size: 14px;
+    border: none;
+    background-color: transparent;
+    overflow: auto;
+    resize: none;
+    /* Note: The Instant Chat engine includes -webkit-appearance: none to ensure that Instant Chat will run on Safari (for example, for iPhone) */
+    /* Note: The Instant Chat engine includes overflow: hidden to ensure that Instant Chat will run on Opera */
+}
+.ic_custom_logo /*<img>*/ {
+    position: absolute;
+    left: 248px;
+    top: 50px;
+    width: 78px;
+    height: 32px;
+    display: none;
+}
+.ic_custom_icon /*<img>*/ {
+    position: absolute;
+    left: 13px;
+    top: 12px;
+    width: 16px;
+    height: 16px;
+    display: none;
+}
+.ic_dialog_box /*<div>*/ {
+    position: absolute;
+    left: 73px;
+    top: 200px;
+    width: 200px;
+    height: 100px;
+    z-index: 4;
+    background-color: #293258;
+    color: #ffffff;
+    -moz-opacity: 0.9;
+    filter: alpha(opacity: 90);
+    opacity: 0.9;
+    -khtml-opacity: 0.9;
+}
+.ic_dialog_box_textarea /*<textarea>*/ {
+    position: absolute;
+    left: 8px;
+    top: 8px;
+    width: 177px;
+    height: 50px;
+    overflow: auto;
+    color: #888888;
+    font-family: "Open Sans", arial, verdana;
+    font-size: 10px;
+    overflow: auto;
+}
+.ic_dialog_box_button1 /*<div>*/ {
+    position: absolute;
+    left: 20px;
+    top: 70px;
+    width: 95px;
+    height: 20px;
+    cursor: pointer;
+    text-align: center;
+    padding-top: 4px;
+    background-color: #49589f;
+}
+.ic_dialog_box_button2 /*<div>*/ {
+    position: absolute;
+    left: 130px;
+    top: 70px;
+    width: 50px;
+    height: 20px;
+    cursor: pointer;
+    text-align: center;
+    padding-top: 4px;
+    background-color: #49589f;
+}
+.ic_progressbars /*<div>*/ {
+    position: absolute;
+    left: 9px;
+    color: #a4a5aa;
+}
+.ic_progressbars_chatbottom /*<div>*/ {
+    position: absolute;
+    left: 10px;
+    width: 328px;
+    height: 11px;
+    font-size: 1px;
+    background-image: url("https://secure.logmeinrescue.com/InstantChat/Standard/Images/ic_background_bottom.jpg");
+}
+.ic_progressbar_instance /*<div>*/ {
+    position: relative;
+    height: 20px;
+    width: 328px;
+    font-family: "Open Sans", arial, verdana;
+    font-size: 9px;
+    background-image: url("https://secure.logmeinrescue.com/InstantChat/Standard/Images/ic_progressbar_background.jpg");
+}
+.ic_progressbar_inner /*<div>*/ {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    height: 20px;
+    width: 326px;
+    overflow: hidden;
+    background-image: url("https://secure.logmeinrescue.com/InstantChat/Standard/Images/ic_progressbar_inner.jpg");
+}
+.ic_progressbar_title /*<div>*/ {
+    position: absolute;
+    left: 58px;
+    top: 3px;
+}
+.ic_progressbar_cancelbutton /*<div>*/ {
+    position: absolute;
+    left: 310px;
+    top: 3px;
+    width: 11px;
+    height: 11px;
+    font-size: 1px;
+    cursor: pointer;
+    background-image: url("https://secure.logmeinrescue.com/InstantChat/Standard/Images/ic_cancel_normal.jpg");
+}
+.ic_progressbar_cancelbutton_hover /*<div>*/ {
+    position: absolute;
+    left: 310px;
+    top: 3px;
+    width: 11px;
+    height: 11px;
+    font-size: 1px;
+    cursor: pointer;
+    background-image: url("https://secure.logmeinrescue.com/InstantChat/Standard/Images/ic_cancel_hover.jpg");
+}
+.ic_progressbar_cancelbutton_pressed /*<div>*/ {
+    position: absolute;
+    left: 310px;
+    top: 3px;
+    width: 11px;
+    height: 11px;
+    font-size: 1px;
+    cursor: pointer;
+    background-image: url("https://secure.logmeinrescue.com/InstantChat/Standard/Images/ic_cancel_pressed.jpg");
+}
+.ic_progressbar_cancelbutton_disabled /*<div>*/ {
+    position: absolute;
+    left: 310px;
+    top: 3px;
+    width: 11px;
+    height: 11px;
+    font-size: 1px;
+    cursor: default;
+    background-image: url("https://secure.logmeinrescue.com/InstantChat/Standard/Images/ic_cancel_disabled.jpg");
+}
+
+/* *************************************************************************************************************** */
+
+.ic_technicianname /*<div>*/ {
+    position: absolute;
+    left: -200px;
+    top: -200px;
+}
+.ic_sessionend_button /*<div>*/ {
+    position: absolute;
+    left: -200px;
+    top: -200px;
+}
+.ic_sessionend_button_hover /*<div>*/ {
+    position: absolute;
+    left: -200px;
+    top: -200px;
+}
+.ic_sessionend_button_pressed /*<div>*/ {
+    position: absolute;
+    left: -200px;
+    top: -200px;
+}
+.ic_sessionend_button_disabled /*<div>*/ {
+    position: absolute;
+    left: -200px;
+    top: -200px;
+}
+.ic_control_chatline_CLIENT_CUSTOM /*<div>*/ {
+    display: block;
+}
+.ic_control_chatline_CLIENT_CONNECTING /*<div>*/ {
+    display: block;
+}
+.ic_control_chatline_CLIENT_CONNECTED /*<div>*/ {
+    display: block;
+}
+.ic_control_chatline_CLIENT_END /*<div>*/ {
+    display: block;
+}
+.ic_control_chatline_CLIENT_DISCONNECTED /*<div>*/ {
+    display: block;
+}
+.ic_control_chatline_CLIENT_CANNOTSTART /*<div>*/ {
+    display: block;
+}
+.ic_control_chatline_CLIENT_TIMEOUT /*<div>*/ {
+    display: block;
+}
+.ic_control_chatline_CLIENT_REQUESTSENTFILE /*<div>*/ {
+    display: block;
+}
+.ic_control_chatline_CLIENT_REQUESTSENTCANCELFILE /*<div>*/ {
+    display: block;
+}
+.ic_control_chatline_TC_CONNECTED /*<div>*/ {
+    display: block;
+}
+.ic_control_chatline_TC_HOLD /*<div>*/ {
+    display: block;
+}
+.ic_control_chatline_TC_TRANSFER /*<div>*/ {
+    display: block;
+}
+.ic_control_chatline_TC_END /*<div>*/ {
+    display: block;
+}
+.ic_control_chatline_TC_EXIT /*<div>*/ {
+    display: block;
+}
+.ic_control_chatline_TC_DISCONNECTED /*<div>*/ {
+    display: block;
+}
+.ic_control_chatline_TC_START_APPLET /*<div>*/ {
+    display: block;
+}
+.ic_control_chatline_TC_SHOWSURVEY /*<div>*/ {
+    display: block;
+}
+.ic_control_chatline_TC_URLPUSH /*<div>*/ {
+    display: block;
+}
+.ic_control_chatline_APPLET_CONNECTING_GW /*<div>*/ {
+    display: block;
+}
+.ic_control_chatline_APPLET_AUTOPROXYLOOKUP /*<div>*/ {
+    display: block;
+}
+.ic_control_chatline_APPLET_FX_START /*<div>*/ {
+    display: block;
+}
+.ic_control_chatline_APPLET_FX_END /*<div>*/ {
+    display: block;
+}
+.ic_control_chatline_APPLET_SENDINGLOGFILE /*<div>*/ {
+    display: block;
+}
+.ic_control_chatline_APPLET_PRINT /*<div>*/ {
+    display: block;
+}
+.ic_control_chatline_APPLET_DROPPED /*<div>*/ {
+    display: block;
+}
+.ic_control_chatline_APPLET_DISCONNECTING /*<div>*/ {
+    display: block;
+}
+.ic_control_chatline_APPLET_RECONNECTING /*<div>*/ {
+    display: block;
+}
+.ic_control_chatline_APPLET_ERROR /*<div>*/ {
+    display: block;
+}
+.ic_control_chatline_APPLET_DISCONNECTED /*<div>*/ {
+    display: block;
+}
+.ic_control_chatline_APPLET_FX_NOTIFY /*<div>*/ {
+    display: block;
+}
+.ic_control_chatline_APPLET_REBOOTING /*<div>*/ {
+    display: block;
+}
+.ic_control_chatline_APPLET_DV_START /*<div>*/ {
+    display: block;
+}
+.ic_control_chatline_APPLET_DV_END /*<div>*/ {
+    display: block;
+}
+.ic_control_chatline_APPLET_RC_START /*<div>*/ {
+    display: block;
+}
+.ic_control_chatline_APPLET_RC_END /*<div>*/ {
+    display: block;
+}
+.ic_control_chatline_APPLET_CONNECTED /*<div>*/ {
+    display: block;
+}
+.ic_control_chatline_APPLET_COMPLETED /*<div>*/ {
+    display: block;
+}
+.ic_control_chatline_APPLET_CANCELLED /*<div>*/ {
+    display: block;
+}
+.ic_text_chatline_tc /*<div>*/ {
+}
+.ic_text_chatline_client /*<div>*/ {
+}
+.ic_waitingtime /*<div>*/ {
+    position: absolute;
+    left: -200px;
+    top: -200px;
+}
+
+.ic_queueposition /*<div>*/ {
+    position: absolute;
+    left: -200px;
+    top: -200px;
+}
