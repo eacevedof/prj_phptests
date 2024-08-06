@@ -2,137 +2,138 @@
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <title>The Framework TEST</title>
-    <script type="text/javascript" src="https://secure.GoToLogMeIn Rescue.com/InstantChat/InstantChat.aspx"></script>
-    <script type="text/javascript">
-        function loadInstantChat(sessionType)
-        {
-            // Show Instant Chat
-            document.getElementById("InstantChatDiv").style.display = "";
-            // Hide Channel form
-            document.getElementById("ChannelForm").style.display = "none";
-            // Hide PIN Code form
-            document.getElementById("PinForm").style.display = "none";
-            // Hide Language dropdown
-            document.getElementById("LanguageForm").style.display = "none";
-            var ICLoader = new LogMeIn RescueInstantChatLoader();
-            ICLoader.ICContainer = "InstantChatDiv";
-            ICLoader.HostedCSS = "http://YourSite/yourstylesheet.css";
-            ICLoader.HostedLanguagesForChatOnlyMode = "http://[YourSite]/LanguagesForChatOnlyMode.js";
-            ICLoader.HostedLanguagesForAppletMode = "http://[YourSite]/LanguagesForAppletMode.js";
-            // The URL or domain name of [YourSite] must be allowlisted in the LogMeIn Rescue Administration Center.
-            // Contact your LogMeIn Rescue Master Administrator!
-            // sessionType == 0, we are after REBOOT
-            // Channel session
-            if (sessionType == 1)
-                ICLoader.EntryID = "123456789";
-            // Private Session
-            if (sessionType == 2)
-            {
-                var pin = document.getElementById("inputPinCode").value;
-                if ((pin.length != 6) || isNaN(pin))
-                {
-                    handleError("Private code should be a 6-digit number!");
-                    return;
-                }
-                else
-                    ICLoader.PrivateCode = document.getElementById("inputPinCode").value;
-            }
-            ICLoader.Name = document.getElementById("inputYourName").value;
-            ICLoader.Comment1 = document.getElementById("inputEmailAddress").value;
-            ICLoader.Comment2 = document.getElementById("inputPhoneNumber").value;
-            ICLoader.Comment3 = document.getElementById("inputCompanyName").value;
-            ICLoader.Comment4 = document.getElementById("inputLocation").value;
-            ICLoader.Comment5 = document.getElementById("inputComment").value;
-            ICLoader.Tracking0 = "TestForm01";
-            ICLoader.Language = document.getElementById("inputLanguageSelect").value;
-            ICLoader.PostMessageTargetOrigin = null; //https://[YourSite].com<:443>
-            // Error + No Technician available notification handling
-            ICLoader.HostedErrorHandler = function(ErrorName)
-            {
-                switch(ErrorName)
-                {
-                    case "NOTECHAVAILABLE": handleError("Currently no technicians are available.
-                        Please check back later."); break;
-                    case "NOTECHWORKING": handleError("Sorry, we're closed. No technicians are
-                        available at this time. Please check back later during our hours of operation."); break;
-                    case "INVALID_PARAMETERS": handleError("Invalid parameters supplied.
-                        Please contact your support provider."); break;
-                    case "SESSIONALREADYSTARTED": handleError("A session using this PIN Code
-                        has already been started. Please ask your support provider for a new PIN Code."); break;
-                    case "UCONNECTIONERROR": handleError("Unknown connection error occurred."); break;
-                    case "ERRNOSUCHSSESSION": handleError("The support session cannot be started.");
-                        break;
-                    case "ERRNOSUCHENTRY": handleError("The online support session cannot be started.
-                        Please contact your support provider directly."); break;
-                    case "ERRCODEDOESNOTEXIST": handleError("PIN Code does not exist.
-                        Please contact your support provider."); break;
-                    case "ERRCODEEXPIRED": handleError("PIN Code has expired.
-                        Please contact your support provider."); break;
-                    case "ERRNOTEXPIRED": handleError("Technician or company does not exist.
-                        Please contact your support provider."); break;
-                    case "ERRMISSINGTECHLICENSE": handleError("The support session cannot be started.
-                        The technician is not configured to support this type of device."); break;
-                }
-            }
-            ICLoader.Start();
+<title>The Framework TEST</title>
+
+<script type="text/javascript" src="https://secure.GoToLogMeIn Rescue.com/InstantChat/InstantChat.aspx"></script>
+
+<script type="text/javascript">
+const ENTRY_ID = "123456"
+const URL_CSS= "http://YourSite/yourstylesheet.css";
+function loadInstantChat(sessionType)
+{
+    // Show Instant Chat
+    document.getElementById("InstantChatDiv").style.display = "";
+    // Hide Channel form
+    document.getElementById("ChannelForm").style.display = "none";
+    // Hide PIN Code form
+    document.getElementById("PinForm").style.display = "none";
+    // Hide Language dropdown
+    document.getElementById("LanguageForm").style.display = "none";
+
+    var ICLoader = new LogMeIn RescueInstantChatLoader();
+    ICLoader.ICContainer = "InstantChatDiv";
+    ICLoader.HostedCSS = URL_CSS;
+    //ICLoader.HostedLanguagesForChatOnlyMode = "http://[YourSite]/LanguagesForChatOnlyMode.js";
+    //ICLoader.HostedLanguagesForAppletMode = "http://[YourSite]/LanguagesForAppletMode.js";
+    // The URL or domain name of [YourSite] must be allowlisted in the LogMeIn Rescue Administration Center.
+    // Contact your LogMeIn Rescue Master Administrator!
+    // sessionType == 0, we are after REBOOT
+    // Channel session
+    if (sessionType == 1)
+        ICLoader.EntryID = ENTRY_ID
+
+    // Private Session
+    if (sessionType == 2) {
+        var pin = document.getElementById("inputPinCode").value;
+        if ((pin.length != 6) || isNaN(pin)) {
+            handleError("Private code should be a 6-digit number!");
+            return;
         }
-        // Start automatically Instant Chat after REBOOT
-        function handleReboot()
-        {
-            if ((window.location + "").indexOf("LogMeIn Rescuewebsessionid") != -1)
-                loadInstantChat(0);
-            if (window.location.hash.length == webSessionIdLength + 1)
-                loadInstantChat(0);
+        else
+            ICLoader.PrivateCode = document.getElementById("inputPinCode").value;
+    }
+    ICLoader.Name = document.getElementById("inputYourName").value;
+    ICLoader.Comment1 = document.getElementById("inputEmailAddress").value;
+    //ICLoader.Comment2 = document.getElementById("inputPhoneNumber").value;
+    //ICLoader.Comment3 = document.getElementById("inputCompanyName").value;
+    //ICLoader.Comment4 = document.getElementById("inputLocation").value;
+    //ICLoader.Comment5 = document.getElementById("inputComment").value;
+    ICLoader.Tracking0 = "TestForm01";
+    ICLoader.Language = document.getElementById("inputLanguageSelect").value;
+    ICLoader.PostMessageTargetOrigin = null; //https://[YourSite].com<:443>
+    // Error + No Technician available notification handling
+    
+    ICLoader.HostedErrorHandler = function(ErrorName) {
+        switch(ErrorName) {
+            case "NOTECHAVAILABLE": handleError("Currently no technicians are available.
+                Please check back later."); break;
+            case "NOTECHWORKING": handleError("Sorry, we're closed. No technicians are
+                available at this time. Please check back later during our hours of operation."); break;
+            case "INVALID_PARAMETERS": handleError("Invalid parameters supplied.
+                Please contact your support provider."); break;
+            case "SESSIONALREADYSTARTED": handleError("A session using this PIN Code
+                has already been started. Please ask your support provider for a new PIN Code."); break;
+            case "UCONNECTIONERROR": handleError("Unknown connection error occurred."); break;
+            case "ERRNOSUCHSSESSION": handleError("The support session cannot be started.");
+                break;
+            case "ERRNOSUCHENTRY": handleError("The online support session cannot be started.
+                Please contact your support provider directly."); break;
+            case "ERRCODEDOESNOTEXIST": handleError("PIN Code does not exist.
+                Please contact your support provider."); break;
+            case "ERRCODEEXPIRED": handleError("PIN Code has expired.
+                Please contact your support provider."); break;
+            case "ERRNOTEXPIRED": handleError("Technician or company does not exist.
+                Please contact your support provider."); break;
+            case "ERRMISSINGTECHLICENSE": handleError("The support session cannot be started.
+                The technician is not configured to support this type of device."); break;
         }
-        // Show error messages
-        function handleError(ErrorDescription)
-        {
-            // Hide Instant Chat
-            document.getElementById("InstantChatDiv").style.display = "none";
-            // Show ErrorForm
-            var ef = document.getElementById("ErrorForm");
-            ef.style.display = "";
-            ef.innerHTML = ErrorDescription;
-        }
-    </script>
+    }
+    ICLoader.Start();
+}
+
+// Start automatically Instant Chat after REBOOT
+function handleReboot() {
+    if ((window.location + "").indexOf("LogMeIn Rescuewebsessionid") != -1)
+        loadInstantChat(0);
+    if (window.location.hash.length == webSessionIdLength + 1)
+        loadInstantChat(0);
+}
+
+// Show error messages
+function handleError(ErrorDescription) {
+    // Hide Instant Chat
+    document.getElementById("InstantChatDiv").style.display = "none";
+    // Show ErrorForm
+    var ef = document.getElementById("ErrorForm");
+    ef.style.display = "";
+    ef.innerHTML = ErrorDescription;
+}
+</script>
 </head>
-<body onload="handleReboot();" style="background-color: #000000; font-family:tahoma,
-arial, verdana; color: #FFFFFF">
+<body onload="handleReboot();" style="background-color: #000000; font-family:tahoma,arial, verdana; color: #FFFFFF">
 <noscript>
     <div style="position: absolute; left: 0px; top: 0px; width: 700px; height: 700px; zindex:
 1; background-color: #000000">
         To use the Instant Chat feature, please ensure you have JavaScript enabled in your
-        web browser.<br />
+        web browser.<br/>
         Once you have enabled JavaScript, please refresh this page.
     </div>
 </noscript>
 <div id="ChannelForm" style="position: absolute; left: 100px; top: 100px; backgroundcolor:
 #303030; padding: 20px 20px 20px 20px">
-    Your Name<br />
-    <input id="inputYourName" type="text" maxlength="64" style="width: 200px" /><br />
-    Email Address<br />
-    <input id="inputEmailAddress" type="text" maxlength="512" style="width: 200px" /><br
-/>
-    Phone Number<br />
-    <input id="inputPhoneNumber" type="text" maxlength="512" style="width: 200px" /><br />
-    Company Name<br />
-    <input id="inputCompanyName" type="text" maxlength="256" style="width: 200px" /><br />
-    Location<br />
-    <input id="inputLocation" type="text" maxlength="64" style="width: 200px" /><br />
-    Comment<br />
-    <input id="inputComment" type="text" maxlength="64" style="width: 200px" /><br /><br
-/>
+    Your Name<br/>
+    <input id="inputYourName" type="text" maxlength="64" style="width: 200px" /><br/>
+    Email Address<br/>
+    <input id="inputEmailAddress" type="text" maxlength="512" style="width: 200px" /><br/>
+    Phone Number<br/>
+    <input id="inputPhoneNumber" type="text" maxlength="512" style="width: 200px" /><br/>
+    Company Name<br/>
+    <input id="inputCompanyName" type="text" maxlength="256" style="width: 200px" /><br/>
+    Location<br/>
+    <input id="inputLocation" type="text" maxlength="64" style="width: 200px" /><br/>
+    Comment<br/>
+    <input id="inputComment" type="text" maxlength="64" style="width: 200px" /><br/><br/>
     <input type="button" value="Start Chat Now" onclick="loadInstantChat(1);" />
 </div>
+
 <div id="PinForm" style="position: absolute; left: 400px; top: 100px; background-color:#303030; padding: 20px 20px 20px 20px">
-    Enter your 6 digit PIN code<br />
-    <input id="inputPinCode" type="text" maxlength="64" style="width: 200px" /><br /><br
-/>
+    Enter your 6 digit PIN code<br/>
+    <input id="inputPinCode" type="text" maxlength="64" style="width: 200px" /><br/><br/>
     <input type="button" value="Connect to technician" onclick="loadInstantChat(2);" />
 </div>
+
 <div id="LanguageForm" style="position: absolute; left: 400px; top: 260px; backgroundcolor:#303030; padding: 20px 20px 20px 20px">
-    Select Chat<br />interface language<br />
+    Select Chat<br/>interface language<br/>
     <select id="inputLanguageSelect" style="width: 200px">
         <option value="en">English</option>
         <option value="es">Español</option>
