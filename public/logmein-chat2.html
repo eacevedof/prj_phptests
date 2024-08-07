@@ -60,6 +60,11 @@
     Instant Chat will be displayed here.
 </div>
 <script>
+function isMobileView() {
+    const mobileWidthThreshold = 768; // Typical max width for mobile devices
+    const viewportWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+    return viewportWidth <= mobileWidthThreshold;
+}
 function getMobileViewportDimensions() {
     const width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
     const height = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
@@ -72,7 +77,11 @@ function getMobileViewportDimensions() {
 document.addEventListener("DOMContentLoaded", function() {
     const windata = document.getElementById("win-data")
     const { width, height, winHeight, winWidth } = getMobileViewportDimensions()
-    windata.innerHTML = `width: ${width}, height: ${height} <br/> winWidth:${winWidth}, winHeight: ${winHeight}`
+    windata.innerHTML = `
+    width: ${width}, height: ${height} <br/>
+    winWidth:${winWidth}, winHeight: ${winHeight} <br/>
+    isMobileView: ${isMobileView()}
+    `
     handleRebootOrRefresh();
 })
 </script>
