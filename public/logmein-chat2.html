@@ -72,7 +72,7 @@ function getMobileViewportDimensions() {
 document.addEventListener("DOMContentLoaded", function() {
     const windata = document.getElementById("win-data")
     const { width, height, winHeight, winWidth } = getMobileViewportDimensions()
-    windata.innerHTML = `width: ${width}, height: ${height} winHeight: ${winHeight}, winWidth: ${winWidth}`
+    windata.innerHTML = `width: ${width}, height: ${height} winWidth: <br/>${winWidth}, winHeight: ${winHeight}`
     handleRebootOrRefresh();
 })
 </script>
