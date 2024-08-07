@@ -63,12 +63,16 @@
 function getMobileViewportDimensions() {
     const width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
     const height = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
-    return { width, height };
+
+    const winHeight = window.screen.height;
+    const winWidth = window.screen.width;
+    return { width, height, winHeight, winWidth };
 }
+
 document.addEventListener("DOMContentLoaded", function() {
     const windata = document.getElementById("win-data")
-    const { width, height } = getMobileViewportDimensions()
-    windata.innerHTML = `width: ${width}, height: ${height}`
+    const { width, height, winHeight, winWidth } = getMobileViewportDimensions()
+    windata.innerHTML = `width: ${width}, height: ${height} winHeight: ${winHeight}, winWidth: ${winWidth}`
     handleRebootOrRefresh();
 })
 </script>
