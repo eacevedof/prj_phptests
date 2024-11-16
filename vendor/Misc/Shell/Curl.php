@@ -80,6 +80,12 @@ final class Curl
         return $this->lastCommand;
     }
 
+    public function printCurl(): self
+    {
+        echo $this->lastCommand;
+        return $this;
+    }
+
     public function reset(): self
     {
         $this->location = "";
