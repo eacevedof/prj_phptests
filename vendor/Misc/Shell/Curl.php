@@ -9,6 +9,7 @@ final class Curl
     private array $headers = [];
     private array $commands = [];
     private array $dataRaw = [];
+    private string $lastCommand = "";
 
     public static function getInstance(): self
     {
@@ -63,9 +64,9 @@ final class Curl
         $logPath = $this->logPath;
         $logPath = "$logPath/curl-async-".date("Ymd").".log";
 
-        $noHupCmd = "nohup $curlCmd >> $logPath 2>&1 &";
-        echo $noHupCmd;
-        exec($noHupCmd);
+        $this->lastCommand = "nohup $curlCmd >> $logPath 2>&1 &";
+        echo $this->lastCommand;
+        exec($this->lastCommand);
     }
 
     public function setLogPath(string $logPath): self
@@ -76,11 +77,12 @@ final class Curl
 
     public function reset(): self
     {
-        $this->url = "";
+        $this->location = "";
         $this->logPath = "";
         $this->flags = [];
         $this->headers = [];
         $this->dataRaw = [];
+        $this->lastCommand = "";
         return $this;
     }
 }
