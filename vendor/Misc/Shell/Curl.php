@@ -62,7 +62,8 @@ final class Curl
         $curlCmd = $this->getCurlCommand();
         $logPath = $this->logPath;
         $logPath = "$logPath/curl-async-".date("Ymd").".log";
-        $noHupCmd .= "nohup $curlCmd >> $logPath 2>&1 &";
+
+        $noHupCmd = "nohup $curlCmd >> $logPath 2>&1 &";
         echo $noHupCmd;
         exec($noHupCmd);
     }
