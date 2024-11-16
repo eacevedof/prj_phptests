@@ -47,6 +47,7 @@ final class Curl
         foreach ($this->flags as $flag)
             $curl[] = "-$flag";
 
+        $curl[] = "--location \"$this->url\"";
         foreach ($this->headers as $header => $value)
             $curl[] = "--header \"$header: $value\"";
 
@@ -61,7 +62,7 @@ final class Curl
         $curlCmd = $this->getCurlCommand();
         $logPath = $this->logPath;
         $logPath = "$logPath/curl-async-".date("Ymd").".log";
-        $noHupCmd .= "nohup $curlCmd >> $this->logPath 2>&1 &";
+        $noHupCmd .= "nohup $curlCmd >> $logPath 2>&1 &";
         echo $noHupCmd;
         exec($noHupCmd);
     }

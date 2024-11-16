@@ -7,7 +7,7 @@
 use Misc\Shell\Curl;
 $curl = Curl::getInstance();
 $curl
-    ->setLogPath(__DIR__."../logs/debug")
+    ->setLogPath(__DIR__."/../../logs/debug")
     ->addFlag("s")
     ->addFlag("X")
     ->addFlag("POST")
