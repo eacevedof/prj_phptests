@@ -33,7 +33,7 @@ final class Curl
         return $this;
     }
 
-    private function addDataRaw(string $key, string $value): self
+    public function addDataRaw(string $key, string $value): self
     {
         $this->dataRaw[$key] = $value;
         return $this;
@@ -66,9 +66,16 @@ final class Curl
         exec($noHupCmd);
     }
 
+    public function setLogPath(string $logPath): self
+    {
+        $this->logPath = $logPath;
+        return $this;
+    }
+
     public function reset(): self
     {
         $this->url = "";
+        $this->logPath = "";
         $this->flags = [];
         $this->headers = [];
         $this->dataRaw = [];

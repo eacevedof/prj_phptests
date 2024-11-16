@@ -2,6 +2,47 @@
 /**
  * index.php 6.2.1
  */
+
+function load_dotenv($path): void
+{
+    if (!file_exists($path)) {
+        return;
+    }
+
+    $lines = file($path, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+    foreach ($lines as $line) {
+        if (strpos(trim($line), '#') === 0) {
+            continue;
+        }
+
+        list($name, $value) = explode('=', $line, 2);
+        $name = trim($name);
+        $value = trim($value);
+
+        if (!array_key_exists($name, $_SERVER) && !array_key_exists($name, $_ENV)) {
+            putenv(sprintf('%s=%s', $name, $value));
+            $_ENV[$name] = $value;
+            $_SERVER[$name] = $value;
+        }
+    }
+}
+
+load_dotenv(__DIR__ . "/.env");
+
+function tfw_autload(string $className): void
+{
+    $filePath = "$className.php";
+    $filePath = str_replace("\\", "/", $filePath);
+    $finalPath = __DIR__ . "/$filePath";
+die($finalPath);
+    $finalPath = __DIR__ . "/vendor/$filePath";
+    if (file_exists($finalPath)) {
+        require_once $finalPath;
+    }
+}
+
+spl_autoload_register("tfw_autload");
+
 //clase para trazas
 require_once "../boot/dg.php";
 
