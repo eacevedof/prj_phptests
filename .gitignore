@@ -7,7 +7,7 @@ vendor/theframework/components/apple/*.pem
 # excluye todo vendor menos theframework
 /public/upload
 /temp
-/logs
+/logs/*
 /vendor/*
 !/vendor/theframework/
 !/vendor/solid/
