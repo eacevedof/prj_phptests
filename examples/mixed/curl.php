@@ -14,4 +14,5 @@ $curl
     ->addHeader("Content-Type", "application/json")
     ->addDataRaw("name", "dimail")
     ->execAsync()
+    ->printCurl()
 ;
