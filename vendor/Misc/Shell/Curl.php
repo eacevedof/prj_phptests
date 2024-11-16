@@ -58,21 +58,26 @@ final class Curl
         return $curlCmd;
     }
 
-    public function execAsync(): void
+    public function execAsync(): self
     {
         $curlCmd = $this->getCurlCommand();
         $logPath = $this->logPath;
         $logPath = "$logPath/curl-async-".date("Ymd").".log";
 
         $this->lastCommand = "nohup $curlCmd >> $logPath 2>&1 &";
-        echo $this->lastCommand;
         exec($this->lastCommand);
+        return $this;
     }
 
     public function setLogPath(string $logPath): self
     {
         $this->logPath = $logPath;
         return $this;
+    }
+
+    public function getLastCommand(): string
+    {
+        return $this->lastCommand;
     }
 
     public function reset(): self
