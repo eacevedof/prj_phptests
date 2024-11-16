@@ -56,7 +56,7 @@ final class Curl
         return $curlCmd;
     }
 
-    private function execAsync(): void
+    public function execAsync(): void
     {
         $curlCmd = $this->getCurlCommand();
         $logPath = $this->logPath;
