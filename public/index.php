@@ -33,9 +33,8 @@ function tfw_autload(string $className): void
 {
     $filePath = "$className.php";
     $filePath = str_replace("\\", "/", $filePath);
-    $finalPath = __DIR__ . "/$filePath";
-die($finalPath);
-    $finalPath = __DIR__ . "/vendor/$filePath";
+    $finalPath = __DIR__ . "/../vendor/$filePath";
+    //die($finalPath);
     if (file_exists($finalPath)) {
         require_once $finalPath;
     }
