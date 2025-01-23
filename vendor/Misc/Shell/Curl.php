@@ -7,7 +7,6 @@ final class Curl
     private string $location = "";
     private array $flags = [];
     private array $headers = [];
-    private array $commands = [];
     private array $dataRaw = [];
     private string $lastCommand = "";
 
@@ -24,7 +23,7 @@ final class Curl
 
     public function setLocation(string $url): self
     {
-        $this->url = $url;
+        $this->location = $url;
         return $this;
     }
 
@@ -48,7 +47,7 @@ final class Curl
         foreach ($this->flags as $flag)
             $curl[] = "-$flag";
 
-        $curl[] = "--location \"$this->url\"";
+        $curl[] = "--location \"$this->location\"";
         foreach ($this->headers as $header => $value)
             $curl[] = "--header \"$header: $value\"";
 
@@ -61,10 +60,12 @@ final class Curl
     public function execAsync(): self
     {
         $curlCmd = $this->getCurlCommand();
-        $logPath = $this->logPath;
-        $logPath = "$logPath/curl-async-".date("Ymd").".log";
-
-        $this->lastCommand = "nohup $curlCmd >> $logPath 2>&1 &";
+        $this->lastCommand = "nohup $curlCmd > /dev/null 2>&1 &";
+        if (is_dir($this->logPath)) {
+            $logPath = $this->logPath;
+            $logPath = "$logPath/curl-async-".date("Ymd").".log";
+            $this->lastCommand = "nohup $curlCmd >> $logPath 2>&1 &";
+        }
         exec($this->lastCommand);
         return $this;
     }
