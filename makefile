@@ -23,3 +23,13 @@ gitpush: ## git push m=any message
 
 server: ## localhost:1024
 	php -S localhost:1024 -t ./public
+
+CURRENT_BRANCH := $(shell git rev-parse --abbrev-ref HEAD)
+update-branch:  ## update main branches
+	git fetch --all;
+
+	git checkout master; git reset --hard origin/master;
+	git checkout dev; git reset --hard origin/dev;
+	git checkout dev-eduardo; git reset --hard origin/dev-eduardo;
+
+	git checkout $(CURRENT_BRANCH);
